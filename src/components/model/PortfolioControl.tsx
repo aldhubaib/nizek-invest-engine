@@ -1,5 +1,6 @@
 import type { PortfolioControlMeta, PortfolioInputs } from "@/model/portfolio";
 import { currency, number as fmtNumber } from "@/model/format";
+import { ValueField } from "./ValueField";
 
 export function formatControl(v: number, unit: PortfolioControlMeta["unit"]) {
   switch (unit) {
