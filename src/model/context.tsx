@@ -25,8 +25,18 @@ interface ModelContextValue {
   reset: () => void;
 }
 
-const ModelContext = createContext<ModelContextValue | null>(null);
+// Keep a single context instance across HMR updates: if this module is
+// re-evaluated while Chrome.tsx still holds the old reference (or vice versa),
+// a fresh createContext() would make consumers miss the provider.
+const globalStore = globalThis as unknown as {
+  __nizekModelContext?: React.Context<ModelContextValue | null>;
+};
+const ModelContext =
+  globalStore.__nizekModelContext ?? createContext<ModelContextValue | null>(null);
+globalStore.__nizekModelContext = ModelContext;
+
 const STORAGE_KEY = "nizek.model.v1";
+
 
 export function ModelProvider({ children }: { children: ReactNode }) {
   const [assumptions, setAssumptions] = useState<Assumptions>(defaultAssumptions);
