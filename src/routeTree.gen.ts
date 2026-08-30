@@ -10,33 +10,141 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DataRoomRouteImport } from './routes/data-room'
+import { Route as FinancialsRouteImport } from './routes/financials'
+import { Route as ModelRouteImport } from './routes/model'
+import { Route as ReturnsRouteImport } from './routes/returns'
+import { Route as RoadmapRouteImport } from './routes/roadmap'
+import { Route as ScenariosRouteImport } from './routes/scenarios'
+import { Route as SimulatorRouteImport } from './routes/simulator'
+import { Route as ThesisRouteImport } from './routes/thesis'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DataRoomRoute = DataRoomRouteImport.update({
+  id: '/data-room',
+  path: '/data-room',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FinancialsRoute = FinancialsRouteImport.update({
+  id: '/financials',
+  path: '/financials',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ModelRoute = ModelRouteImport.update({
+  id: '/model',
+  path: '/model',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReturnsRoute = ReturnsRouteImport.update({
+  id: '/returns',
+  path: '/returns',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RoadmapRoute = RoadmapRouteImport.update({
+  id: '/roadmap',
+  path: '/roadmap',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ScenariosRoute = ScenariosRouteImport.update({
+  id: '/scenarios',
+  path: '/scenarios',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SimulatorRoute = SimulatorRouteImport.update({
+  id: '/simulator',
+  path: '/simulator',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ThesisRoute = ThesisRouteImport.update({
+  id: '/thesis',
+  path: '/thesis',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/data-room': typeof DataRoomRoute
+  '/financials': typeof FinancialsRoute
+  '/model': typeof ModelRoute
+  '/returns': typeof ReturnsRoute
+  '/roadmap': typeof RoadmapRoute
+  '/scenarios': typeof ScenariosRoute
+  '/simulator': typeof SimulatorRoute
+  '/thesis': typeof ThesisRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/data-room': typeof DataRoomRoute
+  '/financials': typeof FinancialsRoute
+  '/model': typeof ModelRoute
+  '/returns': typeof ReturnsRoute
+  '/roadmap': typeof RoadmapRoute
+  '/scenarios': typeof ScenariosRoute
+  '/simulator': typeof SimulatorRoute
+  '/thesis': typeof ThesisRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/data-room': typeof DataRoomRoute
+  '/financials': typeof FinancialsRoute
+  '/model': typeof ModelRoute
+  '/returns': typeof ReturnsRoute
+  '/roadmap': typeof RoadmapRoute
+  '/scenarios': typeof ScenariosRoute
+  '/simulator': typeof SimulatorRoute
+  '/thesis': typeof ThesisRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/data-room'
+    | '/financials'
+    | '/model'
+    | '/returns'
+    | '/roadmap'
+    | '/scenarios'
+    | '/simulator'
+    | '/thesis'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/data-room'
+    | '/financials'
+    | '/model'
+    | '/returns'
+    | '/roadmap'
+    | '/scenarios'
+    | '/simulator'
+    | '/thesis'
+  id:
+    | '__root__'
+    | '/'
+    | '/data-room'
+    | '/financials'
+    | '/model'
+    | '/returns'
+    | '/roadmap'
+    | '/scenarios'
+    | '/simulator'
+    | '/thesis'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DataRoomRoute: typeof DataRoomRoute
+  FinancialsRoute: typeof FinancialsRoute
+  ModelRoute: typeof ModelRoute
+  ReturnsRoute: typeof ReturnsRoute
+  RoadmapRoute: typeof RoadmapRoute
+  ScenariosRoute: typeof ScenariosRoute
+  SimulatorRoute: typeof SimulatorRoute
+  ThesisRoute: typeof ThesisRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +156,75 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/data-room': {
+      id: '/data-room'
+      path: '/data-room'
+      fullPath: '/data-room'
+      preLoaderRoute: typeof DataRoomRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/financials': {
+      id: '/financials'
+      path: '/financials'
+      fullPath: '/financials'
+      preLoaderRoute: typeof FinancialsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/model': {
+      id: '/model'
+      path: '/model'
+      fullPath: '/model'
+      preLoaderRoute: typeof ModelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/returns': {
+      id: '/returns'
+      path: '/returns'
+      fullPath: '/returns'
+      preLoaderRoute: typeof ReturnsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/roadmap': {
+      id: '/roadmap'
+      path: '/roadmap'
+      fullPath: '/roadmap'
+      preLoaderRoute: typeof RoadmapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/scenarios': {
+      id: '/scenarios'
+      path: '/scenarios'
+      fullPath: '/scenarios'
+      preLoaderRoute: typeof ScenariosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/simulator': {
+      id: '/simulator'
+      path: '/simulator'
+      fullPath: '/simulator'
+      preLoaderRoute: typeof SimulatorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/thesis': {
+      id: '/thesis'
+      path: '/thesis'
+      fullPath: '/thesis'
+      preLoaderRoute: typeof ThesisRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DataRoomRoute: DataRoomRoute,
+  FinancialsRoute: FinancialsRoute,
+  ModelRoute: ModelRoute,
+  ReturnsRoute: ReturnsRoute,
+  RoadmapRoute: RoadmapRoute,
+  ScenariosRoute: ScenariosRoute,
+  SimulatorRoute: SimulatorRoute,
+  ThesisRoute: ThesisRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
