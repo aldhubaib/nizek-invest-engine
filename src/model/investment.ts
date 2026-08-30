@@ -148,7 +148,7 @@ export const investmentControls: InvestmentControlMeta[] = [
     key: "successfulCompanies",
     label: "Successful companies",
     min: 0,
-    max: 10,
+    max: 50,
     step: 1,
     unit: "count",
     help: "Startups out of the 50 built that become meaningful successes.",
