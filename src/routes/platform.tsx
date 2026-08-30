@@ -64,11 +64,12 @@ function StudioControl({
   onReset,
   base,
 }: {
-  meta: StudioControlMeta;
+  meta: InvestmentControlMeta;
   value: number;
   base: number;
-  onChange: (k: keyof StudioInputs, v: number) => void;
-  onReset: (k: keyof StudioInputs) => void;
+  onChange: (k: keyof InvestmentInputs, v: number) => void;
+  onReset: (k: keyof InvestmentInputs) => void;
+
 }) {
   const fmt = (v: number) =>
     meta.unit === "kd"
