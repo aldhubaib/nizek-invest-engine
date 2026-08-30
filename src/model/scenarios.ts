@@ -6,12 +6,12 @@ export const presetScenarios: Scenario[] = [
     id: "bear",
     name: "Bear",
     overrides: {
-      acquisitionGrowth: 2,
-      monthlyChurn: 2.2,
-      netExpansion: 98,
-      arpa: 3000,
-      grossMargin: 68,
-      cac: 20000,
+      acquisitionGrowth: 0.8,
+      monthlyChurn: 2.4,
+      netExpansion: 96,
+      arpa: 2900,
+      grossMargin: 66,
+      cac: 34000,
       exitMultiple: 4,
     },
   },
@@ -20,16 +20,17 @@ export const presetScenarios: Scenario[] = [
     id: "bull",
     name: "Bull",
     overrides: {
-      acquisitionGrowth: 7,
-      monthlyChurn: 0.6,
-      netExpansion: 128,
-      arpa: 4600,
-      grossMargin: 84,
-      cac: 11000,
-      exitMultiple: 12,
+      acquisitionGrowth: 3.2,
+      monthlyChurn: 0.8,
+      netExpansion: 118,
+      arpa: 4000,
+      grossMargin: 80,
+      cac: 20000,
+      exitMultiple: 11,
     },
   },
 ];
+
 
 export const applyScenario = (
   base: Assumptions,
