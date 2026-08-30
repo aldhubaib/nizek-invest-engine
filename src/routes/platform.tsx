@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useCallback, useMemo, useState } from "react";
 import { LineChart } from "@/components/charts/Charts";
 import { AnimatedNumber } from "@/components/model/AnimatedNumber";
+import { ScenarioBuilder } from "@/components/model/ScenarioBuilder";
 import { Reveal, Section, SectionHeading } from "@/components/ui/primitives";
 import { multiple, number as fmtNumber, percent } from "@/model/format";
 import {
@@ -357,6 +358,8 @@ function PlatformPage() {
           </div>
         </div>
       </Section>
+
+      <ScenarioBuilder />
 
       {/* 9 — Live business model */}
       <section id="model" className="border-t border-border">
