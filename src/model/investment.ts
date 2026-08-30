@@ -92,18 +92,18 @@ export function projectInvestment(input: InvestmentInputs): InvestmentResult {
   );
   const irr = investorValue > 0 ? irrFromFlows(cashflows) : -100;
 
-  const shape = (t: number) => {
-    const k = 8;
-    const mid = 0.62;
-    const f = (x: number) => 1 / (1 + Math.exp(-k * (x - mid)));
-    return (f(t) - f(0)) / (f(1) - f(0));
-  };
-
+  // The investor line is the same contribution schedule as the benchmarks,
+  // compounded at the calculated IRR. By definition of IRR this lands exactly
+  // on investorValue in the final year, so the curve is a real derivation of
+  // the cash flows rather than a drawn shape.
+  const r = irr / 100;
   const labels: string[] = [];
   const investorCurve: number[] = [];
+  let v = 0;
   for (let y = 0; y <= hold; y++) {
     labels.push(`Y${y}`);
-    investorCurve.push(investorValue * shape(y / hold));
+    v = v * (1 + r) + (y < COMMITMENT_YEARS ? ANNUAL_COMMITMENT : 0);
+    investorCurve.push(v);
   }
 
   return {
