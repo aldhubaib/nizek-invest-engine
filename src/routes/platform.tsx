@@ -593,7 +593,7 @@ function PlatformPage() {
                           <div className="grid flex-1 grid-cols-2 gap-6 md:grid-cols-4">
                             {[
                               ["Invested", kd(c.capitalInvested)],
-                              ["Startups", `${fmtNumber(c.startups)} built · ${fmtNumber(c.failures)} fail`],
+                              ["Startups", `${fmtNumber(c.failures)} fail`],
                               [
                                 "Successes",
                                 `${fmtNumber(c.successes)} · ${kd(c.valueAtBreakout)}`,
