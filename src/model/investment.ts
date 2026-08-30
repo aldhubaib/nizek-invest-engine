@@ -1,14 +1,16 @@
 /**
- * NIZEK investor participation model — cohort based.
+ * NIZEK investor participation model — venture outcome based.
  *
  * Fixed offer: KD400,000 per year for 5 years (KD2,000,000 total).
- * The investor participates in 25% of NIZEK's ownership in successful companies.
+ * The investor participates in a share of NIZEK's ownership in the companies
+ * created during the window.
  *
- * A venture studio does not create 50 startups on the same day. Each year NIZEK
- * builds a new cohort of startups. Some fail, some survive, some become
- * meaningful companies — and those winners keep compounding in value while the
- * next cohorts are still being created. So the portfolio is modelled cohort by
- * cohort: an earlier cohort has had more years to grow than a later one.
+ * Venture value is NOT compounded like real estate or public equities. Each
+ * annual cohort produces a small number of successful companies, and each of
+ * those carries an expected exit valuation. Portfolio value is simply the sum
+ * of the expected exit valuations of every successful company. Earlier cohorts
+ * usually carry a higher expected exit valuation because they have had more
+ * time to mature; later cohorts carry less.
  */
 
 export const ANNUAL_COMMITMENT = 400_000;
@@ -19,10 +21,10 @@ export const INVESTOR_PARTICIPATION = 0.25;
 export interface InvestmentInputs {
   startupsPerYear: number; // startups created each year
   successesPerYear: number; // winners per cohort
-  avgCompanyValue: number; // KD — value of a winner in the year it breaks out
-  annualGrowth: number; // % — default growth applied to every cohort
-  /** Optional per-cohort growth override, index 0 = Year 1 cohort. */
-  growthByYear: number[];
+  /** Baseline expected exit valuation (KD) applied when a cohort has no override. */
+  avgCompanyValue: number;
+  /** Expected exit valuation per cohort, index 0 = Year 1 cohort. */
+  exitValueByYear: number[];
   avgNizekOwnership: number; // %
   investorShare: number; // % of NIZEK's ownership allocated to the investor
   realEstateYield: number; // % annual
@@ -35,13 +37,10 @@ export interface CohortResult {
   startups: number;
   failures: number;
   successes: number;
-  yearsOfGrowth: number; // years compounding by the end of the window
-  growthRate: number; // % annual growth applied to this cohort
-  valueAtBreakout: number; // cohort value the year the winners emerge
-  portfolioValue: number; // cohort value at the end of the window
+  exitValue: number; // expected exit valuation per successful company
+  portfolioValue: number; // successes x exit valuation
   nizekEquityValue: number;
   investorValue: number;
-  growthMultiple: number;
 }
 
 export interface BenchmarkResult {
@@ -64,7 +63,7 @@ export interface InvestmentResult {
   irr: number; // %
   cohorts: CohortResult[];
   labels: string[];
-  /** Portfolio value at the end of each year Y0..Y5. */
+  /** Cumulative expected exit value of every cohort created so far, Y0..Y5. */
   portfolioByYear: number[];
   investorCurve: number[];
   realEstate: BenchmarkResult;
@@ -111,20 +110,17 @@ function benchmark(rate: number, hold: number): BenchmarkResult {
 
 export function projectInvestment(input: InvestmentInputs): InvestmentResult {
   const hold = COMMITMENT_YEARS;
-  const growthFor = (year: number) =>
-    (input.growthByYear?.[year - 1] ?? input.annualGrowth) / 100;
   const ownership = input.avgNizekOwnership / 100;
   const participation = (input.investorShare ?? INVESTOR_PARTICIPATION * 100) / 100;
   const startups = Math.max(0, input.startupsPerYear);
   const successes = Math.min(Math.max(0, input.successesPerYear), startups);
+  const exitFor = (year: number) =>
+    Math.max(0, input.exitValueByYear?.[year - 1] ?? input.avgCompanyValue);
 
   const cohorts: CohortResult[] = Array.from({ length: COMMITMENT_YEARS }, (_, i) => {
     const year = i + 1;
-    const yearsOfGrowth = hold - year; // a Year 1 winner compounds four more years
-    const growth = growthFor(year);
-    const growthMultiple = Math.pow(1 + growth, yearsOfGrowth);
-    const valueAtBreakout = successes * input.avgCompanyValue;
-    const portfolioValue = valueAtBreakout * growthMultiple;
+    const exitValue = exitFor(year);
+    const portfolioValue = successes * exitValue;
     const nizekEquityValue = portfolioValue * ownership;
     return {
       year,
@@ -132,13 +128,10 @@ export function projectInvestment(input: InvestmentInputs): InvestmentResult {
       startups,
       failures: startups - successes,
       successes,
-      yearsOfGrowth,
-      growthRate: growth * 100,
-      valueAtBreakout,
+      exitValue,
       portfolioValue,
       nizekEquityValue,
       investorValue: nizekEquityValue * participation,
-      growthMultiple,
     };
   });
 
@@ -148,17 +141,14 @@ export function projectInvestment(input: InvestmentInputs): InvestmentResult {
   const investorProfit = investorValue - TOTAL_INVESTMENT;
   const moic = TOTAL_INVESTMENT > 0 ? investorValue / TOTAL_INVESTMENT : 0;
 
-  // Portfolio value at the end of each year: only cohorts already created
-  // contribute, each compounded for the years it has been alive.
+  // Cumulative expected exit value of the cohorts created so far.
   const labels: string[] = [];
   const portfolioByYear: number[] = [];
   for (let t = 0; t <= hold; t++) {
     labels.push(`Y${t}`);
-    let v = 0;
-    for (const c of cohorts) {
-      if (c.year <= t) v += c.valueAtBreakout * Math.pow(1 + growthFor(c.year), t - c.year);
-    }
-    portfolioByYear.push(v);
+    portfolioByYear.push(
+      cohorts.reduce((s, c) => (c.year <= t ? s + c.portfolioValue : s), 0),
+    );
   }
 
   const investorCurve = portfolioByYear.map((v) => v * ownership * participation);
@@ -192,9 +182,8 @@ export function projectInvestment(input: InvestmentInputs): InvestmentResult {
 export const defaultInvestmentInputs: InvestmentInputs = {
   startupsPerYear: 10,
   successesPerYear: 1,
-  avgCompanyValue: 3_000_000,
-  annualGrowth: 20,
-  growthByYear: [20, 20, 20, 20, 20],
+  avgCompanyValue: 10_000_000,
+  exitValueByYear: [20_000_000, 15_000_000, 10_000_000, 8_000_000, 5_000_000],
   avgNizekOwnership: 25,
   investorShare: 25,
   realEstateYield: 7,
@@ -213,7 +202,7 @@ export interface InvestmentControlMeta {
   step: number;
   unit: "kd" | "percent" | "count" | "years";
   help: string;
-  group: "Each year" | "Growth" | "Ownership" | "Benchmarks";
+  group: "Each year" | "Exit value" | "Ownership" | "Benchmarks";
 }
 
 export const investmentControls: InvestmentControlMeta[] = [
@@ -234,28 +223,18 @@ export const investmentControls: InvestmentControlMeta[] = [
     max: 10,
     step: 1,
     unit: "count",
-    help: "Companies from each cohort that become meaningful. The rest fail or stay small.",
+    help: "Companies from each cohort that reach a meaningful exit. The rest fail or stay small.",
     group: "Each year",
   },
   {
     key: "avgCompanyValue",
-    label: "Value when a company breaks out",
+    label: "Expected exit valuation (all cohorts)",
     min: 0,
     max: 100_000_000,
     step: 1_000_000,
     unit: "kd",
-    help: "Valuation of a successful company in the year it emerges from its cohort.",
-    group: "Growth",
-  },
-  {
-    key: "annualGrowth",
-    label: "Annual value growth (all years)",
-    min: 0,
-    max: 100,
-    step: 5,
-    unit: "percent",
-    help: "Baseline compounding for every cohort. Tune an individual year below.",
-    group: "Growth",
+    help: "Baseline exit valuation of a successful company. Tune an individual cohort below.",
+    group: "Exit value",
   },
   {
     key: "avgNizekOwnership",
@@ -264,7 +243,7 @@ export const investmentControls: InvestmentControlMeta[] = [
     max: 50,
     step: 1,
     unit: "percent",
-    help: "Average equity NIZEK holds in successful companies.",
+    help: "Average equity NIZEK holds in successful companies at exit.",
     group: "Ownership",
   },
   {
@@ -299,14 +278,14 @@ export const investmentControls: InvestmentControlMeta[] = [
   },
 ];
 
-/** Growth sliders for each cohort, so an individual year can be tuned. */
-export const cohortGrowthControls = Array.from({ length: COMMITMENT_YEARS }, (_, i) => ({
+/** Expected exit valuation per cohort, so an individual year can be tuned. */
+export const cohortExitControls = Array.from({ length: COMMITMENT_YEARS }, (_, i) => ({
   index: i,
-  label: `Year ${i + 1} cohort growth`,
+  label: `Year ${i + 1} exit valuation`,
   min: 0,
-  max: 100,
-  step: 5,
-  help: `Annual growth of the winners created in Year ${i + 1}.`,
+  max: 100_000_000,
+  step: 1_000_000,
+  help: `Expected exit valuation of each winner created in Year ${i + 1}.`,
 }));
 
-export const investmentGroups = ["Each year", "Growth", "Ownership", "Benchmarks"] as const;
+export const investmentGroups = ["Each year", "Exit value", "Ownership", "Benchmarks"] as const;
