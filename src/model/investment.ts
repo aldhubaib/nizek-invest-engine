@@ -127,7 +127,7 @@ export const defaultInvestmentInputs: InvestmentInputs = {
   successfulCompanies: 4,
   avgCompanyValue: 30_000_000,
   avgNizekOwnership: 25,
-  holdYears: 8,
+  holdYears: 5,
   realEstateYield: 7,
   publicMarketReturn: 8,
 };
