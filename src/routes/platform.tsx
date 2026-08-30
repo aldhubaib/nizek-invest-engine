@@ -668,21 +668,8 @@ function PlatformPage() {
                 })}
               </div>
 
-              {/* Portfolio value by year */}
-              <div className="mt-px grid grid-cols-2 gap-px border border-border bg-border md:grid-cols-6">
-                {result.portfolioByYear.map((v, i) => (
-                  <div key={i} className="bg-background p-6">
-                    <div className="label-xs">End of Y{i}</div>
-                    <div className="num mt-4 text-lg text-foreground">
-                      <AnimatedNumber value={v} format={kd} />
-                    </div>
-                    <div className="mt-3 text-[11px] text-subtle">
-                      {fmtNumber(Math.min(i, COMMITMENT_YEARS) * inputs.startupsPerYear)} startups
-                      created
-                    </div>
-                  </div>
-                ))}
-              </div>
+
+
 
               {/* Funnel */}
               <div className="mt-px grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-4">
