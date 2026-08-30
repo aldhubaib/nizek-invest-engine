@@ -165,16 +165,6 @@ export const investmentControls: InvestmentControlMeta[] = [
     group: "Outcomes",
   },
   {
-    key: "holdYears",
-    label: "Hold period",
-    min: 5,
-    max: 15,
-    step: 1,
-    unit: "years",
-    help: "Years from the first cheque to liquidity.",
-    group: "Outcomes",
-  },
-  {
     key: "avgNizekOwnership",
     label: "Average NIZEK ownership",
     min: 10,
