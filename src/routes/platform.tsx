@@ -414,8 +414,7 @@ function PlatformPage() {
                 If Nizek builds successful companies, what could your investment become?
               </h2>
               <p className="mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground">
-                Ten new startups every year, five cohorts, each growing for a different length of
-                time. Move the assumptions and the whole portfolio re-prices instantly.
+                Ten new startups every year, five cohorts. Portfolio value is the sum of the expected exit valuations of the winners. Move the assumptions and it re-prices instantly.
               </p>
 
             </Reveal>
@@ -613,7 +612,7 @@ function PlatformPage() {
                             ))}
                           </div>
                           <div className="md:w-52 md:text-right">
-                            <div className="label-xs">Value at Year 5</div>
+                            <div className="label-xs">Cohort exit value</div>
                             <div className="num mt-2 text-xl text-foreground md:text-2xl">
                               <AnimatedNumber value={c.portfolioValue} format={kd} />
                             </div>
@@ -644,7 +643,7 @@ function PlatformPage() {
                     step: "01",
                     title: "Portfolio value",
                     value: result.portfolioValue,
-                    note: `${fmtNumber(result.totalSuccesses)} winners out of ${fmtNumber(result.totalStartups)} startups, each grown for its own number of years.`,
+                    note: `${fmtNumber(result.totalSuccesses)} winners out of ${fmtNumber(result.totalStartups)} startups, each valued at its expected exit valuation.`,
                   },
                   {
                     step: "02",
