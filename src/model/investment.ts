@@ -157,7 +157,7 @@ export const investmentControls: InvestmentControlMeta[] = [
   {
     key: "avgCompanyValue",
     label: "Average company value",
-    min: 5_000_000,
+    min: 0,
     max: 100_000_000,
     step: 5_000_000,
     unit: "kd",
