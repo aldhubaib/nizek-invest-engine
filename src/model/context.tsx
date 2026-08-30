@@ -131,8 +131,23 @@ export function ModelProvider({ children }: { children: ReactNode }) {
   return <ModelContext.Provider value={value}>{children}</ModelContext.Provider>;
 }
 
+const fallbackValue = (): ModelContextValue => ({
+  assumptions: defaultAssumptions,
+  projection: project(defaultAssumptions),
+  baseProjection: project(defaultAssumptions),
+  scenarios: presetScenarios,
+  activeScenario: "base",
+  isCustom: false,
+  setAssumption: () => {},
+  loadScenario: () => {},
+  saveScenario: () => {},
+  reset: () => {},
+});
+
 export const useModel = () => {
   const ctx = useContext(ModelContext);
-  if (!ctx) throw new Error("useModel must be used inside ModelProvider");
-  return ctx;
+  // Read-only base case rather than a hard crash if a consumer somehow renders
+  // outside the provider (e.g. an error/not-found boundary above the tree).
+  return ctx ?? fallbackValue();
+
 };
