@@ -78,7 +78,7 @@ function benchmark(rate: number, hold: number): BenchmarkResult {
 }
 
 export function projectInvestment(input: InvestmentInputs): InvestmentResult {
-  const hold = Math.max(COMMITMENT_YEARS, Math.round(input.holdYears));
+  const hold = COMMITMENT_YEARS;
   const companies = Math.max(0, input.successfulCompanies);
 
   const portfolioValue = companies * input.avgCompanyValue;
@@ -127,7 +127,7 @@ export const defaultInvestmentInputs: InvestmentInputs = {
   successfulCompanies: 4,
   avgCompanyValue: 30_000_000,
   avgNizekOwnership: 25,
-  holdYears: 8,
+  holdYears: 5,
   realEstateYield: 7,
   publicMarketReturn: 8,
 };
