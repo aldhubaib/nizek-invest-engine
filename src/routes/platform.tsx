@@ -7,7 +7,7 @@ import { Reveal, Section, SectionHeading } from "@/components/ui/primitives";
 import { multiple, number as fmtNumber, percent } from "@/model/format";
 import {
   ANNUAL_COMMITMENT,
-  cohortGrowthControls,
+  cohortExitControls,
   COMMITMENT_YEARS,
   TOTAL_INVESTMENT,
   defaultInvestmentInputs,
@@ -143,8 +143,8 @@ function PlatformPage() {
   const set = useCallback(
     (k: NumericInvestmentKey, v: number) =>
       setInputs((p) =>
-        k === "annualGrowth"
-          ? { ...p, annualGrowth: v, growthByYear: p.growthByYear.map(() => v) }
+        k === "avgCompanyValue"
+          ? { ...p, avgCompanyValue: v, exitValueByYear: p.exitValueByYear.map(() => v) }
           : { ...p, [k]: v },
       ),
     [],
@@ -152,24 +152,23 @@ function PlatformPage() {
   const reset = useCallback(
     (k: NumericInvestmentKey) =>
       setInputs((p) =>
-        k === "annualGrowth"
+        k === "avgCompanyValue"
           ? {
               ...p,
-              annualGrowth: defaultInvestmentInputs.annualGrowth,
-              growthByYear: [...defaultInvestmentInputs.growthByYear],
+              avgCompanyValue: defaultInvestmentInputs.avgCompanyValue,
+              exitValueByYear: [...defaultInvestmentInputs.exitValueByYear],
             }
           : { ...p, [k]: defaultInvestmentInputs[k] },
       ),
     [],
   );
-  const setCohortGrowth = useCallback(
+  const setCohortExit = useCallback(
     (i: number, v: number) =>
       setInputs((p) => ({
         ...p,
-        growthByYear: p.growthByYear.map((g, idx) => (idx === i ? v : g)),
+        exitValueByYear: p.exitValueByYear.map((g, idx) => (idx === i ? v : g)),
       })),
     [],
-
   );
 
 
@@ -415,8 +414,7 @@ function PlatformPage() {
                 If Nizek builds successful companies, what could your investment become?
               </h2>
               <p className="mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground">
-                Ten new startups every year, five cohorts, each growing for a different length of
-                time. Move the assumptions and the whole portfolio re-prices instantly.
+                Ten new startups every year, five cohorts. Portfolio value is the sum of the expected exit valuations of the winners. Move the assumptions and it re-prices instantly.
               </p>
 
             </Reveal>
@@ -475,48 +473,48 @@ function PlatformPage() {
                       onReset={reset}
                     />
                   ))}
-                {g === "Growth" && (
+                {g === "Exit value" && (
                   <div className="mt-8">
-                    <div className="label-xs">Per-year growth</div>
-                    {cohortGrowthControls.map((c) => (
+                    <div className="label-xs">Expected exit valuation per cohort</div>
+                    {cohortExitControls.map((c) => (
                       <div key={c.index} className="border-b border-border py-5">
                         <div className="flex items-baseline justify-between gap-4">
                           <label
-                            htmlFor={`cohort-growth-${c.index}`}
+                            htmlFor={`cohort-exit-${c.index}`}
                             className="text-sm text-muted-foreground"
                           >
                             {c.label}
                           </label>
                           <ValueField
                             label={c.label}
-                            display={`${inputs.growthByYear[c.index]}%`}
-                            value={inputs.growthByYear[c.index] ?? 0}
+                            display={kd(inputs.exitValueByYear[c.index] ?? 0)}
+                            value={inputs.exitValueByYear[c.index] ?? 0}
                             min={c.min}
                             max={c.max}
-                            onCommit={(v) => setCohortGrowth(c.index, v)}
+                            onCommit={(v) => setCohortExit(c.index, v)}
                           />
                         </div>
                         <input
-                          id={`cohort-growth-${c.index}`}
+                          id={`cohort-exit-${c.index}`}
                           type="range"
                           min={c.min}
                           max={c.max}
                           step={c.step}
-                          value={inputs.growthByYear[c.index] ?? 0}
-                          onChange={(e) => setCohortGrowth(c.index, Number(e.target.value))}
+                          value={inputs.exitValueByYear[c.index] ?? 0}
+                          onChange={(e) => setCohortExit(c.index, Number(e.target.value))}
                           className="mt-4"
                           aria-label={c.label}
                         />
                         <div className="mt-2 flex items-start justify-between gap-4">
                           <span className="text-[11px] leading-relaxed text-subtle">{c.help}</span>
-                          {inputs.growthByYear[c.index] !==
-                            defaultInvestmentInputs.growthByYear[c.index] && (
+                          {inputs.exitValueByYear[c.index] !==
+                            defaultInvestmentInputs.exitValueByYear[c.index] && (
                             <button
                               type="button"
                               onClick={() =>
-                                setCohortGrowth(
+                                setCohortExit(
                                   c.index,
-                                  defaultInvestmentInputs.growthByYear[c.index] ?? 0,
+                                  defaultInvestmentInputs.exitValueByYear[c.index] ?? 0,
                                 )
                               }
                               className="label-xs shrink-0 transition-colors hover:text-foreground"
@@ -581,9 +579,10 @@ function PlatformPage() {
             <div className="mt-20">
               <div className="label-xs">How the portfolio is built, one cohort at a time</div>
               <p className="mt-4 max-w-2xl text-xs leading-relaxed text-subtle">
-                Every year new capital is drawn, a new cohort of startups is created, and the
-                winners from earlier cohorts keep compounding. A Year 1 winner has four more years
-                of growth than a Year 5 winner.
+                Every year new capital is drawn and a new cohort of startups is created. Most fail;
+                a few reach an exit. Each cohort is valued at the expected exit valuation of its
+                winners — earlier cohorts carry higher expected exits because they have had more
+                time to mature.
               </p>
 
               <div className="mt-8 border border-border">
@@ -601,13 +600,8 @@ function PlatformPage() {
                               ["Invested", kd(c.capitalInvested)],
                               ["Fail", `${fmtNumber(c.failures)} fail`],
                               ["Successes", fmtNumber(c.successes)],
-                              ["Valuation", kd(c.valueAtBreakout)],
-                              [
-                                "Grows for",
-                                c.yearsOfGrowth === 0
-                                  ? "Just created"
-                                  : `${c.yearsOfGrowth} ${c.yearsOfGrowth === 1 ? "yr" : "yrs"} @ ${c.growthRate}% · ${multiple(c.growthMultiple, 2)}`,
-                              ],
+                              ["Exit valuation", kd(c.exitValue)],
+                              ["Nizek equity", kd(c.nizekEquityValue)],
                             ].map(([l, v]) => (
                               <div key={l} className="min-w-0">
                                 <div className="label-xs">{l}</div>
@@ -618,7 +612,7 @@ function PlatformPage() {
                             ))}
                           </div>
                           <div className="md:w-52 md:text-right">
-                            <div className="label-xs">Value at Year 5</div>
+                            <div className="label-xs">Cohort exit value</div>
                             <div className="num mt-2 text-xl text-foreground md:text-2xl">
                               <AnimatedNumber value={c.portfolioValue} format={kd} />
                             </div>
@@ -649,7 +643,7 @@ function PlatformPage() {
                     step: "01",
                     title: "Portfolio value",
                     value: result.portfolioValue,
-                    note: `${fmtNumber(result.totalSuccesses)} winners out of ${fmtNumber(result.totalStartups)} startups, each grown for its own number of years.`,
+                    note: `${fmtNumber(result.totalSuccesses)} winners out of ${fmtNumber(result.totalStartups)} startups, each valued at its expected exit valuation.`,
                   },
                   {
                     step: "02",
