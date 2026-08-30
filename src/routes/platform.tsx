@@ -115,19 +115,19 @@ function StudioControl({
 }
 
 function PlatformPage() {
-  const [inputs, setInputs] = useState<StudioInputs>(defaultStudioInputs);
-  const result = useMemo(() => projectStudio(inputs), [inputs]);
+  const [inputs, setInputs] = useState<InvestmentInputs>(defaultInvestmentInputs);
+  const result = useMemo(() => projectInvestment(inputs), [inputs]);
 
   const set = useCallback(
-    (k: keyof StudioInputs, v: number) => setInputs((p) => ({ ...p, [k]: v })),
+    (k: keyof InvestmentInputs, v: number) => setInputs((p) => ({ ...p, [k]: v })),
     [],
   );
   const reset = useCallback(
-    (k: keyof StudioInputs) => setInputs((p) => ({ ...p, [k]: defaultStudioInputs[k] })),
+    (k: keyof InvestmentInputs) =>
+      setInputs((p) => ({ ...p, [k]: defaultInvestmentInputs[k] })),
     [],
   );
 
-  const maxTier = Math.max(...result.tiers.map((t) => t.grossValue), 1);
 
   return (
     <div>
