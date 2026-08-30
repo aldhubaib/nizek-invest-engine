@@ -603,8 +603,8 @@ function PlatformPage() {
                                   : `${c.yearsOfGrowth} yrs @ ${c.growthRate}% · ${multiple(c.growthMultiple, 2)}`,
                               ],
                             ].map(([l, v]) => (
-                              <div key={l}>
-                                <div className="label-xs">{l}</div>
+                              <div key={l} className="min-w-0">
+                                <div className="label-xs whitespace-nowrap">{l}</div>
                                 <div className="num mt-2 text-xs text-foreground">{v}</div>
                               </div>
                             ))}
