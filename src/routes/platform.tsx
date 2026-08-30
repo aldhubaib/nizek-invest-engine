@@ -388,8 +388,10 @@ function PlatformPage() {
                 If Nizek builds successful companies, what could your investment become?
               </h2>
               <p className="mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground">
-                Move three assumptions. Everything below re-prices instantly.
+                Ten new startups every year, five cohorts, each growing for a different length of
+                time. Move the assumptions and the whole portfolio re-prices instantly.
               </p>
+
             </Reveal>
           </div>
         </div>
