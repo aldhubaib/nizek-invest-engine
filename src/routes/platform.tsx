@@ -129,6 +129,11 @@ function StudioControl({
 function PlatformPage() {
   const [inputs, setInputs] = useState<InvestmentInputs>(defaultInvestmentInputs);
   const result = useMemo(() => projectInvestment(inputs), [inputs]);
+  const maxCohort = useMemo(
+    () => Math.max(...result.cohorts.map((c) => c.portfolioValue), 1),
+    [result],
+  );
+
 
   const set = useCallback(
     (k: keyof InvestmentInputs, v: number) => setInputs((p) => ({ ...p, [k]: v })),
