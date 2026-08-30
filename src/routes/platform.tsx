@@ -408,21 +408,48 @@ function PlatformPage() {
           </aside>
 
           <div className="px-6 py-12 md:px-12">
-            {/* The result — focal point */}
+            {/* Capital commitment — deployed gradually, not on day one */}
             <div className="border border-border">
+              <div className="border-b border-border px-8 py-8 md:px-12">
+                <div className="label-xs">Capital commitment</div>
+                <p className="mt-3 max-w-lg text-xs leading-relaxed text-subtle">
+                  Capital is not paid on day one. It is drawn down gradually as startups are
+                  created — KD400,000 each year for five years.
+                </p>
+              </div>
+              <div className="grid grid-cols-1 gap-px bg-border md:grid-cols-3">
+                {[
+                  ["Annual commitment", kd(ANNUAL_COMMITMENT), "Drawn each year as companies are built"],
+                  ["Commitment period", `${COMMITMENT_YEARS} Years`, "Years 1 through 5"],
+                  ["Maximum commitment", kd(TOTAL_INVESTMENT), "Cumulative across the full period"],
+                ].map(([l, v, n]) => (
+                  <div key={l} className="bg-background px-8 py-8 md:px-12">
+                    <div className="label-xs">{l}</div>
+                    <div className="num mt-5 text-3xl text-foreground md:text-4xl">{v}</div>
+                    <div className="mt-4 text-[11px] leading-relaxed text-subtle">{n}</div>
+                  </div>
+                ))}
+              </div>
+              <div className="grid grid-cols-5 gap-px border-t border-border bg-border">
+                {Array.from({ length: COMMITMENT_YEARS }, (_, i) => (
+                  <div key={i} className="bg-background px-4 py-5 text-center">
+                    <div className="num text-[11px] text-subtle">Year {i + 1}</div>
+                    <div className="num mt-2 text-sm text-foreground">{kd(ANNUAL_COMMITMENT)}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* The result — focal point */}
+            <div className="mt-px border border-border">
               {[
-                {
-                  label: "Your investment",
-                  note: "KD400,000 a year for five years",
-                  value: result.totalInvestment,
-                  format: kd,
-                },
                 {
                   label: "Estimated value",
                   note: "Your share of Nizek's equity in the successful companies",
                   value: result.investorValue,
                   format: kd,
                 },
+
                 {
                   label: "Estimated profit",
                   note: "Value created above the capital you committed",
