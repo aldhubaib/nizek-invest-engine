@@ -9,7 +9,7 @@ import {
   investmentControls,
   investmentGroups,
   projectInvestment,
-  TOTAL_INVESTMENT,
+  
   type InvestmentControlMeta,
   type InvestmentInputs,
 } from "@/model/investment";
@@ -379,20 +379,6 @@ function PlatformPage() {
         <div className="grid grid-cols-1 border-t border-border lg:grid-cols-[400px_1fr]">
           <aside className="border-b border-border px-6 py-10 lg:border-b-0 lg:border-r lg:px-8">
             <div className="label-xs">Assumptions</div>
-            <div className="mt-8 grid grid-cols-1 gap-px border border-border bg-border">
-              <div className="bg-background p-5">
-                <div className="label-xs">Investment</div>
-                <div className="num mt-2 text-lg">KD400K × 5 years</div>
-              </div>
-              <div className="bg-background p-5">
-                <div className="label-xs">Total commitment</div>
-                <div className="num mt-2 text-lg">{kd(TOTAL_INVESTMENT)}</div>
-              </div>
-              <div className="bg-background p-5">
-                <div className="label-xs">Investor participation</div>
-                <div className="num mt-2 text-lg">25% of NIZEK's ownership</div>
-              </div>
-            </div>
             {investmentGroups.map((g) => (
               <div key={g} className="mt-10">
                 <div className="border-b border-border-strong pb-3 text-sm text-foreground">{g}</div>
