@@ -8,29 +8,30 @@ import type { AssumptionMeta, Assumptions } from "./types";
 export const HORIZON_YEARS = 7;
 
 export const defaultAssumptions: Assumptions = {
-  startingCustomers: 42,
-  newCustomersMonth1: 6,
-  acquisitionGrowth: 4.5,
-  arpa: 3800,
-  annualPriceIncrease: 4,
-  monthlyChurn: 1.1,
-  netExpansion: 112,
-  grossMargin: 78,
-  cac: 14000,
-  rdPercent: 22,
-  gaPercent: 12,
-  fixedOpexMonthly: 120000,
+  startingCustomers: 38,
+  newCustomersMonth1: 5,
+  acquisitionGrowth: 1.9,
+  arpa: 3400,
+  annualPriceIncrease: 3,
+  monthlyChurn: 1.4,
+  netExpansion: 108,
+  grossMargin: 74,
+  cac: 26000,
+  rdPercent: 26,
+  gaPercent: 14,
+  fixedOpexMonthly: 260000,
   startingCash: 1800000,
   roundSize: 6000000,
   preMoney: 24000000,
   followOnYear: 3,
   followOnSize: 18000000,
   followOnPre: 90000000,
-  exitYear: 7,
-  exitMultiple: 8,
+  exitYear: 6,
+  exitMultiple: 7,
   investorTicket: 1000000,
   optionPool: 10,
 };
+
 
 export const assumptionMeta: AssumptionMeta[] = [
   {
