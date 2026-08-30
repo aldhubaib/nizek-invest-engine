@@ -2,6 +2,7 @@ import { useModel } from "@/model/context";
 import { defaultAssumptions } from "@/model/assumptions";
 import { formatByUnit } from "@/model/format";
 import type { AssumptionMeta } from "@/model/types";
+import { ValueField } from "./ValueField";
 
 export function AssumptionControl({ meta }: { meta: AssumptionMeta }) {
   const { assumptions, setAssumption } = useModel();
