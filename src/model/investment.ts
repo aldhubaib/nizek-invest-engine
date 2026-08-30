@@ -190,9 +190,9 @@ export function projectInvestment(input: InvestmentInputs): InvestmentResult {
 export const defaultInvestmentInputs: InvestmentInputs = {
   startupsPerYear: 10,
   successesPerYear: 1,
-  avgCompanyValue: 5_000_000,
-  annualGrowth: 40,
-  growthByYear: [40, 40, 40, 40, 40],
+  avgCompanyValue: 3_000_000,
+  annualGrowth: 20,
+  growthByYear: [20, 20, 20, 20, 20],
   avgNizekOwnership: 25,
   realEstateYield: 7,
   publicMarketReturn: 8,
