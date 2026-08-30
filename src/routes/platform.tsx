@@ -7,7 +7,7 @@ import { Reveal, Section, SectionHeading } from "@/components/ui/primitives";
 import { multiple, number as fmtNumber, percent } from "@/model/format";
 import {
   ANNUAL_COMMITMENT,
-  cohortGrowthControls,
+  cohortExitControls,
   COMMITMENT_YEARS,
   TOTAL_INVESTMENT,
   defaultInvestmentInputs,
