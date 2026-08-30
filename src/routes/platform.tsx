@@ -590,7 +590,7 @@ function PlatformPage() {
                           <div className="display-xl w-28 shrink-0 text-2xl md:text-3xl">
                             Year {c.year}
                           </div>
-                          <div className="grid flex-1 grid-cols-2 gap-6 md:grid-cols-5">
+                          <div className="grid flex-1 grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-3 md:grid-cols-5">
                             {[
                               ["Invested", kd(c.capitalInvested)],
                               ["Fail", `${fmtNumber(c.failures)} fail`],
@@ -603,8 +603,8 @@ function PlatformPage() {
                                   : `${c.yearsOfGrowth} yrs @ ${c.growthRate}% · ${multiple(c.growthMultiple, 2)}`,
                               ],
                             ].map(([l, v]) => (
-                              <div key={l}>
-                                <div className="label-xs">{l}</div>
+                              <div key={l} className="min-w-0">
+                                <div className="label-xs whitespace-nowrap">{l}</div>
                                 <div className="num mt-2 text-xs text-foreground">{v}</div>
                               </div>
                             ))}
