@@ -466,7 +466,7 @@ function PlatformPage() {
                   value: result.moic,
                   format: (v: number) => multiple(v, 2),
                 },
-              ].map((row, i) => (
+              ].map((row) => (
                 <div
                   key={row.label}
                   className="flex flex-col gap-4 border-b border-border px-8 py-10 last:border-b-0 md:flex-row md:items-end md:justify-between md:px-12"
@@ -477,11 +477,8 @@ function PlatformPage() {
                       {row.note}
                     </div>
                   </div>
-                  <div
-                    className={`num text-right leading-none ${
-                      i === 0 ? "text-3xl text-muted-foreground md:text-5xl" : "text-4xl text-foreground md:text-7xl"
-                    }`}
-                  >
+                  <div className="num text-right text-4xl leading-none text-foreground md:text-7xl">
+
                     <AnimatedNumber value={row.value} format={row.format} />
                   </div>
                 </div>
