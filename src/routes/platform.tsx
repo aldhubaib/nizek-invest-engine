@@ -85,7 +85,14 @@ function StudioControl({
         <label htmlFor={`studio-${meta.key}`} className="text-sm text-muted-foreground">
           {meta.label}
         </label>
-        <span className="num text-sm text-foreground">{fmt(value)}</span>
+        <ValueField
+          label={meta.label}
+          display={fmt(value)}
+          value={value}
+          min={meta.min}
+          max={meta.max}
+          onCommit={(v) => onChange(meta.key, v)}
+        />
       </div>
       <input
         id={`studio-${meta.key}`}
