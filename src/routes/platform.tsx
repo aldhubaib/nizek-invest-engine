@@ -454,6 +454,7 @@ function PlatformPage() {
                     name: "Public markets",
                     values: result.publicMarket.curve,
                     color: "#C9A227",
+                    dashed: true,
                   },
                   {
                     name: "Real estate",
