@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as DataRoomRouteImport } from './routes/data-room'
 import { Route as FinancialsRouteImport } from './routes/financials'
 import { Route as ModelRouteImport } from './routes/model'
+import { Route as PlatformRouteImport } from './routes/platform'
 import { Route as ReturnsRouteImport } from './routes/returns'
 import { Route as RoadmapRouteImport } from './routes/roadmap'
 import { Route as ScenariosRouteImport } from './routes/scenarios'
@@ -37,6 +38,11 @@ const FinancialsRoute = FinancialsRouteImport.update({
 const ModelRoute = ModelRouteImport.update({
   id: '/model',
   path: '/model',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlatformRoute = PlatformRouteImport.update({
+  id: '/platform',
+  path: '/platform',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ReturnsRoute = ReturnsRouteImport.update({
@@ -70,6 +76,7 @@ export interface FileRoutesByFullPath {
   '/data-room': typeof DataRoomRoute
   '/financials': typeof FinancialsRoute
   '/model': typeof ModelRoute
+  '/platform': typeof PlatformRoute
   '/returns': typeof ReturnsRoute
   '/roadmap': typeof RoadmapRoute
   '/scenarios': typeof ScenariosRoute
@@ -81,6 +88,7 @@ export interface FileRoutesByTo {
   '/data-room': typeof DataRoomRoute
   '/financials': typeof FinancialsRoute
   '/model': typeof ModelRoute
+  '/platform': typeof PlatformRoute
   '/returns': typeof ReturnsRoute
   '/roadmap': typeof RoadmapRoute
   '/scenarios': typeof ScenariosRoute
@@ -93,6 +101,7 @@ export interface FileRoutesById {
   '/data-room': typeof DataRoomRoute
   '/financials': typeof FinancialsRoute
   '/model': typeof ModelRoute
+  '/platform': typeof PlatformRoute
   '/returns': typeof ReturnsRoute
   '/roadmap': typeof RoadmapRoute
   '/scenarios': typeof ScenariosRoute
@@ -106,6 +115,7 @@ export interface FileRouteTypes {
     | '/data-room'
     | '/financials'
     | '/model'
+    | '/platform'
     | '/returns'
     | '/roadmap'
     | '/scenarios'
@@ -117,6 +127,7 @@ export interface FileRouteTypes {
     | '/data-room'
     | '/financials'
     | '/model'
+    | '/platform'
     | '/returns'
     | '/roadmap'
     | '/scenarios'
@@ -128,6 +139,7 @@ export interface FileRouteTypes {
     | '/data-room'
     | '/financials'
     | '/model'
+    | '/platform'
     | '/returns'
     | '/roadmap'
     | '/scenarios'
@@ -140,6 +152,7 @@ export interface RootRouteChildren {
   DataRoomRoute: typeof DataRoomRoute
   FinancialsRoute: typeof FinancialsRoute
   ModelRoute: typeof ModelRoute
+  PlatformRoute: typeof PlatformRoute
   ReturnsRoute: typeof ReturnsRoute
   RoadmapRoute: typeof RoadmapRoute
   ScenariosRoute: typeof ScenariosRoute
@@ -175,6 +188,13 @@ declare module '@tanstack/react-router' {
       path: '/model'
       fullPath: '/model'
       preLoaderRoute: typeof ModelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/platform': {
+      id: '/platform'
+      path: '/platform'
+      fullPath: '/platform'
+      preLoaderRoute: typeof PlatformRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/returns': {
@@ -220,6 +240,7 @@ const rootRouteChildren: RootRouteChildren = {
   DataRoomRoute: DataRoomRoute,
   FinancialsRoute: FinancialsRoute,
   ModelRoute: ModelRoute,
+  PlatformRoute: PlatformRoute,
   ReturnsRoute: ReturnsRoute,
   RoadmapRoute: RoadmapRoute,
   ScenariosRoute: ScenariosRoute,
