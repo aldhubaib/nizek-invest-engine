@@ -526,15 +526,6 @@ function PlatformPage() {
             </div>
 
 
-            <Reveal className="mt-16">
-              <Link
-                to="/simulator"
-                className="group inline-flex items-baseline gap-6 border-b border-border-strong pb-3 text-2xl transition-colors hover:border-foreground md:text-3xl"
-              >
-                <span className="display-xl">Open the full simulator</span>
-                <span className="label-xs transition-transform group-hover:translate-x-1">→</span>
-              </Link>
-            </Reveal>
           </div>
         </div>
       </section>
