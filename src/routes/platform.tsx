@@ -302,8 +302,8 @@ function PlatformPage() {
       {/* 7 — Where the money goes */}
       <Section>
         <SectionHeading index="06 — Capital deployment" title="Where The Money Goes" />
-        <div className="grid grid-cols-2 gap-px border border-border bg-border md:grid-cols-6">
-          {["Investment", "Developers", "Marketing", "Operations", "Product", "Launch"].map(
+        <div className="grid grid-cols-2 gap-px border border-border bg-border md:grid-cols-4">
+          {["Developers", "Marketing", "Operations", "Ecosystem"].map(
             (s, i) => (
               <div key={s} className="bg-background p-8">
                 <div className="num text-xs text-subtle">{String(i + 1).padStart(2, "0")}</div>
