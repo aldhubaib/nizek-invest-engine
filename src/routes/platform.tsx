@@ -602,7 +602,7 @@ function PlatformPage() {
                                 "Grows for",
                                 c.yearsOfGrowth === 0
                                   ? "Just created"
-                                  : `${c.yearsOfGrowth} yrs · ${multiple(c.growthMultiple, 2)}`,
+                                  : `${c.yearsOfGrowth} yrs @ ${c.growthRate}% · ${multiple(c.growthMultiple, 2)}`,
                               ],
                             ].map(([l, v]) => (
                               <div key={l}>
