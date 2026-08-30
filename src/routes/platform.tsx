@@ -438,8 +438,63 @@ function PlatformPage() {
                       onReset={reset}
                     />
                   ))}
+                {g === "Growth" && (
+                  <div className="mt-8">
+                    <div className="label-xs">Per-year growth</div>
+                    {cohortGrowthControls.map((c) => (
+                      <div key={c.index} className="border-b border-border py-5">
+                        <div className="flex items-baseline justify-between gap-4">
+                          <label
+                            htmlFor={`cohort-growth-${c.index}`}
+                            className="text-sm text-muted-foreground"
+                          >
+                            {c.label}
+                          </label>
+                          <ValueField
+                            label={c.label}
+                            display={`${inputs.growthByYear[c.index]}%`}
+                            value={inputs.growthByYear[c.index] ?? 0}
+                            min={c.min}
+                            max={c.max}
+                            onCommit={(v) => setCohortGrowth(c.index, v)}
+                          />
+                        </div>
+                        <input
+                          id={`cohort-growth-${c.index}`}
+                          type="range"
+                          min={c.min}
+                          max={c.max}
+                          step={c.step}
+                          value={inputs.growthByYear[c.index] ?? 0}
+                          onChange={(e) => setCohortGrowth(c.index, Number(e.target.value))}
+                          className="mt-4"
+                          aria-label={c.label}
+                        />
+                        <div className="mt-2 flex items-start justify-between gap-4">
+                          <span className="text-[11px] leading-relaxed text-subtle">{c.help}</span>
+                          {inputs.growthByYear[c.index] !==
+                            defaultInvestmentInputs.growthByYear[c.index] && (
+                            <button
+                              type="button"
+                              onClick={() =>
+                                setCohortGrowth(
+                                  c.index,
+                                  defaultInvestmentInputs.growthByYear[c.index] ?? 0,
+                                )
+                              }
+                              className="label-xs shrink-0 transition-colors hover:text-foreground"
+                            >
+                              Reset
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             ))}
+
           </aside>
 
           <div className="px-6 py-12 md:px-12">
