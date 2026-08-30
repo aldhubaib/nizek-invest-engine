@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useMemo, useState } from "react";
-import { LineChart } from "@/components/charts/Charts";
+
 import { AnimatedNumber } from "@/components/model/AnimatedNumber";
 import { ValueField } from "@/components/model/ValueField";
 import { Reveal, Section, SectionHeading } from "@/components/ui/primitives";
@@ -374,11 +374,12 @@ function PlatformPage() {
         <div className="px-6 py-24 md:px-12 md:py-32">
           <div className="mx-auto w-full max-w-[1400px]">
             <Reveal>
-              <div className="label-xs">08 — Live business model</div>
-              <h2 className="display-xl mt-6 text-5xl md:text-8xl">Model Your Investment</h2>
+              <div className="label-xs">08 — The investment simulator</div>
+              <h2 className="display-xl mt-6 text-5xl md:text-8xl">
+                If Nizek builds successful companies, what could your investment become?
+              </h2>
               <p className="mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground">
-                Every figure below is calculated live from the assumptions on the left. Change one
-                and the entire section re-prices.
+                Move three assumptions. Everything below re-prices instantly.
               </p>
             </Reveal>
           </div>
@@ -386,7 +387,7 @@ function PlatformPage() {
 
         <div className="grid grid-cols-1 border-t border-border lg:grid-cols-[400px_1fr]">
           <aside className="border-b border-border px-6 py-10 lg:border-b-0 lg:border-r lg:px-8">
-            <div className="label-xs">Assumptions</div>
+            <div className="label-xs">Your assumptions</div>
             {investmentGroups.map((g) => (
               <div key={g} className="mt-10">
                 <div className="border-b border-border-strong pb-3 text-sm text-foreground">{g}</div>
@@ -407,86 +408,181 @@ function PlatformPage() {
           </aside>
 
           <div className="px-6 py-12 md:px-12">
-            <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-2 xl:grid-cols-4">
+            {/* The result — focal point */}
+            <div className="border border-border">
               {[
-                { label: "Portfolio value", v: result.portfolioValue, f: kd },
-                { label: "Nizek equity value", v: result.nizekEquityValue, f: kd },
-                { label: "Investor value", v: result.investorValue, f: kd },
-                { label: "Investor profit", v: result.investorProfit, f: kd },
-              ].map((k) => (
-                <div key={k.label} className="bg-background p-8">
-                  <div className="label-xs">{k.label}</div>
-                  <div className="num mt-4 text-3xl text-foreground md:text-4xl">
-                    <AnimatedNumber value={k.v} format={k.f} />
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-px grid grid-cols-2 gap-px border border-border bg-border lg:grid-cols-4">
-              {[
-                { label: "MOIC", v: result.moic, f: (v: number) => multiple(v, 2) },
-                { label: "IRR", v: result.irr, f: (v: number) => percent(v, 1) },
                 {
-                  label: "Successful companies",
-                  v: inputs.successfulCompanies,
-                  f: (v: number) => fmtNumber(v),
+                  label: "Your investment",
+                  note: "KD400,000 a year for five years",
+                  value: result.totalInvestment,
+                  format: kd,
                 },
-                { label: "Total investment", v: result.totalInvestment, f: kd },
-              ].map((k) => (
-                <div key={k.label} className="bg-background p-6">
-                  <div className="label-xs">{k.label}</div>
-                  <div className="num mt-3 text-xl text-foreground md:text-2xl">
-                    <AnimatedNumber value={k.v} format={k.f} />
+                {
+                  label: "Estimated value",
+                  note: "Your share of Nizek's equity in the successful companies",
+                  value: result.investorValue,
+                  format: kd,
+                },
+                {
+                  label: "Estimated profit",
+                  note: "Value created above the capital you committed",
+                  value: result.investorProfit,
+                  format: kd,
+                },
+                {
+                  label: "Return",
+                  note: "What every dinar comes back as",
+                  value: result.moic,
+                  format: (v: number) => multiple(v, 2),
+                },
+              ].map((row, i) => (
+                <div
+                  key={row.label}
+                  className="flex flex-col gap-4 border-b border-border px-8 py-10 last:border-b-0 md:flex-row md:items-end md:justify-between md:px-12"
+                >
+                  <div>
+                    <div className="label-xs">{row.label}</div>
+                    <div className="mt-3 max-w-sm text-xs leading-relaxed text-subtle">
+                      {row.note}
+                    </div>
+                  </div>
+                  <div
+                    className={`num text-right leading-none ${
+                      i === 0 ? "text-3xl text-muted-foreground md:text-5xl" : "text-4xl text-foreground md:text-7xl"
+                    }`}
+                  >
+                    <AnimatedNumber value={row.value} format={row.format} />
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="mt-16 text-foreground">
-              <div className="label-xs mb-6">
-                Your position vs real estate and public markets — same cash committed
-              </div>
-              <LineChart
-                series={[
-                  { name: "Nizek", values: result.investorCurve, color: "#FFFFFF" },
-                  {
-                    name: "Public markets",
-                    values: result.publicMarket.curve,
-                    color: "#C9A227",
-                    dashed: true,
-                  },
-                  {
-                    name: "Real estate",
-                    values: result.realEstate.curve,
-                    color: "#4E8C86",
-                    dashed: true,
-                  },
-                ]}
-                labels={result.labels}
-                format={(v) => kd(v)}
-              />
-              <div className="mt-4 flex flex-wrap gap-6 text-[11px] uppercase tracking-[0.18em] text-subtle">
+            {/* The story */}
+            <div className="mt-20">
+              <div className="label-xs">How the money travels</div>
+              <div className="mt-8 grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-5">
                 {[
-                  { name: "Nizek", color: "#FFFFFF" },
-                  { name: "Public markets", color: "#C9A227" },
-                  { name: "Real estate", color: "#4E8C86" },
-                ].map((l) => (
-                  <div key={l.name} className="flex items-center gap-2">
-                    <span
-                      className="inline-block h-px w-6"
-                      style={{ backgroundColor: l.color }}
-                    />
-                    {l.name}
+                  {
+                    step: "01",
+                    title: "50 startups are created",
+                    value: fmtNumber(50),
+                    note: "Ten every year for five years.",
+                  },
+                  {
+                    step: "02",
+                    title: "Some become successful",
+                    value: fmtNumber(inputs.successfulCompanies),
+                    note: "Your assumption for meaningful winners.",
+                  },
+                  {
+                    step: "03",
+                    title: "They create portfolio value",
+                    value: kd(result.portfolioValue),
+                    note: `${fmtNumber(inputs.successfulCompanies)} × ${kd(inputs.avgCompanyValue)} at exit.`,
+                  },
+                  {
+                    step: "04",
+                    title: "Nizek owns part of them",
+                    value: kd(result.nizekEquityValue),
+                    note: `${inputs.avgNizekOwnership}% average ownership.`,
+                  },
+                  {
+                    step: "05",
+                    title: "You hold 25% of that",
+                    value: kd(result.investorValue),
+                    note: "Your participation in Nizek's ownership.",
+                  },
+                ].map((s) => (
+                  <div key={s.step} className="bg-background p-8">
+                    <div className="num text-xs text-subtle">{s.step}</div>
+                    <div className="mt-6 text-sm leading-relaxed text-foreground">{s.title}</div>
+                    <div className="num mt-6 text-2xl text-foreground">{s.value}</div>
+                    <div className="mt-4 text-[11px] leading-relaxed text-subtle">{s.note}</div>
                   </div>
                 ))}
               </div>
-              <div className="mt-6 border border-border">
+            </div>
+
+            {/* Comparison */}
+            <div className="mt-20">
+              <div className="label-xs">
+                The same KD400,000 a year, invested three different ways
+              </div>
+              <div className="mt-8 grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-3">
+                {[
+                  {
+                    title: "What it is worth",
+                    format: kd,
+                    rows: [
+                      { name: "Nizek", v: result.investorValue, color: "#FFFFFF" },
+                      { name: "Public markets", v: result.publicMarket.finalValue, color: "#C9A227" },
+                      { name: "Real estate", v: result.realEstate.finalValue, color: "#4E8C86" },
+                    ],
+                  },
+                  {
+                    title: "What you made",
+                    format: kd,
+                    rows: [
+                      { name: "Nizek", v: result.investorProfit, color: "#FFFFFF" },
+                      { name: "Public markets", v: result.publicMarket.profit, color: "#C9A227" },
+                      { name: "Real estate", v: result.realEstate.profit, color: "#4E8C86" },
+                    ],
+                  },
+                  {
+                    title: "Return multiple",
+                    format: (v: number) => multiple(v, 2),
+                    rows: [
+                      { name: "Nizek", v: result.moic, color: "#FFFFFF" },
+                      {
+                        name: "Public markets",
+                        v: result.publicMarket.finalValue / result.totalInvestment,
+                        color: "#C9A227",
+                      },
+                      {
+                        name: "Real estate",
+                        v: result.realEstate.finalValue / result.totalInvestment,
+                        color: "#4E8C86",
+                      },
+                    ],
+                  },
+                ].map((panel) => {
+                  const peak = Math.max(...panel.rows.map((r) => Math.abs(r.v)), 1);
+                  return (
+                    <div key={panel.title} className="bg-background p-8">
+                      <div className="label-xs">{panel.title}</div>
+                      <div className="mt-8 space-y-7">
+                        {panel.rows.map((r) => (
+                          <div key={r.name}>
+                            <div className="flex items-baseline justify-between gap-4">
+                              <span className="text-xs text-muted-foreground">{r.name}</span>
+                              <span className="num text-base text-foreground">
+                                <AnimatedNumber value={r.v} format={panel.format} />
+                              </span>
+                            </div>
+                            <div className="mt-3 h-px w-full bg-border">
+                              <div
+                                className="h-px"
+                                style={{
+                                  width: `${Math.max((Math.abs(r.v) / peak) * 100, 0.5)}%`,
+                                  backgroundColor: r.color,
+                                  transition: "width 500ms cubic-bezier(0.16,1,0.3,1)",
+                                }}
+                              />
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div className="mt-px border border-border">
                 <div className="grid grid-cols-[1.2fr_1fr_1fr_1fr] gap-4 border-b border-border px-6 py-4 text-[11px] uppercase tracking-[0.18em] text-subtle">
                   <div>Option</div>
                   <div className="text-right">Final value</div>
                   <div className="text-right">Profit</div>
-                  <div className="text-right">Annualized</div>
+                  <div className="text-right">Annual return</div>
                 </div>
                 {[
                   {
@@ -526,42 +622,10 @@ function PlatformPage() {
                 ))}
               </div>
             </div>
-
-            <div className="mt-16">
-              <div className="label-xs">How it is calculated</div>
-              <div className="mt-6 grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-3">
-                {[
-                  [
-                    "Portfolio value",
-                    `${fmtNumber(inputs.successfulCompanies)} companies × ${kd(inputs.avgCompanyValue)}`,
-                    result.portfolioValue,
-                  ],
-                  [
-                    "Nizek equity value",
-                    `${kd(result.portfolioValue)} × ${inputs.avgNizekOwnership}%`,
-                    result.nizekEquityValue,
-                  ],
-                  [
-                    "Investor value",
-                    `${kd(result.nizekEquityValue)} × 25%`,
-                    result.investorValue,
-                  ],
-                ].map(([label, formula, value]) => (
-                  <div key={label as string} className="bg-background p-6">
-                    <div className="label-xs">{label as string}</div>
-                    <div className="mt-3 text-sm text-muted-foreground">{formula as string}</div>
-                    <div className="num mt-3 text-2xl text-foreground">
-                      <AnimatedNumber value={value as number} format={kd} />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-
           </div>
         </div>
       </section>
+
 
       {/* 10 — Current proof */}
       <Section>
