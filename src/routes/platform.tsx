@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useMemo, useState } from "react";
-import { LineChart } from "@/components/charts/Charts";
+
 import { AnimatedNumber } from "@/components/model/AnimatedNumber";
 import { ValueField } from "@/components/model/ValueField";
 import { Reveal, Section, SectionHeading } from "@/components/ui/primitives";
