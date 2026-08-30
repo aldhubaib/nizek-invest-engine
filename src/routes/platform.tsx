@@ -474,48 +474,48 @@ function PlatformPage() {
                       onReset={reset}
                     />
                   ))}
-                {g === "Growth" && (
+                {g === "Exit value" && (
                   <div className="mt-8">
-                    <div className="label-xs">Per-year growth</div>
-                    {cohortGrowthControls.map((c) => (
+                    <div className="label-xs">Expected exit valuation per cohort</div>
+                    {cohortExitControls.map((c) => (
                       <div key={c.index} className="border-b border-border py-5">
                         <div className="flex items-baseline justify-between gap-4">
                           <label
-                            htmlFor={`cohort-growth-${c.index}`}
+                            htmlFor={`cohort-exit-${c.index}`}
                             className="text-sm text-muted-foreground"
                           >
                             {c.label}
                           </label>
                           <ValueField
                             label={c.label}
-                            display={`${inputs.growthByYear[c.index]}%`}
-                            value={inputs.growthByYear[c.index] ?? 0}
+                            display={kd(inputs.exitValueByYear[c.index] ?? 0)}
+                            value={inputs.exitValueByYear[c.index] ?? 0}
                             min={c.min}
                             max={c.max}
-                            onCommit={(v) => setCohortGrowth(c.index, v)}
+                            onCommit={(v) => setCohortExit(c.index, v)}
                           />
                         </div>
                         <input
-                          id={`cohort-growth-${c.index}`}
+                          id={`cohort-exit-${c.index}`}
                           type="range"
                           min={c.min}
                           max={c.max}
                           step={c.step}
-                          value={inputs.growthByYear[c.index] ?? 0}
-                          onChange={(e) => setCohortGrowth(c.index, Number(e.target.value))}
+                          value={inputs.exitValueByYear[c.index] ?? 0}
+                          onChange={(e) => setCohortExit(c.index, Number(e.target.value))}
                           className="mt-4"
                           aria-label={c.label}
                         />
                         <div className="mt-2 flex items-start justify-between gap-4">
                           <span className="text-[11px] leading-relaxed text-subtle">{c.help}</span>
-                          {inputs.growthByYear[c.index] !==
-                            defaultInvestmentInputs.growthByYear[c.index] && (
+                          {inputs.exitValueByYear[c.index] !==
+                            defaultInvestmentInputs.exitValueByYear[c.index] && (
                             <button
                               type="button"
                               onClick={() =>
-                                setCohortGrowth(
+                                setCohortExit(
                                   c.index,
-                                  defaultInvestmentInputs.growthByYear[c.index] ?? 0,
+                                  defaultInvestmentInputs.exitValueByYear[c.index] ?? 0,
                                 )
                               }
                               className="label-xs shrink-0 transition-colors hover:text-foreground"
