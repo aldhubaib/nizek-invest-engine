@@ -16,7 +16,14 @@ export function AssumptionControl({ meta }: { meta: AssumptionMeta }) {
         <label htmlFor={meta.key} className="text-sm text-muted-foreground">
           {meta.label}
         </label>
-        <span className="num text-sm text-foreground">{formatByUnit(value, meta.unit)}</span>
+        <ValueField
+          label={meta.label}
+          display={formatByUnit(value, meta.unit)}
+          value={value}
+          min={meta.min}
+          max={meta.max}
+          onCommit={(v) => setAssumption(meta.key, v)}
+        />
       </div>
       <input
         id={meta.key}
