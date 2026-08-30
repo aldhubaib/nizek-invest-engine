@@ -1,5 +1,6 @@
 import type { PortfolioControlMeta, PortfolioInputs } from "@/model/portfolio";
 import { currency, number as fmtNumber } from "@/model/format";
+import { ValueField } from "./ValueField";
 
 export function formatControl(v: number, unit: PortfolioControlMeta["unit"]) {
   switch (unit) {
@@ -34,9 +35,14 @@ export function PortfolioControl({
         <label htmlFor={meta.key} className="text-sm text-muted-foreground">
           {meta.label}
         </label>
-        <span className="num text-sm text-foreground tabular-nums">
-          {formatControl(value, meta.unit)}
-        </span>
+        <ValueField
+          label={meta.label}
+          display={formatControl(value, meta.unit)}
+          value={value}
+          min={meta.min}
+          max={meta.max}
+          onCommit={(v) => onChange(meta.key, v)}
+        />
       </div>
       <input
         id={meta.key}

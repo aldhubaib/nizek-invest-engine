@@ -2,6 +2,7 @@ import { useModel } from "@/model/context";
 import { defaultAssumptions } from "@/model/assumptions";
 import { formatByUnit } from "@/model/format";
 import type { AssumptionMeta } from "@/model/types";
+import { ValueField } from "./ValueField";
 
 export function AssumptionControl({ meta }: { meta: AssumptionMeta }) {
   const { assumptions, setAssumption } = useModel();
@@ -15,7 +16,14 @@ export function AssumptionControl({ meta }: { meta: AssumptionMeta }) {
         <label htmlFor={meta.key} className="text-sm text-muted-foreground">
           {meta.label}
         </label>
-        <span className="num text-sm text-foreground">{formatByUnit(value, meta.unit)}</span>
+        <ValueField
+          label={meta.label}
+          display={formatByUnit(value, meta.unit)}
+          value={value}
+          min={meta.min}
+          max={meta.max}
+          onCommit={(v) => setAssumption(meta.key, v)}
+        />
       </div>
       <input
         id={meta.key}
