@@ -130,6 +130,7 @@ function StudioControl({
 
 function PlatformPage() {
   const [inputs, setInputs] = useState<InvestmentInputs>(defaultInvestmentInputs);
+  const [panelOpen, setPanelOpen] = useState(false);
   const result = useMemo(() => projectInvestment(inputs), [inputs]);
   const maxCohort = useMemo(
     () => Math.max(...result.cohorts.map((c) => c.portfolioValue), 1),
