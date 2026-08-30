@@ -376,17 +376,31 @@ function PlatformPage() {
         <div className="grid grid-cols-1 border-t border-border lg:grid-cols-[400px_1fr]">
           <aside className="border-b border-border px-6 py-10 lg:border-b-0 lg:border-r lg:px-8">
             <div className="label-xs">Assumptions</div>
-            {studioGroups.map((g) => (
+            <div className="mt-8 grid grid-cols-1 gap-px border border-border bg-border">
+              <div className="bg-background p-5">
+                <div className="label-xs">Investment</div>
+                <div className="num mt-2 text-lg">KD400K × 5 years</div>
+              </div>
+              <div className="bg-background p-5">
+                <div className="label-xs">Total commitment</div>
+                <div className="num mt-2 text-lg">{kd(TOTAL_INVESTMENT)}</div>
+              </div>
+              <div className="bg-background p-5">
+                <div className="label-xs">Investor participation</div>
+                <div className="num mt-2 text-lg">25% of NIZEK's ownership</div>
+              </div>
+            </div>
+            {investmentGroups.map((g) => (
               <div key={g} className="mt-10">
                 <div className="border-b border-border-strong pb-3 text-sm text-foreground">{g}</div>
-                {studioControls
+                {investmentControls
                   .filter((c) => c.group === g)
                   .map((c) => (
                     <StudioControl
                       key={c.key}
                       meta={c}
                       value={inputs[c.key]}
-                      base={defaultStudioInputs[c.key]}
+                      base={defaultInvestmentInputs[c.key]}
                       onChange={set}
                       onReset={reset}
                     />
@@ -400,8 +414,8 @@ function PlatformPage() {
               {[
                 { label: "Portfolio value", v: result.portfolioValue, f: kd },
                 { label: "Nizek equity value", v: result.nizekEquityValue, f: kd },
-                { label: "Your equity value", v: result.investorEquityValue, f: kd },
-                { label: "Profit", v: result.profit, f: kd },
+                { label: "Investor value", v: result.investorValue, f: kd },
+                { label: "Investor profit", v: result.investorProfit, f: kd },
               ].map((k) => (
                 <div key={k.label} className="bg-background p-8">
                   <div className="label-xs">{k.label}</div>
@@ -412,13 +426,16 @@ function PlatformPage() {
               ))}
             </div>
 
-            <div className="mt-px grid grid-cols-2 gap-px border border-border bg-border lg:grid-cols-5">
+            <div className="mt-px grid grid-cols-2 gap-px border border-border bg-border lg:grid-cols-4">
               {[
                 { label: "MOIC", v: result.moic, f: (v: number) => multiple(v, 2) },
                 { label: "IRR", v: result.irr, f: (v: number) => percent(v, 1) },
-                { label: "Startups created", v: result.totalStartups, f: (v: number) => fmtNumber(v) },
-                { label: "Total commitment", v: result.totalCommitment, f: kd },
-                { label: "Cost per startup", v: result.costPerStartup, f: kd },
+                {
+                  label: "Successful companies",
+                  v: inputs.successfulCompanies,
+                  f: (v: number) => fmtNumber(v),
+                },
+                { label: "Total investment", v: result.totalInvestment, f: kd },
               ].map((k) => (
                 <div key={k.label} className="bg-background p-6">
                   <div className="label-xs">{k.label}</div>
@@ -435,23 +452,53 @@ function PlatformPage() {
               </div>
               <LineChart
                 series={[
-                  { name: "Nizek", values: result.investorValueCurve },
-                  { name: "Public markets", values: result.publicMarketCurve, muted: true },
-                  { name: "Real estate", values: result.realEstateCurve, muted: true, dashed: true },
+                  { name: "Nizek", values: result.investorCurve },
+                  { name: "Public markets", values: result.publicMarket.curve, muted: true },
+                  { name: "Real estate", values: result.realEstate.curve, muted: true, dashed: true },
                 ]}
                 labels={result.labels}
                 format={(v) => kd(v)}
               />
-              <div className="mt-6 grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-3">
+              <div className="mt-6 border border-border">
+                <div className="grid grid-cols-[1.2fr_1fr_1fr_1fr] gap-4 border-b border-border px-6 py-4 text-[11px] uppercase tracking-[0.18em] text-subtle">
+                  <div>Option</div>
+                  <div className="text-right">Final value</div>
+                  <div className="text-right">Profit</div>
+                  <div className="text-right">Annualized</div>
+                </div>
                 {[
-                  ["Nizek", result.investorEquityValue],
-                  ["Public markets", result.publicMarketFinal],
-                  ["Real estate", result.realEstateFinal],
-                ].map(([l, v]) => (
-                  <div key={l as string} className="bg-background p-6">
-                    <div className="label-xs">{l as string}</div>
-                    <div className="num mt-3 text-lg text-foreground">
-                      <AnimatedNumber value={v as number} format={kd} />
+                  {
+                    name: "Nizek participation",
+                    value: result.investorValue,
+                    profit: result.investorProfit,
+                    rate: result.irr,
+                  },
+                  {
+                    name: "Real estate",
+                    value: result.realEstate.finalValue,
+                    profit: result.realEstate.profit,
+                    rate: result.realEstate.annualizedReturn,
+                  },
+                  {
+                    name: "Public market",
+                    value: result.publicMarket.finalValue,
+                    profit: result.publicMarket.profit,
+                    rate: result.publicMarket.annualizedReturn,
+                  },
+                ].map((row) => (
+                  <div
+                    key={row.name}
+                    className="grid grid-cols-[1.2fr_1fr_1fr_1fr] gap-4 border-b border-border px-6 py-4 text-sm text-foreground last:border-b-0"
+                  >
+                    <div>{row.name}</div>
+                    <div className="num text-right">
+                      <AnimatedNumber value={row.value} format={kd} />
+                    </div>
+                    <div className="num text-right">
+                      <AnimatedNumber value={row.profit} format={kd} />
+                    </div>
+                    <div className="num text-right">
+                      <AnimatedNumber value={row.rate} format={(v) => percent(v, 1)} />
                     </div>
                   </div>
                 ))}
@@ -459,43 +506,36 @@ function PlatformPage() {
             </div>
 
             <div className="mt-16">
-              <div className="label-xs">Risk — where the value comes from</div>
-              <div className="mt-6 border border-border">
-                <div className="grid grid-cols-[1.3fr_0.6fr_0.7fr_1fr_1fr] gap-4 border-b border-border px-6 py-4 text-[11px] uppercase tracking-[0.18em] text-subtle">
-                  <div>Outcome</div>
-                  <div className="text-right">Share</div>
-                  <div className="text-right">Companies</div>
-                  <div className="text-right">Exit / co.</div>
-                  <div className="text-right">Your value</div>
-                </div>
-                <div className="grid grid-cols-[1.3fr_0.6fr_0.7fr_1fr_1fr] gap-4 border-b border-border px-6 py-4 text-sm text-subtle">
-                  <div>Write-offs</div>
-                  <div className="num text-right">{result.shares.failure.toFixed(1)}%</div>
-                  <div className="num text-right">{result.failures.toFixed(1)}</div>
-                  <div className="num text-right">KD0</div>
-                  <div className="num text-right">KD0</div>
-                </div>
-                {result.tiers.map((t) => (
-                  <div key={t.key} className="border-b border-border last:border-b-0">
-                    <div className="grid grid-cols-[1.3fr_0.6fr_0.7fr_1fr_1fr] gap-4 px-6 py-4 text-sm text-foreground">
-                      <div>{t.label}</div>
-                      <div className="num text-right">{t.share.toFixed(1)}%</div>
-                      <div className="num text-right">{t.count.toFixed(1)}</div>
-                      <div className="num text-right">{kd(t.exitValuation)}</div>
-                      <div className="num text-right">
-                        <AnimatedNumber value={t.investorValue} format={kd} />
-                      </div>
-                    </div>
-                    <div className="h-px w-full bg-border/60">
-                      <div
-                        className="h-px bg-foreground transition-all duration-700 ease-out"
-                        style={{ width: `${(t.grossValue / maxTier) * 100}%` }}
-                      />
+              <div className="label-xs">How it is calculated</div>
+              <div className="mt-6 grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-3">
+                {[
+                  [
+                    "Portfolio value",
+                    `${fmtNumber(inputs.successfulCompanies)} companies × ${kd(inputs.avgCompanyValue)}`,
+                    result.portfolioValue,
+                  ],
+                  [
+                    "Nizek equity value",
+                    `${kd(result.portfolioValue)} × ${inputs.avgNizekOwnership}%`,
+                    result.nizekEquityValue,
+                  ],
+                  [
+                    "Investor value",
+                    `${kd(result.nizekEquityValue)} × 25%`,
+                    result.investorValue,
+                  ],
+                ].map(([label, formula, value]) => (
+                  <div key={label as string} className="bg-background p-6">
+                    <div className="label-xs">{label as string}</div>
+                    <div className="mt-3 text-sm text-muted-foreground">{formula as string}</div>
+                    <div className="num mt-3 text-2xl text-foreground">
+                      <AnimatedNumber value={value as number} format={kd} />
                     </div>
                   </div>
                 ))}
               </div>
             </div>
+
 
             <Reveal className="mt-16">
               <Link
