@@ -110,7 +110,7 @@ export function Footer() {
   );
 }
 
-export function NextStep({ to, label }: { to: LinkProps["to"]; label: string }) {
+export function NextStep({ to, label }: { to: NonNullable<LinkProps["to"]>; label: string }) {
   return (
     <Link
       to={to}
