@@ -420,7 +420,7 @@ function PlatformPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 border-t border-border lg:grid-cols-[400px_1fr]">
+        <div className="grid grid-cols-1 border-t border-border lg:grid-cols-[400px_minmax(0,1fr)]">
           <aside className="border-b border-border px-6 py-10 lg:border-b-0 lg:border-r lg:px-8">
             <div className="label-xs">Your assumptions</div>
             {investmentGroups.map((g) => (
