@@ -659,7 +659,7 @@ function PlatformPage() {
                     step: "03",
                     title: "Investor share",
                     value: result.investorValue,
-                    note: "25% of Nizek's ownership in every company created in the window.",
+                    note: `${inputs.investorShare}% of Nizek's ownership in every company created in the window.`,
                   },
                   {
                     step: "04",
