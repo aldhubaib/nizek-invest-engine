@@ -590,7 +590,7 @@ function PlatformPage() {
                           <div className="display-xl w-28 shrink-0 text-2xl md:text-3xl">
                             Year {c.year}
                           </div>
-                          <div className="grid flex-1 grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-3 md:grid-cols-5">
+                          <div className="grid min-w-0 flex-1 grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-3 md:grid-cols-[repeat(4,minmax(3.5rem,1fr))_minmax(8.5rem,1.6fr)]">
                             {[
                               ["Invested", kd(c.capitalInvested)],
                               ["Fail", `${fmtNumber(c.failures)} fail`],
@@ -605,7 +605,13 @@ function PlatformPage() {
                             ].map(([l, v]) => (
                               <div key={l} className="min-w-0">
                                 <div className="label-xs whitespace-nowrap">{l}</div>
-                                <div className="num mt-2 text-xs text-foreground">{v}</div>
+                                <div
+                                  className={`num mt-2 text-xs text-foreground ${
+                                    l === "Grows for" ? "whitespace-nowrap" : ""
+                                  }`}
+                                >
+                                  {v}
+                                </div>
                               </div>
                             ))}
                           </div>
