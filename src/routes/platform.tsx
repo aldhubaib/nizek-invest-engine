@@ -601,13 +601,8 @@ function PlatformPage() {
                               ["Invested", kd(c.capitalInvested)],
                               ["Fail", `${fmtNumber(c.failures)} fail`],
                               ["Successes", fmtNumber(c.successes)],
-                              ["Valuation", kd(c.valueAtBreakout)],
-                              [
-                                "Grows for",
-                                c.yearsOfGrowth === 0
-                                  ? "Just created"
-                                  : `${c.yearsOfGrowth} ${c.yearsOfGrowth === 1 ? "yr" : "yrs"} @ ${c.growthRate}% · ${multiple(c.growthMultiple, 2)}`,
-                              ],
+                              ["Exit valuation", kd(c.exitValue)],
+                              ["Nizek equity", kd(c.nizekEquityValue)],
                             ].map(([l, v]) => (
                               <div key={l} className="min-w-0">
                                 <div className="label-xs">{l}</div>
