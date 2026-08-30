@@ -9,7 +9,7 @@ import {
   investmentControls,
   investmentGroups,
   projectInvestment,
-  TOTAL_INVESTMENT,
+  
   type InvestmentControlMeta,
   type InvestmentInputs,
 } from "@/model/investment";
