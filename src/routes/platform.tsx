@@ -449,13 +449,37 @@ function PlatformPage() {
               </div>
               <LineChart
                 series={[
-                  { name: "Nizek", values: result.investorCurve },
-                  { name: "Public markets", values: result.publicMarket.curve, muted: true },
-                  { name: "Real estate", values: result.realEstate.curve, muted: true, dashed: true },
+                  { name: "Nizek", values: result.investorCurve, color: "#FFFFFF" },
+                  {
+                    name: "Public markets",
+                    values: result.publicMarket.curve,
+                    color: "#C9A227",
+                  },
+                  {
+                    name: "Real estate",
+                    values: result.realEstate.curve,
+                    color: "#4E8C86",
+                    dashed: true,
+                  },
                 ]}
                 labels={result.labels}
                 format={(v) => kd(v)}
               />
+              <div className="mt-4 flex flex-wrap gap-6 text-[11px] uppercase tracking-[0.18em] text-subtle">
+                {[
+                  { name: "Nizek", color: "#FFFFFF" },
+                  { name: "Public markets", color: "#C9A227" },
+                  { name: "Real estate", color: "#4E8C86" },
+                ].map((l) => (
+                  <div key={l.name} className="flex items-center gap-2">
+                    <span
+                      className="inline-block h-px w-6"
+                      style={{ backgroundColor: l.color }}
+                    />
+                    {l.name}
+                  </div>
+                ))}
+              </div>
               <div className="mt-6 border border-border">
                 <div className="grid grid-cols-[1.2fr_1fr_1fr_1fr] gap-4 border-b border-border px-6 py-4 text-[11px] uppercase tracking-[0.18em] text-subtle">
                   <div>Option</div>
