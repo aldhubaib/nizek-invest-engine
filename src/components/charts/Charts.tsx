@@ -5,6 +5,7 @@ export interface Series {
   values: number[];
   muted?: boolean;
   dashed?: boolean;
+  color?: string;
 }
 
 const W = 1000;
