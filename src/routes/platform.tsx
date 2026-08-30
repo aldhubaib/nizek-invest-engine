@@ -580,9 +580,10 @@ function PlatformPage() {
             <div className="mt-20">
               <div className="label-xs">How the portfolio is built, one cohort at a time</div>
               <p className="mt-4 max-w-2xl text-xs leading-relaxed text-subtle">
-                Every year new capital is drawn, a new cohort of startups is created, and the
-                winners from earlier cohorts keep compounding. A Year 1 winner has four more years
-                of growth than a Year 5 winner.
+                Every year new capital is drawn and a new cohort of startups is created. Most fail;
+                a few reach an exit. Each cohort is valued at the expected exit valuation of its
+                winners — earlier cohorts carry higher expected exits because they have had more
+                time to mature.
               </p>
 
               <div className="mt-8 border border-border">
