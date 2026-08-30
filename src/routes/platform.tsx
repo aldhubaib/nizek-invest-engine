@@ -358,6 +358,8 @@ function PlatformPage() {
         </div>
       </Section>
 
+      <ScenarioBuilder />
+
       {/* 9 — Live business model */}
       <section id="model" className="border-t border-border">
         <div className="px-6 py-24 md:px-12 md:py-32">
