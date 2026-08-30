@@ -130,6 +130,7 @@ function StudioControl({
 
 function PlatformPage() {
   const [inputs, setInputs] = useState<InvestmentInputs>(defaultInvestmentInputs);
+  const [panelOpen, setPanelOpen] = useState(false);
   const result = useMemo(() => projectInvestment(inputs), [inputs]);
   const maxCohort = useMemo(
     () => Math.max(...result.cohorts.map((c) => c.portfolioValue), 1),
@@ -420,9 +421,43 @@ function PlatformPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 border-t border-border lg:grid-cols-[400px_1fr]">
-          <aside className="border-b border-border px-6 py-10 lg:border-b-0 lg:border-r lg:px-8">
-            <div className="label-xs">Your assumptions</div>
+        <div className="border-t border-border">
+          <div className="sticky top-0 z-30 flex items-center justify-between gap-6 border-b border-border bg-background px-6 py-4 md:px-12">
+            <div className="label-xs">Live model</div>
+            <button
+              type="button"
+              onClick={() => setPanelOpen(true)}
+              className="border border-border-strong px-5 py-2.5 text-xs uppercase tracking-[0.18em] text-foreground transition-colors hover:bg-foreground hover:text-background"
+            >
+              Show assumptions
+            </button>
+          </div>
+
+          {panelOpen && (
+            <button
+              type="button"
+              aria-label="Close assumptions"
+              onClick={() => setPanelOpen(false)}
+              className="fixed inset-0 z-40 bg-black/70"
+            />
+          )}
+
+          <aside
+            className={`fixed right-0 top-0 z-50 h-screen w-full max-w-[420px] overflow-y-auto border-l border-border bg-background px-6 py-8 transition-transform duration-300 lg:px-8 ${
+              panelOpen ? "translate-x-0" : "pointer-events-none translate-x-full"
+            }`}
+            aria-hidden={!panelOpen}
+          >
+            <div className="flex items-center justify-between gap-4">
+              <div className="label-xs">Your assumptions</div>
+              <button
+                type="button"
+                onClick={() => setPanelOpen(false)}
+                className="label-xs transition-colors hover:text-foreground"
+              >
+                Close
+              </button>
+            </div>
             {investmentGroups.map((g) => (
               <div key={g} className="mt-10">
                 <div className="border-b border-border-strong pb-3 text-sm text-foreground">{g}</div>
@@ -590,7 +625,7 @@ function PlatformPage() {
                           <div className="display-xl w-28 shrink-0 text-2xl md:text-3xl">
                             Year {c.year}
                           </div>
-                          <div className="grid min-w-0 flex-1 grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-3 md:grid-cols-[repeat(5,minmax(max-content,1fr))]">
+                          <div className="grid min-w-0 flex-1 grid-cols-2 gap-x-6 gap-y-6 sm:grid-cols-3 lg:grid-cols-5">
                             {[
                               ["Invested", kd(c.capitalInvested)],
                               ["Fail", `${fmtNumber(c.failures)} fail`],
@@ -604,12 +639,8 @@ function PlatformPage() {
                               ],
                             ].map(([l, v]) => (
                               <div key={l} className="min-w-0">
-                                <div className="label-xs whitespace-nowrap">{l}</div>
-                                <div
-                                  className={`num mt-2 text-xs text-foreground ${
-                                    l === "Grows for" ? "whitespace-nowrap" : ""
-                                  }`}
-                                >
+                                <div className="label-xs">{l}</div>
+                                <div className="num mt-2 break-words text-xs text-foreground">
                                   {v}
                                 </div>
                               </div>
