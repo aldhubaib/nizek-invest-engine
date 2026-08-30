@@ -83,9 +83,9 @@ export function LineChart({
         <polyline
           key={s.name}
           fill="none"
-          stroke="currentColor"
-          strokeOpacity={s.muted ? 0.35 : 1}
-          strokeWidth={s.muted ? 1 : 1.75}
+          stroke={s.color ?? "currentColor"}
+          strokeOpacity={s.color ? 1 : s.muted ? 0.35 : 1}
+          strokeWidth={s.muted && !s.color ? 1 : 1.75}
           strokeDasharray={s.dashed ? "4 6" : undefined}
           points={s.values.map((v, i) => `${x(i)},${y(v)}`).join(" ")}
           style={{ transition: "all 400ms cubic-bezier(0.16,1,0.3,1)" }}
