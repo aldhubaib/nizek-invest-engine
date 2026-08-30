@@ -20,7 +20,9 @@ export interface InvestmentInputs {
   startupsPerYear: number; // startups created each year
   successesPerYear: number; // winners per cohort
   avgCompanyValue: number; // KD — value of a winner in the year it breaks out
-  annualGrowth: number; // % — how fast a winner compounds afterwards
+  annualGrowth: number; // % — default growth applied to every cohort
+  /** Optional per-cohort growth override, index 0 = Year 1 cohort. */
+  growthByYear: number[];
   avgNizekOwnership: number; // %
   realEstateYield: number; // % annual
   publicMarketReturn: number; // % annual
@@ -33,6 +35,7 @@ export interface CohortResult {
   failures: number;
   successes: number;
   yearsOfGrowth: number; // years compounding by the end of the window
+  growthRate: number; // % annual growth applied to this cohort
   valueAtBreakout: number; // cohort value the year the winners emerge
   portfolioValue: number; // cohort value at the end of the window
   nizekEquityValue: number;
@@ -107,7 +110,8 @@ function benchmark(rate: number, hold: number): BenchmarkResult {
 
 export function projectInvestment(input: InvestmentInputs): InvestmentResult {
   const hold = COMMITMENT_YEARS;
-  const g = input.annualGrowth / 100;
+  const growthFor = (year: number) =>
+    (input.growthByYear?.[year - 1] ?? input.annualGrowth) / 100;
   const ownership = input.avgNizekOwnership / 100;
   const startups = Math.max(0, input.startupsPerYear);
   const successes = Math.min(Math.max(0, input.successesPerYear), startups);
@@ -115,7 +119,8 @@ export function projectInvestment(input: InvestmentInputs): InvestmentResult {
   const cohorts: CohortResult[] = Array.from({ length: COMMITMENT_YEARS }, (_, i) => {
     const year = i + 1;
     const yearsOfGrowth = hold - year; // a Year 1 winner compounds four more years
-    const growthMultiple = Math.pow(1 + g, yearsOfGrowth);
+    const growth = growthFor(year);
+    const growthMultiple = Math.pow(1 + growth, yearsOfGrowth);
     const valueAtBreakout = successes * input.avgCompanyValue;
     const portfolioValue = valueAtBreakout * growthMultiple;
     const nizekEquityValue = portfolioValue * ownership;
@@ -126,6 +131,7 @@ export function projectInvestment(input: InvestmentInputs): InvestmentResult {
       failures: startups - successes,
       successes,
       yearsOfGrowth,
+      growthRate: growth * 100,
       valueAtBreakout,
       portfolioValue,
       nizekEquityValue,
@@ -148,7 +154,7 @@ export function projectInvestment(input: InvestmentInputs): InvestmentResult {
     labels.push(`Y${t}`);
     let v = 0;
     for (const c of cohorts) {
-      if (c.year <= t) v += c.valueAtBreakout * Math.pow(1 + g, t - c.year);
+      if (c.year <= t) v += c.valueAtBreakout * Math.pow(1 + growthFor(c.year), t - c.year);
     }
     portfolioByYear.push(v);
   }
@@ -186,13 +192,18 @@ export const defaultInvestmentInputs: InvestmentInputs = {
   successesPerYear: 1,
   avgCompanyValue: 5_000_000,
   annualGrowth: 40,
+  growthByYear: [40, 40, 40, 40, 40],
   avgNizekOwnership: 25,
   realEstateYield: 7,
   publicMarketReturn: 8,
 };
 
+export type NumericInvestmentKey = {
+  [K in keyof InvestmentInputs]: InvestmentInputs[K] extends number ? K : never;
+}[keyof InvestmentInputs];
+
 export interface InvestmentControlMeta {
-  key: keyof InvestmentInputs;
+  key: NumericInvestmentKey;
   label: string;
   min: number;
   max: number;
@@ -235,12 +246,12 @@ export const investmentControls: InvestmentControlMeta[] = [
   },
   {
     key: "annualGrowth",
-    label: "Annual value growth",
+    label: "Annual value growth (all years)",
     min: 0,
     max: 100,
     step: 5,
     unit: "percent",
-    help: "How fast a successful company keeps compounding in the years after it breaks out.",
+    help: "Baseline compounding for every cohort. Tune an individual year below.",
     group: "Growth",
   },
   {
@@ -274,5 +285,15 @@ export const investmentControls: InvestmentControlMeta[] = [
     group: "Benchmarks",
   },
 ];
+
+/** Growth sliders for each cohort, so an individual year can be tuned. */
+export const cohortGrowthControls = Array.from({ length: COMMITMENT_YEARS }, (_, i) => ({
+  index: i,
+  label: `Year ${i + 1} cohort growth`,
+  min: 0,
+  max: 100,
+  step: 5,
+  help: `Annual growth of the winners created in Year ${i + 1}.`,
+}));
 
 export const investmentGroups = ["Each year", "Growth", "Ownership", "Benchmarks"] as const;
