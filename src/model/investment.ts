@@ -24,6 +24,7 @@ export interface InvestmentInputs {
   /** Optional per-cohort growth override, index 0 = Year 1 cohort. */
   growthByYear: number[];
   avgNizekOwnership: number; // %
+  investorShare: number; // % of NIZEK's ownership allocated to the investor
   realEstateYield: number; // % annual
   publicMarketReturn: number; // % annual
 }
@@ -113,6 +114,7 @@ export function projectInvestment(input: InvestmentInputs): InvestmentResult {
   const growthFor = (year: number) =>
     (input.growthByYear?.[year - 1] ?? input.annualGrowth) / 100;
   const ownership = input.avgNizekOwnership / 100;
+  const participation = (input.investorShare ?? INVESTOR_PARTICIPATION * 100) / 100;
   const startups = Math.max(0, input.startupsPerYear);
   const successes = Math.min(Math.max(0, input.successesPerYear), startups);
 
@@ -135,14 +137,14 @@ export function projectInvestment(input: InvestmentInputs): InvestmentResult {
       valueAtBreakout,
       portfolioValue,
       nizekEquityValue,
-      investorValue: nizekEquityValue * INVESTOR_PARTICIPATION,
+      investorValue: nizekEquityValue * participation,
       growthMultiple,
     };
   });
 
   const portfolioValue = cohorts.reduce((s, c) => s + c.portfolioValue, 0);
   const nizekEquityValue = portfolioValue * ownership;
-  const investorValue = nizekEquityValue * INVESTOR_PARTICIPATION;
+  const investorValue = nizekEquityValue * participation;
   const investorProfit = investorValue - TOTAL_INVESTMENT;
   const moic = TOTAL_INVESTMENT > 0 ? investorValue / TOTAL_INVESTMENT : 0;
 
@@ -159,7 +161,7 @@ export function projectInvestment(input: InvestmentInputs): InvestmentResult {
     portfolioByYear.push(v);
   }
 
-  const investorCurve = portfolioByYear.map((v) => v * ownership * INVESTOR_PARTICIPATION);
+  const investorCurve = portfolioByYear.map((v) => v * ownership * participation);
 
   const cashflows = Array.from({ length: hold + 1 }, (_, y) =>
     (y < COMMITMENT_YEARS ? -ANNUAL_COMMITMENT : 0) + (y === hold ? investorValue : 0),
@@ -194,6 +196,7 @@ export const defaultInvestmentInputs: InvestmentInputs = {
   annualGrowth: 20,
   growthByYear: [20, 20, 20, 20, 20],
   avgNizekOwnership: 25,
+  investorShare: 25,
   realEstateYield: 7,
   publicMarketReturn: 8,
 };
@@ -262,6 +265,16 @@ export const investmentControls: InvestmentControlMeta[] = [
     step: 1,
     unit: "percent",
     help: "Average equity NIZEK holds in successful companies.",
+    group: "Ownership",
+  },
+  {
+    key: "investorShare",
+    label: "Investor share of NIZEK",
+    min: 0,
+    max: 100,
+    step: 1,
+    unit: "percent",
+    help: "Share of NIZEK's ownership the investor participates in. Not ownership of NIZEK itself.",
     group: "Ownership",
   },
   {
