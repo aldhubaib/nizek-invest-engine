@@ -5,14 +5,16 @@ import { AnimatedNumber } from "@/components/model/AnimatedNumber";
 import { Reveal, Section, SectionHeading } from "@/components/ui/primitives";
 import { multiple, number as fmtNumber, percent } from "@/model/format";
 import {
-  defaultStudioInputs,
-  kd,
-  projectStudio,
-  studioControls,
-  studioGroups,
-  type StudioControlMeta,
-  type StudioInputs,
-} from "@/model/studio";
+  defaultInvestmentInputs,
+  investmentControls,
+  investmentGroups,
+  projectInvestment,
+  TOTAL_INVESTMENT,
+  type InvestmentControlMeta,
+  type InvestmentInputs,
+} from "@/model/investment";
+import { kd } from "@/model/studio";
+
 
 export const Route = createFileRoute("/platform")({
   head: () => ({
