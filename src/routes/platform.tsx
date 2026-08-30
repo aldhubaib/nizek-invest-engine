@@ -605,7 +605,13 @@ function PlatformPage() {
                             ].map(([l, v]) => (
                               <div key={l} className="min-w-0">
                                 <div className="label-xs whitespace-nowrap">{l}</div>
-                                <div className="num mt-2 text-xs text-foreground">{v}</div>
+                                <div
+                                  className={`num mt-2 text-xs text-foreground ${
+                                    l === "Grows for" ? "whitespace-nowrap" : ""
+                                  }`}
+                                >
+                                  {v}
+                                </div>
                               </div>
                             ))}
                           </div>
