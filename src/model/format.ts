@@ -1,11 +1,12 @@
-export const currency = (v: number, digits = 0) => {
+export const currency = (v: number, digits = 1) => {
   const abs = Math.abs(v);
   const sign = v < 0 ? "-" : "";
   if (abs >= 1_000_000_000) return `${sign}$${(abs / 1_000_000_000).toFixed(2)}B`;
   if (abs >= 1_000_000) return `${sign}$${(abs / 1_000_000).toFixed(abs >= 10_000_000 ? 1 : 2)}M`;
-  if (abs >= 1_000) return `${sign}$${(abs / 1_000).toFixed(digits)}K`;
-  return `${sign}$${abs.toFixed(digits)}`;
+  if (abs >= 1_000) return `${sign}$${(abs / 1_000).toFixed(abs >= 100_000 ? 0 : digits)}K`;
+  return `${sign}$${abs.toFixed(0)}`;
 };
+
 
 export const currencyExact = (v: number) =>
   `${v < 0 ? "-" : ""}$${Math.abs(Math.round(v)).toLocaleString("en-US")}`;
