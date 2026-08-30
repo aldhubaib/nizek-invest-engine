@@ -6,7 +6,11 @@ import { ValueField } from "@/components/model/ValueField";
 import { Reveal, Section, SectionHeading } from "@/components/ui/primitives";
 import { multiple, number as fmtNumber, percent } from "@/model/format";
 import {
+  ANNUAL_COMMITMENT,
+  COMMITMENT_YEARS,
+  TOTAL_INVESTMENT,
   defaultInvestmentInputs,
+
   investmentControls,
   investmentGroups,
   projectInvestment,
