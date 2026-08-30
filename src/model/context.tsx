@@ -25,8 +25,18 @@ interface ModelContextValue {
   reset: () => void;
 }
 
-const ModelContext = createContext<ModelContextValue | null>(null);
+// Keep a single context instance across HMR updates: if this module is
+// re-evaluated while Chrome.tsx still holds the old reference (or vice versa),
+// a fresh createContext() would make consumers miss the provider.
+const globalStore = globalThis as unknown as {
+  __nizekModelContext?: React.Context<ModelContextValue | null>;
+};
+const ModelContext =
+  globalStore.__nizekModelContext ?? createContext<ModelContextValue | null>(null);
+globalStore.__nizekModelContext = ModelContext;
+
 const STORAGE_KEY = "nizek.model.v1";
+
 
 export function ModelProvider({ children }: { children: ReactNode }) {
   const [assumptions, setAssumptions] = useState<Assumptions>(defaultAssumptions);
@@ -121,8 +131,23 @@ export function ModelProvider({ children }: { children: ReactNode }) {
   return <ModelContext.Provider value={value}>{children}</ModelContext.Provider>;
 }
 
+const fallbackValue = (): ModelContextValue => ({
+  assumptions: defaultAssumptions,
+  projection: project(defaultAssumptions),
+  baseProjection: project(defaultAssumptions),
+  scenarios: presetScenarios,
+  activeScenario: "base",
+  isCustom: false,
+  setAssumption: () => {},
+  loadScenario: () => {},
+  saveScenario: () => {},
+  reset: () => {},
+});
+
 export const useModel = () => {
   const ctx = useContext(ModelContext);
-  if (!ctx) throw new Error("useModel must be used inside ModelProvider");
-  return ctx;
+  // Read-only base case rather than a hard crash if a consumer somehow renders
+  // outside the provider (e.g. an error/not-found boundary above the tree).
+  return ctx ?? fallbackValue();
+
 };
