@@ -78,14 +78,16 @@ function StudioControl({
   onReset: (k: NumericInvestmentKey) => void;
 
 }) {
-  const fmt = (v: number) =>
-    meta.unit === "kd"
+  const fmt = (raw: number) => {
+    const v = Number.isFinite(raw) ? raw : 0;
+    return meta.unit === "kd"
       ? kd(v)
       : meta.unit === "percent"
         ? `${Number.isInteger(v) ? v : v.toFixed(2).replace(/0$/, "")}%`
         : meta.unit === "years"
           ? `${Math.round(v)} yrs`
           : fmtNumber(v);
+  };
   return (
     <div className="border-b border-border py-5">
       <div className="flex items-baseline justify-between gap-4">
