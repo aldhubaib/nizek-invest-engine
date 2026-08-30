@@ -485,51 +485,125 @@ function PlatformPage() {
               ))}
             </div>
 
-            {/* The story */}
+            {/* The portfolio, year by year */}
             <div className="mt-20">
-              <div className="label-xs">How the money travels</div>
-              <div className="mt-8 grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-5">
+              <div className="label-xs">How the portfolio is built, one cohort at a time</div>
+              <p className="mt-4 max-w-2xl text-xs leading-relaxed text-subtle">
+                Every year new capital is drawn, a new cohort of startups is created, and the
+                winners from earlier cohorts keep compounding. A Year 1 winner has four more years
+                of growth than a Year 5 winner.
+              </p>
+
+              <div className="mt-8 border border-border">
+                {result.cohorts.map((c) => {
+                  const share = maxCohort > 0 ? c.portfolioValue / maxCohort : 0;
+                  return (
+                    <Reveal key={c.year} delay={(c.year - 1) * 60}>
+                      <div className="border-b border-border last:border-b-0 px-6 py-7 md:px-10">
+                        <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+                          <div className="display-xl w-28 shrink-0 text-2xl md:text-3xl">
+                            Year {c.year}
+                          </div>
+                          <div className="grid flex-1 grid-cols-2 gap-6 md:grid-cols-4">
+                            {[
+                              ["Invested", kd(c.capitalInvested)],
+                              ["Startups", `${fmtNumber(c.startups)} built · ${fmtNumber(c.failures)} fail`],
+                              [
+                                "Successes",
+                                `${fmtNumber(c.successes)} · ${kd(c.valueAtBreakout)}`,
+                              ],
+                              [
+                                "Grows for",
+                                c.yearsOfGrowth === 0
+                                  ? "Just created"
+                                  : `${c.yearsOfGrowth} yrs · ${multiple(c.growthMultiple, 2)}`,
+                              ],
+                            ].map(([l, v]) => (
+                              <div key={l}>
+                                <div className="label-xs">{l}</div>
+                                <div className="num mt-2 text-xs text-foreground">{v}</div>
+                              </div>
+                            ))}
+                          </div>
+                          <div className="md:w-52 md:text-right">
+                            <div className="label-xs">Value at Year 5</div>
+                            <div className="num mt-2 text-xl text-foreground md:text-2xl">
+                              <AnimatedNumber value={c.portfolioValue} format={kd} />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="mt-5 h-px w-full bg-border">
+                          <div
+                            className="h-px bg-foreground"
+                            style={{
+                              width: `${Math.max(share * 100, 0.5)}%`,
+                              transition: "width 500ms cubic-bezier(0.16,1,0.3,1)",
+                            }}
+                          />
+                        </div>
+                      </div>
+                    </Reveal>
+                  );
+                })}
+              </div>
+
+              {/* Portfolio value by year */}
+              <div className="mt-px grid grid-cols-2 gap-px border border-border bg-border md:grid-cols-6">
+                {result.portfolioByYear.map((v, i) => (
+                  <div key={i} className="bg-background p-6">
+                    <div className="label-xs">End of Y{i}</div>
+                    <div className="num mt-4 text-lg text-foreground">
+                      <AnimatedNumber value={v} format={kd} />
+                    </div>
+                    <div className="mt-3 text-[11px] text-subtle">
+                      {fmtNumber(Math.min(i, COMMITMENT_YEARS) * inputs.startupsPerYear)} startups
+                      created
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Funnel */}
+              <div className="mt-px grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-4">
                 {[
                   {
                     step: "01",
-                    title: "50 startups are created",
-                    value: fmtNumber(50),
-                    note: "Ten every year for five years.",
+                    title: "Portfolio value",
+                    value: result.portfolioValue,
+                    note: `${fmtNumber(result.totalSuccesses)} winners out of ${fmtNumber(result.totalStartups)} startups, each grown for its own number of years.`,
                   },
                   {
                     step: "02",
-                    title: "Some become successful",
-                    value: fmtNumber(inputs.successfulCompanies),
-                    note: "Your assumption for meaningful winners.",
+                    title: "Nizek ownership",
+                    value: result.nizekEquityValue,
+                    note: `${inputs.avgNizekOwnership}% average equity across the successful companies.`,
                   },
                   {
                     step: "03",
-                    title: "They create portfolio value",
-                    value: kd(result.portfolioValue),
-                    note: `${fmtNumber(inputs.successfulCompanies)} × ${kd(inputs.avgCompanyValue)} at exit.`,
+                    title: "Investor share",
+                    value: result.investorValue,
+                    note: "25% of Nizek's ownership in every company created in the window.",
                   },
                   {
                     step: "04",
-                    title: "Nizek owns part of them",
-                    value: kd(result.nizekEquityValue),
-                    note: `${inputs.avgNizekOwnership}% average ownership.`,
-                  },
-                  {
-                    step: "05",
-                    title: "You hold 25% of that",
-                    value: kd(result.investorValue),
-                    note: "Your participation in Nizek's ownership.",
+                    title: "Estimated return",
+                    value: result.moic,
+                    format: (v: number) => multiple(v, 2),
+                    note: "On the KD2,000,000 committed across five years.",
                   },
                 ].map((s) => (
                   <div key={s.step} className="bg-background p-8">
                     <div className="num text-xs text-subtle">{s.step}</div>
                     <div className="mt-6 text-sm leading-relaxed text-foreground">{s.title}</div>
-                    <div className="num mt-6 text-2xl text-foreground">{s.value}</div>
+                    <div className="num mt-6 text-2xl text-foreground">
+                      <AnimatedNumber value={s.value} format={s.format ?? kd} />
+                    </div>
                     <div className="mt-4 text-[11px] leading-relaxed text-subtle">{s.note}</div>
                   </div>
                 ))}
               </div>
             </div>
+
 
             {/* Comparison */}
             <div className="mt-20">
