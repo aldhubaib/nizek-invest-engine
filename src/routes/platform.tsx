@@ -7,6 +7,7 @@ import { Reveal, Section, SectionHeading } from "@/components/ui/primitives";
 import { multiple, number as fmtNumber, percent } from "@/model/format";
 import {
   ANNUAL_COMMITMENT,
+  cohortGrowthControls,
   COMMITMENT_YEARS,
   TOTAL_INVESTMENT,
   defaultInvestmentInputs,
@@ -17,6 +18,7 @@ import {
   
   type InvestmentControlMeta,
   type InvestmentInputs,
+  type NumericInvestmentKey,
 } from "@/model/investment";
 import { kd } from "@/model/studio";
 
@@ -72,8 +74,8 @@ function StudioControl({
   meta: InvestmentControlMeta;
   value: number;
   base: number;
-  onChange: (k: keyof InvestmentInputs, v: number) => void;
-  onReset: (k: keyof InvestmentInputs) => void;
+  onChange: (k: NumericInvestmentKey, v: number) => void;
+  onReset: (k: NumericInvestmentKey) => void;
 
 }) {
   const fmt = (v: number) =>
