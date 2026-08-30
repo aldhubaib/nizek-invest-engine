@@ -136,13 +136,35 @@ function PlatformPage() {
 
 
   const set = useCallback(
-    (k: keyof InvestmentInputs, v: number) => setInputs((p) => ({ ...p, [k]: v })),
+    (k: NumericInvestmentKey, v: number) =>
+      setInputs((p) =>
+        k === "annualGrowth"
+          ? { ...p, annualGrowth: v, growthByYear: p.growthByYear.map(() => v) }
+          : { ...p, [k]: v },
+      ),
     [],
   );
   const reset = useCallback(
-    (k: keyof InvestmentInputs) =>
-      setInputs((p) => ({ ...p, [k]: defaultInvestmentInputs[k] })),
+    (k: NumericInvestmentKey) =>
+      setInputs((p) =>
+        k === "annualGrowth"
+          ? {
+              ...p,
+              annualGrowth: defaultInvestmentInputs.annualGrowth,
+              growthByYear: [...defaultInvestmentInputs.growthByYear],
+            }
+          : { ...p, [k]: defaultInvestmentInputs[k] },
+      ),
     [],
+  );
+  const setCohortGrowth = useCallback(
+    (i: number, v: number) =>
+      setInputs((p) => ({
+        ...p,
+        growthByYear: p.growthByYear.map((g, idx) => (idx === i ? v : g)),
+      })),
+    [],
+
   );
 
 
