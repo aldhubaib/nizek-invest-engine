@@ -4,7 +4,7 @@ import { useModel } from "@/model/context";
 import { multiple } from "@/model/format";
 
 const nav = [
-  { to: "/platform", label: "Platform" },
+  { to: "/", label: "Platform" },
   { to: "/thesis", label: "Thesis" },
   { to: "/model", label: "Model" },
   { to: "/financials", label: "Financials" },
