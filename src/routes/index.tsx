@@ -292,7 +292,7 @@ function PlatformPage() {
           title="Traditional Venture Capital Has One Major Weakness"
           lede="VCs invest after founders have already built something. That means they inherit what was built before they arrived."
         />
-        <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-5">
+        <div className="grid grid-cols-2 gap-px border border-border bg-border md:grid-cols-3">
           {[
             "Weak founders",
             "Poor technology",
