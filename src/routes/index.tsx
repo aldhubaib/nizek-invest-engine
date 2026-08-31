@@ -159,6 +159,16 @@ function PlatformPage() {
     [],
   );
 
+  const setCohortSuccess = useCallback(
+    (i: number, v: number) =>
+      setInputs((p) => ({
+        ...p,
+        successesByYear: p.successesByYear.map((g, idx) => (idx === i ? v : g)),
+      })),
+    [],
+  );
+
+
 
   return (
     <div>
@@ -463,15 +473,45 @@ function PlatformPage() {
                   ))}
                 {g === "Exit value" && (
                   <div className="mt-8">
-                    <div className="label-xs">Expected exit valuation per cohort</div>
+                    <div className="label-xs">Successes &amp; exit valuation per cohort</div>
                     {cohortExitControls.map((c) => (
                       <div key={c.index} className="border-b border-border py-5">
-                        <div className="flex items-baseline justify-between gap-4">
+                        <div className="text-sm text-foreground">{c.label}</div>
+                        <div className="mt-4 flex items-baseline justify-between gap-4">
+                          <label
+                            htmlFor={`cohort-success-${c.index}`}
+                            className="text-sm text-muted-foreground"
+                          >
+                            Successes
+                          </label>
+                          <ValueField
+                            label={`${c.label} successes`}
+                            display={String(inputs.successesByYear[c.index] ?? 0)}
+                            value={inputs.successesByYear[c.index] ?? 0}
+                            min={c.successMin}
+                            max={c.successMax}
+                            onCommit={(v) => setCohortSuccess(c.index, Math.round(v))}
+                          />
+                        </div>
+                        <input
+                          id={`cohort-success-${c.index}`}
+                          type="range"
+                          min={c.successMin}
+                          max={c.successMax}
+                          step={c.successStep}
+                          value={inputs.successesByYear[c.index] ?? 0}
+                          onChange={(e) =>
+                            setCohortSuccess(c.index, Number(e.target.value))
+                          }
+                          className="mt-4"
+                          aria-label={`${c.label} successes`}
+                        />
+                        <div className="mt-5 flex items-baseline justify-between gap-4">
                           <label
                             htmlFor={`cohort-exit-${c.index}`}
                             className="text-sm text-muted-foreground"
                           >
-                            {c.label}
+                            Exit valuation
                           </label>
                           <ValueField
                             label={c.label}
@@ -495,16 +535,23 @@ function PlatformPage() {
                         />
                         <div className="mt-2 flex items-start justify-between gap-4">
                           <span className="text-[11px] leading-relaxed text-subtle">{c.help}</span>
-                          {inputs.exitValueByYear[c.index] !==
-                            defaultInvestmentInputs.exitValueByYear[c.index] && (
+                          {(inputs.exitValueByYear[c.index] !==
+                            defaultInvestmentInputs.exitValueByYear[c.index] ||
+                            inputs.successesByYear[c.index] !==
+                              defaultInvestmentInputs.successesByYear[c.index]) && (
                             <button
                               type="button"
-                              onClick={() =>
+                              onClick={() => {
                                 setCohortExit(
                                   c.index,
                                   defaultInvestmentInputs.exitValueByYear[c.index] ?? 0,
-                                )
-                              }
+                                );
+                                setCohortSuccess(
+                                  c.index,
+                                  defaultInvestmentInputs.successesByYear[c.index] ?? 0,
+                                );
+                              }}
+
                               className="label-xs shrink-0 transition-colors hover:text-foreground"
                             >
                               Reset
