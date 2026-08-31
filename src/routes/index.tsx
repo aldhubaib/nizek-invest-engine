@@ -227,7 +227,7 @@ function PlatformPage() {
       </section>
 
       {/* 2 — Why we exist */}
-      <Section>
+      <Section id="why">
         <SectionHeading index="01 — Why we exist" title="Great Ideas Don't Fail. Execution Does." />
         <div className="grid grid-cols-1 gap-16 md:grid-cols-2">
           <Reveal>
@@ -247,7 +247,7 @@ function PlatformPage() {
       </Section>
 
       {/* 3 — Track record */}
-      <Section>
+      <Section id="track-record">
         <SectionHeading index="02 — Track record" title="We've Been Building Since 2009" />
         <Reveal>
           <div className="flex items-baseline justify-between border-b border-border-strong pb-6">
@@ -286,7 +286,7 @@ function PlatformPage() {
       </Section>
 
       {/* 4 — The problem */}
-      <Section>
+      <Section id="problem">
         <SectionHeading
           index="03 — The problem"
           title="Traditional Venture Capital Has One Major Weakness"
@@ -316,7 +316,7 @@ function PlatformPage() {
       </Section>
 
       {/* 5 — Our model */}
-      <Section>
+      <Section id="how-we-build">
         <SectionHeading
           index="04 — Our model"
           title="We Build Companies From Day One"
@@ -337,7 +337,7 @@ function PlatformPage() {
       </Section>
 
       {/* 6 — The investment */}
-      <Section>
+      <Section id="investment">
         <SectionHeading
           index="05 — The investment"
           title="One Investment. Fifty Companies."
@@ -387,7 +387,7 @@ function PlatformPage() {
       </Section>
 
       {/* 7 — Where the money goes */}
-      <Section>
+      <Section id="capital">
         <SectionHeading index="06 — Capital deployment" title="Where The Money Goes" />
         <div className="grid grid-cols-2 gap-px border border-border bg-border md:grid-cols-4">
           {["Developers", "Marketing", "Operations", "Ecosystem"].map(
@@ -407,7 +407,7 @@ function PlatformPage() {
       </Section>
 
       {/* 8 — Why this is different */}
-      <Section>
+      <Section id="comparison">
         <SectionHeading index="07 — Comparison" title="Why This Is Different" />
         <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-2">
           <div className="bg-background p-10">
@@ -446,7 +446,7 @@ function PlatformPage() {
       </Section>
 
       {/* Diversification */}
-      <Section>
+      <Section id="diversification">
         <SectionHeading
           index="08 — Diversification"
           title="One Investment. Fifty Opportunities."
@@ -498,7 +498,7 @@ function PlatformPage() {
       </Section>
 
       {/* Early visibility */}
-      <Section>
+      <Section id="visibility">
         <SectionHeading
           index="09 — Early visibility"
           title="See Tomorrow's Companies Before Everyone Else."
@@ -1006,7 +1006,7 @@ function PlatformPage() {
 
 
       {/* 10 — Current proof */}
-      <Section>
+      <Section id="proof">
         <SectionHeading index="11 — Current proof" title="Not Theory. Reality." />
         <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-2">
           {[
@@ -1042,7 +1042,7 @@ function PlatformPage() {
       </Section>
 
       {/* 11 — Why investors win */}
-      <Section>
+      <Section id="investors">
         <SectionHeading index="12 — Investor case" title="Why Investors Win" />
         <div className="grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2">
           {[
@@ -1063,7 +1063,7 @@ function PlatformPage() {
       </Section>
 
       {/* 12 — Timeline */}
-      <Section>
+      <Section id="timeline">
         <SectionHeading index="13 — Timeline" title="Fifty Companies In Five Years" />
         <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-6">
           {[
@@ -1093,7 +1093,7 @@ function PlatformPage() {
       </Section>
 
       {/* 13 — Closing */}
-      <Section>
+      <Section id="contact">
         <Reveal>
           <h2 className="display-xl max-w-5xl text-4xl md:text-7xl">
             We Didn't Build One Startup.
