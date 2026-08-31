@@ -151,10 +151,16 @@ function PlatformPage() {
   );
 
   const setCohortExit = useCallback(
-    (i: number, v: number) =>
+    (i: number, k: number, v: number) =>
       setInputs((p) => ({
         ...p,
-        exitValueByYear: p.exitValueByYear.map((g, idx) => (idx === i ? v : g)),
+        exitValuesByYear: p.exitValuesByYear.map((row, idx) => {
+          if (idx !== i) return row;
+          const next = [...row];
+          while (next.length <= k) next.push(next[next.length - 1] ?? 0);
+          next[k] = v;
+          return next;
+        }),
       })),
     [],
   );
@@ -164,9 +170,16 @@ function PlatformPage() {
       setInputs((p) => ({
         ...p,
         successesByYear: p.successesByYear.map((g, idx) => (idx === i ? v : g)),
+        exitValuesByYear: p.exitValuesByYear.map((row, idx) => {
+          if (idx !== i) return row;
+          const next = row.slice(0, Math.max(0, v));
+          while (next.length < v) next.push(next[next.length - 1] ?? row[0] ?? 0);
+          return next;
+        }),
       })),
     [],
   );
+
 
 
 
