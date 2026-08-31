@@ -300,7 +300,11 @@ function PlatformPage() {
             "Bad hiring",
             "Weak product strategy",
           ].map((t, i) => (
-            <div key={t} className="bg-background p-8">
+            <div
+              key={t}
+              className={`bg-background p-8 ${i === 4 ? "col-span-2 md:col-span-2" : ""}`}
+            >
+
               <div className="num text-xs text-subtle">{String(i + 1).padStart(2, "0")}</div>
               <div className="mt-6 text-lg text-foreground">{t}</div>
             </div>
@@ -343,10 +347,29 @@ function PlatformPage() {
         />
         <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-3">
           {[
-            ["Investment", "KD400K", "annually for 5 years"],
-            ["Total commitment", "KD2M", "across the build window"],
-            ["Nizek commits to", "10 startups", "every year — minimum 50"],
+            [
+              "Investment",
+              (() => {
+                const years = inputs.capitalByYear ?? [];
+                const first = years[0] ?? 0;
+                return years.every((y) => y === first)
+                  ? kd(first)
+                  : `${kd(Math.min(...years))}–${kd(Math.max(...years))}`;
+              })(),
+              `annually for ${COMMITMENT_YEARS} years`,
+            ],
+            [
+              "Total commitment",
+              kd(result.totalInvestment),
+              "across the build window",
+            ],
+            [
+              "Nizek commits to",
+              `${fmtNumber(inputs.startupsPerYear)} startups`,
+              `every year — minimum ${fmtNumber(result.totalStartups)}`,
+            ],
           ].map(([l, v, n]) => (
+
             <div key={l} className="bg-background p-10">
               <div className="label-xs">{l}</div>
               <div className="num mt-6 text-4xl text-foreground md:text-5xl">{v}</div>
