@@ -925,7 +925,7 @@ function PlatformPage() {
       {/* 11 — Why investors win */}
       <Section>
         <SectionHeading index="10 — Investor case" title="Why Investors Win" />
-        <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-4">
+        <div className="grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2">
           {[
             ["Diversification", "Exposure to dozens of startups instead of one."],
             ["Deal Flow", "See opportunities before the market."],
