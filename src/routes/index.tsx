@@ -763,10 +763,9 @@ function PlatformPage() {
                           <div className="display-xl w-28 shrink-0 text-2xl md:text-3xl">
                             Year {c.year}
                           </div>
-                          <div className="grid min-w-0 flex-1 grid-cols-2 gap-x-6 gap-y-6 sm:grid-cols-3 lg:grid-cols-5">
+                          <div className="grid min-w-0 flex-1 grid-cols-2 gap-x-6 gap-y-6 sm:grid-cols-4">
                             {[
                               ["Invested", kd(c.capitalInvested)],
-                              ["Fail", `${fmtNumber(c.failures)} fail`],
                               ["Successes", fmtNumber(c.successes)],
                               ["Exit valuation", kd(c.exitValue)],
                               ["Nizek equity", kd(c.nizekEquityValue)],
