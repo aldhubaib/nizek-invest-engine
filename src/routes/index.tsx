@@ -159,6 +159,16 @@ function PlatformPage() {
     [],
   );
 
+  const setCohortSuccess = useCallback(
+    (i: number, v: number) =>
+      setInputs((p) => ({
+        ...p,
+        successesByYear: p.successesByYear.map((g, idx) => (idx === i ? v : g)),
+      })),
+    [],
+  );
+
+
 
   return (
     <div>
