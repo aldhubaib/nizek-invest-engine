@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   redirect,
   HeadContent,
   Scripts,
@@ -137,17 +138,19 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const bare = pathname.startsWith("/unlock");
 
   return (
     <QueryClientProvider client={queryClient}>
       <ModelProvider>
         <div className="flex min-h-screen flex-col bg-background">
-          <Header />
+          {!bare && <Header />}
           <main className="flex-1">
             {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
             <Outlet />
           </main>
-          <Footer />
+          {!bare && <Footer />}
         </div>
       </ModelProvider>
     </QueryClientProvider>
