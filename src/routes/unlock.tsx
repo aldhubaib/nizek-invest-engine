@@ -1,10 +1,9 @@
-import { createFileRoute, useRouter } from "@tanstack/react-router";
-import { useServerFn } from "@tanstack/react-start";
-import { useState } from "react";
-
-import { unlockSite } from "@/lib/gate.functions";
+import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/unlock")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    error: search["error"] === "1" || search["error"] === 1 ? true : undefined,
+  }),
   head: () => ({
     meta: [
       { title: "NIZEK — Private Access" },
@@ -20,25 +19,7 @@ export const Route = createFileRoute("/unlock")({
 });
 
 function Unlock() {
-  const router = useRouter();
-  const unlock = useServerFn(unlockSite);
-  const [error, setError] = useState(false);
-  const [busy, setBusy] = useState(false);
-
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setBusy(true);
-    setError(false);
-    const password = String(new FormData(e.currentTarget).get("password") ?? "");
-    const { ok } = await unlock({ data: { password } });
-    setBusy(false);
-    if (ok) {
-      await router.invalidate();
-      await router.navigate({ to: "/" });
-    } else {
-      setError(true);
-    }
-  }
+  const { error } = Route.useSearch();
 
   return (
     <div className="flex min-h-[70vh] items-center justify-center px-6">
@@ -48,7 +29,7 @@ function Unlock() {
         <p className="mt-4 text-sm text-muted-foreground">
           Access is restricted. Enter the password you were given.
         </p>
-        <form onSubmit={onSubmit} className="mt-8 space-y-4">
+        <form method="post" action="/api/unlock" className="mt-8 space-y-4">
           <input
             name="password"
             type="password"
@@ -59,10 +40,9 @@ function Unlock() {
           {error && <p className="text-xs text-muted-foreground">Incorrect password.</p>}
           <button
             type="submit"
-            disabled={busy}
-            className="w-full border border-border-strong px-4 py-3 text-sm text-foreground transition-colors hover:bg-foreground hover:text-background disabled:opacity-50"
+            className="w-full border border-border-strong px-4 py-3 text-sm text-foreground transition-colors hover:bg-foreground hover:text-background"
           >
-            {busy ? "Checking…" : "Enter"}
+            Enter
           </button>
         </form>
       </div>

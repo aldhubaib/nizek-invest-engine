@@ -20,6 +20,7 @@ import { Route as ScenariosRouteImport } from './routes/scenarios'
 import { Route as SimulatorRouteImport } from './routes/simulator'
 import { Route as ThesisRouteImport } from './routes/thesis'
 import { Route as UnlockRouteImport } from './routes/unlock'
+import { Route as ApiUnlockRouteImport } from './routes/api/unlock'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -76,6 +77,11 @@ const UnlockRoute = UnlockRouteImport.update({
   path: '/unlock',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiUnlockRoute = ApiUnlockRouteImport.update({
+  id: '/api/unlock',
+  path: '/api/unlock',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -89,6 +95,7 @@ export interface FileRoutesByFullPath {
   '/simulator': typeof SimulatorRoute
   '/thesis': typeof ThesisRoute
   '/unlock': typeof UnlockRoute
+  '/api/unlock': typeof ApiUnlockRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -102,6 +109,7 @@ export interface FileRoutesByTo {
   '/simulator': typeof SimulatorRoute
   '/thesis': typeof ThesisRoute
   '/unlock': typeof UnlockRoute
+  '/api/unlock': typeof ApiUnlockRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -116,6 +124,7 @@ export interface FileRoutesById {
   '/simulator': typeof SimulatorRoute
   '/thesis': typeof ThesisRoute
   '/unlock': typeof UnlockRoute
+  '/api/unlock': typeof ApiUnlockRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -131,6 +140,7 @@ export interface FileRouteTypes {
     | '/simulator'
     | '/thesis'
     | '/unlock'
+    | '/api/unlock'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -144,6 +154,7 @@ export interface FileRouteTypes {
     | '/simulator'
     | '/thesis'
     | '/unlock'
+    | '/api/unlock'
   id:
     | '__root__'
     | '/'
@@ -157,6 +168,7 @@ export interface FileRouteTypes {
     | '/simulator'
     | '/thesis'
     | '/unlock'
+    | '/api/unlock'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -171,6 +183,7 @@ export interface RootRouteChildren {
   SimulatorRoute: typeof SimulatorRoute
   ThesisRoute: typeof ThesisRoute
   UnlockRoute: typeof UnlockRoute
+  ApiUnlockRoute: typeof ApiUnlockRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -252,6 +265,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UnlockRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/unlock': {
+      id: '/api/unlock'
+      path: '/api/unlock'
+      fullPath: '/api/unlock'
+      preLoaderRoute: typeof ApiUnlockRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -267,6 +287,7 @@ const rootRouteChildren: RootRouteChildren = {
   SimulatorRoute: SimulatorRoute,
   ThesisRoute: ThesisRoute,
   UnlockRoute: UnlockRoute,
+  ApiUnlockRoute: ApiUnlockRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
