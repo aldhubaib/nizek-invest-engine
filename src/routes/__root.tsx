@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  redirect,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -13,6 +14,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { ModelProvider } from "@/model/context";
 import { Footer, Header } from "@/components/site/Chrome";
+import { isUnlocked } from "@/lib/gate.functions";
 
 
 function NotFoundComponent() {
