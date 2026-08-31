@@ -948,19 +948,22 @@ function PlatformPage() {
         <SectionHeading index="11 — Timeline" title="Fifty Companies In Five Years" />
         <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-5">
           {[
-            ["Year 1", "10 startups"],
-            ["Year 2", "20 startups"],
-            ["Year 3", "30 startups"],
-            ["Year 4", "40 startups"],
-            ["Year 5", "50+ startups"],
+            ["Year 1", "10"],
+            ["Year 2", "20"],
+            ["Year 3", "30"],
+            ["Year 4", "40"],
+            ["Year 5", "50+"],
           ].map(([y, s], i) => (
             <Reveal key={y} delay={i * 80}>
               <div className="h-full bg-background p-8">
                 <div className="label-xs">{y}</div>
-                <div className="display-xl mt-6 text-3xl md:text-4xl">{s}</div>
+                <div className="display-xl mt-6 whitespace-nowrap text-3xl md:text-4xl">
+                  {s} <span className="text-lg md:text-xl">startups</span>
+                </div>
               </div>
             </Reveal>
           ))}
+
         </div>
         <p className="mt-10 text-sm text-muted-foreground">
           Then the portfolio continues to mature well beyond the commitment window.
