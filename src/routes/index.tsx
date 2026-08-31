@@ -348,8 +348,8 @@ function PlatformPage() {
         <Reveal>
           <div className="mt-16 max-w-3xl border-l border-border-strong pl-8">
             <p className="display-xl text-3xl md:text-5xl">
-              Investor participates in 25% of Nizek's ownership in every startup created during
-              those five years.
+              Investor participates in a share of Nizek's ownership in every startup created
+              during those five years.
             </p>
             <p className="mt-6 text-sm text-muted-foreground">Not ownership in Nizek.</p>
           </div>
