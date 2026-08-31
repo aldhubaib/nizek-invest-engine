@@ -202,7 +202,7 @@ export interface InvestmentControlMeta {
   step: number;
   unit: "kd" | "percent" | "count" | "years";
   help: string;
-  group: "Each year" | "Exit value" | "Ownership" | "Benchmarks";
+  group: "Each year" | "Exit value" | "Ownership";
 }
 
 export const investmentControls: InvestmentControlMeta[] = [
@@ -256,26 +256,6 @@ export const investmentControls: InvestmentControlMeta[] = [
     help: "Share of NIZEK's ownership the investor participates in. Not ownership of NIZEK itself.",
     group: "Ownership",
   },
-  {
-    key: "realEstateYield",
-    label: "Real estate return",
-    min: 0,
-    max: 15,
-    step: 0.5,
-    unit: "percent",
-    help: "Annual total return of the property benchmark, same annual cash schedule.",
-    group: "Benchmarks",
-  },
-  {
-    key: "publicMarketReturn",
-    label: "Public market return",
-    min: 0,
-    max: 20,
-    step: 0.5,
-    unit: "percent",
-    help: "Annual total return of the index benchmark, same annual cash schedule.",
-    group: "Benchmarks",
-  },
 ];
 
 /** Expected exit valuation per cohort, so an individual year can be tuned. */
@@ -288,4 +268,4 @@ export const cohortExitControls = Array.from({ length: COMMITMENT_YEARS }, (_, i
   help: `Expected exit valuation of each winner created in Year ${i + 1}.`,
 }));
 
-export const investmentGroups = ["Each year", "Exit value", "Ownership", "Benchmarks"] as const;
+export const investmentGroups = ["Each year", "Exit value", "Ownership"] as const;
