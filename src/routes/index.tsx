@@ -1087,7 +1087,7 @@ function PlatformPage() {
           ))}
 
         </div>
-        <Arrow />
+        <p className="mt-10 text-sm text-muted-foreground">
         <p className="text-sm text-muted-foreground">
           Then the portfolio continues to mature well beyond the commitment window.
         </p>
