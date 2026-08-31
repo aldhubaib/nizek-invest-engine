@@ -520,7 +520,7 @@ function PlatformPage() {
         <div className="px-6 py-24 md:px-12 md:py-32">
           <div className="mx-auto w-full max-w-[1400px]">
             <Reveal>
-              <div className="label-xs">08 — The investment simulator</div>
+              <div className="label-xs">09 — The investment simulator</div>
               <h2 className="display-xl mt-6 text-5xl md:text-8xl">
                 If Nizek builds successful companies, what could your investment become?
               </h2>
