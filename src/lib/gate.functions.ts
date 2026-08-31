@@ -1,5 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
-import { useSession } from "@tanstack/react-start/server";
+import { useSession, getRequest } from "@tanstack/react-start/server";
 import { createHash, timingSafeEqual } from "node:crypto";
 
 type GateSession = { unlocked?: boolean };
@@ -19,8 +19,24 @@ function passwordMatches(input: string, expected: string): boolean {
   return timingSafeEqual(a, b);
 }
 
+/**
+ * The gate is only enforced on the published site. Local dev and the Lovable
+ * preview always pass, so the password never has to be toggled off to work.
+ */
+function isPreviewHost(host: string): boolean {
+  return (
+    host.startsWith("localhost") ||
+    host.startsWith("127.0.0.1") ||
+    host.includes("lovableproject.com") ||
+    host.includes("id-preview--") ||
+    host.includes("-dev.lovable.app")
+  );
+}
+
 export const isUnlocked = createServerFn({ method: "GET" }).handler(async () => {
   if (!process.env["SITE_PASSWORD"] || !process.env["SESSION_SECRET"]) return true;
+  const host = new URL(getRequest().url).host;
+  if (isPreviewHost(host)) return true;
   const session = await useSession<GateSession>(sessionConfig());
   return session.data.unlocked === true;
 });
