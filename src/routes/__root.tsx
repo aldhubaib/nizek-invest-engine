@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  redirect,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -13,6 +14,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { ModelProvider } from "@/model/context";
 import { Footer, Header } from "@/components/site/Chrome";
+import { isUnlocked } from "@/lib/gate.functions";
 
 
 function NotFoundComponent() {
@@ -76,6 +78,13 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+  beforeLoad: async ({ location }) => {
+    // Password gate: enforced on the published site only (see gate.functions.ts).
+    if (location.pathname.startsWith("/unlock") || location.pathname.startsWith("/api/")) return;
+    if (!(await isUnlocked())) {
+      throw redirect({ to: "/unlock" });
+    }
+  },
   head: () => ({
     meta: [
       { charSet: "utf-8" },
