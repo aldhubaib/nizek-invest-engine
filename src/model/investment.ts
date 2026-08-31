@@ -20,7 +20,8 @@ export const INVESTOR_PARTICIPATION = 0.25;
 
 export interface InvestmentInputs {
   startupsPerYear: number; // startups created each year
-  successesPerYear: number; // winners per cohort
+  /** Successful companies per cohort, index 0 = Year 1 cohort. */
+  successesByYear: number[];
   /** Expected exit valuation per cohort, index 0 = Year 1 cohort. */
   exitValueByYear: number[];
   avgNizekOwnership: number; // %
@@ -111,13 +112,15 @@ export function projectInvestment(input: InvestmentInputs): InvestmentResult {
   const ownership = input.avgNizekOwnership / 100;
   const participation = (input.investorShare ?? INVESTOR_PARTICIPATION * 100) / 100;
   const startups = Math.max(0, input.startupsPerYear);
-  const successes = Math.min(Math.max(0, input.successesPerYear), startups);
+  const successesFor = (year: number) =>
+    Math.min(Math.max(0, input.successesByYear?.[year - 1] ?? 0), startups);
   const exitFor = (year: number) =>
     Math.max(0, input.exitValueByYear?.[year - 1] ?? 0);
 
   const cohorts: CohortResult[] = Array.from({ length: COMMITMENT_YEARS }, (_, i) => {
     const year = i + 1;
     const exitValue = exitFor(year);
+    const successes = successesFor(year);
     const portfolioValue = successes * exitValue;
     const nizekEquityValue = portfolioValue * ownership;
     return {
@@ -160,7 +163,7 @@ export function projectInvestment(input: InvestmentInputs): InvestmentResult {
     inputs: input,
     totalInvestment: TOTAL_INVESTMENT,
     totalStartups: startups * COMMITMENT_YEARS,
-    totalSuccesses: successes * COMMITMENT_YEARS,
+    totalSuccesses: cohorts.reduce((s2, c) => s2 + c.successes, 0),
     portfolioValue,
     nizekEquityValue,
     investorValue,
@@ -179,7 +182,7 @@ export function projectInvestment(input: InvestmentInputs): InvestmentResult {
 
 export const defaultInvestmentInputs: InvestmentInputs = {
   startupsPerYear: 10,
-  successesPerYear: 1,
+  successesByYear: [1, 1, 1, 1, 1],
   exitValueByYear: [20_000_000, 15_000_000, 10_000_000, 8_000_000, 5_000_000],
   avgNizekOwnership: 30,
   investorShare: 30,
@@ -214,16 +217,6 @@ export const investmentControls: InvestmentControlMeta[] = [
     group: "Each year",
   },
   {
-    key: "successesPerYear",
-    label: "Successes per year",
-    min: 0,
-    max: 10,
-    step: 1,
-    unit: "count",
-    help: "Companies from each cohort that reach a meaningful exit. The rest fail or stay small.",
-    group: "Each year",
-  },
-  {
     key: "avgNizekOwnership",
     label: "Average NIZEK ownership",
     min: 0,
@@ -245,14 +238,17 @@ export const investmentControls: InvestmentControlMeta[] = [
   },
 ];
 
-/** Expected exit valuation per cohort, so an individual year can be tuned. */
+/** Per-cohort assumptions, so an individual year can be tuned. */
 export const cohortExitControls = Array.from({ length: COMMITMENT_YEARS }, (_, i) => ({
   index: i,
-  label: `Year ${i + 1} exit valuation`,
+  label: `Year ${i + 1}`,
   min: 0,
   max: 100_000_000,
   step: 1_000_000,
-  help: `Expected exit valuation of each winner created in Year ${i + 1}.`,
+  successMin: 0,
+  successMax: 10,
+  successStep: 1,
+  help: `Winners created in Year ${i + 1} and the expected exit valuation of each.`,
 }));
 
 export const investmentGroups = ["Each year", "Exit value", "Ownership"] as const;
