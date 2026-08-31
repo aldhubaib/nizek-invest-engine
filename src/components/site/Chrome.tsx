@@ -80,7 +80,7 @@ export function Footer() {
     <footer className="border-t border-border px-6 py-16 md:px-12">
       <div className="mx-auto flex max-w-[1400px] flex-col justify-between gap-10 md:flex-row">
         <div>
-          <div className="text-sm tracking-[0.4em]">NIZEK</div>
+          <img src={nizekLogo.url} alt="NIZEK" className="h-6 w-auto" />
           <p className="mt-4 max-w-md text-xs leading-relaxed text-subtle">
             All figures on this platform are generated live from a single financial model.
             Illustrative only; not an offer to sell securities.
