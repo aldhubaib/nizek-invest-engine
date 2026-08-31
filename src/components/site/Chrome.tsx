@@ -34,14 +34,13 @@ export function Header() {
 
         <nav className="hidden items-center gap-8 lg:flex">
           {nav.map((n) => (
-            <Link
+            <a
               key={n.to}
-              to={n.to}
+              href={n.to}
               className="text-xs text-muted-foreground transition-colors hover:text-foreground"
-              activeProps={{ className: "text-xs text-foreground" }}
             >
               {n.label}
-            </Link>
+            </a>
           ))}
         </nav>
         <div className="flex items-center gap-6">
@@ -61,14 +60,14 @@ export function Header() {
       {open && (
         <nav className="grid grid-cols-2 gap-px border-t border-border bg-border lg:hidden">
           {nav.map((n) => (
-            <Link
+            <a
               key={n.to}
-              to={n.to}
+              href={n.to}
               onClick={() => setOpen(false)}
               className="bg-background px-6 py-5 text-sm text-muted-foreground"
             >
               {n.label}
-            </Link>
+            </a>
           ))}
         </nav>
       )}
@@ -90,15 +89,15 @@ export function Footer() {
         <div className="flex gap-16">
           <div className="flex flex-col gap-3">
             <span className="label-xs">Platform</span>
-            <Link to="/model" className="text-xs text-muted-foreground hover:text-foreground">
+            <a href="#how-we-build" className="text-xs text-muted-foreground hover:text-foreground">
               Model
-            </Link>
-            <Link to="/simulator" className="text-xs text-muted-foreground hover:text-foreground">
+            </a>
+            <a href="#model" className="text-xs text-muted-foreground hover:text-foreground">
               Simulator
-            </Link>
-            <Link to="/returns" className="text-xs text-muted-foreground hover:text-foreground">
-              Returns
-            </Link>
+            </a>
+            <a href="#timeline" className="text-xs text-muted-foreground hover:text-foreground">
+              Timeline
+            </a>
           </div>
           <div className="flex flex-col gap-3">
             <span className="label-xs">Contact</span>
