@@ -946,7 +946,7 @@ function PlatformPage() {
       {/* 12 — Timeline */}
       <Section>
         <SectionHeading index="11 — Timeline" title="Fifty Companies In Five Years" />
-        <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-5">
+        <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-6">
           {[
             ["Year 1", "10"],
             ["Year 2", "20"],
@@ -954,7 +954,8 @@ function PlatformPage() {
             ["Year 4", "40"],
             ["Year 5", "50+"],
           ].map(([y, s], i) => (
-            <Reveal key={y} delay={i * 80}>
+            <Reveal key={y} delay={i * 80} className={i < 3 ? "md:col-span-2" : "md:col-span-3"}>
+
               <div className="h-full bg-background p-8">
                 <div className="label-xs">{y}</div>
                 <div className="display-xl mt-6 whitespace-nowrap text-3xl md:text-4xl">
