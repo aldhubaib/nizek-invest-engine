@@ -141,27 +141,15 @@ function PlatformPage() {
 
 
   const set = useCallback(
-    (k: NumericInvestmentKey, v: number) =>
-      setInputs((p) =>
-        k === "avgCompanyValue"
-          ? { ...p, avgCompanyValue: v, exitValueByYear: p.exitValueByYear.map(() => v) }
-          : { ...p, [k]: v },
-      ),
+    (k: NumericInvestmentKey, v: number) => setInputs((p) => ({ ...p, [k]: v })),
     [],
   );
   const reset = useCallback(
     (k: NumericInvestmentKey) =>
-      setInputs((p) =>
-        k === "avgCompanyValue"
-          ? {
-              ...p,
-              avgCompanyValue: defaultInvestmentInputs.avgCompanyValue,
-              exitValueByYear: [...defaultInvestmentInputs.exitValueByYear],
-            }
-          : { ...p, [k]: defaultInvestmentInputs[k] },
-      ),
+      setInputs((p) => ({ ...p, [k]: defaultInvestmentInputs[k] })),
     [],
   );
+
   const setCohortExit = useCallback(
     (i: number, v: number) =>
       setInputs((p) => ({

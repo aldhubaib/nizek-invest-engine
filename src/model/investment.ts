@@ -21,8 +21,6 @@ export const INVESTOR_PARTICIPATION = 0.25;
 export interface InvestmentInputs {
   startupsPerYear: number; // startups created each year
   successesPerYear: number; // winners per cohort
-  /** Baseline expected exit valuation (KD) applied when a cohort has no override. */
-  avgCompanyValue: number;
   /** Expected exit valuation per cohort, index 0 = Year 1 cohort. */
   exitValueByYear: number[];
   avgNizekOwnership: number; // %
@@ -115,7 +113,7 @@ export function projectInvestment(input: InvestmentInputs): InvestmentResult {
   const startups = Math.max(0, input.startupsPerYear);
   const successes = Math.min(Math.max(0, input.successesPerYear), startups);
   const exitFor = (year: number) =>
-    Math.max(0, input.exitValueByYear?.[year - 1] ?? input.avgCompanyValue);
+    Math.max(0, input.exitValueByYear?.[year - 1] ?? 0);
 
   const cohorts: CohortResult[] = Array.from({ length: COMMITMENT_YEARS }, (_, i) => {
     const year = i + 1;
@@ -182,7 +180,6 @@ export function projectInvestment(input: InvestmentInputs): InvestmentResult {
 export const defaultInvestmentInputs: InvestmentInputs = {
   startupsPerYear: 10,
   successesPerYear: 1,
-  avgCompanyValue: 10_000_000,
   exitValueByYear: [20_000_000, 15_000_000, 10_000_000, 8_000_000, 5_000_000],
   avgNizekOwnership: 30,
   investorShare: 30,
@@ -225,16 +222,6 @@ export const investmentControls: InvestmentControlMeta[] = [
     unit: "count",
     help: "Companies from each cohort that reach a meaningful exit. The rest fail or stay small.",
     group: "Each year",
-  },
-  {
-    key: "avgCompanyValue",
-    label: "Expected exit valuation (all cohorts)",
-    min: 0,
-    max: 100_000_000,
-    step: 1_000_000,
-    unit: "kd",
-    help: "Baseline exit valuation of a successful company. Tune an individual cohort below.",
-    group: "Exit value",
   },
   {
     key: "avgNizekOwnership",
