@@ -290,25 +290,23 @@ function PlatformPage() {
         <SectionHeading
           index="03 — The problem"
           title="Traditional Venture Capital Has One Major Weakness"
-          lede="VCs invest after founders have already built something. That means they inherit what was built before they arrived."
+          lede="VCs invest after founders have already built something. And the hardest part is finding great entrepreneurs in the first place — capital is abundant, exceptional founders are not."
         />
         <div className="grid grid-cols-2 gap-px border border-border bg-border md:grid-cols-3">
           {[
+            "Finding great entrepreneurs",
             "Weak founders",
             "Poor technology",
             "Technical debt",
             "Bad hiring",
             "Weak product strategy",
           ].map((t, i) => (
-            <div
-              key={t}
-              className={`bg-background p-8 ${i === 4 ? "col-span-2 md:col-span-2" : ""}`}
-            >
-
+            <div key={t} className="bg-background p-8">
               <div className="num text-xs text-subtle">{String(i + 1).padStart(2, "0")}</div>
               <div className="mt-6 text-lg text-foreground">{t}</div>
             </div>
           ))}
+
         </div>
         <Reveal>
           <p className="display-xl mt-16 text-3xl md:text-5xl">
