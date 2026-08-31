@@ -1,26 +1,49 @@
 import { Link, type LinkProps } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useModel } from "@/model/context";
 import { multiple } from "@/model/format";
 import nizekLogo from "@/assets/nizek-logo.png.asset.json";
 
 
 const nav = [
-  { to: "#why", label: "Why" },
-  { to: "#problem", label: "Problem" },
-  { to: "#how-we-build", label: "Model" },
-  { to: "#investment", label: "Investment" },
-  { to: "#model", label: "Simulator" },
-  { to: "#founders", label: "Founders" },
-  { to: "#proof", label: "Proof" },
-  { to: "#timeline", label: "Timeline" },
-  { to: "#contact", label: "Contact" },
+  { id: "why", label: "Why" },
+  { id: "problem", label: "Problem" },
+  { id: "how-we-build", label: "Model" },
+  { id: "investment", label: "Investment" },
+  { id: "founders", label: "Founders" },
+  { id: "model", label: "Simulator" },
+  { id: "proof", label: "Proof" },
+  { id: "timeline", label: "Timeline" },
+  { id: "contact", label: "Contact" },
 ] as const;
+
+function useActiveSection() {
+  const [active, setActive] = useState<string>("");
+  useEffect(() => {
+    const onScroll = () => {
+      let current = "";
+      for (const n of nav) {
+        const el = document.getElementById(n.id);
+        if (el && el.getBoundingClientRect().top <= 140) current = n.id;
+      }
+      setActive(current);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
+  return active;
+}
 
 
 export function Header() {
   const { projection, activeScenario, isCustom, scenarios } = useModel();
   const [open, setOpen] = useState(false);
+  const active = useActiveSection();
   const current = isCustom
     ? "Custom"
     : (scenarios.find((s) => s.id === activeScenario)?.name ?? "Base");
@@ -35,9 +58,12 @@ export function Header() {
         <nav className="hidden items-center gap-8 lg:flex">
           {nav.map((n) => (
             <a
-              key={n.to}
-              href={n.to}
-              className="text-xs text-muted-foreground transition-colors hover:text-foreground"
+              key={n.id}
+              href={`#${n.id}`}
+              aria-current={active === n.id ? "true" : undefined}
+              className={`text-xs transition-colors hover:text-foreground ${
+                active === n.id ? "text-foreground" : "text-muted-foreground"
+              }`}
             >
               {n.label}
             </a>
@@ -61,10 +87,12 @@ export function Header() {
         <nav className="grid grid-cols-2 gap-px border-t border-border bg-border lg:hidden">
           {nav.map((n) => (
             <a
-              key={n.to}
-              href={n.to}
+              key={n.id}
+              href={`#${n.id}`}
               onClick={() => setOpen(false)}
-              className="bg-background px-6 py-5 text-sm text-muted-foreground"
+              className={`bg-background px-6 py-5 text-sm ${
+                active === n.id ? "text-foreground" : "text-muted-foreground"
+              }`}
             >
               {n.label}
             </a>
