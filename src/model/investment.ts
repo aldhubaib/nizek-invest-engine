@@ -184,7 +184,7 @@ export const defaultInvestmentInputs: InvestmentInputs = {
   successesPerYear: 1,
   avgCompanyValue: 10_000_000,
   exitValueByYear: [20_000_000, 15_000_000, 10_000_000, 8_000_000, 5_000_000],
-  avgNizekOwnership: 25,
+  avgNizekOwnership: 30,
   investorShare: 25,
   realEstateYield: 7,
   publicMarketReturn: 8,
