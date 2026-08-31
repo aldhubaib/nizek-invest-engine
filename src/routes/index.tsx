@@ -424,10 +424,108 @@ function PlatformPage() {
         </div>
       </Section>
 
+      {/* Diversification */}
+      <Section>
+        <SectionHeading
+          index="08 — Diversification"
+          title="One Investment. Fifty Opportunities."
+          lede="Backing a single startup is a binary bet: it works, or the capital is gone. Participating across a studio portfolio spreads that same commitment over 50+ companies built on shared infrastructure — no single outcome decides the result."
+        />
+
+        <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-2">
+          <div className="bg-background p-10">
+            <div className="label-xs">One startup</div>
+            <div className="display-xl mt-8 text-5xl md:text-6xl">1</div>
+            <p className="mt-4 text-sm text-subtle">company carries the entire outcome</p>
+            <ul className="mt-10 space-y-5">
+              {[
+                "A single team, a single market, a single thesis",
+                "One wrong hire or one bad quarter ends it",
+                "No second attempt with the same capital",
+                "Outcome concentrated in one exit event",
+              ].map((t) => (
+                <li key={t} className="border-b border-border pb-4 text-lg text-subtle">
+                  {t}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="bg-background p-10">
+            <div className="label-xs text-foreground">The Nizek portfolio</div>
+            <div className="display-xl mt-8 text-5xl md:text-6xl">50+</div>
+            <p className="mt-4 text-sm text-subtle">companies over five annual cohorts</p>
+            <ul className="mt-10 space-y-5">
+              {[
+                "Ten new companies built every year, across sectors",
+                "Failures are absorbed by the portfolio, not fatal to it",
+                "Shared engineering, marketing and operations lower the cost of each attempt",
+                "Multiple independent paths to a meaningful outcome",
+              ].map((t) => (
+                <li key={t} className="border-b border-border pb-4 text-lg text-foreground">
+                  {t}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <Reveal>
+          <p className="display-xl mt-16 text-3xl md:text-5xl">
+            Diversification reduces dependence on any single company's success.
+          </p>
+        </Reveal>
+      </Section>
+
+      {/* Early visibility */}
+      <Section>
+        <SectionHeading
+          index="09 — Early visibility"
+          title="See Tomorrow's Companies Before Everyone Else."
+          lede="Most investors meet a company when it is already raising — the story is polished, the price is set, the seats are taken. Inside the studio, investors see companies from the day they are created, and watch how they actually behave over time."
+        />
+
+        <div className="grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2 md:grid-cols-3">
+          {[
+            { t: "Idea", d: "The thesis is written, the market sized, the first sketch made." },
+            { t: "Validation", d: "Demand is tested with real users before code is committed." },
+            { t: "MVP", d: "The in-house team ships the first working product." },
+            { t: "Traction", d: "Early usage, retention and revenue signals appear." },
+            { t: "Fundraising", d: "The company approaches the outside market for the first time." },
+            { t: "Growth", d: "Scale, expansion and the path toward an exit." },
+          ].map((s, i) => (
+            <Reveal key={s.t} delay={i * 90}>
+              <div className="flex h-full flex-col justify-between bg-background p-8">
+                <div>
+                  <span className="num text-xs text-subtle">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div className="display-xl mt-6 text-2xl leading-tight md:text-3xl">
+                    {s.t}
+                  </div>
+                </div>
+                <p className="mt-8 text-sm leading-relaxed text-subtle">{s.d}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal>
+          <p className="mt-12 max-w-3xl text-lg leading-relaxed text-subtle">
+            Investors follow these companies throughout the journey rather than discovering
+            them at the moment they raise. This is early visibility and the opportunity to
+            evaluate future investments with far more information than the market has — it
+            is not a guarantee of participation, and it does not create priority or
+            first-refusal rights unless such rights are set out in the legal documents.
+          </p>
+        </Reveal>
+      </Section>
+
+
+
       {/* 8 — Founder pipeline */}
       <Section id="founders">
         <SectionHeading
-          index="08 — Founder pipeline"
+          index="10 — Founder pipeline"
           title="We Don't Find Founders. We Qualify Them."
           lede="Venture capital's hardest problem is founder risk: a handful of meetings, then a decade of consequences. Nizek runs a repeatable system for discovering, testing and selecting founders before a single dinar is committed."
         />
@@ -888,7 +986,7 @@ function PlatformPage() {
 
       {/* 10 — Current proof */}
       <Section>
-        <SectionHeading index="09 — Current proof" title="Not Theory. Reality." />
+        <SectionHeading index="11 — Current proof" title="Not Theory. Reality." />
         <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-2">
           {[
             {
@@ -924,7 +1022,7 @@ function PlatformPage() {
 
       {/* 11 — Why investors win */}
       <Section>
-        <SectionHeading index="10 — Investor case" title="Why Investors Win" />
+        <SectionHeading index="12 — Investor case" title="Why Investors Win" />
         <div className="grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2">
           {[
             ["Diversification", "Exposure to dozens of startups instead of one."],
@@ -945,7 +1043,7 @@ function PlatformPage() {
 
       {/* 12 — Timeline */}
       <Section>
-        <SectionHeading index="11 — Timeline" title="Fifty Companies In Five Years" />
+        <SectionHeading index="13 — Timeline" title="Fifty Companies In Five Years" />
         <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-6">
           {[
             ["Year 1", "10"],
