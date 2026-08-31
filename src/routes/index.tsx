@@ -373,7 +373,7 @@ function PlatformPage() {
             (s, i) => (
               <div key={s} className="bg-background p-8">
                 <div className="num text-xs text-subtle">{String(i + 1).padStart(2, "0")}</div>
-                <div className="mt-6 text-base text-foreground">{s}</div>
+                <div className="display-xl mt-6 text-2xl leading-tight md:text-3xl">{s}</div>
               </div>
             ),
           )}
