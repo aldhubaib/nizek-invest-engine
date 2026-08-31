@@ -13,13 +13,15 @@
  * time to mature; later cohorts carry less.
  */
 
-export const ANNUAL_COMMITMENT = 400_000;
+export const ANNUAL_COMMITMENT = 360_000;
 export const COMMITMENT_YEARS = 5;
 export const TOTAL_INVESTMENT = ANNUAL_COMMITMENT * COMMITMENT_YEARS;
 export const INVESTOR_PARTICIPATION = 0.25;
 
 export interface InvestmentInputs {
   startupsPerYear: number; // startups created each year
+  /** Capital committed by the investor in each year, index 0 = Year 1. */
+  capitalByYear: number[];
   /** Successful companies per cohort, index 0 = Year 1 cohort. */
   successesByYear: number[];
   /** Expected exit valuation of each successful company, per cohort. */
@@ -85,24 +87,25 @@ function irrFromFlows(flows: number[]): number {
   return ((lo + hi) / 2) * 100;
 }
 
-function benchmark(rate: number, hold: number): BenchmarkResult {
+function benchmark(rate: number, hold: number, capital: number[]): BenchmarkResult {
+  const total = capital.reduce((a, b) => a + b, 0);
   const r = rate / 100;
   const curve: number[] = [];
   let v = 0;
   for (let y = 0; y <= hold; y++) {
     // Same schedule as the investor: KD400,000 committed at the start of each
     // of the first five years, then compounded.
-    const contribution = y < COMMITMENT_YEARS ? ANNUAL_COMMITMENT : 0;
+    const contribution = capital[y] ?? 0;
     v = v * (1 + r) + contribution;
     curve.push(v);
   }
   const finalValue = curve[curve.length - 1] ?? 0;
   const flows = Array.from({ length: hold + 1 }, (_, y) =>
-    (y < COMMITMENT_YEARS ? -ANNUAL_COMMITMENT : 0) + (y === hold ? finalValue : 0),
+    -(capital[y] ?? 0) + (y === hold ? finalValue : 0),
   );
   return {
     finalValue,
-    profit: finalValue - TOTAL_INVESTMENT,
+    profit: finalValue - total,
     annualizedReturn: irrFromFlows(flows),
     curve,
   };
@@ -113,6 +116,10 @@ export function projectInvestment(input: InvestmentInputs): InvestmentResult {
   const ownership = input.avgNizekOwnership / 100;
   const participation = (input.investorShare ?? INVESTOR_PARTICIPATION * 100) / 100;
   const startups = Math.max(0, input.startupsPerYear);
+  const capitalByYear = Array.from({ length: COMMITMENT_YEARS }, (_, i) =>
+    Math.max(0, input.capitalByYear?.[i] ?? ANNUAL_COMMITMENT),
+  );
+  const totalInvestment = capitalByYear.reduce((a, b) => a + b, 0);
   const successesFor = (year: number) =>
     Math.min(Math.max(0, input.successesByYear?.[year - 1] ?? 0), startups);
 
@@ -129,7 +136,7 @@ export function projectInvestment(input: InvestmentInputs): InvestmentResult {
     const nizekEquityValue = portfolioValue * ownership;
     return {
       year,
-      capitalInvested: ANNUAL_COMMITMENT,
+      capitalInvested: capitalByYear[i] ?? 0,
       startups,
       failures: startups - successes,
       successes,
@@ -144,8 +151,8 @@ export function projectInvestment(input: InvestmentInputs): InvestmentResult {
   const portfolioValue = cohorts.reduce((s, c) => s + c.portfolioValue, 0);
   const nizekEquityValue = portfolioValue * ownership;
   const investorValue = nizekEquityValue * participation;
-  const investorProfit = investorValue - TOTAL_INVESTMENT;
-  const moic = TOTAL_INVESTMENT > 0 ? investorValue / TOTAL_INVESTMENT : 0;
+  const investorProfit = investorValue - totalInvestment;
+  const moic = totalInvestment > 0 ? investorValue / totalInvestment : 0;
 
   // Cumulative expected exit value of the cohorts created so far.
   const labels: string[] = [];
@@ -160,13 +167,13 @@ export function projectInvestment(input: InvestmentInputs): InvestmentResult {
   const investorCurve = portfolioByYear.map((v) => v * ownership * participation);
 
   const cashflows = Array.from({ length: hold + 1 }, (_, y) =>
-    (y < COMMITMENT_YEARS ? -ANNUAL_COMMITMENT : 0) + (y === hold ? investorValue : 0),
+    -(capitalByYear[y] ?? 0) + (y === hold ? investorValue : 0),
   );
   const irr = investorValue > 0 ? irrFromFlows(cashflows) : -100;
 
   return {
     inputs: input,
-    totalInvestment: TOTAL_INVESTMENT,
+    totalInvestment,
     totalStartups: startups * COMMITMENT_YEARS,
     totalSuccesses: cohorts.reduce((s2, c) => s2 + c.successes, 0),
     portfolioValue,
@@ -179,14 +186,21 @@ export function projectInvestment(input: InvestmentInputs): InvestmentResult {
     labels,
     portfolioByYear,
     investorCurve,
-    realEstate: benchmark(input.realEstateYield, hold),
-    publicMarket: benchmark(input.publicMarketReturn, hold),
+    realEstate: benchmark(input.realEstateYield, hold, capitalByYear),
+    publicMarket: benchmark(input.publicMarketReturn, hold, capitalByYear),
     cashflows,
   };
 }
 
 export const defaultInvestmentInputs: InvestmentInputs = {
   startupsPerYear: 10,
+  capitalByYear: [
+    ANNUAL_COMMITMENT,
+    ANNUAL_COMMITMENT,
+    ANNUAL_COMMITMENT,
+    ANNUAL_COMMITMENT,
+    ANNUAL_COMMITMENT,
+  ],
   successesByYear: [1, 1, 1, 1, 1],
   exitValuesByYear: [[20_000_000], [15_000_000], [10_000_000], [8_000_000], [5_000_000]],
   avgNizekOwnership: 30,
@@ -250,6 +264,9 @@ export const cohortExitControls = Array.from({ length: COMMITMENT_YEARS }, (_, i
   min: 0,
   max: 100_000_000,
   step: 1_000_000,
+  capitalMin: 0,
+  capitalMax: 2_000_000,
+  capitalStep: 10_000,
   successMin: 0,
   successMax: 10,
   successStep: 1,
