@@ -519,58 +519,78 @@ function PlatformPage() {
                           className="mt-4"
                           aria-label={`${c.label} successes`}
                         />
-                        <div className="mt-5 flex items-baseline justify-between gap-4">
-                          <label
-                            htmlFor={`cohort-exit-${c.index}`}
-                            className="text-sm text-muted-foreground"
-                          >
-                            Exit valuation
-                          </label>
-                          <ValueField
-                            label={c.label}
-                            display={kd(inputs.exitValueByYear[c.index] ?? 0)}
-                            value={inputs.exitValueByYear[c.index] ?? 0}
-                            min={c.min}
-                            max={c.max}
-                            onCommit={(v) => setCohortExit(c.index, v)}
-                          />
-                        </div>
-                        <input
-                          id={`cohort-exit-${c.index}`}
-                          type="range"
-                          min={c.min}
-                          max={c.max}
-                          step={c.step}
-                          value={inputs.exitValueByYear[c.index] ?? 0}
-                          onChange={(e) => setCohortExit(c.index, Number(e.target.value))}
-                          className="mt-4"
-                          aria-label={c.label}
-                        />
-                        <div className="mt-2 flex items-start justify-between gap-4">
+                        {Array.from(
+                          { length: inputs.successesByYear[c.index] ?? 0 },
+                          (_, k) => {
+                            const val =
+                              inputs.exitValuesByYear[c.index]?.[k] ?? 0;
+                            const id = `cohort-exit-${c.index}-${k}`;
+                            return (
+                              <div key={k} className="mt-5">
+                                <div className="flex items-baseline justify-between gap-4">
+                                  <label
+                                    htmlFor={id}
+                                    className="text-sm text-muted-foreground"
+                                  >
+                                    {(inputs.successesByYear[c.index] ?? 0) > 1
+                                      ? `Exit valuation · Company ${k + 1}`
+                                      : "Exit valuation"}
+                                  </label>
+                                  <ValueField
+                                    label={`${c.label} exit ${k + 1}`}
+                                    display={kd(val)}
+                                    value={val}
+                                    min={c.min}
+                                    max={c.max}
+                                    onCommit={(v) => setCohortExit(c.index, k, v)}
+                                  />
+                                </div>
+                                <input
+                                  id={id}
+                                  type="range"
+                                  min={c.min}
+                                  max={c.max}
+                                  step={c.step}
+                                  value={val}
+                                  onChange={(e) =>
+                                    setCohortExit(c.index, k, Number(e.target.value))
+                                  }
+                                  className="mt-4"
+                                  aria-label={`${c.label} exit ${k + 1}`}
+                                />
+                              </div>
+                            );
+                          },
+                        )}
+                        <div className="mt-3 flex items-start justify-between gap-4">
                           <span className="text-[11px] leading-relaxed text-subtle">{c.help}</span>
-                          {(inputs.exitValueByYear[c.index] !==
-                            defaultInvestmentInputs.exitValueByYear[c.index] ||
-                            inputs.successesByYear[c.index] !==
-                              defaultInvestmentInputs.successesByYear[c.index]) && (
-                            <button
-                              type="button"
-                              onClick={() => {
-                                setCohortExit(
-                                  c.index,
-                                  defaultInvestmentInputs.exitValueByYear[c.index] ?? 0,
-                                );
-                                setCohortSuccess(
-                                  c.index,
-                                  defaultInvestmentInputs.successesByYear[c.index] ?? 0,
-                                );
-                              }}
-
-                              className="label-xs shrink-0 transition-colors hover:text-foreground"
-                            >
-                              Reset
-                            </button>
-                          )}
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setInputs((p) => ({
+                                ...p,
+                                successesByYear: p.successesByYear.map((g, idx) =>
+                                  idx === c.index
+                                    ? defaultInvestmentInputs.successesByYear[c.index] ?? 0
+                                    : g,
+                                ),
+                                exitValuesByYear: p.exitValuesByYear.map((row, idx) =>
+                                  idx === c.index
+                                    ? [
+                                        ...(defaultInvestmentInputs.exitValuesByYear[
+                                          c.index
+                                        ] ?? []),
+                                      ]
+                                    : row,
+                                ),
+                              }))
+                            }
+                            className="label-xs shrink-0 transition-colors hover:text-foreground"
+                          >
+                            Reset
+                          </button>
                         </div>
+
                       </div>
                     ))}
                   </div>
