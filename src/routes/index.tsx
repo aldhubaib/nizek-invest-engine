@@ -454,7 +454,7 @@ function PlatformPage() {
         {/* Flow */}
         <div className="mt-24">
           <div className="label-xs">The process</div>
-          <div className="mt-10 grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-3 lg:grid-cols-6">
+          <div className="mt-10 grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2 md:grid-cols-3">
             {[
               { t: "Applications", d: "Open, continuous inbound from the region's operators." },
               { t: "Founder Residency", d: "~6 months building inside a live Nizek startup." },
