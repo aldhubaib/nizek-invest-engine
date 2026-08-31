@@ -154,7 +154,7 @@ function PlatformPage() {
     (i: number, k: number, v: number) =>
       setInputs((p) => ({
         ...p,
-        exitValuesByYear: p.exitValuesByYear.map((row, idx) => {
+        exitValuesByYear: (p.exitValuesByYear ?? []).map((row, idx) => {
           if (idx !== i) return row;
           const next = [...row];
           while (next.length <= k) next.push(next[next.length - 1] ?? 0);
@@ -169,8 +169,8 @@ function PlatformPage() {
     (i: number, v: number) =>
       setInputs((p) => ({
         ...p,
-        successesByYear: p.successesByYear.map((g, idx) => (idx === i ? v : g)),
-        exitValuesByYear: p.exitValuesByYear.map((row, idx) => {
+        successesByYear: (p.successesByYear ?? []).map((g, idx) => (idx === i ? v : g)),
+        exitValuesByYear: (p.exitValuesByYear ?? []).map((row, idx) => {
           if (idx !== i) return row;
           const next = row.slice(0, Math.max(0, v));
           while (next.length < v) next.push(next[next.length - 1] ?? row[0] ?? 0);
@@ -569,12 +569,12 @@ function PlatformPage() {
                             onClick={() =>
                               setInputs((p) => ({
                                 ...p,
-                                successesByYear: p.successesByYear.map((g, idx) =>
+                                successesByYear: (p.successesByYear ?? []).map((g, idx) =>
                                   idx === c.index
                                     ? defaultInvestmentInputs.successesByYear[c.index] ?? 0
                                     : g,
                                 ),
-                                exitValuesByYear: p.exitValuesByYear.map((row, idx) =>
+                                exitValuesByYear: (p.exitValuesByYear ?? []).map((row, idx) =>
                                   idx === c.index
                                     ? [
                                         ...(defaultInvestmentInputs.exitValuesByYear[
