@@ -2,6 +2,8 @@ import { Link, type LinkProps } from "@tanstack/react-router";
 import { useState } from "react";
 import { useModel } from "@/model/context";
 import { multiple } from "@/model/format";
+import nizekLogo from "@/assets/nizek-logo.png.asset.json";
+
 
 const nav = [
   { to: "/", label: "Platform" },
@@ -25,9 +27,10 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur">
       <div className="flex items-center justify-between px-6 py-5 md:px-12">
-        <Link to="/" className="text-sm tracking-[0.4em] text-foreground">
-          NIZEK
+        <Link to="/" className="flex items-center">
+          <img src={nizekLogo.url} alt="NIZEK" className="h-6 w-auto" />
         </Link>
+
         <nav className="hidden items-center gap-8 lg:flex">
           {nav.map((n) => (
             <Link
@@ -77,7 +80,7 @@ export function Footer() {
     <footer className="border-t border-border px-6 py-16 md:px-12">
       <div className="mx-auto flex max-w-[1400px] flex-col justify-between gap-10 md:flex-row">
         <div>
-          <div className="text-sm tracking-[0.4em]">NIZEK</div>
+          <img src={nizekLogo.url} alt="NIZEK" className="h-6 w-auto" />
           <p className="mt-4 max-w-md text-xs leading-relaxed text-subtle">
             All figures on this platform are generated live from a single financial model.
             Illustrative only; not an offer to sell securities.
