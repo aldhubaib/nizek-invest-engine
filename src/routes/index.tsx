@@ -154,7 +154,7 @@ function PlatformPage() {
     (i: number, k: number, v: number) =>
       setInputs((p) => ({
         ...p,
-        exitValuesByYear: p.exitValuesByYear.map((row, idx) => {
+        exitValuesByYear: (p.exitValuesByYear ?? []).map((row, idx) => {
           if (idx !== i) return row;
           const next = [...row];
           while (next.length <= k) next.push(next[next.length - 1] ?? 0);
@@ -169,8 +169,8 @@ function PlatformPage() {
     (i: number, v: number) =>
       setInputs((p) => ({
         ...p,
-        successesByYear: p.successesByYear.map((g, idx) => (idx === i ? v : g)),
-        exitValuesByYear: p.exitValuesByYear.map((row, idx) => {
+        successesByYear: (p.successesByYear ?? []).map((g, idx) => (idx === i ? v : g)),
+        exitValuesByYear: (p.exitValuesByYear ?? []).map((row, idx) => {
           if (idx !== i) return row;
           const next = row.slice(0, Math.max(0, v));
           while (next.length < v) next.push(next[next.length - 1] ?? row[0] ?? 0);
@@ -499,8 +499,8 @@ function PlatformPage() {
                           </label>
                           <ValueField
                             label={`${c.label} successes`}
-                            display={String(inputs.successesByYear[c.index] ?? 0)}
-                            value={inputs.successesByYear[c.index] ?? 0}
+                            display={String(inputs.successesByYear?.[c.index] ?? 0)}
+                            value={inputs.successesByYear?.[c.index] ?? 0}
                             min={c.successMin}
                             max={c.successMax}
                             onCommit={(v) => setCohortSuccess(c.index, Math.round(v))}
@@ -512,7 +512,7 @@ function PlatformPage() {
                           min={c.successMin}
                           max={c.successMax}
                           step={c.successStep}
-                          value={inputs.successesByYear[c.index] ?? 0}
+                          value={inputs.successesByYear?.[c.index] ?? 0}
                           onChange={(e) =>
                             setCohortSuccess(c.index, Number(e.target.value))
                           }
@@ -520,10 +520,10 @@ function PlatformPage() {
                           aria-label={`${c.label} successes`}
                         />
                         {Array.from(
-                          { length: inputs.successesByYear[c.index] ?? 0 },
+                          { length: inputs.successesByYear?.[c.index] ?? 0 },
                           (_, k) => {
                             const val =
-                              inputs.exitValuesByYear[c.index]?.[k] ?? 0;
+                              inputs.exitValuesByYear?.[c.index]?.[k] ?? 0;
                             const id = `cohort-exit-${c.index}-${k}`;
                             return (
                               <div key={k} className="mt-5">
@@ -532,7 +532,7 @@ function PlatformPage() {
                                     htmlFor={id}
                                     className="text-sm text-muted-foreground"
                                   >
-                                    {(inputs.successesByYear[c.index] ?? 0) > 1
+                                    {(inputs.successesByYear?.[c.index] ?? 0) > 1
                                       ? `Exit valuation · Company ${k + 1}`
                                       : "Exit valuation"}
                                   </label>
@@ -569,12 +569,12 @@ function PlatformPage() {
                             onClick={() =>
                               setInputs((p) => ({
                                 ...p,
-                                successesByYear: p.successesByYear.map((g, idx) =>
+                                successesByYear: (p.successesByYear ?? []).map((g, idx) =>
                                   idx === c.index
                                     ? defaultInvestmentInputs.successesByYear[c.index] ?? 0
                                     : g,
                                 ),
-                                exitValuesByYear: p.exitValuesByYear.map((row, idx) =>
+                                exitValuesByYear: (p.exitValuesByYear ?? []).map((row, idx) =>
                                   idx === c.index
                                     ? [
                                         ...(defaultInvestmentInputs.exitValuesByYear[
