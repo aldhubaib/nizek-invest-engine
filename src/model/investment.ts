@@ -22,8 +22,8 @@ export interface InvestmentInputs {
   startupsPerYear: number; // startups created each year
   /** Successful companies per cohort, index 0 = Year 1 cohort. */
   successesByYear: number[];
-  /** Expected exit valuation per cohort, index 0 = Year 1 cohort. */
-  exitValueByYear: number[];
+  /** Expected exit valuation of each successful company, per cohort. */
+  exitValuesByYear: number[][];
   avgNizekOwnership: number; // %
   investorShare: number; // % of NIZEK's ownership allocated to the investor
   realEstateYield: number; // % annual
@@ -36,7 +36,8 @@ export interface CohortResult {
   startups: number;
   failures: number;
   successes: number;
-  exitValue: number; // expected exit valuation per successful company
+  exitValue: number; // average expected exit valuation per successful company
+  exitValues: number[]; // expected exit valuation of each successful company
   portfolioValue: number; // successes x exit valuation
   nizekEquityValue: number;
   investorValue: number;
@@ -114,14 +115,17 @@ export function projectInvestment(input: InvestmentInputs): InvestmentResult {
   const startups = Math.max(0, input.startupsPerYear);
   const successesFor = (year: number) =>
     Math.min(Math.max(0, input.successesByYear?.[year - 1] ?? 0), startups);
-  const exitFor = (year: number) =>
-    Math.max(0, input.exitValueByYear?.[year - 1] ?? 0);
+
 
   const cohorts: CohortResult[] = Array.from({ length: COMMITMENT_YEARS }, (_, i) => {
     const year = i + 1;
-    const exitValue = exitFor(year);
     const successes = successesFor(year);
-    const portfolioValue = successes * exitValue;
+    const raw = input.exitValuesByYear?.[i] ?? [];
+    const exitValues = Array.from({ length: successes }, (_, k) =>
+      Math.max(0, raw[k] ?? raw[raw.length - 1] ?? 0),
+    );
+    const portfolioValue = exitValues.reduce((a, b) => a + b, 0);
+    const exitValue = successes > 0 ? portfolioValue / successes : 0;
     const nizekEquityValue = portfolioValue * ownership;
     return {
       year,
@@ -130,6 +134,7 @@ export function projectInvestment(input: InvestmentInputs): InvestmentResult {
       failures: startups - successes,
       successes,
       exitValue,
+      exitValues,
       portfolioValue,
       nizekEquityValue,
       investorValue: nizekEquityValue * participation,
@@ -183,7 +188,7 @@ export function projectInvestment(input: InvestmentInputs): InvestmentResult {
 export const defaultInvestmentInputs: InvestmentInputs = {
   startupsPerYear: 10,
   successesByYear: [1, 1, 1, 1, 1],
-  exitValueByYear: [20_000_000, 15_000_000, 10_000_000, 8_000_000, 5_000_000],
+  exitValuesByYear: [[20_000_000], [15_000_000], [10_000_000], [8_000_000], [5_000_000]],
   avgNizekOwnership: 30,
   investorShare: 30,
   realEstateYield: 7,
