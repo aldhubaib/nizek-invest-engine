@@ -6,16 +6,17 @@ import nizekLogo from "@/assets/nizek-logo.png.asset.json";
 
 
 const nav = [
-  { to: "/", label: "Platform" },
-  { to: "/thesis", label: "Thesis" },
-  { to: "/model", label: "Model" },
-  { to: "/financials", label: "Financials" },
-  { to: "/simulator", label: "Simulator" },
-  { to: "/returns", label: "Returns" },
-  { to: "/scenarios", label: "Scenarios" },
-  { to: "/roadmap", label: "Roadmap" },
-  { to: "/data-room", label: "Data room" },
+  { to: "#why", label: "Why" },
+  { to: "#problem", label: "Problem" },
+  { to: "#how-we-build", label: "Model" },
+  { to: "#investment", label: "Investment" },
+  { to: "#model", label: "Simulator" },
+  { to: "#founders", label: "Founders" },
+  { to: "#proof", label: "Proof" },
+  { to: "#timeline", label: "Timeline" },
+  { to: "#contact", label: "Contact" },
 ] as const;
+
 
 export function Header() {
   const { projection, activeScenario, isCustom, scenarios } = useModel();
