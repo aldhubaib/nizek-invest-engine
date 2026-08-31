@@ -150,6 +150,15 @@ function PlatformPage() {
     [],
   );
 
+  const setCohortCapital = useCallback(
+    (i: number, v: number) =>
+      setInputs((p) => ({
+        ...p,
+        capitalByYear: (p.capitalByYear ?? []).map((c, idx) => (idx === i ? v : c)),
+      })),
+    [],
+  );
+
   const setCohortExit = useCallback(
     (i: number, k: number, v: number) =>
       setInputs((p) => ({
