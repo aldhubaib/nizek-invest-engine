@@ -2,6 +2,8 @@ import { Link, type LinkProps } from "@tanstack/react-router";
 import { useState } from "react";
 import { useModel } from "@/model/context";
 import { multiple } from "@/model/format";
+import nizekLogo from "@/assets/nizek-logo.png.asset.json";
+
 
 const nav = [
   { to: "/", label: "Platform" },
