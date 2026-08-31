@@ -27,9 +27,10 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur">
       <div className="flex items-center justify-between px-6 py-5 md:px-12">
-        <Link to="/" className="text-sm tracking-[0.4em] text-foreground">
-          NIZEK
+        <Link to="/" className="flex items-center">
+          <img src={nizekLogo.url} alt="NIZEK" className="h-6 w-auto" />
         </Link>
+
         <nav className="hidden items-center gap-8 lg:flex">
           {nav.map((n) => (
             <Link
