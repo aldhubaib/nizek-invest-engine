@@ -300,7 +300,11 @@ function PlatformPage() {
             "Bad hiring",
             "Weak product strategy",
           ].map((t, i) => (
-            <div key={t} className="bg-background p-8">
+            <div
+              key={t}
+              className={`bg-background p-8 ${i === 4 ? "col-span-2 md:col-span-2" : ""}`}
+            >
+
               <div className="num text-xs text-subtle">{String(i + 1).padStart(2, "0")}</div>
               <div className="mt-6 text-lg text-foreground">{t}</div>
             </div>
