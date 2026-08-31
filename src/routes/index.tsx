@@ -415,12 +415,112 @@ function PlatformPage() {
         </div>
       </Section>
 
+      {/* 8 — Founder pipeline */}
+      <Section id="founders">
+        <SectionHeading
+          index="08 — Founder pipeline"
+          title="We Don't Find Founders. We Qualify Them."
+          lede="Venture capital's hardest problem is founder risk: a handful of meetings, then a decade of consequences. Nizek runs a repeatable system for discovering, testing and selecting founders before a single dinar is committed."
+        />
+
+        <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-2">
+          <div className="bg-background p-10">
+            <div className="label-xs">The problem</div>
+            <p className="mt-8 text-lg leading-relaxed text-subtle">
+              Most investors meet entrepreneurs through pitch events, introductions or
+              applications, and must decide after a few conversations. Execution is
+              discovered after the money is gone.
+            </p>
+          </div>
+          <div className="bg-background p-10">
+            <div className="label-xs text-foreground">Our solution</div>
+            <p className="mt-8 text-lg leading-relaxed text-foreground">
+              Every founder enters the Nizek Founder Residency first — roughly six months
+              building inside one of our existing startups. Only those who prove
+              themselves are offered investment.
+            </p>
+          </div>
+        </div>
+
+        {/* Flow */}
+        <div className="mt-24">
+          <div className="label-xs">The process</div>
+          <div className="mt-10 grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-3 lg:grid-cols-6">
+            {[
+              { t: "Applications", d: "Open, continuous inbound from the region's operators." },
+              { t: "Founder Residency", d: "~6 months building inside a live Nizek startup." },
+              { t: "Performance Evaluation", d: "Judged on real output, not a pitch deck." },
+              { t: "Founder Approved", d: "Both sides decide to build a company together." },
+              { t: "Investment", d: "Capital, equity and platform are committed." },
+              { t: "Startup Launch", d: "The company enters the annual cohort." },
+            ].map((s, i) => (
+              <Reveal key={s.t} delay={i * 90}>
+                <div className="flex h-full flex-col justify-between bg-background p-8">
+                  <div>
+                    <span className="num text-xs text-subtle">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <div className="display-xl mt-6 text-2xl leading-tight md:text-3xl">
+                      {s.t}
+                    </div>
+                  </div>
+                  <p className="mt-8 text-sm leading-relaxed text-subtle">{s.d}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+
+        {/* What we evaluate */}
+        <div className="mt-24">
+          <div className="label-xs">What the residency measures</div>
+          <div className="mt-8 grid grid-cols-1 gap-x-12 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              "Execution",
+              "Leadership",
+              "Commitment",
+              "Problem solving",
+              "Product thinking",
+              "Communication",
+              "Work under pressure",
+              "Cultural fit",
+            ].map((t, i) => (
+              <Reveal key={t} delay={i * 50}>
+                <div className="border-b border-border py-5 text-lg text-foreground">{t}</div>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal>
+            <p className="mt-10 max-w-2xl text-base leading-relaxed text-muted-foreground">
+              The founder is evaluating us at the same time. By the end of the residency,
+              both sides know the answer.
+            </p>
+          </Reveal>
+        </div>
+
+        {/* Key message */}
+        <Reveal>
+          <div className="mt-24 border-t border-border-strong pt-12">
+            <p className="display-xl max-w-5xl text-3xl leading-tight md:text-6xl">
+              Traditional venture capital invests first and evaluates execution later.
+              Nizek evaluates execution first and invests later.
+            </p>
+            <p className="mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground">
+              The result is a continuous pipeline of founders who have already proven they
+              can execute before receiving capital — making the studio repeatable,
+              scalable and far less dependent on luck.
+            </p>
+          </div>
+        </Reveal>
+      </Section>
+
       {/* 9 — Live business model */}
+
       <section id="model" className="border-t border-border">
         <div className="px-6 py-24 md:px-12 md:py-32">
           <div className="mx-auto w-full max-w-[1400px]">
             <Reveal>
-              <div className="label-xs">08 — The investment simulator</div>
+              <div className="label-xs">09 — The investment simulator</div>
               <h2 className="display-xl mt-6 text-5xl md:text-8xl">
                 If Nizek builds successful companies, what could your investment become?
               </h2>
