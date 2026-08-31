@@ -525,7 +525,7 @@ function PlatformPage() {
       {/* 8 — Founder pipeline */}
       <Section id="founders">
         <SectionHeading
-          index="08 — Founder pipeline"
+          index="10 — Founder pipeline"
           title="We Don't Find Founders. We Qualify Them."
           lede="Venture capital's hardest problem is founder risk: a handful of meetings, then a decade of consequences. Nizek runs a repeatable system for discovering, testing and selecting founders before a single dinar is committed."
         />
@@ -986,7 +986,7 @@ function PlatformPage() {
 
       {/* 10 — Current proof */}
       <Section>
-        <SectionHeading index="09 — Current proof" title="Not Theory. Reality." />
+        <SectionHeading index="11 — Current proof" title="Not Theory. Reality." />
         <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-2">
           {[
             {
@@ -1022,7 +1022,7 @@ function PlatformPage() {
 
       {/* 11 — Why investors win */}
       <Section>
-        <SectionHeading index="10 — Investor case" title="Why Investors Win" />
+        <SectionHeading index="12 — Investor case" title="Why Investors Win" />
         <div className="grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2">
           {[
             ["Diversification", "Exposure to dozens of startups instead of one."],
@@ -1043,7 +1043,7 @@ function PlatformPage() {
 
       {/* 12 — Timeline */}
       <Section>
-        <SectionHeading index="11 — Timeline" title="Fifty Companies In Five Years" />
+        <SectionHeading index="13 — Timeline" title="Fifty Companies In Five Years" />
         <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-6">
           {[
             ["Year 1", "10"],
