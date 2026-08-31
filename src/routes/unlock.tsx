@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/unlock")({
-  validateSearch: (search: Record<string, unknown>) => ({
-    error: search["error"] === "1" || search["error"] === 1 ? true : undefined,
-  }),
+  validateSearch: (search: Record<string, unknown>): { error?: boolean } =>
+    search["error"] === "1" ? { error: true } : {},
+
   head: () => ({
     meta: [
       { title: "NIZEK — Private Access" },
