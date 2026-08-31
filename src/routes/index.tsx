@@ -150,6 +150,15 @@ function PlatformPage() {
     [],
   );
 
+  const setCohortCapital = useCallback(
+    (i: number, v: number) =>
+      setInputs((p) => ({
+        ...p,
+        capitalByYear: (p.capitalByYear ?? []).map((c, idx) => (idx === i ? v : c)),
+      })),
+    [],
+  );
+
   const setCohortExit = useCallback(
     (i: number, k: number, v: number) =>
       setInputs((p) => ({
@@ -591,6 +600,34 @@ function PlatformPage() {
                       <div key={c.index} className="border-b border-border py-5">
                         <div className="text-sm text-foreground">{c.label}</div>
                         <div className="mt-4 flex items-baseline justify-between gap-4">
+                          <label
+                            htmlFor={`cohort-capital-${c.index}`}
+                            className="text-sm text-muted-foreground"
+                          >
+                            Investment
+                          </label>
+                          <ValueField
+                            label={`${c.label} investment`}
+                            display={kd(inputs.capitalByYear?.[c.index] ?? 0)}
+                            value={inputs.capitalByYear?.[c.index] ?? 0}
+                            min={c.capitalMin}
+                            max={c.capitalMax}
+                            onCommit={(v) => setCohortCapital(c.index, v)}
+                          />
+                        </div>
+                        <input
+                          id={`cohort-capital-${c.index}`}
+                          type="range"
+                          min={c.capitalMin}
+                          max={c.capitalMax}
+                          step={c.capitalStep}
+                          value={inputs.capitalByYear?.[c.index] ?? 0}
+                          onChange={(e) => setCohortCapital(c.index, Number(e.target.value))}
+                          className="mt-4"
+                          aria-label={`${c.label} investment`}
+                        />
+                        <div className="mt-4 flex items-baseline justify-between gap-4">
+
                           <label
                             htmlFor={`cohort-success-${c.index}`}
                             className="text-sm text-muted-foreground"
