@@ -966,16 +966,7 @@ function PlatformPage() {
         </div>
 
         <div className="border-t border-border">
-          <div className="sticky top-0 z-30 flex items-center justify-between gap-6 border-b border-border bg-background px-6 py-4 md:px-12">
-            <div className="label-xs">Live model</div>
-            <button
-              type="button"
-              onClick={() => setPanelOpen(true)}
-              className="border border-border-strong px-5 py-2.5 text-xs uppercase tracking-[0.18em] text-foreground transition-colors hover:bg-foreground hover:text-background"
-            >
-              Show assumptions
-            </button>
-          </div>
+
 
           {panelOpen && (
             <button
@@ -1140,10 +1131,20 @@ function PlatformPage() {
             <div className="border border-border p-8 md:p-12">
               <div className="flex flex-col gap-10 border-b border-border pb-10 md:flex-row md:items-end md:justify-between">
                 <div className="max-w-2xl">
-                  <div className="flex items-center gap-4">
-                    <span className="h-px w-8 bg-border-strong" aria-hidden />
-                    <div className="label-xs">Allocation interface</div>
+                  <div className="flex flex-wrap items-center justify-between gap-4">
+                    <div className="flex items-center gap-4">
+                      <span className="h-px w-8 bg-border-strong" aria-hidden />
+                      <div className="label-xs">Allocation interface</div>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setPanelOpen(true)}
+                      className="border border-border-strong px-5 py-2.5 text-xs uppercase tracking-[0.18em] text-foreground transition-colors hover:bg-foreground hover:text-background"
+                    >
+                      Show assumptions
+                    </button>
                   </div>
+
                   <h3 className="display-xl mt-6 text-3xl leading-tight md:text-5xl">
                     Secure your position in the Nizek ecosystem.{" "}
                     <span className="text-subtle">
