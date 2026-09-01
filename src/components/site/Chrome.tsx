@@ -8,6 +8,7 @@ const nav = [
   { id: "problem", label: "Problem" },
   { id: "how-we-build", label: "Model" },
   { id: "founders", label: "Founders" },
+  { id: "equity", label: "Equity" },
   { id: "track-record", label: "Track record" },
   { id: "team", label: "Team" },
   { id: "regional", label: "Regional" },
