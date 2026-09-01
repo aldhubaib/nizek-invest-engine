@@ -992,6 +992,7 @@ function PlatformPage() {
                                   : null,
                               ],
                               ["Nizek equity", kd(c.nizekEquityValue), null],
+                              ["Investor equity", kd(c.investorValue), null],
                             ].map(([l, v, breakdown]) => (
                               <div key={l as string} className="min-w-0">
                                 <div className="label-xs">{l}</div>
@@ -1007,12 +1008,6 @@ function PlatformPage() {
                             ))}
                           </div>
 
-                          <div className="md:w-52 md:text-right">
-                            <div className="label-xs">Cohort exit value</div>
-                            <div className="num mt-2 text-xl text-foreground md:text-2xl">
-                              <AnimatedNumber value={c.portfolioValue} format={kd} />
-                            </div>
-                          </div>
                         </div>
                         <div className="mt-5 h-px w-full bg-border">
                           <div
