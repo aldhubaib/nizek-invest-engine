@@ -13,24 +13,31 @@
  * time to mature; later cohorts carry less.
  */
 
-export const ANNUAL_COMMITMENT = 360_000;
+/** Ownership seats. Six only. */
+export const TOTAL_SEATS = 6;
+export const SEAT_OWNERSHIP = 5; // % of Nizek's equity per seat
+export const SEAT_ANNUAL_COMMITMENT = 150_000; // KD per seat, per year
 export const COMMITMENT_YEARS = 5;
-export const TOTAL_INVESTMENT = ANNUAL_COMMITMENT * COMMITMENT_YEARS;
-export const INVESTOR_PARTICIPATION = 0.25;
+export const SEAT_MAX_COMMITMENT = SEAT_ANNUAL_COMMITMENT * COMMITMENT_YEARS;
+/** Seats already reserved (1-indexed seat numbers). */
+export const RESERVED_SEATS = [2, 3];
+
+export const ANNUAL_COMMITMENT = SEAT_ANNUAL_COMMITMENT;
+export const TOTAL_INVESTMENT = SEAT_MAX_COMMITMENT;
 
 export interface InvestmentInputs {
   startupsPerYear: number; // startups created each year
-  /** Capital committed by the investor in each year, index 0 = Year 1. */
-  capitalByYear: number[];
+  /** Ownership seats selected by the investor, 1..6. Each seat = 5%. */
+  seats: number;
   /** Successful companies per cohort, index 0 = Year 1 cohort. */
   successesByYear: number[];
   /** Expected exit valuation of each successful company, per cohort. */
   exitValuesByYear: number[][];
   avgNizekOwnership: number; // %
-  investorShare: number; // % of NIZEK's ownership allocated to the investor
   realEstateYield: number; // % annual
   publicMarketReturn: number; // % annual
 }
+
 
 export interface CohortResult {
   year: number; // 1..5
@@ -54,6 +61,10 @@ export interface BenchmarkResult {
 
 export interface InvestmentResult {
   inputs: InvestmentInputs;
+  seats: number;
+  ownershipPercent: number;
+  annualCommitment: number;
+  maxCommitment: number;
   totalInvestment: number;
   totalStartups: number;
   totalSuccesses: number;
@@ -114,12 +125,14 @@ function benchmark(rate: number, hold: number, capital: number[]): BenchmarkResu
 export function projectInvestment(input: InvestmentInputs): InvestmentResult {
   const hold = COMMITMENT_YEARS;
   const ownership = input.avgNizekOwnership / 100;
-  const participation = (input.investorShare ?? INVESTOR_PARTICIPATION * 100) / 100;
+  const seats = Math.min(Math.max(1, Math.round(input.seats ?? 1)), TOTAL_SEATS);
+  const ownershipPercent = seats * SEAT_OWNERSHIP;
+  const participation = ownershipPercent / 100;
+  const annualCommitment = seats * SEAT_ANNUAL_COMMITMENT;
   const startups = Math.max(0, input.startupsPerYear);
-  const capitalByYear = Array.from({ length: COMMITMENT_YEARS }, (_, i) =>
-    Math.max(0, input.capitalByYear?.[i] ?? ANNUAL_COMMITMENT),
-  );
+  const capitalByYear = Array.from({ length: COMMITMENT_YEARS }, () => annualCommitment);
   const totalInvestment = capitalByYear.reduce((a, b) => a + b, 0);
+
   const successesFor = (year: number) =>
     Math.min(Math.max(0, input.successesByYear?.[year - 1] ?? 0), startups);
 
@@ -173,6 +186,10 @@ export function projectInvestment(input: InvestmentInputs): InvestmentResult {
 
   return {
     inputs: input,
+    seats,
+    ownershipPercent,
+    annualCommitment,
+    maxCommitment: totalInvestment,
     totalInvestment,
     totalStartups: startups * COMMITMENT_YEARS,
     totalSuccesses: cohorts.reduce((s2, c) => s2 + c.successes, 0),
@@ -194,13 +211,7 @@ export function projectInvestment(input: InvestmentInputs): InvestmentResult {
 
 export const defaultInvestmentInputs: InvestmentInputs = {
   startupsPerYear: 10,
-  capitalByYear: [
-    ANNUAL_COMMITMENT,
-    ANNUAL_COMMITMENT,
-    ANNUAL_COMMITMENT,
-    ANNUAL_COMMITMENT,
-    ANNUAL_COMMITMENT,
-  ],
+  seats: 2,
   successesByYear: [3, 3, 3, 3, 3],
   exitValuesByYear: [
     [5_000_000, 3_000_000, 2_000_000],
@@ -210,7 +221,6 @@ export const defaultInvestmentInputs: InvestmentInputs = {
     [5_000_000, 3_000_000, 2_000_000],
   ],
   avgNizekOwnership: 30,
-  investorShare: 25,
   realEstateYield: 7,
   publicMarketReturn: 8,
 };
@@ -249,16 +259,6 @@ export const investmentControls: InvestmentControlMeta[] = [
     step: 1,
     unit: "percent",
     help: "Average equity NIZEK holds in successful companies at exit.",
-    group: "Ownership",
-  },
-  {
-    key: "investorShare",
-    label: "Investor share of NIZEK",
-    min: 0,
-    max: 100,
-    step: 1,
-    unit: "percent",
-    help: "Share of NIZEK's ownership the investor participates in. Not ownership of NIZEK itself.",
     group: "Ownership",
   },
 ];
