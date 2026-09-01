@@ -16,7 +16,8 @@
 /** Ownership seats. Six only. */
 export const TOTAL_SEATS = 6;
 export const SEAT_OWNERSHIP = 5; // % of Nizek's equity per seat
-export const SEAT_ANNUAL_COMMITMENT = 150_000; // KD per seat, per year
+export const SEAT_QUARTERLY_COMMITMENT = 15_000; // KD per seat, per quarter
+export const SEAT_ANNUAL_COMMITMENT = SEAT_QUARTERLY_COMMITMENT * 4; // KD per seat, per year
 export const COMMITMENT_YEARS = 5;
 export const SEAT_MAX_COMMITMENT = SEAT_ANNUAL_COMMITMENT * COMMITMENT_YEARS;
 /** Seats already reserved (1-indexed seat numbers). */

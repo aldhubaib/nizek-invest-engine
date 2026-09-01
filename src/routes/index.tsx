@@ -9,6 +9,7 @@ import {
   AVAILABLE_SEATS,
   RESERVED_SEATS,
   SEAT_ANNUAL_COMMITMENT,
+  SEAT_QUARTERLY_COMMITMENT,
   SEAT_MAX_COMMITMENT,
   SEAT_OWNERSHIP,
   TOTAL_SEATS,
@@ -342,8 +343,8 @@ function PlatformPage() {
         <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-3">
           {[
             [
-              "Per seat",
-              kd(SEAT_ANNUAL_COMMITMENT),
+              "Per seat, per quarter",
+              kd(SEAT_QUARTERLY_COMMITMENT),
               `annually for ${COMMITMENT_YEARS} years`,
             ],
             [
@@ -392,8 +393,8 @@ function PlatformPage() {
                 startup created during this five-year venture creation program.
               </p>
               <p>
-                Each seat requires an annual commitment of {kd(SEAT_ANNUAL_COMMITMENT)}, paid
-                quarterly over five years. Maximum commitment per seat is{" "}
+                Each seat requires a quarterly commitment of {kd(SEAT_QUARTERLY_COMMITMENT)} —
+                {" "}{kd(SEAT_ANNUAL_COMMITMENT)} a year over five years. Maximum commitment per seat is{" "}
                 {kd(SEAT_MAX_COMMITMENT)}.
               </p>
               <p className="text-foreground">
@@ -433,7 +434,7 @@ function PlatformPage() {
                     {reserved ? "Taken" : "Available"}
                   </div>
                   <div className="mt-6 text-[11px] leading-relaxed opacity-60">
-                    {SEAT_OWNERSHIP}% · {kd(SEAT_ANNUAL_COMMITMENT)} / year
+                    {SEAT_OWNERSHIP}% · {kd(SEAT_QUARTERLY_COMMITMENT)} / quarter
                   </div>
                 </div>
               </Reveal>
@@ -1142,7 +1143,7 @@ function PlatformPage() {
                   <div className="label-xs">Choose your seats</div>
                   <p className="mt-4 max-w-md text-xs leading-relaxed text-subtle">
                     Each seat is {SEAT_OWNERSHIP}% of Nizek's equity in every company created, for{" "}
-                    {kd(SEAT_ANNUAL_COMMITMENT)} a year over five years. One seat is already
+                    {kd(SEAT_QUARTERLY_COMMITMENT)} a quarter over five years. One seat is already
                     taken — {AVAILABLE_SEATS} remain. Everything below updates instantly.
                   </p>
                 </div>
@@ -1213,7 +1214,7 @@ function PlatformPage() {
                   v: result.ownershipPercent,
                   f: (v: number) => `${v.toFixed(0)}%`,
                 },
-                { l: "Annual commitment", v: result.annualCommitment, f: kd },
+                { l: "Quarterly commitment", v: result.annualCommitment / 4, f: kd },
                 { l: "Maximum commitment", v: result.maxCommitment, f: kd },
                 { l: "Estimated portfolio value", v: result.portfolioValue, f: kd },
                 {
