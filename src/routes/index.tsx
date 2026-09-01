@@ -596,65 +596,136 @@ function PlatformPage() {
         </Reveal>
       </Section>
 
-      {/* Lifecycle — commitment to transfer */}
+      {/* Institutional fund structure */}
       <Section id="lifecycle" invert>
         <SectionHeading
-          index="09b — Structure"
-          title="Five Years Of Building. Then The Portfolio Is Yours."
-          lede="The commitment window builds the portfolio. At the end of Year 5, the equity accumulated on the investor's behalf is transferred directly to the investor."
+          index="09b — Institutional Fund Structure"
+          title="One Fund. Fifty Companies. One Ownership Structure."
+          lede="To provide investors with a simple, transparent and scalable ownership model, all investments are made through a dedicated investment fund established in Abu Dhabi, UAE."
         />
 
-        <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-2">
-          <div className="bg-background p-10">
-            <div className="label-xs">Years 1–5</div>
-            <div className="mt-8">
-              {[
-                "Capital Commitment",
-                "Startup Creation",
-                "Portfolio Growth",
-                "Ownership Accumulation",
-              ].map((s, i, arr) => (
-                <div key={s}>
-                  <div className="display-xl text-2xl md:text-3xl">{s}</div>
-                  {i < arr.length - 1 && <Arrow />}
+        <div className="grid grid-cols-1 gap-16 lg:grid-cols-[1fr_1.2fr]">
+          <div className="space-y-6 text-base leading-relaxed text-muted-foreground md:text-lg">
+            <Reveal>
+              <p>
+                Instead of investors owning shares directly in dozens of different startups, each
+                investor owns a percentage of the investment fund.
+              </p>
+            </Reveal>
+            <Reveal delay={80}>
+              <p>
+                As new startups are created, every investment agreement is signed by the fund,
+                making the fund the legal shareholder of every portfolio company.
+              </p>
+            </Reveal>
+            <Reveal delay={160}>
+              <p className="text-foreground">
+                One ownership vehicle that grows over time, while the legal structure stays simple
+                for investors.
+              </p>
+            </Reveal>
+          </div>
+
+          {/* Diagram */}
+          <div className="border border-border p-8 md:p-12">
+            <div className="label-xs">Ownership structure</div>
+
+            <div className="mt-10 grid grid-cols-2 gap-px border border-border bg-border sm:grid-cols-3">
+              {["Investor A", "Investor B", "Investor C", "Investor D", "Investor E", "Investor F"].map(
+                (n, i) => (
+                  <Reveal key={n} delay={i * 60}>
+                    <div className="bg-background px-5 py-6 text-sm text-foreground">{n}</div>
+                  </Reveal>
+                ),
+              )}
+            </div>
+
+            <Reveal delay={120}>
+              <div className="flex flex-col items-center">
+                <div className="my-6 h-10 w-px bg-border-strong" aria-hidden />
+                <div className="w-full border-y border-border-strong py-8 text-center">
+                  <div className="display-xl text-3xl md:text-5xl">NIZEK Venture Fund</div>
+                  <div className="label-xs mt-4">Abu Dhabi, UAE</div>
                 </div>
+                <div className="my-6 h-10 w-px bg-border-strong" aria-hidden />
+              </div>
+            </Reveal>
+
+            <div className="grid grid-cols-2 gap-px border border-border bg-border sm:grid-cols-4">
+              {[
+                "Startup 01",
+                "Startup 02",
+                "Startup 03",
+                "Startup 04",
+                "Startup 05",
+                "Startup 06",
+                "…",
+                "Startup 50+",
+              ].map((s, i) => (
+                <Reveal key={s} delay={i * 50}>
+                  <div className="num bg-background px-4 py-5 text-xs text-muted-foreground">
+                    {s}
+                  </div>
+                </Reveal>
               ))}
             </div>
           </div>
+        </div>
 
-          <div className="bg-background p-10">
-            <div className="border-y border-border-strong py-8">
-              <div className="label-xs">End of Year 5</div>
-              <div className="display-xl mt-4 text-3xl md:text-4xl">Portfolio Transfer</div>
-            </div>
-
-            <div className="mt-10">
-              <div className="label-xs">After Year 5</div>
-              <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-                The investor becomes the direct owner of the transferred startup equity, and
-                continues benefiting from:
-              </p>
-              <ul className="mt-8 grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2">
-                {[
-                  "Future funding rounds",
-                  "Company growth",
-                  "Dividends (where applicable)",
-                  "Acquisitions",
-                  "IPOs",
-                  "Exits",
-                ].map((b, i) => (
-                  <li key={b} className="bg-background px-6 py-5">
-                    <span className="num text-xs text-subtle">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <div className="mt-3 text-base text-foreground">{b}</div>
-                  </li>
-                ))}
-              </ul>
-            </div>
+        {/* Process */}
+        <div className="mt-24">
+          <div className="label-xs">How it works</div>
+          <div className="mt-8 border-t border-border">
+            {[
+              "Investors subscribe to ownership units in the NIZEK Venture Fund.",
+              "The fund commits capital over five years.",
+              "Every startup investment agreement is executed directly by the fund.",
+              "The fund becomes the shareholder of each startup.",
+              "As more startups are created, the value of the fund's portfolio grows.",
+            ].map((step, i) => (
+              <Reveal key={step} delay={i * 70}>
+                <div className="flex items-baseline gap-8 border-b border-border py-7">
+                  <span className="num w-12 shrink-0 text-xs text-subtle">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="text-xl leading-snug text-foreground md:text-3xl">{step}</span>
+                </div>
+              </Reveal>
+            ))}
           </div>
         </div>
+
+        {/* Benefits */}
+        <div className="mt-px grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            [
+              "Simple Ownership",
+              "Investors own one fund instead of managing ownership in dozens of separate companies.",
+            ],
+            [
+              "Centralized Portfolio",
+              "Every startup becomes part of one professionally managed investment vehicle.",
+            ],
+            [
+              "Scalable Structure",
+              "New startups are automatically added to the fund without changing the ownership structure.",
+            ],
+            [
+              "Aligned Interests",
+              "All investors participate in the performance of the same diversified portfolio.",
+            ],
+          ].map(([t, d], i) => (
+            <Reveal key={t} delay={i * 70}>
+              <div className="h-full bg-background p-10">
+                <div className="num text-xs text-subtle">{String(i + 1).padStart(2, "0")}</div>
+                <div className="display-xl mt-8 text-2xl md:text-3xl">{t}</div>
+                <p className="mt-6 text-sm leading-relaxed text-muted-foreground">{d}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
       </Section>
+
 
       {/* 09c — From building to independence */}
       <Section id="independence">
