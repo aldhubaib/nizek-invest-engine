@@ -1343,7 +1343,7 @@ function PlatformPage() {
                               ],
                               ["Successes", fmtNumber(c.successes), null],
                               [
-                                "Estimated enterprise value",
+                                "EEV",
                                 kd(c.portfolioValue),
                                 c.exitValues.length > 1
                                   ? `${c.exitValues
@@ -1355,7 +1355,16 @@ function PlatformPage() {
                               ["Investor equity", kd(c.investorValue), null],
                             ].map(([l, v, breakdown]) => (
                               <div key={l as string} className="min-w-0">
-                                <div className="label-xs">{l}</div>
+                                <div
+                                  className="label-xs"
+                                  title={
+                                    l === "EEV"
+                                      ? "Estimated enterprise value"
+                                      : undefined
+                                  }
+                                >
+                                  {l}
+                                </div>
                                 <div className="num mt-2 break-words text-xs text-foreground">
                                   {v}
                                 </div>
