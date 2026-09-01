@@ -1329,7 +1329,7 @@ function PlatformPage() {
                   return (
                     <Reveal key={c.year} delay={(c.year - 1) * 60}>
                       <div className="border-b border-border last:border-b-0 px-6 py-7 md:px-10">
-                        <div className="grid grid-cols-2 items-center gap-x-6 gap-y-6 sm:grid-cols-3 lg:grid-cols-6">
+                        <div className="grid grid-cols-2 items-start gap-x-6 gap-y-6 sm:grid-cols-3 lg:grid-cols-6">
                           <div className="display-xl col-span-2 min-w-0 text-2xl sm:col-span-3 lg:col-span-1">
                             Year {c.year}
                           </div>
