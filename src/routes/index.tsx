@@ -1343,7 +1343,7 @@ function PlatformPage() {
                               ],
                               ["Successes", fmtNumber(c.successes), null],
                               [
-                                "Exit valuation",
+                                "Estimated enterprise value",
                                 kd(c.portfolioValue),
                                 c.exitValues.length > 1
                                   ? `${c.exitValues
