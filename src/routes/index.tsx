@@ -966,16 +966,7 @@ function PlatformPage() {
         </div>
 
         <div className="border-t border-border">
-          <div className="sticky top-0 z-30 flex items-center justify-between gap-6 border-b border-border bg-background px-6 py-4 md:px-12">
-            <div className="label-xs">Live model</div>
-            <button
-              type="button"
-              onClick={() => setPanelOpen(true)}
-              className="border border-border-strong px-5 py-2.5 text-xs uppercase tracking-[0.18em] text-foreground transition-colors hover:bg-foreground hover:text-background"
-            >
-              Show assumptions
-            </button>
-          </div>
+
 
           {panelOpen && (
             <button
