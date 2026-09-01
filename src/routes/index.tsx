@@ -1165,8 +1165,10 @@ function PlatformPage() {
                       type="button"
                       onClick={() => set("seats", n)}
                       aria-pressed={active}
-                      className={`bg-background p-6 text-left transition-colors duration-300 ${
-                        active ? "bg-foreground text-background" : "hover:bg-muted"
+                      className={`p-6 text-left transition-colors duration-300 ${
+                        active
+                          ? "bg-foreground text-background"
+                          : "bg-background hover:bg-muted"
                       }`}
                     >
                       <div className="num text-xs opacity-60">{String(n).padStart(2, "0")}</div>
