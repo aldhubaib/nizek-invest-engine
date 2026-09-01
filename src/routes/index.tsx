@@ -1136,28 +1136,33 @@ function PlatformPage() {
 
           <div className="px-6 py-12 md:px-12">
 
-            {/* Seat selector */}
+            {/* Seat selector — allocation interface */}
             <div className="border border-border p-8 md:p-12">
-              <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-                <div>
-                  <div className="label-xs">Choose your seats</div>
-                  <p className="mt-4 max-w-md text-xs leading-relaxed text-subtle">
+              <div className="flex flex-col gap-10 border-b border-border pb-10 md:flex-row md:items-end md:justify-between">
+                <div className="max-w-2xl">
+                  <div className="flex items-center gap-4">
+                    <span className="h-px w-8 bg-border-strong" aria-hidden />
+                    <div className="label-xs">Allocation interface</div>
+                  </div>
+                  <h3 className="display-xl mt-6 text-3xl leading-tight md:text-5xl">
+                    Secure your position in the Nizek ecosystem.{" "}
+                    <span className="text-subtle">Only {AVAILABLE_SEATS} seats remain.</span>
+                  </h3>
+                  <p className="mt-6 max-w-md text-xs leading-relaxed text-subtle">
                     Each seat is {SEAT_OWNERSHIP}% of Nizek's equity in every company created, for{" "}
-                    {kd(SEAT_QUARTERLY_COMMITMENT)} a quarter over five years. One seat is already
-                    taken — {AVAILABLE_SEATS} remain. Everything below updates instantly.
+                    {kd(SEAT_QUARTERLY_COMMITMENT)} a quarter over five years. Everything below
+                    updates instantly.
                   </p>
                 </div>
-                <div className="num text-5xl leading-none text-foreground md:text-7xl">
-                  <AnimatedNumber
-                    value={result.seats}
-                    format={(v) => `${Math.round(v)}`}
-                  />
-                  <span className="ml-3 text-base text-subtle">
-                    seat{result.seats > 1 ? "s" : ""}
-                  </span>
+                <div className="text-right">
+                  <div className="num text-6xl leading-none text-foreground md:text-8xl">
+                    {String(AVAILABLE_SEATS).padStart(2, "0")}
+                  </div>
+                  <div className="label-xs mt-3">Available seats</div>
                 </div>
               </div>
-              <div className="mt-10 grid grid-cols-3 gap-px border border-border bg-border md:grid-cols-6">
+
+              <div className="mt-10 grid grid-cols-2 gap-px border border-border bg-border md:grid-cols-3 lg:grid-cols-6">
                 {Array.from({ length: TOTAL_SEATS }, (_, i) => {
                   const n = i + 1;
                   const reserved = RESERVED_SEATS.includes(n);
@@ -1174,25 +1179,49 @@ function PlatformPage() {
                       aria-pressed={active}
                       aria-label={
                         reserved
-                          ? `Seat ${n} reserved`
+                          ? `Seat ${n} committed`
                           : `Select ${rank} seat${rank > 1 ? "s" : ""}`
                       }
-                      className={`p-6 text-left transition-colors duration-300 ${
+                      className={`group relative flex aspect-square flex-col justify-between overflow-hidden p-5 text-left transition-colors duration-300 md:p-6 ${
                         reserved
-                          ? "cursor-not-allowed bg-muted text-subtle"
+                          ? "cursor-not-allowed bg-background text-subtle"
                           : active
                             ? "bg-foreground text-background"
                             : "bg-background hover:bg-muted"
                       }`}
                     >
-                      <div className="num text-xs opacity-60">{String(n).padStart(2, "0")}</div>
-                      <div className="num mt-6 text-lg">
-                        {reserved ? "Taken" : `${SEAT_OWNERSHIP}%`}
-                      </div>
+                      {reserved && (
+                        <span
+                          aria-hidden
+                          className="pointer-events-none absolute inset-0 opacity-20"
+                          style={{
+                            backgroundImage:
+                              "repeating-linear-gradient(45deg, currentColor 0, currentColor 1px, transparent 1px, transparent 8px)",
+                          }}
+                        />
+                      )}
+                      <span className="num relative text-[11px] opacity-50 transition-opacity group-hover:opacity-100">
+                        {String(n).padStart(2, "0")}
+                      </span>
+                      <span className="relative block">
+                        <span
+                          className={`label-xs block ${active ? "text-background" : ""}`}
+                        >
+                          {reserved ? "Committed" : active ? "Selected" : "Available"}
+                        </span>
+                        <span
+                          className={`num mt-2 block text-2xl tracking-tight md:text-3xl ${
+                            reserved ? "opacity-30" : active ? "" : "opacity-50 group-hover:opacity-100"
+                          }`}
+                        >
+                          {reserved ? "—" : `${SEAT_OWNERSHIP.toFixed(1)}%`}
+                        </span>
+                      </span>
                     </button>
                   );
                 })}
               </div>
+
               <input
                 type="range"
                 min={1}
@@ -1205,32 +1234,44 @@ function PlatformPage() {
               />
             </div>
 
-            {/* KPIs */}
+            {/* KPIs — live metrics matrix */}
             <div className="mt-px grid grid-cols-2 gap-px border border-border bg-border md:grid-cols-3 lg:grid-cols-6">
               {[
                 { l: "Seats selected", v: result.seats, f: (v: number) => `${Math.round(v)}` },
                 {
                   l: "Ownership",
                   v: result.ownershipPercent,
-                  f: (v: number) => `${v.toFixed(0)}%`,
+                  f: (v: number) => `${v.toFixed(1)}%`,
                 },
-                { l: "Quarterly commitment", v: result.annualCommitment / 4, f: kd },
-                { l: "Maximum commitment", v: result.maxCommitment, f: kd },
-                { l: "Estimated portfolio value", v: result.portfolioValue, f: kd },
+                { l: "Quarterly", v: result.annualCommitment / 4, f: kd },
+                { l: "Maximum cap", v: result.maxCommitment, f: kd },
+                { l: "Portfolio value", v: result.portfolioValue, f: kd },
                 {
-                  l: "Investment multiple",
+                  l: "Multiple",
                   v: result.moic,
                   f: (v: number) => multiple(v, 2),
                 },
               ].map((k) => (
                 <div key={k.l} className="bg-background p-8">
                   <div className="label-xs">{k.l}</div>
-                  <div className="num mt-8 text-2xl text-foreground md:text-3xl">
+                  <div className="num mt-8 text-2xl tracking-tight text-foreground md:text-4xl">
                     <AnimatedNumber value={k.v} format={k.f} />
                   </div>
                 </div>
               ))}
             </div>
+
+            {/* Status bar */}
+            <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-foreground" aria-hidden />
+                <span className="label-xs">Live — pool allocation active</span>
+              </div>
+              <span className="label-xs text-subtle">
+                {result.seats} of {AVAILABLE_SEATS} available seats selected
+              </span>
+            </div>
+
 
             {/* The result — focal point */}
             <div className="mt-px border border-border">
