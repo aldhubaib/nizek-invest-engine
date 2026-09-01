@@ -42,7 +42,7 @@ export function TeamSection() {
   return (
     <Section id="team">
       <SectionHeading
-        index="The people behind the studio"
+        index="07 — The people behind the studio"
         title="A Venture Studio Is Only As Good As The Team Behind It."
       />
 
