@@ -1,7 +1,5 @@
 import { Link, type LinkProps } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { useModel } from "@/model/context";
-import { multiple } from "@/model/format";
 import nizekLogo from "@/assets/nizek-logo.png.asset.json";
 
 
@@ -13,6 +11,7 @@ const nav = [
   { id: "ownership", label: "Seats" },
   { id: "lifecycle", label: "Fund" },
   { id: "founders", label: "Founders" },
+  { id: "team", label: "Team" },
   { id: "model", label: "Simulator" },
   { id: "proof", label: "Proof" },
   { id: "timeline", label: "Timeline" },
@@ -43,13 +42,8 @@ function useActiveSection() {
 
 
 export function Header() {
-  const { projection, activeScenario, isCustom, scenarios } = useModel();
   const [open, setOpen] = useState(false);
   const active = useActiveSection();
-  const current = isCustom
-    ? "Custom"
-    : (scenarios.find((s) => s.id === activeScenario)?.name ?? "Base");
-
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur">
       <div className="flex items-center justify-between px-6 py-5 md:px-12">
