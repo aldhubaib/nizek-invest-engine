@@ -121,12 +121,14 @@ function benchmark(rate: number, hold: number, capital: number[]): BenchmarkResu
 export function projectInvestment(input: InvestmentInputs): InvestmentResult {
   const hold = COMMITMENT_YEARS;
   const ownership = input.avgNizekOwnership / 100;
-  const participation = (input.investorShare ?? INVESTOR_PARTICIPATION * 100) / 100;
+  const seats = Math.min(Math.max(1, Math.round(input.seats ?? 1)), TOTAL_SEATS);
+  const ownershipPercent = seats * SEAT_OWNERSHIP;
+  const participation = ownershipPercent / 100;
+  const annualCommitment = seats * SEAT_ANNUAL_COMMITMENT;
   const startups = Math.max(0, input.startupsPerYear);
-  const capitalByYear = Array.from({ length: COMMITMENT_YEARS }, (_, i) =>
-    Math.max(0, input.capitalByYear?.[i] ?? ANNUAL_COMMITMENT),
-  );
+  const capitalByYear = Array.from({ length: COMMITMENT_YEARS }, () => annualCommitment);
   const totalInvestment = capitalByYear.reduce((a, b) => a + b, 0);
+
   const successesFor = (year: number) =>
     Math.min(Math.max(0, input.successesByYear?.[year - 1] ?? 0), startups);
 
