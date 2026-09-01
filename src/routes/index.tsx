@@ -375,6 +375,72 @@ function PlatformPage() {
         </Reveal>
       </Section>
 
+
+      {/* Limited ownership */}
+      <Section id="ownership">
+        <SectionHeading
+          index="06 — Limited ownership"
+          title="Only Six Ownership Seats."
+          lede="This investment vehicle is intentionally limited to only six ownership seats."
+        />
+        <div className="grid grid-cols-1 gap-16 lg:grid-cols-[1.1fr_1fr]">
+          <Reveal>
+            <div className="space-y-6 text-base leading-relaxed text-muted-foreground md:text-lg">
+              <p>
+                Each seat represents {SEAT_OWNERSHIP}% ownership of Nizek's equity across every
+                startup created during this five-year venture creation program.
+              </p>
+              <p>
+                Each seat requires an annual commitment of {kd(SEAT_ANNUAL_COMMITMENT)}, paid
+                quarterly over five years. Maximum commitment per seat is{" "}
+                {kd(SEAT_MAX_COMMITMENT)}.
+              </p>
+              <p className="text-foreground">
+                Once all six seats have been allocated, this investment vehicle will be closed.
+              </p>
+            </div>
+          </Reveal>
+          <Reveal delay={100}>
+            <div className="grid grid-cols-3 gap-px border border-border bg-border">
+              {[
+                [String(TOTAL_SEATS), "Total seats"],
+                [String(RESERVED_SEATS.length), "Reserved"],
+                [String(TOTAL_SEATS - RESERVED_SEATS.length), "Remaining"],
+              ].map(([v, l]) => (
+                <div key={l} className="bg-background p-6 text-center">
+                  <div className="num text-4xl text-foreground md:text-5xl">{v}</div>
+                  <div className="label-xs mt-4">{l}</div>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+
+        <div className="mt-px grid grid-cols-2 gap-px border border-border bg-border md:grid-cols-3 lg:grid-cols-6">
+          {Array.from({ length: TOTAL_SEATS }, (_, i) => {
+            const n = i + 1;
+            const reserved = RESERVED_SEATS.includes(n);
+            return (
+              <Reveal key={n} delay={i * 60}>
+                <div
+                  className={`h-full p-8 transition-colors duration-300 ${
+                    reserved ? "bg-foreground text-background" : "bg-background"
+                  }`}
+                >
+                  <div className="num text-xs opacity-60">Seat {String(n).padStart(2, "0")}</div>
+                  <div className="display-xl mt-10 text-2xl md:text-3xl">
+                    {reserved ? "Reserved" : "Available"}
+                  </div>
+                  <div className="mt-6 text-[11px] leading-relaxed opacity-60">
+                    {SEAT_OWNERSHIP}% · {kd(SEAT_ANNUAL_COMMITMENT)} / year
+                  </div>
+                </div>
+              </Reveal>
+            );
+          })}
+        </div>
+      </Section>
+
       {/* 7 — Where the money goes */}
       <Section id="capital" invert>
         <SectionHeading index="06 — Capital deployment" title="Where The Money Goes" />
@@ -996,6 +1062,86 @@ function PlatformPage() {
           </aside>
 
           <div className="px-6 py-12 md:px-12">
+
+            {/* Seat selector */}
+            <div className="border border-border p-8 md:p-12">
+              <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+                <div>
+                  <div className="label-xs">Choose your seats</div>
+                  <p className="mt-4 max-w-md text-xs leading-relaxed text-subtle">
+                    Each seat is {SEAT_OWNERSHIP}% of Nizek's equity in every company created, for{" "}
+                    {kd(SEAT_ANNUAL_COMMITMENT)} a year over five years. Everything below updates
+                    instantly.
+                  </p>
+                </div>
+                <div className="num text-5xl leading-none text-foreground md:text-7xl">
+                  <AnimatedNumber
+                    value={result.seats}
+                    format={(v) => `${Math.round(v)}`}
+                  />
+                  <span className="ml-3 text-base text-subtle">
+                    seat{result.seats > 1 ? "s" : ""}
+                  </span>
+                </div>
+              </div>
+              <div className="mt-10 grid grid-cols-3 gap-px border border-border bg-border md:grid-cols-6">
+                {Array.from({ length: TOTAL_SEATS }, (_, i) => {
+                  const n = i + 1;
+                  const active = n <= result.seats;
+                  return (
+                    <button
+                      key={n}
+                      type="button"
+                      onClick={() => set("seats", n)}
+                      aria-pressed={active}
+                      className={`bg-background p-6 text-left transition-colors duration-300 ${
+                        active ? "bg-foreground text-background" : "hover:bg-muted"
+                      }`}
+                    >
+                      <div className="num text-xs opacity-60">{String(n).padStart(2, "0")}</div>
+                      <div className="num mt-6 text-lg">{n * SEAT_OWNERSHIP}%</div>
+                    </button>
+                  );
+                })}
+              </div>
+              <input
+                type="range"
+                min={1}
+                max={TOTAL_SEATS}
+                step={1}
+                value={inputs.seats}
+                onChange={(e) => set("seats", Number(e.target.value))}
+                className="mt-8"
+                aria-label="Number of ownership seats"
+              />
+            </div>
+
+            {/* KPIs */}
+            <div className="mt-px grid grid-cols-2 gap-px border border-border bg-border md:grid-cols-3 lg:grid-cols-6">
+              {[
+                { l: "Seats selected", v: result.seats, f: (v: number) => `${Math.round(v)}` },
+                {
+                  l: "Ownership",
+                  v: result.ownershipPercent,
+                  f: (v: number) => `${v.toFixed(0)}%`,
+                },
+                { l: "Annual commitment", v: result.annualCommitment, f: kd },
+                { l: "Maximum commitment", v: result.maxCommitment, f: kd },
+                { l: "Estimated portfolio value", v: result.portfolioValue, f: kd },
+                {
+                  l: "Investment multiple",
+                  v: result.moic,
+                  f: (v: number) => multiple(v, 2),
+                },
+              ].map((k) => (
+                <div key={k.l} className="bg-background p-8">
+                  <div className="label-xs">{k.l}</div>
+                  <div className="num mt-8 text-2xl text-foreground md:text-3xl">
+                    <AnimatedNumber value={k.v} format={k.f} />
+                  </div>
+                </div>
+              ))}
+            </div>
 
             {/* The result — focal point */}
             <div className="mt-px border border-border">
