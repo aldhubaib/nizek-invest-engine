@@ -6,7 +6,11 @@ import { ValueField } from "@/components/model/ValueField";
 import { Reveal, Section, SectionHeading } from "@/components/ui/primitives";
 import { multiple, number as fmtNumber, percent } from "@/model/format";
 import {
-  ANNUAL_COMMITMENT,
+  RESERVED_SEATS,
+  SEAT_ANNUAL_COMMITMENT,
+  SEAT_MAX_COMMITMENT,
+  SEAT_OWNERSHIP,
+  TOTAL_SEATS,
   cohortExitControls,
   COMMITMENT_YEARS,
   TOTAL_INVESTMENT,
@@ -147,15 +151,6 @@ function PlatformPage() {
   const reset = useCallback(
     (k: NumericInvestmentKey) =>
       setInputs((p) => ({ ...p, [k]: defaultInvestmentInputs[k] })),
-    [],
-  );
-
-  const setCohortCapital = useCallback(
-    (i: number, v: number) =>
-      setInputs((p) => ({
-        ...p,
-        capitalByYear: (p.capitalByYear ?? []).map((c, idx) => (idx === i ? v : c)),
-      })),
     [],
   );
 
@@ -346,20 +341,14 @@ function PlatformPage() {
         <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-3">
           {[
             [
-              "Investment",
-              (() => {
-                const years = inputs.capitalByYear ?? [];
-                const first = years[0] ?? 0;
-                return years.every((y) => y === first)
-                  ? kd(first)
-                  : `${kd(Math.min(...years))}–${kd(Math.max(...years))}`;
-              })(),
+              "Per seat",
+              kd(SEAT_ANNUAL_COMMITMENT),
               `annually for ${COMMITMENT_YEARS} years`,
             ],
             [
-              "Total commitment",
-              kd(result.totalInvestment),
-              "across the build window",
+              "Your commitment",
+              kd(result.annualCommitment),
+              `${result.seats} seat${result.seats > 1 ? "s" : ""} — ${kd(result.maxCommitment)} maximum`,
             ],
             [
               "Nizek commits to",
@@ -896,33 +885,6 @@ function PlatformPage() {
                       <div key={c.index} className="border-b border-border py-5">
                         <div className="text-sm text-foreground">{c.label}</div>
                         <div className="mt-4 flex items-baseline justify-between gap-4">
-                          <label
-                            htmlFor={`cohort-capital-${c.index}`}
-                            className="text-sm text-muted-foreground"
-                          >
-                            Investment
-                          </label>
-                          <ValueField
-                            label={`${c.label} investment`}
-                            display={kd(inputs.capitalByYear?.[c.index] ?? 0)}
-                            value={inputs.capitalByYear?.[c.index] ?? 0}
-                            min={c.capitalMin}
-                            max={c.capitalMax}
-                            onCommit={(v) => setCohortCapital(c.index, v)}
-                          />
-                        </div>
-                        <input
-                          id={`cohort-capital-${c.index}`}
-                          type="range"
-                          min={c.capitalMin}
-                          max={c.capitalMax}
-                          step={c.capitalStep}
-                          value={inputs.capitalByYear?.[c.index] ?? 0}
-                          onChange={(e) => setCohortCapital(c.index, Number(e.target.value))}
-                          className="mt-4"
-                          aria-label={`${c.label} investment`}
-                        />
-                        <div className="mt-4 flex items-baseline justify-between gap-4">
 
                           <label
                             htmlFor={`cohort-success-${c.index}`}
@@ -1166,14 +1128,14 @@ function PlatformPage() {
                     step: "03",
                     title: "Investor share",
                     value: result.investorValue,
-                    note: `${inputs.investorShare}% of Nizek's ownership in every company created in the window.`,
+                    note: `${result.ownershipPercent}% of Nizek's ownership — ${result.seats} seat${result.seats > 1 ? "s" : ""} × ${SEAT_OWNERSHIP}%.`,
                   },
                   {
                     step: "04",
                     title: "Estimated return",
                     value: result.moic,
                     format: (v: number) => multiple(v, 2),
-                    note: "On the KD2,000,000 committed across five years.",
+                    note: `On the ${kd(result.maxCommitment)} committed across five years.`,
                   },
                 ].map((s) => (
                   <div key={s.step} className="bg-background p-8">
