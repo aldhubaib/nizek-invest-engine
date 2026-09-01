@@ -351,7 +351,7 @@ function PlatformPage() {
             ],
             [
               "Your commitment",
-              `${kd(result.quarterlyCommitment ?? result.annualCommitment / 4)} / quarter`,
+              `${kd(result.seats * SEAT_QUARTERLY_COMMITMENT)} / quarter`,
               `${result.seats} seat${result.seats > 1 ? "s" : ""} — ${kd(result.annualCommitment)} a year, ${kd(result.maxCommitment)} over ${COMMITMENT_YEARS} years`,
             ],
 
