@@ -344,15 +344,17 @@ function PlatformPage() {
         <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-3">
           {[
             [
+
               "Per seat, per quarter",
               kd(SEAT_QUARTERLY_COMMITMENT),
-              `annually for ${COMMITMENT_YEARS} years`,
+              `every quarter for ${COMMITMENT_YEARS} years — ${kd(SEAT_ANNUAL_COMMITMENT)} a year, ${kd(SEAT_MAX_COMMITMENT)} per seat`,
             ],
             [
               "Your commitment",
-              kd(result.annualCommitment),
-              `${result.seats} seat${result.seats > 1 ? "s" : ""} — ${kd(result.maxCommitment)} maximum`,
+              `${kd(result.seats * SEAT_QUARTERLY_COMMITMENT)} / quarter`,
+              `${result.seats} seat${result.seats > 1 ? "s" : ""} — ${kd(result.annualCommitment)} a year, ${kd(result.maxCommitment)} over ${COMMITMENT_YEARS} years`,
             ],
+
             [
               "Nizek commits to",
               `${fmtNumber(inputs.startupsPerYear)} startups`,
