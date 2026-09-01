@@ -601,6 +601,124 @@ function PlatformPage() {
         </div>
       </Section>
 
+      {/* 09c — From building to independence */}
+      <Section id="independence">
+        <SectionHeading
+          index="09c — Operating model"
+          title="From Building To Independence"
+          lede="NIZEK does not permanently support every startup with its internal team. We provide the technology, product development and engineering needed to launch and validate the business in its first year — then hand it over."
+        />
+
+        <div className="grid grid-cols-1 gap-px border border-border bg-border lg:grid-cols-3">
+          <div className="bg-background p-10">
+            <div className="label-xs">The model</div>
+            <p className="mt-6 text-base leading-relaxed text-muted-foreground">
+              Every startup accepted into the NIZEK Venture Studio receives a full product and
+              engineering organisation from day one, in exchange for an agreed equity stake.
+            </p>
+            <ul className="mt-8 flex flex-col">
+              {[
+                "Product Strategy",
+                "UI/UX Design",
+                "Software Development",
+                "Technical Leadership",
+                "Product Management",
+                "Infrastructure & DevOps",
+                "Technical Support",
+              ].map((s, i) => (
+                <li
+                  key={s}
+                  className="flex items-baseline gap-4 border-b border-border py-3 last:border-b-0"
+                >
+                  <span className="num text-xs text-subtle">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="text-base text-foreground">{s}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-8 text-sm leading-relaxed text-subtle">
+              Founders focus on building the business, acquiring customers and validating the
+              market — not on hiring and managing an engineering team from day one.
+            </p>
+          </div>
+
+          <div className="bg-background p-10">
+            <div className="label-xs">The transition</div>
+            <div className="display-xl mt-6 text-3xl md:text-4xl">
+              Built To Become Independent.
+            </div>
+            <p className="mt-6 text-base leading-relaxed text-muted-foreground">
+              At the end of the first year, the startup begins building its own internal
+              technology team. NIZEK supports the transition through documentation, knowledge
+              transfer and technical handover.
+            </p>
+            <p className="mt-6 text-base leading-relaxed text-muted-foreground">
+              The engineering team gradually moves from NIZEK to the startup, freeing NIZEK to
+              redirect its resources toward building the next generation of companies.
+            </p>
+          </div>
+
+          <div className="bg-background p-10">
+            <div className="label-xs">Why this matters</div>
+            <div className="display-xl mt-6 text-3xl md:text-4xl">
+              Engineering Capacity Is Recycled, Not Consumed.
+            </div>
+            <p className="mt-6 text-base leading-relaxed text-muted-foreground">
+              Instead of permanently allocating developers to mature companies, capacity returns
+              to the studio and is reinvested into new ventures. That is what makes the program
+              repeatable, scalable and capital efficient.
+            </p>
+            <div className="mt-10 grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-3">
+              {["Repeatable", "Scalable", "Capital efficient"].map((t) => (
+                <div key={t} className="bg-background px-5 py-6 text-sm text-foreground">
+                  {t}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Animated horizontal timeline */}
+        <div className="mt-16">
+          <div className="label-xs mb-8">The cycle</div>
+          <div className="grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { t: "Startup Accepted", n: "Into the venture studio" },
+              { t: "NIZEK Builds Product", n: "Year 1" },
+              { t: "Market Validation", n: "Customers, traction, proof" },
+              { t: "Startup Hires Internal Team", n: "Its own engineers" },
+              { t: "Knowledge Transfer", n: "Documentation and handover" },
+              { t: "Independent Company", n: "Technically self-sufficient" },
+              { t: "NIZEK Builds The Next Startup", n: "Capacity recycled" },
+              { t: "Repeat", n: "The loop closes" },
+            ].map((s, i) => (
+              <Reveal key={s.t} delay={i * 80} className="bg-background">
+                <div className="flex h-full flex-col justify-between p-8">
+                  <span className="num text-xs text-subtle">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div className="mt-10">
+                    <div className="display-xl text-xl md:text-2xl">{s.t}</div>
+                    <div className="mt-3 text-xs text-muted-foreground">{s.n}</div>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+
+        <Reveal>
+          <p className="mt-16 max-w-4xl text-2xl leading-snug text-foreground md:text-3xl">
+            NIZEK's goal is not to become a startup's long-term software company. Our goal is to
+            launch it, validate it and prepare it to stand on its own — so the studio can keep
+            creating new companies without increasing operational complexity.
+          </p>
+        </Reveal>
+      </Section>
+
+
+
 
       {/* 8 — Founder pipeline */}
       <Section id="founders" invert>
