@@ -10,6 +10,8 @@ const nav = [
   { id: "problem", label: "Problem" },
   { id: "how-we-build", label: "Model" },
   { id: "investment", label: "Investment" },
+  { id: "ownership", label: "Seats" },
+  { id: "lifecycle", label: "Fund" },
   { id: "founders", label: "Founders" },
   { id: "model", label: "Simulator" },
   { id: "proof", label: "Proof" },
