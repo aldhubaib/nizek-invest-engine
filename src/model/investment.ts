@@ -13,24 +13,31 @@
  * time to mature; later cohorts carry less.
  */
 
-export const ANNUAL_COMMITMENT = 360_000;
+/** Ownership seats. Six only. */
+export const TOTAL_SEATS = 6;
+export const SEAT_OWNERSHIP = 5; // % of Nizek's equity per seat
+export const SEAT_ANNUAL_COMMITMENT = 150_000; // KD per seat, per year
 export const COMMITMENT_YEARS = 5;
-export const TOTAL_INVESTMENT = ANNUAL_COMMITMENT * COMMITMENT_YEARS;
-export const INVESTOR_PARTICIPATION = 0.25;
+export const SEAT_MAX_COMMITMENT = SEAT_ANNUAL_COMMITMENT * COMMITMENT_YEARS;
+/** Seats already reserved (1-indexed seat numbers). */
+export const RESERVED_SEATS = [2, 3];
+
+export const ANNUAL_COMMITMENT = SEAT_ANNUAL_COMMITMENT;
+export const TOTAL_INVESTMENT = SEAT_MAX_COMMITMENT;
 
 export interface InvestmentInputs {
   startupsPerYear: number; // startups created each year
-  /** Capital committed by the investor in each year, index 0 = Year 1. */
-  capitalByYear: number[];
+  /** Ownership seats selected by the investor, 1..6. Each seat = 5%. */
+  seats: number;
   /** Successful companies per cohort, index 0 = Year 1 cohort. */
   successesByYear: number[];
   /** Expected exit valuation of each successful company, per cohort. */
   exitValuesByYear: number[][];
   avgNizekOwnership: number; // %
-  investorShare: number; // % of NIZEK's ownership allocated to the investor
   realEstateYield: number; // % annual
   publicMarketReturn: number; // % annual
 }
+
 
 export interface CohortResult {
   year: number; // 1..5
