@@ -3,6 +3,7 @@ import { useCallback, useMemo, useState } from "react";
 
 import { AnimatedNumber } from "@/components/model/AnimatedNumber";
 import { ValueField } from "@/components/model/ValueField";
+import { TeamSection } from "@/components/site/TeamSection";
 import { Reveal, Section, SectionHeading } from "@/components/ui/primitives";
 import { multiple, number as fmtNumber, percent } from "@/model/format";
 import {
@@ -1640,6 +1641,8 @@ function PlatformPage() {
         </div>
       </section>
 
+
+      <TeamSection />
 
       {/* 10 — Current proof */}
       <Section id="proof">
