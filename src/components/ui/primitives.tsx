@@ -44,13 +44,22 @@ export function Section({
   children,
   className,
   id,
+  invert = false,
 }: {
   children: ReactNode;
   className?: string;
   id?: string;
+  invert?: boolean;
 }) {
   return (
-    <section id={id} className={cn("border-t border-border px-6 py-24 md:px-12 md:py-32", className)}>
+    <section
+      id={id}
+      className={cn(
+        "border-t border-border px-6 py-24 md:px-12 md:py-32",
+        invert && "section-invert",
+        className,
+      )}
+    >
       <div className="mx-auto w-full max-w-[1400px]">{children}</div>
     </section>
   );
