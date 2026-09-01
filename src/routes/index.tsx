@@ -1138,87 +1138,55 @@ function PlatformPage() {
 
             {/* Seat selector */}
             <div className="border border-border p-8 md:p-12">
-              <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-                <div>
-                  <div className="label-xs">Choose your seats</div>
-                  <p className="mt-4 max-w-md text-xs leading-relaxed text-subtle">
-                    Each seat is {SEAT_OWNERSHIP}% of Nizek's equity in every company created, for{" "}
-                    {kd(SEAT_QUARTERLY_COMMITMENT)} a quarter over five years. One seat is already
-                    taken — {AVAILABLE_SEATS} remain. Everything below updates instantly.
-                  </p>
-                </div>
-                <div className="num text-5xl leading-none text-foreground md:text-7xl">
-                  <AnimatedNumber
-                    value={result.seats}
-                    format={(v) => `${Math.round(v)}`}
-                  />
-                  <span className="ml-3 text-base text-subtle">
-                    seat{result.seats > 1 ? "s" : ""}
-                  </span>
-                </div>
-              </div>
-              <div className="mt-10 grid grid-cols-3 gap-px border border-border bg-border md:grid-cols-6">
-                {Array.from({ length: TOTAL_SEATS }, (_, i) => {
+              <div className="label-xs">How many seats do you want?</div>
+              <p className="mt-4 max-w-xl text-xs leading-relaxed text-subtle">
+                Six seats exist. One is taken, {AVAILABLE_SEATS} are open. Each seat is{" "}
+                {SEAT_OWNERSHIP}% of Nizek's equity in every company built, for{" "}
+                {kd(SEAT_QUARTERLY_COMMITMENT)} a quarter over five years.
+              </p>
+
+              <div className="mt-10 grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-5">
+                {Array.from({ length: AVAILABLE_SEATS }, (_, i) => {
                   const n = i + 1;
-                  const reserved = RESERVED_SEATS.includes(n);
-                  const rank = reserved
-                    ? 0
-                    : n - RESERVED_SEATS.filter((r) => r < n).length;
-                  const active = !reserved && rank <= result.seats;
+                  const active = n === result.seats;
                   return (
                     <button
                       key={n}
                       type="button"
-                      disabled={reserved}
-                      onClick={() => !reserved && set("seats", rank)}
+                      onClick={() => set("seats", n)}
                       aria-pressed={active}
-                      aria-label={
-                        reserved
-                          ? `Seat ${n} reserved`
-                          : `Select ${rank} seat${rank > 1 ? "s" : ""}`
-                      }
+                      aria-label={`Select ${n} seat${n > 1 ? "s" : ""}`}
                       className={`p-6 text-left transition-colors duration-300 ${
-                        reserved
-                          ? "cursor-not-allowed bg-muted text-subtle"
-                          : active
-                            ? "bg-foreground text-background"
-                            : "bg-background hover:bg-muted"
+                        active ? "bg-foreground text-background" : "bg-background hover:bg-muted"
                       }`}
                     >
-                      <div className="num text-xs opacity-60">{String(n).padStart(2, "0")}</div>
-                      <div className="num mt-6 text-lg">
-                        {reserved ? "Taken" : `${SEAT_OWNERSHIP}%`}
+                      <div className="num text-2xl">
+                        {n} <span className="text-xs opacity-60">seat{n > 1 ? "s" : ""}</span>
+                      </div>
+                      <div className="mt-4 text-[11px] leading-relaxed opacity-70">
+                        {n * SEAT_OWNERSHIP}% ownership
+                      </div>
+                      <div className="text-[11px] leading-relaxed opacity-70">
+                        {kd(n * SEAT_QUARTERLY_COMMITMENT)} / quarter
                       </div>
                     </button>
                   );
                 })}
               </div>
-              <input
-                type="range"
-                min={1}
-                max={AVAILABLE_SEATS}
-                step={1}
-                value={inputs.seats}
-                onChange={(e) => set("seats", Number(e.target.value))}
-                className="mt-8"
-                aria-label="Number of ownership seats"
-              />
             </div>
 
             {/* KPIs */}
-            <div className="mt-px grid grid-cols-2 gap-px border border-border bg-border md:grid-cols-3 lg:grid-cols-6">
+            <div className="mt-px grid grid-cols-2 gap-px border border-border bg-border lg:grid-cols-4">
               {[
-                { l: "Seats selected", v: result.seats, f: (v: number) => `${Math.round(v)}` },
                 {
-                  l: "Ownership",
+                  l: "You own",
                   v: result.ownershipPercent,
                   f: (v: number) => `${v.toFixed(0)}%`,
                 },
-                { l: "Quarterly commitment", v: result.annualCommitment / 4, f: kd },
-                { l: "Maximum commitment", v: result.maxCommitment, f: kd },
-                { l: "Estimated portfolio value", v: result.portfolioValue, f: kd },
+                { l: "You pay each quarter", v: result.annualCommitment / 4, f: kd },
+                { l: "You pay in total", v: result.maxCommitment, f: kd },
                 {
-                  l: "Investment multiple",
+                  l: "Your money multiplies",
                   v: result.moic,
                   f: (v: number) => multiple(v, 2),
                 },
