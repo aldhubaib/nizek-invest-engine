@@ -20,7 +20,9 @@ export const SEAT_ANNUAL_COMMITMENT = 150_000; // KD per seat, per year
 export const COMMITMENT_YEARS = 5;
 export const SEAT_MAX_COMMITMENT = SEAT_ANNUAL_COMMITMENT * COMMITMENT_YEARS;
 /** Seats already reserved (1-indexed seat numbers). */
-export const RESERVED_SEATS = [2, 3];
+export const RESERVED_SEATS = [1];
+/** Seats still open to new investors. */
+export const AVAILABLE_SEATS = TOTAL_SEATS - RESERVED_SEATS.length;
 
 export const ANNUAL_COMMITMENT = SEAT_ANNUAL_COMMITMENT;
 export const TOTAL_INVESTMENT = SEAT_MAX_COMMITMENT;
@@ -125,7 +127,7 @@ function benchmark(rate: number, hold: number, capital: number[]): BenchmarkResu
 export function projectInvestment(input: InvestmentInputs): InvestmentResult {
   const hold = COMMITMENT_YEARS;
   const ownership = input.avgNizekOwnership / 100;
-  const seats = Math.min(Math.max(1, Math.round(input.seats ?? 1)), TOTAL_SEATS);
+  const seats = Math.min(Math.max(1, Math.round(input.seats ?? 1)), AVAILABLE_SEATS);
   const ownershipPercent = seats * SEAT_OWNERSHIP;
   const participation = ownershipPercent / 100;
   const annualCommitment = seats * SEAT_ANNUAL_COMMITMENT;
