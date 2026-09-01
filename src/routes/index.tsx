@@ -421,7 +421,8 @@ function PlatformPage() {
           </Reveal>
         </div>
 
-        <div className="mt-px grid grid-cols-2 gap-px border border-border bg-border md:grid-cols-3 lg:grid-cols-6">
+        <div className="mt-16 grid grid-cols-2 gap-px border border-border bg-border md:mt-24 md:grid-cols-3 lg:grid-cols-6">
+
           {Array.from({ length: TOTAL_SEATS }, (_, i) => {
             const n = i + 1;
             const reserved = RESERVED_SEATS.includes(n);
