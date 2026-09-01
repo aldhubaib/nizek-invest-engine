@@ -598,6 +598,204 @@ function PlatformPage() {
         </Reveal>
       </Section>
 
+      {/* Regional first */}
+      <Section id="regional">
+        <SectionHeading
+          index="09a — Regional first"
+          title="Built for the GCC. Designed to Scale Beyond Borders."
+          lede="Nizek does not build companies for a single city or a single country. Every venture is designed from day one with regional expansion in mind."
+        />
+
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
+          <Reveal>
+            <div className="space-y-6 text-lg leading-relaxed text-subtle">
+              <p>
+                Our experience across the GCC allows us to identify opportunities that can be
+                replicated across multiple markets instead of relying on the limited size of
+                any single economy.
+              </p>
+              <p>
+                By focusing on regional opportunities, startups have access to significantly
+                larger customer bases, stronger revenue potential and greater long-term
+                valuations.
+              </p>
+              <p className="text-foreground">
+                This creates a larger addressable market and increases the probability of
+                building companies with regional relevance.
+              </p>
+            </div>
+          </Reveal>
+
+          <Reveal delay={120}>
+            <div className="border border-border p-6 md:p-10">
+              <div className="label-xs">Gulf Cooperation Council</div>
+              <svg
+                viewBox="0 0 760 470"
+                className="mt-6 w-full text-foreground"
+                fill="none"
+                role="img"
+                aria-label="Minimal map of the GCC with animated expansion routes between Kuwait, Saudi Arabia, Bahrain, Qatar, the UAE and Oman"
+              >
+                {/* Peninsula outline — stylised */}
+                <path
+                  d="M196 74 L262 96 L300 78 L352 108 L398 96 L436 128 L470 132 L520 158 L566 160 L612 196 L648 258 L636 316 L594 356 L546 386 L488 404 L430 396 L372 366 L318 328 L262 300 L214 252 L182 190 Z"
+                  stroke="currentColor"
+                  strokeWidth="1"
+                  opacity="0.35"
+                />
+                <path
+                  d="M182 190 L214 252 L262 300 L318 328 L372 366"
+                  stroke="currentColor"
+                  strokeWidth="1"
+                  opacity="0.15"
+                />
+
+                {/* Expansion routes */}
+                {[
+                  "M232 132 C300 150 340 172 392 190",
+                  "M392 190 C420 186 430 190 448 200",
+                  "M448 200 C470 214 486 220 520 224",
+                  "M520 224 C566 232 596 262 616 296",
+                  "M232 132 C300 200 360 250 340 268",
+                  "M340 268 C420 268 500 246 520 224",
+                ].map((d, i) => (
+                  <g key={d}>
+                    <path d={d} stroke="currentColor" strokeWidth="0.75" opacity="0.18" />
+                    <path
+                      d={d}
+                      stroke="currentColor"
+                      strokeWidth="1"
+                      className="map-flow"
+                      opacity="0.75"
+                      style={{ animationDelay: `${i * 0.7}s` }}
+                    />
+                  </g>
+                ))}
+
+                {/* Country nodes */}
+                {[
+                  { x: 232, y: 132, label: "Kuwait", anchor: "end" as const, dx: -14, dy: 4 },
+                  { x: 340, y: 268, label: "Saudi Arabia", anchor: "middle" as const, dx: 0, dy: 26 },
+                  { x: 392, y: 190, label: "Bahrain", anchor: "end" as const, dx: -14, dy: -8 },
+                  { x: 448, y: 200, label: "Qatar", anchor: "middle" as const, dx: 0, dy: 28 },
+                  { x: 520, y: 224, label: "United Arab Emirates", anchor: "start" as const, dx: 14, dy: -10 },
+                  { x: 616, y: 296, label: "Oman", anchor: "start" as const, dx: 14, dy: 6 },
+                ].map((n, i) => (
+                  <g key={n.label}>
+                    <circle
+                      cx={n.x}
+                      cy={n.y}
+                      r="4"
+                      fill="currentColor"
+                      className="map-pulse"
+                      style={{ animationDelay: `${i * 0.5}s` }}
+                    />
+                    <rect
+                      x={n.x - 3}
+                      y={n.y - 3}
+                      width="6"
+                      height="6"
+                      fill="currentColor"
+                    />
+                    <text
+                      x={n.x + n.dx}
+                      y={n.y + n.dy}
+                      textAnchor={n.anchor}
+                      fill="currentColor"
+                      opacity="0.7"
+                      style={{
+                        fontSize: "11px",
+                        letterSpacing: "0.18em",
+                        textTransform: "uppercase",
+                      }}
+                    >
+                      {n.label}
+                    </text>
+                  </g>
+                ))}
+              </svg>
+              <div className="mt-6 flex flex-wrap gap-x-8 gap-y-2 border-t border-border pt-5">
+                {["Kuwait", "Saudi Arabia", "UAE", "Qatar", "Bahrain", "Oman"].map((c) => (
+                  <span key={c} className="label-xs">
+                    {c}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+        </div>
+
+        {/* Why regional matters */}
+        <div className="mt-20 grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            {
+              n: "01",
+              t: "Larger Markets",
+              d: "Every company is designed to reach millions of customers across the GCC rather than serving a single local market.",
+            },
+            {
+              n: "02",
+              t: "Higher Valuations",
+              d: "Regional businesses generally attract higher valuations than businesses operating in only one country.",
+            },
+            {
+              n: "03",
+              t: "Faster Expansion",
+              d: "Products are built with regional infrastructure, localization and scalability from the beginning.",
+            },
+            {
+              n: "04",
+              t: "Diversified Revenue",
+              d: "Revenue generated across multiple countries reduces dependence on a single economy.",
+            },
+          ].map((c, i) => (
+            <Reveal key={c.n} delay={i * 80}>
+              <div className="h-full bg-background p-8">
+                <div className="label-xs">{c.n}</div>
+                <div className="display-xl mt-6 text-2xl">{c.t}</div>
+                <p className="mt-4 text-sm leading-relaxed text-subtle">{c.d}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+
+        {/* Our approach */}
+        <div className="mt-20 grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-2">
+          <Reveal>
+            <div className="h-full bg-background p-10">
+              <div className="label-xs">Instead of asking</div>
+              <p className="display-xl mt-6 text-2xl text-subtle md:text-3xl">
+                “Can this succeed in Kuwait?”
+              </p>
+            </div>
+          </Reveal>
+          <Reveal delay={100}>
+            <div className="h-full bg-background p-10">
+              <div className="label-xs">We ask</div>
+              <p className="display-xl mt-6 text-2xl md:text-3xl">
+                “Can this become a regional company?”
+              </p>
+            </div>
+          </Reveal>
+        </div>
+
+        <Reveal>
+          <p className="mt-10 max-w-3xl text-lg leading-relaxed text-subtle">
+            Only ideas capable of expanding across multiple GCC markets are selected for
+            venture creation.
+          </p>
+        </Reveal>
+
+        <Reveal>
+          <p className="display-xl mt-16 max-w-5xl text-3xl md:text-5xl">
+            Our ambition is not to create Kuwait startups. Our ambition is to build regional
+            technology companies that can scale across the GCC and beyond.
+          </p>
+        </Reveal>
+      </Section>
+
+
+
       {/* Institutional fund structure */}
       <Section id="lifecycle" invert>
         <SectionHeading
