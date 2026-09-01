@@ -1058,8 +1058,8 @@ function PlatformPage() {
                                     className="text-sm text-muted-foreground"
                                   >
                                     {(inputs.successesByYear?.[c.index] ?? 0) > 1
-                                      ? `Exit valuation · Company ${k + 1}`
-                                      : "Exit valuation"}
+                                      ? `Estimated enterprise value · Company ${k + 1}`
+                                      : "Estimated enterprise value"}
                                   </label>
                                   <ValueField
                                     label={`${c.label} exit ${k + 1}`}
@@ -1343,7 +1343,7 @@ function PlatformPage() {
                               ],
                               ["Successes", fmtNumber(c.successes), null],
                               [
-                                "Exit valuation",
+                                "Estimated enterprise value",
                                 kd(c.portfolioValue),
                                 c.exitValues.length > 1
                                   ? `${c.exitValues
