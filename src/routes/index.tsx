@@ -1187,7 +1187,7 @@ function PlatformPage() {
                     >
                       <div className="num text-xs opacity-60">{String(n).padStart(2, "0")}</div>
                       <div className="num mt-6 text-lg">
-                        {reserved ? "Taken" : `${rank * SEAT_OWNERSHIP}%`}
+                        {reserved ? "Taken" : `${SEAT_OWNERSHIP}%`}
                       </div>
                     </button>
                   );
