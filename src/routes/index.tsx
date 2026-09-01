@@ -982,7 +982,7 @@ function PlatformPage() {
                             {[
                               ["Invested", kd(c.capitalInvested)],
                               ["Successes", fmtNumber(c.successes)],
-                              ["Exit valuation", kd(c.exitValue)],
+                              ["Exit valuation", kd(c.portfolioValue)],
                               ["Nizek equity", kd(c.nizekEquityValue)],
                             ].map(([l, v]) => (
                               <div key={l} className="min-w-0">
