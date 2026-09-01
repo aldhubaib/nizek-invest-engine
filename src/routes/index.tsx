@@ -342,7 +342,9 @@ function PlatformPage() {
           lede="Instead of investing in one startup, invest in the platform that creates them."
         />
         <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-3">
+          {[
             [
+
               "Per seat, per quarter",
               kd(SEAT_QUARTERLY_COMMITMENT),
               `every quarter for ${COMMITMENT_YEARS} years — ${kd(SEAT_ANNUAL_COMMITMENT)} a year, ${kd(SEAT_MAX_COMMITMENT)} per seat`,
