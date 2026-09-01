@@ -541,6 +541,65 @@ function PlatformPage() {
         </Reveal>
       </Section>
 
+      {/* Lifecycle — commitment to transfer */}
+      <Section id="lifecycle" invert>
+        <SectionHeading
+          index="09b — Structure"
+          title="Five Years Of Building. Then The Portfolio Is Yours."
+          lede="The commitment window builds the portfolio. At the end of Year 5, the equity accumulated on the investor's behalf is transferred directly to the investor."
+        />
+
+        <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-2">
+          <div className="bg-background p-10">
+            <div className="label-xs">Years 1–5</div>
+            <div className="mt-8">
+              {[
+                "Capital Commitment",
+                "Startup Creation",
+                "Portfolio Growth",
+                "Ownership Accumulation",
+              ].map((s, i, arr) => (
+                <div key={s}>
+                  <div className="display-xl text-2xl md:text-3xl">{s}</div>
+                  {i < arr.length - 1 && <Arrow />}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-background p-10">
+            <div className="border-y border-border-strong py-8">
+              <div className="label-xs">End of Year 5</div>
+              <div className="display-xl mt-4 text-3xl md:text-4xl">Portfolio Transfer</div>
+            </div>
+
+            <div className="mt-10">
+              <div className="label-xs">After Year 5</div>
+              <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
+                The investor becomes the direct owner of the transferred startup equity, and
+                continues benefiting from:
+              </p>
+              <ul className="mt-8 grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2">
+                {[
+                  "Future funding rounds",
+                  "Company growth",
+                  "Dividends (where applicable)",
+                  "Acquisitions",
+                  "IPOs",
+                  "Exits",
+                ].map((b, i) => (
+                  <li key={b} className="bg-background px-6 py-5">
+                    <span className="num text-xs text-subtle">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <div className="mt-3 text-base text-foreground">{b}</div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </Section>
 
 
       {/* 8 — Founder pipeline */}
