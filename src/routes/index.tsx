@@ -1161,7 +1161,9 @@ function PlatformPage() {
                     {String(AVAILABLE_SEATS).padStart(2, "0")}
                     <span className="text-subtle">/{String(TOTAL_SEATS).padStart(2, "0")}</span>
                   </div>
+
                   <div className="label-xs mt-3">Available seats</div>
+
 
                 </div>
               </div>
