@@ -1058,8 +1058,8 @@ function PlatformPage() {
                                     className="text-sm text-muted-foreground"
                                   >
                                     {(inputs.successesByYear?.[c.index] ?? 0) > 1
-                                      ? `Exit valuation · Company ${k + 1}`
-                                      : "Exit valuation"}
+                                      ? `Estimated enterprise value · Company ${k + 1}`
+                                      : "Estimated enterprise value"}
                                   </label>
                                   <ValueField
                                     label={`${c.label} exit ${k + 1}`}
