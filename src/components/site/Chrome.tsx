@@ -72,9 +72,7 @@ export function Header() {
           ))}
         </nav>
         <div className="flex items-center gap-6">
-          <span className="label-xs hidden md:inline">
-            {current} · {multiple(projection.returns.moic)}
-          </span>
+
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
