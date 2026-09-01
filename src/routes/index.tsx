@@ -1148,7 +1148,9 @@ function PlatformPage() {
                   <h3 className="display-xl mt-6 text-3xl leading-tight md:text-5xl">
                     Secure your position in the Nizek ecosystem.{" "}
                     <span className="text-subtle">
-                      Only {AVAILABLE_SEATS} of {TOTAL_SEATS} seats remain.
+                      {AVAILABLE_SEATS - result.seats === 0
+                        ? "All remaining seats are yours."
+                        : `Only ${AVAILABLE_SEATS - result.seats} of ${TOTAL_SEATS} seats would remain.`}
                     </span>
                   </h3>
                   <p className="mt-6 max-w-md text-xs leading-relaxed text-subtle">
@@ -1159,11 +1161,12 @@ function PlatformPage() {
                 </div>
                 <div className="text-right">
                   <div className="num text-6xl leading-none text-foreground md:text-8xl">
-                    {String(AVAILABLE_SEATS).padStart(2, "0")}
+                    {String(AVAILABLE_SEATS - result.seats).padStart(2, "0")}
                     <span className="text-subtle">/{String(TOTAL_SEATS).padStart(2, "0")}</span>
                   </div>
 
-                  <div className="label-xs mt-3">Available seats</div>
+                  <div className="label-xs mt-3">Seats still available</div>
+
 
 
                 </div>
