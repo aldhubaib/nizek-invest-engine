@@ -6,6 +6,7 @@ import { ValueField } from "@/components/model/ValueField";
 import { Reveal, Section, SectionHeading } from "@/components/ui/primitives";
 import { multiple, number as fmtNumber, percent } from "@/model/format";
 import {
+  AVAILABLE_SEATS,
   RESERVED_SEATS,
   SEAT_ANNUAL_COMMITMENT,
   SEAT_MAX_COMMITMENT,
@@ -429,7 +430,7 @@ function PlatformPage() {
                 >
                   <div className="num text-xs opacity-60">Seat {String(n).padStart(2, "0")}</div>
                   <div className="display-xl mt-10 text-2xl md:text-3xl">
-                    {reserved ? "Reserved" : "Available"}
+                    {reserved ? "Taken" : "Available"}
                   </div>
                   <div className="mt-6 text-[11px] leading-relaxed opacity-60">
                     {SEAT_OWNERSHIP}% · {kd(SEAT_ANNUAL_COMMITMENT)} / year
@@ -1141,8 +1142,8 @@ function PlatformPage() {
                   <div className="label-xs">Choose your seats</div>
                   <p className="mt-4 max-w-md text-xs leading-relaxed text-subtle">
                     Each seat is {SEAT_OWNERSHIP}% of Nizek's equity in every company created, for{" "}
-                    {kd(SEAT_ANNUAL_COMMITMENT)} a year over five years. Everything below updates
-                    instantly.
+                    {kd(SEAT_ANNUAL_COMMITMENT)} a year over five years. One seat is already
+                    taken — {AVAILABLE_SEATS} remain. Everything below updates instantly.
                   </p>
                 </div>
                 <div className="num text-5xl leading-none text-foreground md:text-7xl">
@@ -1158,21 +1159,35 @@ function PlatformPage() {
               <div className="mt-10 grid grid-cols-3 gap-px border border-border bg-border md:grid-cols-6">
                 {Array.from({ length: TOTAL_SEATS }, (_, i) => {
                   const n = i + 1;
-                  const active = n <= result.seats;
+                  const reserved = RESERVED_SEATS.includes(n);
+                  const rank = reserved
+                    ? 0
+                    : n - RESERVED_SEATS.filter((r) => r < n).length;
+                  const active = !reserved && rank <= result.seats;
                   return (
                     <button
                       key={n}
                       type="button"
-                      onClick={() => set("seats", n)}
+                      disabled={reserved}
+                      onClick={() => !reserved && set("seats", rank)}
                       aria-pressed={active}
+                      aria-label={
+                        reserved
+                          ? `Seat ${n} reserved`
+                          : `Select ${rank} seat${rank > 1 ? "s" : ""}`
+                      }
                       className={`p-6 text-left transition-colors duration-300 ${
-                        active
-                          ? "bg-foreground text-background"
-                          : "bg-background hover:bg-muted"
+                        reserved
+                          ? "cursor-not-allowed bg-muted text-subtle"
+                          : active
+                            ? "bg-foreground text-background"
+                            : "bg-background hover:bg-muted"
                       }`}
                     >
                       <div className="num text-xs opacity-60">{String(n).padStart(2, "0")}</div>
-                      <div className="num mt-6 text-lg">{n * SEAT_OWNERSHIP}%</div>
+                      <div className="num mt-6 text-lg">
+                        {reserved ? "Taken" : `${rank * SEAT_OWNERSHIP}%`}
+                      </div>
                     </button>
                   );
                 })}
@@ -1180,7 +1195,7 @@ function PlatformPage() {
               <input
                 type="range"
                 min={1}
-                max={TOTAL_SEATS}
+                max={AVAILABLE_SEATS}
                 step={1}
                 value={inputs.seats}
                 onChange={(e) => set("seats", Number(e.target.value))}
