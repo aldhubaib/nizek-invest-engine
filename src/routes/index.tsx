@@ -1231,17 +1231,6 @@ function PlatformPage() {
                   );
                 })}
               </div>
-
-              <input
-                type="range"
-                min={1}
-                max={AVAILABLE_SEATS}
-                step={1}
-                value={inputs.seats}
-                onChange={(e) => set("seats", Number(e.target.value))}
-                className="mt-8"
-                aria-label="Number of ownership seats"
-              />
             </div>
 
             {/* KPIs — live metrics matrix */}
