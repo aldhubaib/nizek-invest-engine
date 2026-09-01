@@ -1336,7 +1336,11 @@ function PlatformPage() {
                           <>
 
                             {[
-                              ["Invested", kd(c.capitalInvested), null],
+                              [
+                                "Invested",
+                                `${kd(c.capitalInvested / 4)} / quarter`,
+                                null,
+                              ],
                               ["Successes", fmtNumber(c.successes), null],
                               [
                                 "Exit valuation",
