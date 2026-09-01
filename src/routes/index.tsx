@@ -978,7 +978,7 @@ function PlatformPage() {
                           <div className="display-xl w-28 shrink-0 text-2xl md:text-3xl">
                             Year {c.year}
                           </div>
-                          <div className="grid min-w-0 flex-1 grid-cols-2 gap-x-6 gap-y-6 sm:grid-cols-4">
+                          <div className="grid min-w-0 flex-1 grid-cols-2 gap-x-6 gap-y-6 sm:grid-cols-3 lg:grid-cols-5">
                             {[
                               ["Invested", kd(c.capitalInvested), null],
                               ["Successes", fmtNumber(c.successes), null],
@@ -992,6 +992,7 @@ function PlatformPage() {
                                   : null,
                               ],
                               ["Nizek equity", kd(c.nizekEquityValue), null],
+                              ["Investor equity", kd(c.investorValue), null],
                             ].map(([l, v, breakdown]) => (
                               <div key={l as string} className="min-w-0">
                                 <div className="label-xs">{l}</div>
@@ -1007,12 +1008,6 @@ function PlatformPage() {
                             ))}
                           </div>
 
-                          <div className="md:w-52 md:text-right">
-                            <div className="label-xs">Cohort exit value</div>
-                            <div className="num mt-2 text-xl text-foreground md:text-2xl">
-                              <AnimatedNumber value={c.portfolioValue} format={kd} />
-                            </div>
-                          </div>
                         </div>
                         <div className="mt-5 h-px w-full bg-border">
                           <div
