@@ -674,12 +674,12 @@ function PlatformPage() {
 
                 {/* Country nodes */}
                 {[
-                  { x: 232, y: 132, label: "Kuwait", anchor: "end", dx: -14, dy: 4 },
-                  { x: 340, y: 268, label: "Saudi Arabia", anchor: "middle", dx: 0, dy: 26 },
-                  { x: 392, y: 190, label: "Bahrain", anchor: "end", dx: -14, dy: -8 },
-                  { x: 448, y: 200, label: "Qatar", anchor: "middle", dx: 0, dy: 28 },
-                  { x: 520, y: 224, label: "United Arab Emirates", anchor: "start", dx: 14, dy: -10 },
-                  { x: 616, y: 296, label: "Oman", anchor: "start", dx: 14, dy: 6 },
+                  { x: 232, y: 132, label: "Kuwait", anchor: "end" as const, dx: -14, dy: 4 },
+                  { x: 340, y: 268, label: "Saudi Arabia", anchor: "middle" as const, dx: 0, dy: 26 },
+                  { x: 392, y: 190, label: "Bahrain", anchor: "end" as const, dx: -14, dy: -8 },
+                  { x: 448, y: 200, label: "Qatar", anchor: "middle" as const, dx: 0, dy: 28 },
+                  { x: 520, y: 224, label: "United Arab Emirates", anchor: "start" as const, dx: 14, dy: -10 },
+                  { x: 616, y: 296, label: "Oman", anchor: "start" as const, dx: 14, dy: 6 },
                 ].map((n, i) => (
                   <g key={n.label}>
                     <circle
