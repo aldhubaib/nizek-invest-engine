@@ -177,3 +177,31 @@ input[type="range"]::-moz-range-thumb {
   border-radius: 0;
   background: var(--color-foreground);
 }
+
+/* Inverted sections: light canvas, dark type. Same token names, flipped values. */
+.section-invert {
+  --background: oklch(0.97 0 0);
+  --foreground: oklch(0.12 0 0);
+  --card: oklch(0.94 0 0);
+  --card-foreground: oklch(0.12 0 0);
+  --primary: oklch(0.12 0 0);
+  --primary-foreground: oklch(0.97 0 0);
+  --secondary: oklch(0.9 0 0);
+  --secondary-foreground: oklch(0.12 0 0);
+  --muted: oklch(0.9 0 0);
+  --muted-foreground: oklch(0.42 0 0);
+  --subtle: oklch(0.52 0 0);
+  --faint: oklch(0.72 0 0);
+  --accent: oklch(0.9 0 0);
+  --accent-foreground: oklch(0.12 0 0);
+  --border: oklch(0 0 0 / 14%);
+  --border-strong: oklch(0 0 0 / 30%);
+  --input: oklch(0 0 0 / 18%);
+  --ring: oklch(0 0 0 / 40%);
+  background-color: var(--background);
+  color: var(--foreground);
+}
+.section-invert ::selection {
+  background: var(--foreground);
+  color: var(--background);
+}

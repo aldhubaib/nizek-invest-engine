@@ -247,7 +247,7 @@ function PlatformPage() {
       </Section>
 
       {/* 3 — Track record */}
-      <Section id="track-record">
+      <Section id="track-record" invert>
         <SectionHeading index="02 — Track record" title="We've Been Building Since 2009" />
         <Reveal>
           <div className="flex items-baseline justify-between border-b border-border-strong pb-6">
@@ -316,7 +316,7 @@ function PlatformPage() {
       </Section>
 
       {/* 5 — Our model */}
-      <Section id="how-we-build">
+      <Section id="how-we-build" invert>
         <SectionHeading
           index="04 — Our model"
           title="We Build Companies From Day One"
@@ -387,7 +387,7 @@ function PlatformPage() {
       </Section>
 
       {/* 7 — Where the money goes */}
-      <Section id="capital">
+      <Section id="capital" invert>
         <SectionHeading index="06 — Capital deployment" title="Where The Money Goes" />
         <div className="grid grid-cols-2 gap-px border border-border bg-border md:grid-cols-4">
           {["Developers", "Marketing", "Operations", "Ecosystem"].map(
@@ -446,7 +446,7 @@ function PlatformPage() {
       </Section>
 
       {/* Diversification */}
-      <Section id="diversification">
+      <Section id="diversification" invert>
         <SectionHeading
           index="08 — Diversification"
           title="One Investment. Fifty Opportunities."
@@ -544,7 +544,7 @@ function PlatformPage() {
 
 
       {/* 8 — Founder pipeline */}
-      <Section id="founders">
+      <Section id="founders" invert>
         <SectionHeading
           index="10 — Founder pipeline"
           title="We Don't Find Founders. We Qualify Them."
@@ -1042,7 +1042,7 @@ function PlatformPage() {
       </Section>
 
       {/* 11 — Why investors win */}
-      <Section id="investors">
+      <Section id="investors" invert>
         <SectionHeading index="12 — Investor case" title="Why Investors Win" />
         <div className="grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2">
           {[
@@ -1093,7 +1093,7 @@ function PlatformPage() {
       </Section>
 
       {/* 13 — Closing */}
-      <Section id="contact">
+      <Section id="contact" invert>
         <Reveal>
           <h2 className="display-xl max-w-5xl text-4xl md:text-7xl">
             We Didn't Build One Startup.
