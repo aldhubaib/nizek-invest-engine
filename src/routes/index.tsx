@@ -1007,7 +1007,8 @@ function PlatformPage() {
                                 ) : null}
                               </div>
                             ))}
-                          </div>
+                          </>
+
 
                         </div>
                         <div className="mt-5 h-px w-full bg-border">
