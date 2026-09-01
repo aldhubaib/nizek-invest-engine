@@ -224,7 +224,6 @@ function PlatformPage() {
         </div>
       </section>
 
-      {/* 2 — Why we exist */}
       <Section id="why">
         <SectionHeading index="01 — Why we exist" title="Great Ideas Don't Fail. Execution Does." />
         <div className="grid grid-cols-1 gap-16 md:grid-cols-2">
@@ -244,9 +243,270 @@ function PlatformPage() {
         </div>
       </Section>
 
-      {/* 3 — Track record */}
+      <Section id="problem" invert>
+        <SectionHeading
+          index="02 — The problem"
+          title="Traditional Venture Capital Has One Major Weakness"
+          lede="VCs invest after founders have already built something. And the hardest part is finding great entrepreneurs in the first place — capital is abundant, exceptional founders are not."
+        />
+        <div className="grid grid-cols-2 gap-px border border-border bg-border md:grid-cols-3">
+          {[
+            "Finding great entrepreneurs",
+            "Weak founders",
+            "Poor technology",
+            "Technical debt",
+            "Bad hiring",
+            "Weak product strategy",
+          ].map((t, i) => (
+            <div key={t} className="bg-background p-8">
+              <div className="num text-xs text-subtle">{String(i + 1).padStart(2, "0")}</div>
+              <div className="mt-6 text-lg text-foreground">{t}</div>
+            </div>
+          ))}
+
+        </div>
+        <Reveal>
+          <p className="display-xl mt-16 text-3xl md:text-5xl">
+            They hope execution improves. We don't.
+          </p>
+        </Reveal>
+      </Section>
+
+      <Section id="how-we-build">
+        <SectionHeading
+          index="03 — Our model"
+          title="We Build Companies From Day One"
+          lede="Every startup goes through the same repeatable operating system."
+        />
+        <FlowStack
+          steps={[
+            "Idea",
+            "Validation",
+            "Product",
+            "Technology",
+            "Launch",
+            "Growth",
+            "Fundraising",
+            "Exit",
+          ]}
+        />
+      </Section>
+
+      <Section id="founders" invert>
+        <SectionHeading
+          index="04 — Founder pipeline"
+          title="We Don't Find Founders. We Qualify Them."
+          lede="Venture capital's hardest problem is founder risk: a handful of meetings, then a decade of consequences. Nizek runs a repeatable system for discovering, testing and selecting founders before a single dinar is committed."
+        />
+
+        <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-2">
+          <div className="bg-background p-10">
+            <div className="label-xs">The problem</div>
+            <p className="mt-8 text-lg leading-relaxed text-subtle">
+              Most investors meet entrepreneurs through pitch events, introductions or
+              applications, and must decide after a few conversations. Execution is
+              discovered after the money is gone.
+            </p>
+          </div>
+          <div className="bg-background p-10">
+            <div className="label-xs text-foreground">Our solution</div>
+            <p className="mt-8 text-lg leading-relaxed text-foreground">
+              Every founder enters the Nizek Founder Residency first — roughly six months
+              building inside one of our existing startups. Only those who prove
+              themselves are offered investment.
+            </p>
+          </div>
+        </div>
+
+        {/* Flow */}
+        <div className="mt-24">
+          <div className="label-xs">The process</div>
+          <div className="mt-10 grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2 md:grid-cols-3">
+            {[
+              { t: "Applications", d: "Open, continuous inbound from the region's operators." },
+              { t: "Founder Residency", d: "~6 months building inside a live Nizek startup." },
+              { t: "Performance Evaluation", d: "Judged on real output, not a pitch deck." },
+              { t: "Founder Approved", d: "Both sides decide to build a company together." },
+              { t: "Investment", d: "Capital, equity and platform are committed." },
+              { t: "Startup Launch", d: "The company enters the annual cohort." },
+            ].map((s, i) => (
+              <Reveal key={s.t} delay={i * 90}>
+                <div className="flex h-full flex-col justify-between bg-background p-8">
+                  <div>
+                    <span className="num text-xs text-subtle">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <div className="display-xl mt-6 text-2xl leading-tight md:text-3xl">
+                      {s.t}
+                    </div>
+                  </div>
+                  <p className="mt-8 text-sm leading-relaxed text-subtle">{s.d}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+
+        {/* What we evaluate */}
+        <div className="mt-24">
+          <div className="label-xs">What the residency measures</div>
+          <div className="mt-8 grid grid-cols-1 gap-x-12 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              "Execution",
+              "Leadership",
+              "Commitment",
+              "Problem solving",
+              "Product thinking",
+              "Communication",
+              "Work under pressure",
+              "Cultural fit",
+            ].map((t, i) => (
+              <Reveal key={t} delay={i * 50}>
+                <div className="border-b border-border py-5 text-lg text-foreground">{t}</div>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal>
+            <p className="mt-10 max-w-2xl text-base leading-relaxed text-muted-foreground">
+              The founder is evaluating us at the same time. By the end of the residency,
+              both sides know the answer.
+            </p>
+          </Reveal>
+        </div>
+
+        {/* Key message */}
+        <Reveal>
+          <div className="mt-24 border-t border-border-strong pt-12">
+            <p className="display-xl max-w-5xl text-3xl leading-tight md:text-6xl">
+              Traditional venture capital invests first and evaluates execution later.
+              Nizek evaluates execution first and invests later.
+            </p>
+            <p className="mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground">
+              The result is a continuous pipeline of founders who have already proven they
+              can execute before receiving capital — making the studio repeatable,
+              scalable and far less dependent on luck.
+            </p>
+          </div>
+        </Reveal>
+      </Section>
+
+      <Section id="independence">
+        <SectionHeading
+          index="05 — Operating model"
+          title="From Building To Independence"
+          lede="NIZEK does not permanently support every startup with its internal team. We provide the technology, product development and engineering needed to launch and validate the business in its first year — then hand it over."
+        />
+
+        <div className="grid grid-cols-1 gap-px border border-border bg-border lg:grid-cols-3">
+          <div className="bg-background p-10">
+            <div className="label-xs">The model</div>
+            <p className="mt-6 text-base leading-relaxed text-muted-foreground">
+              Every startup accepted into the NIZEK Venture Studio receives a full product and
+              engineering organisation from day one, in exchange for an agreed equity stake.
+            </p>
+            <ul className="mt-8 flex flex-col">
+              {[
+                "Product Strategy",
+                "UI/UX Design",
+                "Software Development",
+                "Technical Leadership",
+                "Product Management",
+                "Infrastructure & DevOps",
+                "Technical Support",
+              ].map((s, i) => (
+                <li
+                  key={s}
+                  className="flex items-baseline gap-4 border-b border-border py-3 last:border-b-0"
+                >
+                  <span className="num text-xs text-subtle">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="text-base text-foreground">{s}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-8 text-sm leading-relaxed text-subtle">
+              Founders focus on building the business, acquiring customers and validating the
+              market — not on hiring and managing an engineering team from day one.
+            </p>
+          </div>
+
+          <div className="bg-background p-10">
+            <div className="label-xs">The transition</div>
+            <div className="display-xl mt-6 text-3xl md:text-4xl">
+              Built To Become Independent.
+            </div>
+            <p className="mt-6 text-base leading-relaxed text-muted-foreground">
+              At the end of the first year, the startup begins building its own internal
+              technology team. NIZEK supports the transition through documentation, knowledge
+              transfer and technical handover.
+            </p>
+            <p className="mt-6 text-base leading-relaxed text-muted-foreground">
+              The engineering team gradually moves from NIZEK to the startup, freeing NIZEK to
+              redirect its resources toward building the next generation of companies.
+            </p>
+          </div>
+
+          <div className="bg-background p-10">
+            <div className="label-xs">Why this matters</div>
+            <div className="display-xl mt-6 text-3xl md:text-4xl">
+              Engineering Capacity Is Recycled, Not Consumed.
+            </div>
+            <p className="mt-6 text-base leading-relaxed text-muted-foreground">
+              Instead of permanently allocating developers to mature companies, capacity returns
+              to the studio and is reinvested into new ventures. That is what makes the program
+              repeatable, scalable and capital efficient.
+            </p>
+            <div className="mt-10 grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-3">
+              {["Repeatable", "Scalable", "Capital efficient"].map((t) => (
+                <div key={t} className="bg-background px-5 py-6 text-sm text-foreground">
+                  {t}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Animated horizontal timeline */}
+        <div className="mt-16">
+          <div className="label-xs mb-8">The cycle</div>
+          <div className="grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { t: "Startup Accepted", n: "Into the venture studio" },
+              { t: "NIZEK Builds Product", n: "Year 1" },
+              { t: "Market Validation", n: "Customers, traction, proof" },
+              { t: "Startup Hires Internal Team", n: "Its own engineers" },
+              { t: "Knowledge Transfer", n: "Documentation and handover" },
+              { t: "Independent Company", n: "Technically self-sufficient" },
+              { t: "NIZEK Builds The Next Startup", n: "Capacity recycled" },
+              { t: "Repeat", n: "The loop closes" },
+            ].map((s, i) => (
+              <Reveal key={s.t} delay={i * 80} className="bg-background">
+                <div className="flex h-full flex-col justify-between p-8">
+                  <span className="num text-xs text-subtle">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div className="mt-10">
+                    <div className="display-xl text-xl md:text-2xl">{s.t}</div>
+                    <div className="mt-3 text-xs text-muted-foreground">{s.n}</div>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+
+        <Reveal>
+          <p className="mt-16 max-w-4xl text-2xl leading-snug text-foreground md:text-3xl">
+            NIZEK's goal is not to become a startup's long-term software company. Our goal is to
+            launch it, validate it and prepare it to stand on its own — so the studio can keep
+            creating new companies without increasing operational complexity.
+          </p>
+        </Reveal>
+      </Section>
+
       <Section id="track-record" invert>
-        <SectionHeading index="02 — Track record" title="We've Been Building Since 2009" />
+        <SectionHeading index="06 — Track record" title="We've Been Building Since 2009" />
         <Reveal>
           <div className="flex items-baseline justify-between border-b border-border-strong pb-6">
             <span className="display-xl text-4xl md:text-7xl">2009</span>
@@ -283,233 +543,46 @@ function PlatformPage() {
         </div>
       </Section>
 
-      {/* 4 — The problem */}
-      <Section id="problem">
-        <SectionHeading
-          index="03 — The problem"
-          title="Traditional Venture Capital Has One Major Weakness"
-          lede="VCs invest after founders have already built something. And the hardest part is finding great entrepreneurs in the first place — capital is abundant, exceptional founders are not."
-        />
-        <div className="grid grid-cols-2 gap-px border border-border bg-border md:grid-cols-3">
-          {[
-            "Finding great entrepreneurs",
-            "Weak founders",
-            "Poor technology",
-            "Technical debt",
-            "Bad hiring",
-            "Weak product strategy",
-          ].map((t, i) => (
-            <div key={t} className="bg-background p-8">
-              <div className="num text-xs text-subtle">{String(i + 1).padStart(2, "0")}</div>
-              <div className="mt-6 text-lg text-foreground">{t}</div>
-            </div>
-          ))}
+      <TeamSection />
 
-        </div>
-        <Reveal>
-          <p className="display-xl mt-16 text-3xl md:text-5xl">
-            They hope execution improves. We don't.
-          </p>
-        </Reveal>
-      </Section>
-
-      {/* 5 — Our model */}
-      <Section id="how-we-build" invert>
-        <SectionHeading
-          index="04 — Our model"
-          title="We Build Companies From Day One"
-          lede="Every startup goes through the same repeatable operating system."
-        />
-        <FlowStack
-          steps={[
-            "Idea",
-            "Validation",
-            "Product",
-            "Technology",
-            "Launch",
-            "Growth",
-            "Fundraising",
-            "Exit",
-          ]}
-        />
-      </Section>
-
-      {/* 6 — The investment */}
-      <Section id="investment">
-        <SectionHeading
-          index="05 — The investment"
-          title="One Investment. Fifty Companies."
-          lede="Instead of investing in one startup, invest in the platform that creates them."
-        />
-        <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-3">
-          {[
-            [
-
-              "Per seat, per quarter",
-              kd(SEAT_QUARTERLY_COMMITMENT),
-              `every quarter for ${COMMITMENT_YEARS} years — ${kd(SEAT_ANNUAL_COMMITMENT)} a year, ${kd(SEAT_MAX_COMMITMENT)} per seat`,
-            ],
-            [
-              "Your commitment",
-              `${kd(result.seats * SEAT_QUARTERLY_COMMITMENT)} / quarter`,
-              `${result.seats} seat${result.seats > 1 ? "s" : ""} — ${kd(result.annualCommitment)} a year, ${kd(result.maxCommitment)} over ${COMMITMENT_YEARS} years`,
-            ],
-
-            [
-              "Nizek commits to",
-              `${fmtNumber(inputs.startupsPerYear)} startups`,
-              `every year — minimum ${fmtNumber(result.totalStartups)}`,
-            ],
-          ].map(([l, v, n]) => (
-
-            <div key={l} className="bg-background p-10">
-              <div className="label-xs">{l}</div>
-              <div className="num mt-6 text-4xl text-foreground md:text-5xl">{v}</div>
-              <div className="mt-4 text-xs text-subtle">{n}</div>
-            </div>
-          ))}
-        </div>
-        <Reveal>
-          <div className="mt-16 max-w-3xl border-l border-border-strong pl-8">
-            <p className="display-xl text-3xl md:text-5xl">
-              Investor participates in a share of Nizek's ownership in every startup created
-              during those five years.
-            </p>
-            <p className="mt-6 text-sm text-muted-foreground">Not ownership in Nizek.</p>
-          </div>
-        </Reveal>
-      </Section>
-
-
-      {/* Limited ownership */}
-      <Section id="ownership">
-        <SectionHeading
-          index="06 — Limited ownership"
-          title="Only Six Ownership Seats."
-          lede="This investment vehicle is intentionally limited to only six ownership seats."
-        />
-        <div className="grid grid-cols-1 gap-16 lg:grid-cols-[1.1fr_1fr]">
-          <Reveal>
-            <div className="space-y-6 text-base leading-relaxed text-muted-foreground md:text-lg">
-              <p>
-                Each seat represents {SEAT_OWNERSHIP}% ownership of Nizek's equity across every
-                startup created during this five-year venture creation program.
-              </p>
-              <p>
-                Each seat requires a quarterly commitment of {kd(SEAT_QUARTERLY_COMMITMENT)} —
-                {" "}{kd(SEAT_ANNUAL_COMMITMENT)} a year over five years. Maximum commitment per seat is{" "}
-                {kd(SEAT_MAX_COMMITMENT)}.
-              </p>
-              <p className="text-foreground">
-                Once all six seats have been allocated, this investment vehicle will be closed.
-              </p>
-            </div>
-          </Reveal>
-          <Reveal delay={100}>
-            <div className="grid grid-cols-3 gap-px border border-border bg-border">
-              {[
-                [String(TOTAL_SEATS), "Total seats"],
-                [String(RESERVED_SEATS.length), "Reserved"],
-                [String(TOTAL_SEATS - RESERVED_SEATS.length), "Remaining"],
-              ].map(([v, l]) => (
-                <div key={l} className="bg-background p-6 text-center">
-                  <div className="num text-4xl text-foreground md:text-5xl">{v}</div>
-                  <div className="label-xs mt-4">{l}</div>
-                </div>
-              ))}
-            </div>
-          </Reveal>
-        </div>
-
-        <div className="mt-16 grid grid-cols-2 gap-px border border-border bg-border md:mt-24 md:grid-cols-3 lg:grid-cols-6">
-
-          {Array.from({ length: TOTAL_SEATS }, (_, i) => {
-            const n = i + 1;
-            const reserved = RESERVED_SEATS.includes(n);
-            return (
-              <Reveal key={n} delay={i * 60}>
-                <div
-                  className={`h-full p-8 transition-colors duration-300 ${
-                    reserved ? "bg-foreground text-background" : "bg-background"
-                  }`}
-                >
-                  <div className="num text-xs opacity-60">Seat {String(n).padStart(2, "0")}</div>
-                  <div className="display-xl mt-10 text-2xl md:text-3xl">
-                    {reserved ? "Taken" : "Available"}
-                  </div>
-                  <div className="mt-6 text-[11px] leading-relaxed opacity-60">
-                    {SEAT_OWNERSHIP}% · {kd(SEAT_QUARTERLY_COMMITMENT)} / quarter
-                  </div>
-                </div>
-              </Reveal>
-            );
-          })}
-        </div>
-      </Section>
-
-      {/* 7 — Where the money goes */}
-      <Section id="capital" invert>
-        <SectionHeading index="06 — Capital deployment" title="Where The Money Goes" />
-        <div className="grid grid-cols-2 gap-px border border-border bg-border md:grid-cols-4">
-          {["Developers", "Marketing", "Operations", "Ecosystem"].map(
-            (s, i) => (
-              <div key={s} className="bg-background p-8">
-                <div className="num text-xs text-subtle">{String(i + 1).padStart(2, "0")}</div>
-                <div className="display-xl mt-6 text-2xl leading-tight md:text-3xl">{s}</div>
-              </div>
-            ),
-          )}
-        </div>
-        <Reveal>
-          <p className="display-xl mt-16 text-3xl md:text-5xl">
-            Every dinar creates assets. Not overhead.
-          </p>
-        </Reveal>
-      </Section>
-
-      {/* 8 — Why this is different */}
-      <Section id="comparison">
-        <SectionHeading index="07 — Comparison" title="Why This Is Different" />
+      <Section id="proof">
+        <SectionHeading index="08 — Current proof" title="Not Theory. Reality." />
         <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-2">
-          <div className="bg-background p-10">
-            <div className="label-xs">Traditional VC</div>
-            <ul className="mt-8 space-y-5">
-              {[
-                "Waits for founders",
-                "Invests later",
-                "Limited influence",
-                "Unknown technology",
-                "Unknown execution",
-              ].map((t) => (
-                <li key={t} className="border-b border-border pb-4 text-lg text-subtle">
-                  {t}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="bg-background p-10">
-            <div className="label-xs text-foreground">Nizek</div>
-            <ul className="mt-8 space-y-5">
-              {[
-                "Creates founders",
-                "Builds technology",
-                "Controls execution",
-                "Owns infrastructure",
-                "Launches repeatedly",
-              ].map((t) => (
-                <li key={t} className="border-b border-border pb-4 text-lg text-foreground">
-                  {t}
-                </li>
-              ))}
-            </ul>
-          </div>
+          {[
+            {
+              name: "Ad Space",
+              time: "6 months",
+              val: "KD3M",
+              basis: "Valuation basis: latest priced round discussions and comparable regional media-tech multiples.",
+            },
+            {
+              name: "Hazawy",
+              time: "2 months",
+              val: "KD1.5M",
+              basis: "Valuation basis: internal build cost, traction to date and comparable early-stage GCC rounds.",
+            },
+          ].map((c) => (
+            <div key={c.name} className="bg-background p-10 md:p-14">
+              <div className="display-xl text-4xl md:text-6xl">{c.name}</div>
+              <div className="mt-10 flex gap-16">
+                <div>
+                  <div className="label-xs">Time to build</div>
+                  <div className="num mt-3 text-2xl">{c.time}</div>
+                </div>
+                <div>
+                  <div className="label-xs">Indicative valuation</div>
+                  <div className="num mt-3 text-2xl">{c.val}</div>
+                </div>
+              </div>
+              <p className="mt-10 max-w-md text-xs leading-relaxed text-subtle">{c.basis}</p>
+            </div>
+          ))}
         </div>
       </Section>
 
-      {/* Diversification */}
       <Section id="diversification" invert>
         <SectionHeading
-          index="08 — Diversification"
+          index="09 — Diversification"
           title="One Investment. Fifty Opportunities."
           lede="Backing a single startup is a binary bet: it works, or the capital is gone. Participating across a studio portfolio spreads that same commitment over 50+ companies built on shared infrastructure — no single outcome decides the result."
         />
@@ -558,10 +631,9 @@ function PlatformPage() {
         </Reveal>
       </Section>
 
-      {/* Early visibility */}
       <Section id="visibility">
         <SectionHeading
-          index="09 — Early visibility"
+          index="10 — Early visibility"
           title="See Tomorrow's Companies Before Everyone Else."
           lede="Most investors meet a company when it is already raising — the story is polished, the price is set, the seats are taken. Inside the studio, investors see companies from the day they are created, and watch how they actually behave over time."
         />
@@ -602,10 +674,9 @@ function PlatformPage() {
         </Reveal>
       </Section>
 
-      {/* Regional first */}
-      <Section id="regional">
+      <Section id="regional" invert>
         <SectionHeading
-          index="09a — Regional first"
+          index="11 — Regional first"
           title="Built for the GCC. Designed to Scale Beyond Borders."
           lede="Nizek does not build companies for a single city or a single country. Every venture is designed from day one with regional expansion in mind."
         />
@@ -798,12 +869,196 @@ function PlatformPage() {
         </Reveal>
       </Section>
 
+      <Section id="comparison">
+        <SectionHeading index="12 — Comparison" title="Why This Is Different" />
+        <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-2">
+          <div className="bg-background p-10">
+            <div className="label-xs">Traditional VC</div>
+            <ul className="mt-8 space-y-5">
+              {[
+                "Waits for founders",
+                "Invests later",
+                "Limited influence",
+                "Unknown technology",
+                "Unknown execution",
+              ].map((t) => (
+                <li key={t} className="border-b border-border pb-4 text-lg text-subtle">
+                  {t}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="bg-background p-10">
+            <div className="label-xs text-foreground">Nizek</div>
+            <ul className="mt-8 space-y-5">
+              {[
+                "Creates founders",
+                "Builds technology",
+                "Controls execution",
+                "Owns infrastructure",
+                "Launches repeatedly",
+              ].map((t) => (
+                <li key={t} className="border-b border-border pb-4 text-lg text-foreground">
+                  {t}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </Section>
 
+      <Section id="investors" invert>
+        <SectionHeading index="13 — Investor case" title="Why Investors Win" />
+        <div className="grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2">
+          {[
+            ["Diversification", "Exposure to dozens of startups instead of one."],
+            ["Deal Flow", "See opportunities before the market."],
+            ["Execution", "Built by an experienced venture studio."],
+            [
+              "Optional Follow-on",
+              "Opportunity to participate in future funding rounds, subject to the investment terms.",
+            ],
+          ].map(([t, d]) => (
+            <div key={t} className="bg-background p-10">
+              <div className="display-xl text-2xl md:text-3xl">{t}</div>
+              <p className="mt-6 text-sm leading-relaxed text-muted-foreground">{d}</p>
+            </div>
+          ))}
+        </div>
+      </Section>
 
-      {/* Institutional fund structure */}
+      <Section id="investment">
+        <SectionHeading
+          index="14 — The investment"
+          title="One Investment. Fifty Companies."
+          lede="Instead of investing in one startup, invest in the platform that creates them."
+        />
+        <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-3">
+          {[
+            [
+
+              "Per seat, per quarter",
+              kd(SEAT_QUARTERLY_COMMITMENT),
+              `every quarter for ${COMMITMENT_YEARS} years — ${kd(SEAT_ANNUAL_COMMITMENT)} a year, ${kd(SEAT_MAX_COMMITMENT)} per seat`,
+            ],
+            [
+              "Your commitment",
+              `${kd(result.seats * SEAT_QUARTERLY_COMMITMENT)} / quarter`,
+              `${result.seats} seat${result.seats > 1 ? "s" : ""} — ${kd(result.annualCommitment)} a year, ${kd(result.maxCommitment)} over ${COMMITMENT_YEARS} years`,
+            ],
+
+            [
+              "Nizek commits to",
+              `${fmtNumber(inputs.startupsPerYear)} startups`,
+              `every year — minimum ${fmtNumber(result.totalStartups)}`,
+            ],
+          ].map(([l, v, n]) => (
+
+            <div key={l} className="bg-background p-10">
+              <div className="label-xs">{l}</div>
+              <div className="num mt-6 text-4xl text-foreground md:text-5xl">{v}</div>
+              <div className="mt-4 text-xs text-subtle">{n}</div>
+            </div>
+          ))}
+        </div>
+        <Reveal>
+          <div className="mt-16 max-w-3xl border-l border-border-strong pl-8">
+            <p className="display-xl text-3xl md:text-5xl">
+              Investor participates in a share of Nizek's ownership in every startup created
+              during those five years.
+            </p>
+            <p className="mt-6 text-sm text-muted-foreground">Not ownership in Nizek.</p>
+          </div>
+        </Reveal>
+      </Section>
+
+      <Section id="ownership" invert>
+        <SectionHeading
+          index="15 — Limited ownership"
+          title="Only Six Ownership Seats."
+          lede="This investment vehicle is intentionally limited to only six ownership seats."
+        />
+        <div className="grid grid-cols-1 gap-16 lg:grid-cols-[1.1fr_1fr]">
+          <Reveal>
+            <div className="space-y-6 text-base leading-relaxed text-muted-foreground md:text-lg">
+              <p>
+                Each seat represents {SEAT_OWNERSHIP}% ownership of Nizek's equity across every
+                startup created during this five-year venture creation program.
+              </p>
+              <p>
+                Each seat requires a quarterly commitment of {kd(SEAT_QUARTERLY_COMMITMENT)} —
+                {" "}{kd(SEAT_ANNUAL_COMMITMENT)} a year over five years. Maximum commitment per seat is{" "}
+                {kd(SEAT_MAX_COMMITMENT)}.
+              </p>
+              <p className="text-foreground">
+                Once all six seats have been allocated, this investment vehicle will be closed.
+              </p>
+            </div>
+          </Reveal>
+          <Reveal delay={100}>
+            <div className="grid grid-cols-3 gap-px border border-border bg-border">
+              {[
+                [String(TOTAL_SEATS), "Total seats"],
+                [String(RESERVED_SEATS.length), "Reserved"],
+                [String(TOTAL_SEATS - RESERVED_SEATS.length), "Remaining"],
+              ].map(([v, l]) => (
+                <div key={l} className="bg-background p-6 text-center">
+                  <div className="num text-4xl text-foreground md:text-5xl">{v}</div>
+                  <div className="label-xs mt-4">{l}</div>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+
+        <div className="mt-16 grid grid-cols-2 gap-px border border-border bg-border md:mt-24 md:grid-cols-3 lg:grid-cols-6">
+
+          {Array.from({ length: TOTAL_SEATS }, (_, i) => {
+            const n = i + 1;
+            const reserved = RESERVED_SEATS.includes(n);
+            return (
+              <Reveal key={n} delay={i * 60}>
+                <div
+                  className={`h-full p-8 transition-colors duration-300 ${
+                    reserved ? "bg-foreground text-background" : "bg-background"
+                  }`}
+                >
+                  <div className="num text-xs opacity-60">Seat {String(n).padStart(2, "0")}</div>
+                  <div className="display-xl mt-10 text-2xl md:text-3xl">
+                    {reserved ? "Taken" : "Available"}
+                  </div>
+                  <div className="mt-6 text-[11px] leading-relaxed opacity-60">
+                    {SEAT_OWNERSHIP}% · {kd(SEAT_QUARTERLY_COMMITMENT)} / quarter
+                  </div>
+                </div>
+              </Reveal>
+            );
+          })}
+        </div>
+      </Section>
+
+      <Section id="capital">
+        <SectionHeading index="16 — Capital deployment" title="Where The Money Goes" />
+        <div className="grid grid-cols-2 gap-px border border-border bg-border md:grid-cols-4">
+          {["Developers", "Marketing", "Operations", "Ecosystem"].map(
+            (s, i) => (
+              <div key={s} className="bg-background p-8">
+                <div className="num text-xs text-subtle">{String(i + 1).padStart(2, "0")}</div>
+                <div className="display-xl mt-6 text-2xl leading-tight md:text-3xl">{s}</div>
+              </div>
+            ),
+          )}
+        </div>
+        <Reveal>
+          <p className="display-xl mt-16 text-3xl md:text-5xl">
+            Every dinar creates assets. Not overhead.
+          </p>
+        </Reveal>
+      </Section>
+
       <Section id="lifecycle" invert>
         <SectionHeading
-          index="09b — Institutional Fund Structure"
+          index="17 — Institutional Fund Structure"
           title="One Fund. Fifty Companies. One Ownership Structure."
           lede="To provide investors with a simple, transparent and scalable ownership model, all investments are made through a dedicated investment fund established in Abu Dhabi, UAE."
         />
@@ -929,227 +1184,6 @@ function PlatformPage() {
           ))}
         </div>
       </Section>
-
-
-      {/* 09c — From building to independence */}
-      <Section id="independence">
-        <SectionHeading
-          index="09c — Operating model"
-          title="From Building To Independence"
-          lede="NIZEK does not permanently support every startup with its internal team. We provide the technology, product development and engineering needed to launch and validate the business in its first year — then hand it over."
-        />
-
-        <div className="grid grid-cols-1 gap-px border border-border bg-border lg:grid-cols-3">
-          <div className="bg-background p-10">
-            <div className="label-xs">The model</div>
-            <p className="mt-6 text-base leading-relaxed text-muted-foreground">
-              Every startup accepted into the NIZEK Venture Studio receives a full product and
-              engineering organisation from day one, in exchange for an agreed equity stake.
-            </p>
-            <ul className="mt-8 flex flex-col">
-              {[
-                "Product Strategy",
-                "UI/UX Design",
-                "Software Development",
-                "Technical Leadership",
-                "Product Management",
-                "Infrastructure & DevOps",
-                "Technical Support",
-              ].map((s, i) => (
-                <li
-                  key={s}
-                  className="flex items-baseline gap-4 border-b border-border py-3 last:border-b-0"
-                >
-                  <span className="num text-xs text-subtle">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="text-base text-foreground">{s}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="mt-8 text-sm leading-relaxed text-subtle">
-              Founders focus on building the business, acquiring customers and validating the
-              market — not on hiring and managing an engineering team from day one.
-            </p>
-          </div>
-
-          <div className="bg-background p-10">
-            <div className="label-xs">The transition</div>
-            <div className="display-xl mt-6 text-3xl md:text-4xl">
-              Built To Become Independent.
-            </div>
-            <p className="mt-6 text-base leading-relaxed text-muted-foreground">
-              At the end of the first year, the startup begins building its own internal
-              technology team. NIZEK supports the transition through documentation, knowledge
-              transfer and technical handover.
-            </p>
-            <p className="mt-6 text-base leading-relaxed text-muted-foreground">
-              The engineering team gradually moves from NIZEK to the startup, freeing NIZEK to
-              redirect its resources toward building the next generation of companies.
-            </p>
-          </div>
-
-          <div className="bg-background p-10">
-            <div className="label-xs">Why this matters</div>
-            <div className="display-xl mt-6 text-3xl md:text-4xl">
-              Engineering Capacity Is Recycled, Not Consumed.
-            </div>
-            <p className="mt-6 text-base leading-relaxed text-muted-foreground">
-              Instead of permanently allocating developers to mature companies, capacity returns
-              to the studio and is reinvested into new ventures. That is what makes the program
-              repeatable, scalable and capital efficient.
-            </p>
-            <div className="mt-10 grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-3">
-              {["Repeatable", "Scalable", "Capital efficient"].map((t) => (
-                <div key={t} className="bg-background px-5 py-6 text-sm text-foreground">
-                  {t}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Animated horizontal timeline */}
-        <div className="mt-16">
-          <div className="label-xs mb-8">The cycle</div>
-          <div className="grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              { t: "Startup Accepted", n: "Into the venture studio" },
-              { t: "NIZEK Builds Product", n: "Year 1" },
-              { t: "Market Validation", n: "Customers, traction, proof" },
-              { t: "Startup Hires Internal Team", n: "Its own engineers" },
-              { t: "Knowledge Transfer", n: "Documentation and handover" },
-              { t: "Independent Company", n: "Technically self-sufficient" },
-              { t: "NIZEK Builds The Next Startup", n: "Capacity recycled" },
-              { t: "Repeat", n: "The loop closes" },
-            ].map((s, i) => (
-              <Reveal key={s.t} delay={i * 80} className="bg-background">
-                <div className="flex h-full flex-col justify-between p-8">
-                  <span className="num text-xs text-subtle">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <div className="mt-10">
-                    <div className="display-xl text-xl md:text-2xl">{s.t}</div>
-                    <div className="mt-3 text-xs text-muted-foreground">{s.n}</div>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-
-        <Reveal>
-          <p className="mt-16 max-w-4xl text-2xl leading-snug text-foreground md:text-3xl">
-            NIZEK's goal is not to become a startup's long-term software company. Our goal is to
-            launch it, validate it and prepare it to stand on its own — so the studio can keep
-            creating new companies without increasing operational complexity.
-          </p>
-        </Reveal>
-      </Section>
-
-
-
-
-      {/* 8 — Founder pipeline */}
-      <Section id="founders" invert>
-        <SectionHeading
-          index="10 — Founder pipeline"
-          title="We Don't Find Founders. We Qualify Them."
-          lede="Venture capital's hardest problem is founder risk: a handful of meetings, then a decade of consequences. Nizek runs a repeatable system for discovering, testing and selecting founders before a single dinar is committed."
-        />
-
-        <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-2">
-          <div className="bg-background p-10">
-            <div className="label-xs">The problem</div>
-            <p className="mt-8 text-lg leading-relaxed text-subtle">
-              Most investors meet entrepreneurs through pitch events, introductions or
-              applications, and must decide after a few conversations. Execution is
-              discovered after the money is gone.
-            </p>
-          </div>
-          <div className="bg-background p-10">
-            <div className="label-xs text-foreground">Our solution</div>
-            <p className="mt-8 text-lg leading-relaxed text-foreground">
-              Every founder enters the Nizek Founder Residency first — roughly six months
-              building inside one of our existing startups. Only those who prove
-              themselves are offered investment.
-            </p>
-          </div>
-        </div>
-
-        {/* Flow */}
-        <div className="mt-24">
-          <div className="label-xs">The process</div>
-          <div className="mt-10 grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2 md:grid-cols-3">
-            {[
-              { t: "Applications", d: "Open, continuous inbound from the region's operators." },
-              { t: "Founder Residency", d: "~6 months building inside a live Nizek startup." },
-              { t: "Performance Evaluation", d: "Judged on real output, not a pitch deck." },
-              { t: "Founder Approved", d: "Both sides decide to build a company together." },
-              { t: "Investment", d: "Capital, equity and platform are committed." },
-              { t: "Startup Launch", d: "The company enters the annual cohort." },
-            ].map((s, i) => (
-              <Reveal key={s.t} delay={i * 90}>
-                <div className="flex h-full flex-col justify-between bg-background p-8">
-                  <div>
-                    <span className="num text-xs text-subtle">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <div className="display-xl mt-6 text-2xl leading-tight md:text-3xl">
-                      {s.t}
-                    </div>
-                  </div>
-                  <p className="mt-8 text-sm leading-relaxed text-subtle">{s.d}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-
-        {/* What we evaluate */}
-        <div className="mt-24">
-          <div className="label-xs">What the residency measures</div>
-          <div className="mt-8 grid grid-cols-1 gap-x-12 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              "Execution",
-              "Leadership",
-              "Commitment",
-              "Problem solving",
-              "Product thinking",
-              "Communication",
-              "Work under pressure",
-              "Cultural fit",
-            ].map((t, i) => (
-              <Reveal key={t} delay={i * 50}>
-                <div className="border-b border-border py-5 text-lg text-foreground">{t}</div>
-              </Reveal>
-            ))}
-          </div>
-          <Reveal>
-            <p className="mt-10 max-w-2xl text-base leading-relaxed text-muted-foreground">
-              The founder is evaluating us at the same time. By the end of the residency,
-              both sides know the answer.
-            </p>
-          </Reveal>
-        </div>
-
-        {/* Key message */}
-        <Reveal>
-          <div className="mt-24 border-t border-border-strong pt-12">
-            <p className="display-xl max-w-5xl text-3xl leading-tight md:text-6xl">
-              Traditional venture capital invests first and evaluates execution later.
-              Nizek evaluates execution first and invests later.
-            </p>
-            <p className="mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground">
-              The result is a continuous pipeline of founders who have already proven they
-              can execute before receiving capital — making the studio repeatable,
-              scalable and far less dependent on luck.
-            </p>
-          </div>
-        </Reveal>
-      </Section>
-
-      {/* 9 — Live business model */}
 
       <section id="model" className="border-t border-border">
         <div className="px-6 py-24 md:px-12 md:py-32">
@@ -1644,69 +1678,8 @@ function PlatformPage() {
         </div>
       </section>
 
-
-      <TeamSection />
-
-      {/* 10 — Current proof */}
-      <Section id="proof">
-        <SectionHeading index="11 — Current proof" title="Not Theory. Reality." />
-        <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-2">
-          {[
-            {
-              name: "Ad Space",
-              time: "6 months",
-              val: "KD3M",
-              basis: "Valuation basis: latest priced round discussions and comparable regional media-tech multiples.",
-            },
-            {
-              name: "Hazawy",
-              time: "2 months",
-              val: "KD1.5M",
-              basis: "Valuation basis: internal build cost, traction to date and comparable early-stage GCC rounds.",
-            },
-          ].map((c) => (
-            <div key={c.name} className="bg-background p-10 md:p-14">
-              <div className="display-xl text-4xl md:text-6xl">{c.name}</div>
-              <div className="mt-10 flex gap-16">
-                <div>
-                  <div className="label-xs">Time to build</div>
-                  <div className="num mt-3 text-2xl">{c.time}</div>
-                </div>
-                <div>
-                  <div className="label-xs">Indicative valuation</div>
-                  <div className="num mt-3 text-2xl">{c.val}</div>
-                </div>
-              </div>
-              <p className="mt-10 max-w-md text-xs leading-relaxed text-subtle">{c.basis}</p>
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      {/* 11 — Why investors win */}
-      <Section id="investors" invert>
-        <SectionHeading index="12 — Investor case" title="Why Investors Win" />
-        <div className="grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2">
-          {[
-            ["Diversification", "Exposure to dozens of startups instead of one."],
-            ["Deal Flow", "See opportunities before the market."],
-            ["Execution", "Built by an experienced venture studio."],
-            [
-              "Optional Follow-on",
-              "Opportunity to participate in future funding rounds, subject to the investment terms.",
-            ],
-          ].map(([t, d]) => (
-            <div key={t} className="bg-background p-10">
-              <div className="display-xl text-2xl md:text-3xl">{t}</div>
-              <p className="mt-6 text-sm leading-relaxed text-muted-foreground">{d}</p>
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      {/* 12 — Timeline */}
       <Section id="timeline">
-        <SectionHeading index="13 — Timeline" title="Fifty Companies In Five Years" />
+        <SectionHeading index="19 — Timeline" title="Fifty Companies In Five Years" />
         <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-6">
           {[
             ["Year 1", "10"],
@@ -1734,7 +1707,6 @@ function PlatformPage() {
 
       </Section>
 
-      {/* 13 — Closing */}
       <Section id="contact" invert>
         <Reveal>
           <h2 className="display-xl max-w-5xl text-4xl md:text-7xl">
@@ -1766,6 +1738,7 @@ function PlatformPage() {
           </a>
         </Reveal>
       </Section>
+
     </div>
   );
 }
