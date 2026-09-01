@@ -508,7 +508,7 @@ function PlatformPage() {
 
       <EquitySection />
 
-      <Section id="track-record" invert>
+      <Section id="track-record">
         <SectionHeading index="07 — Track record" title="We've Been Building Since 2009" />
         <Reveal>
           <div className="flex items-baseline justify-between border-b border-border-strong pb-6">
@@ -548,7 +548,7 @@ function PlatformPage() {
 
       <TeamSection />
 
-      <Section id="proof">
+      <Section id="proof" invert>
         <SectionHeading index="09 — Current proof" title="Not Theory. Reality." />
         <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-2">
           {[
@@ -583,7 +583,7 @@ function PlatformPage() {
         </div>
       </Section>
 
-      <Section id="diversification" invert>
+      <Section id="diversification">
         <SectionHeading
           index="10 — Diversification"
           title="One Investment. Fifty Opportunities."
@@ -634,7 +634,7 @@ function PlatformPage() {
         </Reveal>
       </Section>
 
-      <Section id="visibility">
+      <Section id="visibility" invert>
         <SectionHeading
           index="11 — Early visibility"
           title="See Tomorrow's Companies Before Everyone Else."
@@ -677,7 +677,7 @@ function PlatformPage() {
         </Reveal>
       </Section>
 
-      <Section id="regional" invert>
+      <Section id="regional">
         <SectionHeading
           index="12 — Regional first"
           title="Built for the GCC. Designed to Scale Beyond Borders."
@@ -872,7 +872,7 @@ function PlatformPage() {
         </Reveal>
       </Section>
 
-      <Section id="comparison">
+      <Section id="comparison" invert>
         <SectionHeading index="13 — Comparison" title="Why This Is Different" />
         <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-2">
           <div className="bg-background p-10">
@@ -910,7 +910,7 @@ function PlatformPage() {
         </div>
       </Section>
 
-      <Section id="investors" invert>
+      <Section id="investors">
         <SectionHeading index="14 — Investor case" title="Why Investors Win" />
         <div className="grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2">
           {[
@@ -930,7 +930,7 @@ function PlatformPage() {
         </div>
       </Section>
 
-      <Section id="investment">
+      <Section id="investment" invert>
         <SectionHeading
           index="15 — The investment"
           title="One Investment. Fifty Companies."
@@ -975,7 +975,7 @@ function PlatformPage() {
         </Reveal>
       </Section>
 
-      <Section id="ownership" invert>
+      <Section id="ownership">
         <SectionHeading
           index="16 — Limited ownership"
           title="Only Six Ownership Seats."
@@ -1040,7 +1040,7 @@ function PlatformPage() {
         </div>
       </Section>
 
-      <Section id="capital">
+      <Section id="capital" invert>
         <SectionHeading index="17 — Capital deployment" title="Where The Money Goes" />
         <div className="grid grid-cols-2 gap-px border border-border bg-border md:grid-cols-4">
           {["Developers", "Marketing", "Operations", "Ecosystem"].map(
@@ -1059,7 +1059,7 @@ function PlatformPage() {
         </Reveal>
       </Section>
 
-      <Section id="lifecycle" invert>
+      <Section id="lifecycle">
         <SectionHeading
           index="18 — Institutional Fund Structure"
           title="One Fund. Fifty Companies. One Ownership Structure."
@@ -1681,7 +1681,7 @@ function PlatformPage() {
         </div>
       </section>
 
-      <Section id="timeline">
+      <Section id="timeline" invert>
         <SectionHeading index="20 — Timeline" title="Fifty Companies In Five Years" />
         <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-6">
           {[
@@ -1710,7 +1710,7 @@ function PlatformPage() {
 
       </Section>
 
-      <Section id="contact" invert>
+      <Section id="contact">
         <Reveal>
           <h2 className="display-xl max-w-5xl text-4xl md:text-7xl">
             We Didn't Build One Startup.

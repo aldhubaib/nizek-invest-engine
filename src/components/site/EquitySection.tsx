@@ -49,7 +49,7 @@ function Arrow({ caption }: { caption?: string }) {
 
 export function EquitySection() {
   return (
-    <Section id="equity">
+    <Section id="equity" invert>
       <SectionHeading
         index="06 — Our equity model"
         title="We Earn Equity By Building Companies, Not By Funding Them."
