@@ -3,6 +3,7 @@ import { useCallback, useMemo, useState } from "react";
 
 import { AnimatedNumber } from "@/components/model/AnimatedNumber";
 import { ValueField } from "@/components/model/ValueField";
+import { EquitySection } from "@/components/site/EquitySection";
 import { TeamSection } from "@/components/site/TeamSection";
 import { Reveal, Section, SectionHeading } from "@/components/ui/primitives";
 import { multiple, number as fmtNumber, percent } from "@/model/format";
@@ -505,8 +506,10 @@ function PlatformPage() {
         </Reveal>
       </Section>
 
+      <EquitySection />
+
       <Section id="track-record" invert>
-        <SectionHeading index="06 — Track record" title="We've Been Building Since 2009" />
+        <SectionHeading index="07 — Track record" title="We've Been Building Since 2009" />
         <Reveal>
           <div className="flex items-baseline justify-between border-b border-border-strong pb-6">
             <span className="display-xl text-4xl md:text-7xl">2009</span>
@@ -546,7 +549,7 @@ function PlatformPage() {
       <TeamSection />
 
       <Section id="proof">
-        <SectionHeading index="08 — Current proof" title="Not Theory. Reality." />
+        <SectionHeading index="09 — Current proof" title="Not Theory. Reality." />
         <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-2">
           {[
             {
@@ -582,7 +585,7 @@ function PlatformPage() {
 
       <Section id="diversification" invert>
         <SectionHeading
-          index="09 — Diversification"
+          index="10 — Diversification"
           title="One Investment. Fifty Opportunities."
           lede="Backing a single startup is a binary bet: it works, or the capital is gone. Participating across a studio portfolio spreads that same commitment over 50+ companies built on shared infrastructure — no single outcome decides the result."
         />
@@ -633,7 +636,7 @@ function PlatformPage() {
 
       <Section id="visibility">
         <SectionHeading
-          index="10 — Early visibility"
+          index="11 — Early visibility"
           title="See Tomorrow's Companies Before Everyone Else."
           lede="Most investors meet a company when it is already raising — the story is polished, the price is set, the seats are taken. Inside the studio, investors see companies from the day they are created, and watch how they actually behave over time."
         />
@@ -676,7 +679,7 @@ function PlatformPage() {
 
       <Section id="regional" invert>
         <SectionHeading
-          index="11 — Regional first"
+          index="12 — Regional first"
           title="Built for the GCC. Designed to Scale Beyond Borders."
           lede="Nizek does not build companies for a single city or a single country. Every venture is designed from day one with regional expansion in mind."
         />
@@ -870,7 +873,7 @@ function PlatformPage() {
       </Section>
 
       <Section id="comparison">
-        <SectionHeading index="12 — Comparison" title="Why This Is Different" />
+        <SectionHeading index="13 — Comparison" title="Why This Is Different" />
         <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-2">
           <div className="bg-background p-10">
             <div className="label-xs">Traditional VC</div>
@@ -908,7 +911,7 @@ function PlatformPage() {
       </Section>
 
       <Section id="investors" invert>
-        <SectionHeading index="13 — Investor case" title="Why Investors Win" />
+        <SectionHeading index="14 — Investor case" title="Why Investors Win" />
         <div className="grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2">
           {[
             ["Diversification", "Exposure to dozens of startups instead of one."],
@@ -929,7 +932,7 @@ function PlatformPage() {
 
       <Section id="investment">
         <SectionHeading
-          index="14 — The investment"
+          index="15 — The investment"
           title="One Investment. Fifty Companies."
           lede="Instead of investing in one startup, invest in the platform that creates them."
         />
@@ -974,7 +977,7 @@ function PlatformPage() {
 
       <Section id="ownership" invert>
         <SectionHeading
-          index="15 — Limited ownership"
+          index="16 — Limited ownership"
           title="Only Six Ownership Seats."
           lede="This investment vehicle is intentionally limited to only six ownership seats."
         />
@@ -1038,7 +1041,7 @@ function PlatformPage() {
       </Section>
 
       <Section id="capital">
-        <SectionHeading index="16 — Capital deployment" title="Where The Money Goes" />
+        <SectionHeading index="17 — Capital deployment" title="Where The Money Goes" />
         <div className="grid grid-cols-2 gap-px border border-border bg-border md:grid-cols-4">
           {["Developers", "Marketing", "Operations", "Ecosystem"].map(
             (s, i) => (
@@ -1058,7 +1061,7 @@ function PlatformPage() {
 
       <Section id="lifecycle" invert>
         <SectionHeading
-          index="17 — Institutional Fund Structure"
+          index="18 — Institutional Fund Structure"
           title="One Fund. Fifty Companies. One Ownership Structure."
           lede="To provide investors with a simple, transparent and scalable ownership model, all investments are made through a dedicated investment fund established in Abu Dhabi, UAE."
         />
@@ -1189,7 +1192,7 @@ function PlatformPage() {
         <div className="px-6 py-24 md:px-12 md:py-32">
           <div className="mx-auto w-full max-w-[1400px]">
             <Reveal>
-              <div className="label-xs">18 — The investment simulator</div>
+              <div className="label-xs">19 — The investment simulator</div>
               <h2 className="display-xl mt-6 text-5xl md:text-8xl">
                 If Nizek builds successful companies, what could your investment become?
               </h2>
@@ -1679,7 +1682,7 @@ function PlatformPage() {
       </section>
 
       <Section id="timeline">
-        <SectionHeading index="19 — Timeline" title="Fifty Companies In Five Years" />
+        <SectionHeading index="20 — Timeline" title="Fifty Companies In Five Years" />
         <div className="grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-6">
           {[
             ["Year 1", "10"],
