@@ -980,19 +980,33 @@ function PlatformPage() {
                           </div>
                           <div className="grid min-w-0 flex-1 grid-cols-2 gap-x-6 gap-y-6 sm:grid-cols-4">
                             {[
-                              ["Invested", kd(c.capitalInvested)],
-                              ["Successes", fmtNumber(c.successes)],
-                              ["Exit valuation", kd(c.portfolioValue)],
-                              ["Nizek equity", kd(c.nizekEquityValue)],
-                            ].map(([l, v]) => (
-                              <div key={l} className="min-w-0">
+                              ["Invested", kd(c.capitalInvested), null],
+                              ["Successes", fmtNumber(c.successes), null],
+                              [
+                                "Exit valuation",
+                                kd(c.portfolioValue),
+                                c.exitValues.length > 1
+                                  ? `${c.exitValues
+                                      .map((v) => kd(v).replace("KD", ""))
+                                      .join(" + ")} = ${kd(c.portfolioValue).replace("KD", "")}`
+                                  : null,
+                              ],
+                              ["Nizek equity", kd(c.nizekEquityValue), null],
+                            ].map(([l, v, breakdown]) => (
+                              <div key={l as string} className="min-w-0">
                                 <div className="label-xs">{l}</div>
                                 <div className="num mt-2 break-words text-xs text-foreground">
                                   {v}
                                 </div>
+                                {breakdown ? (
+                                  <div className="num mt-1 break-words text-[10px] text-muted-foreground">
+                                    {breakdown}
+                                  </div>
+                                ) : null}
                               </div>
                             ))}
                           </div>
+
                           <div className="md:w-52 md:text-right">
                             <div className="label-xs">Cohort exit value</div>
                             <div className="num mt-2 text-xl text-foreground md:text-2xl">
