@@ -61,6 +61,10 @@ export interface BenchmarkResult {
 
 export interface InvestmentResult {
   inputs: InvestmentInputs;
+  seats: number;
+  ownershipPercent: number;
+  annualCommitment: number;
+  maxCommitment: number;
   totalInvestment: number;
   totalStartups: number;
   totalSuccesses: number;
@@ -182,6 +186,10 @@ export function projectInvestment(input: InvestmentInputs): InvestmentResult {
 
   return {
     inputs: input,
+    seats,
+    ownershipPercent,
+    annualCommitment,
+    maxCommitment: totalInvestment,
     totalInvestment,
     totalStartups: startups * COMMITMENT_YEARS,
     totalSuccesses: cohorts.reduce((s2, c) => s2 + c.successes, 0),
@@ -203,13 +211,7 @@ export function projectInvestment(input: InvestmentInputs): InvestmentResult {
 
 export const defaultInvestmentInputs: InvestmentInputs = {
   startupsPerYear: 10,
-  capitalByYear: [
-    ANNUAL_COMMITMENT,
-    ANNUAL_COMMITMENT,
-    ANNUAL_COMMITMENT,
-    ANNUAL_COMMITMENT,
-    ANNUAL_COMMITMENT,
-  ],
+  seats: 2,
   successesByYear: [3, 3, 3, 3, 3],
   exitValuesByYear: [
     [5_000_000, 3_000_000, 2_000_000],
@@ -219,7 +221,6 @@ export const defaultInvestmentInputs: InvestmentInputs = {
     [5_000_000, 3_000_000, 2_000_000],
   ],
   avgNizekOwnership: 30,
-  investorShare: 25,
   realEstateYield: 7,
   publicMarketReturn: 8,
 };
@@ -258,16 +259,6 @@ export const investmentControls: InvestmentControlMeta[] = [
     step: 1,
     unit: "percent",
     help: "Average equity NIZEK holds in successful companies at exit.",
-    group: "Ownership",
-  },
-  {
-    key: "investorShare",
-    label: "Investor share of NIZEK",
-    min: 0,
-    max: 100,
-    step: 1,
-    unit: "percent",
-    help: "Share of NIZEK's ownership the investor participates in. Not ownership of NIZEK itself.",
     group: "Ownership",
   },
 ];
