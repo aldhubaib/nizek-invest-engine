@@ -240,8 +240,33 @@ function InvestorsDashboard() {
                     <td className="py-4 pr-4">{i.visits ? `${i.visits} visits` : "—"}</td>
                     <td className="py-4 pr-4">{duration(i.activeSeconds)}</td>
                     <td className="py-4 pr-4">{i.simulatorUsed ? "Yes" : "No"}</td>
-                    <td className="py-4">
+                    <td className="py-4 pr-4">
                       {i.allocationRequested ? i.allocationPositions || "Yes" : "—"}
+                    </td>
+                    <td className="py-4">
+                      {links[i.id] ? (
+                        <div className="flex items-center gap-3">
+                          <span className="max-w-[220px] truncate font-mono text-[11px] text-muted-foreground">
+                            {links[i.id]}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => copy(i.id, links[i.id])}
+                            className="border border-foreground px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em]"
+                          >
+                            {copiedId === i.id ? "Copied" : "Copy"}
+                          </button>
+                        </div>
+                      ) : (
+                        <button
+                          type="button"
+                          disabled={rotate.isPending && rotate.variables === i.id}
+                          onClick={() => rotate.mutate(i.id)}
+                          className="border border-border px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] disabled:opacity-40"
+                        >
+                          {rotate.isPending && rotate.variables === i.id ? "Generating…" : "Generate link"}
+                        </button>
+                      )}
                     </td>
                   </tr>
                 ))}
