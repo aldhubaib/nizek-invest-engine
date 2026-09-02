@@ -60,7 +60,7 @@ function InvestorDetail() {
 
   const rotate = useMutation({
     mutationFn: () => rotateInvestorToken({ data: { id } }),
-    onSuccess: (res) => setInvite(`${window.location.origin}${res.invitePath}`),
+    onSuccess: (res) => setInvite(publicLink(res.invitePath)),
   });
 
   const saveNotes = useMutation({
