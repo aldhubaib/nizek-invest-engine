@@ -45,7 +45,6 @@ export function ReserveSection() {
   const [form, setForm] = useState({
     fullName: "",
     company: "",
-    email: "",
     phone: "",
     message: "",
   });
@@ -56,11 +55,11 @@ export function ReserveSection() {
     setForm((prev) => ({
       ...prev,
       fullName: prev.fullName || investor.fullName,
-      email: prev.email || investor.email,
       phone: prev.phone || investor.phone,
       company: prev.company || investor.company,
     }));
   }, [investor]);
+
 
   const knowsDetails = Boolean(investor && form.fullName && form.phone);
 

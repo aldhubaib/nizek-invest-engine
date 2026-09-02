@@ -329,10 +329,8 @@ function InvestorsDashboard() {
                     </td>
                     <td className="py-4 pr-4">
                       <div>{r.phone}</div>
-                      {r.email ? (
-                        <div className="text-xs text-muted-foreground">{r.email}</div>
-                      ) : null}
                     </td>
+
                     <td className="py-4 pr-4">{r.positions || "—"}</td>
                     <td className="py-4 pr-4">{r.ownership}%</td>
                     <td className="py-4 pr-4">KD{r.quarterly.toLocaleString("en-US")}</td>
