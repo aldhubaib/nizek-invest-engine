@@ -170,8 +170,9 @@ export function EquitySection() {
             </div>
             <div className="grid grid-cols-1 gap-px bg-border md:grid-cols-4">
               {[
-                { l: "Founder", v: `${FOUNDER_SHARE}%`, n: "Founders keep the majority of their company." },
-                { l: "Fund A position", v: `${NIZEK_SHARE}%`, n: "Equity earned by building the company." },
+                { l: "Entrepreneur", v: "70–80%", n: "Entrepreneurs keep the majority of their company." },
+                { l: "Fund A position", v: "20–30%", n: "Equity earned by building the company." },
+
                 {
                   l: "Investor share of the Fund",
                   v: `${participation}%`,
