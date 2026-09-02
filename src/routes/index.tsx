@@ -18,6 +18,8 @@ import {
   defaultInvestmentInputs,
   investmentControls,
   investmentGroups,
+  investorPosition,
+
   projectInvestment,
   type InvestmentControlMeta,
   type InvestmentInputs,
