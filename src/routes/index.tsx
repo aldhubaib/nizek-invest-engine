@@ -298,7 +298,7 @@ function PlatformPage() {
               ["Hiring & Team Building", "We help founders recruit and build their first internal product and technology team."],
               ["Fundraising Readiness", "We prepare startups for future investment rounds with the right structure, metrics and documentation."],
               ["Operational Guidance", "We work alongside founders during the first year, helping them make critical product and business decisions."],
-              ["Knowledge Transfer", "Once the startup is ready, we transfer the technology, documentation and operational knowledge to the company's own team."],
+              ["Dedicated Team Transition", "We help the startup move from Nizek's shared venture-building resources to its own dedicated internal engineering team, with Nizek continuing as long-term CTO and technical leadership partner."],
             ].map(([t, d], i) => (
               <Reveal key={t} delay={i * 40}>
                 <div className="h-full bg-background px-6 py-8">
@@ -417,7 +417,8 @@ function PlatformPage() {
               "Launch",
               "Market Validation",
               "Startup Builds Internal Team",
-              "Knowledge Transfer",
+              "Dedicated Internal Team",
+              "Ongoing Nizek Technical Leadership",
               "Independent Company",
             ]}
           />
