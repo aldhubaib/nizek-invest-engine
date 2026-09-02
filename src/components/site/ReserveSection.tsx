@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useServerFn } from "@tanstack/react-start";
 import { Reveal, Section, SectionHeading } from "@/components/ui/primitives";
 import { submitSeatRequest } from "@/lib/investor.functions";
 import { RESERVED_SEATS, TOTAL_SEATS } from "@/model/investment";
@@ -12,7 +11,6 @@ function kd(value: number) {
 }
 
 export function ReserveSection() {
-  const submit = useServerFn(submitSeatRequest);
   const firstOpen = Array.from({ length: TOTAL_SEATS }, (_, i) => i + 1).find(
     (n) => !RESERVED_SEATS.includes(n),
   )!;
@@ -54,7 +52,7 @@ export function ReserveSection() {
     setError(null);
     setStatus("sending");
     try {
-      await submit({ data: { ...form, seats } });
+      await submitSeatRequest({ data: { ...form, seats } });
       setStatus("done");
     } catch {
       setStatus("idle");
