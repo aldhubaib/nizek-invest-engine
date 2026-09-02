@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 
 import { PresentationPage } from "@/components/site/PresentationPage";
+import { InvestorOnboarding } from "@/components/site/InvestorOnboarding";
 import { InvestorProvider } from "@/lib/investor-context";
-import { getInvestorContext } from "@/lib/investor.functions";
+import { acknowledgeConfidentiality, getInvestorContext } from "@/lib/investor.functions";
 import { useEngagement } from "@/hooks/useEngagement";
+
 
 export const Route = createFileRoute("/presentation")({
   ssr: false,
