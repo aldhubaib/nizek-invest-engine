@@ -151,8 +151,8 @@ export const createInvestor = createServerFn({ method: "POST" })
     z
       .object({
         fullName: z.string().trim().min(2).max(120),
-        email: z.string().trim().email().max(255),
-        phone: z.string().trim().max(40).optional().default(""),
+        email: z.string().trim().max(255).optional().default(""),
+        phone: z.string().trim().min(4).max(40),
         company: z.string().trim().max(160).optional().default(""),
       })
       .parse(data),
@@ -167,8 +167,8 @@ export const createInvestor = createServerFn({ method: "POST" })
       .from("investors")
       .insert({
         full_name: data.fullName,
-        email: data.email,
-        phone: data.phone || null,
+        email: data.email || null,
+        phone: data.phone,
         company: data.company || null,
         access_token_hash: await hashToken(token),
       })

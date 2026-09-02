@@ -124,7 +124,7 @@ export const getInvestorContext = createServerFn({ method: "GET" }).handler(asyn
     id: data.id,
     fullName: data.full_name,
     firstName: data.full_name.split(" ")[0] ?? data.full_name,
-    email: data.email,
+    email: data.email ?? "",
     phone: data.phone ?? "",
     company: data.company ?? "",
     allocationStatus: data.allocation_status,

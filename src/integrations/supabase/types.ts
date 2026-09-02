@@ -320,7 +320,7 @@ export type Database = {
           allocation_status: Database["public"]["Enums"]["allocation_status"]
           company: string | null
           created_at: string
-          email: string
+          email: string | null
           engagement_status: Database["public"]["Enums"]["engagement_status"]
           first_viewed_at: string | null
           full_name: string
@@ -339,7 +339,7 @@ export type Database = {
           allocation_status?: Database["public"]["Enums"]["allocation_status"]
           company?: string | null
           created_at?: string
-          email: string
+          email?: string | null
           engagement_status?: Database["public"]["Enums"]["engagement_status"]
           first_viewed_at?: string | null
           full_name: string
@@ -358,7 +358,7 @@ export type Database = {
           allocation_status?: Database["public"]["Enums"]["allocation_status"]
           company?: string | null
           created_at?: string
-          email?: string
+          email?: string | null
           engagement_status?: Database["public"]["Enums"]["engagement_status"]
           first_viewed_at?: string | null
           full_name?: string
