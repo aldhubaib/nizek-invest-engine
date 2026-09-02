@@ -1225,7 +1225,7 @@ function PlatformPage() {
               </div>
             ))}
           </aside>
-          </aside>
+
 
           <div className="px-6 py-12 md:px-12">
             <div className="flex flex-wrap items-center justify-between gap-4 border border-border px-8 py-6">
