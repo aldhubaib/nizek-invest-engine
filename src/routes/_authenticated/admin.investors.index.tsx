@@ -118,7 +118,7 @@ function InvestorsDashboard() {
         ) : null}
         {create.isError ? (
           <p className="mt-4 text-xs text-muted-foreground">
-            Could not create the investor. Confirm the email is unique and you have admin access.
+            Could not generate the link. Confirm you have admin access and try again.
           </p>
         ) : null}
       </section>

@@ -1,6 +1,7 @@
 # Roadmap
 
 ## Next
+- [x] Admin generates private investor links from name + phone (no email sending); email optional.
 - [ ] Quarterly reporting surfaces (admin entry + stakeholder view) on top of the existing portfolio_companies / quarterly_reports tables.
 
 ## Done
