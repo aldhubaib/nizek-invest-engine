@@ -61,7 +61,7 @@ function InvestorsDashboard() {
   const create = useMutation({
     mutationFn: () => createInvestor({ data: form }),
     onSuccess: (res) => {
-      setInvite(`${window.location.origin}${res.invitePath}`);
+      setInvite(publicLink(res.invitePath));
       setForm({ fullName: "", email: "", phone: "", company: "" });
       void qc.invalidateQueries({ queryKey: ["admin", "investors"] });
     },
