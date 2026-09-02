@@ -1,0 +1,1 @@
+ALTER TABLE public.investors ALTER COLUMN email DROP NOT NULL;
