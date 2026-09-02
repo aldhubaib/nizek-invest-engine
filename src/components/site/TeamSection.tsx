@@ -1,11 +1,8 @@
 import { Reveal, Section, SectionHeading } from "@/components/ui/primitives";
 import {
-  advantages,
-  currentPortfolio,
   founder,
   founderBio,
   team,
-  trackRecord,
   type TeamMember,
 } from "@/data/team";
 
