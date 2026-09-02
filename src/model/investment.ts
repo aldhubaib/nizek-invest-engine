@@ -7,16 +7,15 @@
  *
  * Venture value is NOT compounded like real estate or public equities. Each
  * annual cohort produces a small number of successful companies, and each of
- * those carries an expected exit valuation. Portfolio value is simply the sum
- * of the expected exit valuations of every successful company. Earlier cohorts
- * usually carry a higher expected exit valuation because they have had more
- * time to mature; later cohorts carry less.
+ * those carries an Estimated Enterprise Value (EEV). Portfolio value is simply
+ * the sum of the EEVs of every successful company. Earlier cohorts usually
+ * carry a higher EEV because they have had more time to mature.
  */
 
 /** Ownership seats. Six only. */
 export const TOTAL_SEATS = 6;
 export const SEAT_OWNERSHIP = 5; // % of Nizek's equity per seat
-export const SEAT_QUARTERLY_COMMITMENT = 15_000; // KD per seat, per quarter
+export const SEAT_QUARTERLY_COMMITMENT = 37_500; // KD per seat, per quarter
 export const SEAT_ANNUAL_COMMITMENT = SEAT_QUARTERLY_COMMITMENT * 4; // KD per seat, per year
 export const COMMITMENT_YEARS = 5;
 export const SEAT_MAX_COMMITMENT = SEAT_ANNUAL_COMMITMENT * COMMITMENT_YEARS;
@@ -34,7 +33,7 @@ export interface InvestmentInputs {
   seats: number;
   /** Successful companies per cohort, index 0 = Year 1 cohort. */
   successesByYear: number[];
-  /** Expected exit valuation of each successful company, per cohort. */
+  /** Estimated enterprise value of each successful company, per cohort. */
   exitValuesByYear: number[][];
   avgNizekOwnership: number; // %
   realEstateYield: number; // % annual
@@ -48,9 +47,9 @@ export interface CohortResult {
   startups: number;
   failures: number;
   successes: number;
-  exitValue: number; // average expected exit valuation per successful company
-  exitValues: number[]; // expected exit valuation of each successful company
-  portfolioValue: number; // successes x exit valuation
+  exitValue: number; // average estimated enterprise value per successful company
+  exitValues: number[]; // estimated enterprise value of each successful company
+  portfolioValue: number; // successes x estimated enterprise value
   nizekEquityValue: number;
   investorValue: number;
 }
@@ -79,7 +78,7 @@ export interface InvestmentResult {
   irr: number; // %
   cohorts: CohortResult[];
   labels: string[];
-  /** Cumulative expected exit value of every cohort created so far, Y0..Y5. */
+  /** Cumulative estimated enterprise value of every cohort created so far, Y0..Y5. */
   portfolioByYear: number[];
   investorCurve: number[];
   realEstate: BenchmarkResult;
@@ -170,7 +169,7 @@ export function projectInvestment(input: InvestmentInputs): InvestmentResult {
   const investorProfit = investorValue - totalInvestment;
   const moic = totalInvestment > 0 ? investorValue / totalInvestment : 0;
 
-  // Cumulative expected exit value of the cohorts created so far.
+  // Cumulative estimated enterprise value of the cohorts created so far.
   const labels: string[] = [];
   const portfolioByYear: number[] = [];
   for (let t = 0; t <= hold; t++) {
@@ -240,7 +239,7 @@ export interface InvestmentControlMeta {
   step: number;
   unit: "kd" | "percent" | "count" | "years";
   help: string;
-  group: "Each year" | "Exit value" | "Ownership";
+  group: "Each year" | "Company value" | "Ownership";
 }
 
 export const investmentControls: InvestmentControlMeta[] = [
@@ -261,7 +260,7 @@ export const investmentControls: InvestmentControlMeta[] = [
     max: 50,
     step: 1,
     unit: "percent",
-    help: "Average equity NIZEK holds in successful companies at exit.",
+    help: "Average equity NIZEK holds in the successful companies.",
     group: "Ownership",
   },
 ];
@@ -279,7 +278,7 @@ export const cohortExitControls = Array.from({ length: COMMITMENT_YEARS }, (_, i
   successMin: 0,
   successMax: 10,
   successStep: 1,
-  help: `Winners created in Year ${i + 1} and the expected exit valuation of each.`,
+  help: `Successful companies created in Year ${i + 1} and the estimated enterprise value of each.`,
 }));
 
-export const investmentGroups = ["Each year", "Exit value", "Ownership"] as const;
+export const investmentGroups = ["Each year", "Company value", "Ownership"] as const;

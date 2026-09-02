@@ -4,21 +4,17 @@ import nizekLogo from "@/assets/nizek-logo.png.asset.json";
 
 
 const nav = [
-  { id: "why", label: "Why" },
-  { id: "problem", label: "Problem" },
-  { id: "how-we-build", label: "Model" },
+  { id: "why", label: "Why Nizek" },
   { id: "founders", label: "Founders" },
-  { id: "equity", label: "Equity" },
-  { id: "track-record", label: "Track record" },
-  { id: "team", label: "Team" },
+  { id: "how-we-build", label: "Model" },
   { id: "regional", label: "Regional" },
-  { id: "investment", label: "Investment" },
-  { id: "ownership", label: "Seats" },
-  { id: "lifecycle", label: "Fund" },
+  { id: "equity", label: "Equity" },
+  { id: "structure", label: "Fund" },
+  { id: "advantages", label: "Advantages" },
+  { id: "investment", label: "Seats" },
   { id: "model", label: "Simulator" },
-  { id: "timeline", label: "Timeline" },
-  { id: "reserve", label: "Reserve" },
-  { id: "contact", label: "Contact" },
+  { id: "team", label: "Team" },
+  { id: "reserve", label: "Request allocation" },
 ] as const;
 
 function useActiveSection() {
@@ -102,39 +98,28 @@ export function Header() {
 
 export function Footer() {
   return (
-    <footer className="border-t border-border px-6 py-16 md:px-12">
-      <div className="mx-auto flex max-w-[1400px] flex-col justify-between gap-10 md:flex-row">
-        <div>
-          <img src={nizekLogo.url} alt="NIZEK" className="h-6 w-auto" />
-          <p className="mt-4 max-w-md text-xs leading-relaxed text-subtle">
-            All figures on this platform are generated live from a single financial model.
-            Illustrative only; not an offer to sell securities.
-          </p>
-        </div>
-        <div className="flex gap-16">
-          <div className="flex flex-col gap-3">
-            <span className="label-xs">Platform</span>
-            <a href="#how-we-build" className="text-xs text-muted-foreground hover:text-foreground">
-              Model
-            </a>
-            <a href="#model" className="text-xs text-muted-foreground hover:text-foreground">
-              Simulator
-            </a>
-            <a href="#timeline" className="text-xs text-muted-foreground hover:text-foreground">
-              Timeline
-            </a>
-          </div>
-          <div className="flex flex-col gap-3">
-            <span className="label-xs">Contact</span>
-            <a
-              href="mailto:investors@nizek.com"
-              className="text-xs text-muted-foreground hover:text-foreground"
-            >
-              investors@nizek.com
-            </a>
-          </div>
+    <footer className="border-t border-border px-6 py-12 md:px-12">
+      <div className="mx-auto flex max-w-[1400px] flex-col gap-8 md:flex-row md:items-center md:justify-between">
+        <img src={nizekLogo.url} alt="NIZEK" className="h-5 w-auto" />
+        <div className="flex flex-wrap items-center gap-x-10 gap-y-3">
+          <a
+            href="mailto:investors@nizek.com"
+            className="text-xs text-muted-foreground hover:text-foreground"
+          >
+            investors@nizek.com
+          </a>
+          <span className="text-xs text-subtle">Kuwait / GCC</span>
+          <a href="#reserve" className="text-xs text-muted-foreground hover:text-foreground">
+            Legal
+          </a>
+          <a href="#reserve" className="text-xs text-muted-foreground hover:text-foreground">
+            Privacy
+          </a>
         </div>
       </div>
+      <p className="mx-auto mt-8 max-w-[1400px] text-[11px] leading-relaxed text-subtle">
+        Illustrative only; not an offer to sell securities.
+      </p>
     </footer>
   );
 }
