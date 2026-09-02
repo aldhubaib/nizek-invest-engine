@@ -118,7 +118,7 @@ export async function buildHomePage() {
           title: "Dabdoob",
           index: "Success story",
           body: "Built with Nizek from its early stages and successfully scaled into one of the GCC's leading e-commerce companies.",
-          note: "Acquired — acquired for approximately USD 30 million.",
+          note: "Acquired — acquired for approximately KD 30 million.",
         },
         {
           title: "Provien",
