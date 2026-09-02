@@ -298,7 +298,7 @@ function PlatformPage() {
               ["Hiring & Team Building", "We help founders recruit and build their first internal product and technology team."],
               ["Fundraising Readiness", "We prepare startups for future investment rounds with the right structure, metrics and documentation."],
               ["Operational Guidance", "We work alongside founders during the first year, helping them make critical product and business decisions."],
-              ["Knowledge Transfer", "Once the startup is ready, we transfer the technology, documentation and operational knowledge to the company's own team."],
+              ["Dedicated Team Transition", "We help the startup move from Nizek's shared venture-building resources to its own dedicated internal engineering team, with Nizek continuing as long-term CTO and technical leadership partner."],
             ].map(([t, d], i) => (
               <Reveal key={t} delay={i * 40}>
                 <div className="h-full bg-background px-6 py-8">
@@ -417,7 +417,8 @@ function PlatformPage() {
               "Launch",
               "Market Validation",
               "Startup Builds Internal Team",
-              "Knowledge Transfer",
+              "Dedicated Internal Team",
+              "Ongoing Nizek Technical Leadership",
               "Independent Company",
             ]}
           />
@@ -435,22 +436,50 @@ function PlatformPage() {
             </Reveal>
             <Reveal delay={100}>
               <div className="border border-border p-8 md:p-10">
-                <div className="label-xs">The handover</div>
+                <div className="label-xs">Building an internal team</div>
                 <p className="mt-6 text-base leading-relaxed text-muted-foreground">
-                  At the end of the first year the startup begins hiring its own technology team.
-                  Nizek performs documentation, knowledge transfer and technical handover.
+                  At the end of the first year, the startup begins building its own internal
+                  technology team. Rather than replacing Nizek, the company transitions from using
+                  Nizek's shared venture-building resources to a dedicated team that works
+                  exclusively for the startup.
                 </p>
+                <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+                  Nizek remains the long-term technology partner, providing CTO leadership,
+                  technical supervision, architecture oversight, engineering standards and strategic
+                  product guidance. The startup pays only the actual cost of the dedicated
+                  engineering team plus a fixed 15% management margin.
+                </p>
+                <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+                  This model allows every startup to become operationally independent while still
+                  benefiting from Nizek's experience, governance and technical leadership.
+                </p>
+                <div className="mt-8 grid grid-cols-1 gap-px border border-border bg-border">
+                  {[
+                    "Shared Venture Studio Team",
+                    "Dedicated Internal Team",
+                    "Ongoing Technical Leadership by Nizek",
+                  ].map((t, i) => (
+                    <div key={t} className="bg-background px-5 py-5">
+                      <span className="num text-xs text-subtle">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <div className="mt-2 text-sm text-foreground">{t}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </Reveal>
             <Reveal delay={200}>
               <div className="border border-border-strong p-8 md:p-10">
                 <div className="label-xs">Why this matters</div>
                 <div className="display-xl mt-6 text-3xl md:text-4xl">
-                  Engineering Capacity Is Recycled, Not Consumed.
+                  Independent Team. Continuous Leadership.
                 </div>
                 <p className="mt-6 text-base leading-relaxed text-muted-foreground">
-                  Capacity returns to the studio and is reinvested into the next company. That is
-                  what makes the model repeatable and scalable.
+                  Every startup eventually builds its own dedicated engineering team, but founders
+                  continue benefiting from Nizek's experience and technical leadership. This ensures
+                  architectural consistency, better engineering decisions, faster hiring and lower
+                  long-term execution risk while allowing the company to scale independently.
                 </p>
                 <div className="mt-8 grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-3">
                   {["Repeatable", "Scalable", "Capital efficient"].map((t) => (
@@ -461,6 +490,7 @@ function PlatformPage() {
                 </div>
               </div>
             </Reveal>
+
           </div>
         </div>
       </Section>
