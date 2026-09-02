@@ -167,8 +167,8 @@ export const createInvestor = createServerFn({ method: "POST" })
       .from("investors")
       .insert({
         full_name: data.fullName,
-        email: data.email,
-        phone: data.phone || null,
+        email: data.email || null,
+        phone: data.phone,
         company: data.company || null,
         access_token_hash: await hashToken(token),
       })
