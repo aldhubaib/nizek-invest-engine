@@ -10,53 +10,33 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as UnlockRouteImport } from './routes/unlock'
-import { Route as ApiUnlockRouteImport } from './routes/api/unlock'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const UnlockRoute = UnlockRouteImport.update({
-  id: '/unlock',
-  path: '/unlock',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiUnlockRoute = ApiUnlockRouteImport.update({
-  id: '/api/unlock',
-  path: '/api/unlock',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/unlock': typeof UnlockRoute
-  '/api/unlock': typeof ApiUnlockRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/unlock': typeof UnlockRoute
-  '/api/unlock': typeof ApiUnlockRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/unlock': typeof UnlockRoute
-  '/api/unlock': typeof ApiUnlockRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/unlock' | '/api/unlock'
+  fullPaths: '/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/unlock' | '/api/unlock'
-  id: '__root__' | '/' | '/unlock' | '/api/unlock'
+  to: '/'
+  id: '__root__' | '/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  UnlockRoute: typeof UnlockRoute
-  ApiUnlockRoute: typeof ApiUnlockRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -68,27 +48,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/unlock': {
-      id: '/unlock'
-      path: '/unlock'
-      fullPath: '/unlock'
-      preLoaderRoute: typeof UnlockRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/unlock': {
-      id: '/api/unlock'
-      path: '/api/unlock'
-      fullPath: '/api/unlock'
-      preLoaderRoute: typeof ApiUnlockRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  UnlockRoute: UnlockRoute,
-  ApiUnlockRoute: ApiUnlockRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
