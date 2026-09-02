@@ -1070,11 +1070,8 @@ function PlatformPage() {
             </div>
           </div>
         </Reveal>
-      </Section>
-
       {/* Part 4 — the simulator, assuming the selection above */}
-      <section id="model">
-        <div>
+        <div id="model">
           {panelOpen && (
             <button
               type="button"
