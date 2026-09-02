@@ -243,12 +243,11 @@ function PlatformPage() {
           </Reveal>
         </div>
 
-        {/* Selected proof */}
+        {/* Track record */}
         <div className="mt-24">
-          <div className="label-xs">Selected proof</div>
+          <div className="label-xs">Track record</div>
           <p className="mt-8 max-w-3xl text-base leading-relaxed text-muted-foreground">
-            Four companies at four stages of the same venture-building journey — a proven success, a
-            graduated venture, a growth company and a new build.
+            Real companies built through the Nizek Venture Studio.
           </p>
           <div className="mt-10 grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
             <Reveal>
@@ -256,33 +255,36 @@ function PlatformPage() {
                 <div className="label-xs opacity-60">Success story</div>
                 <div className="display-xl mt-10 text-4xl md:text-5xl">Dabdoob</div>
                 <p className="mt-6 text-sm leading-relaxed opacity-70">
-                  Built with Nizek and grew into one of the GCC&apos;s best-known consumer
-                  technology companies.
+                  One of the GCC&apos;s best-known e-commerce platforms. Built with Nizek from its
+                  early stages and successfully scaled into a leading regional consumer technology
+                  company.
                 </p>
               </div>
             </Reveal>
             <Reveal delay={120}>
               <div className="flex h-full flex-col justify-between bg-background p-8 md:p-10">
-                <div className="label-xs text-subtle">Graduated venture</div>
+                <div className="label-xs text-subtle">Series A</div>
                 <div className="display-xl mt-10 text-4xl md:text-5xl">Provien</div>
                 <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
-                  Started inside the Nizek Venture Studio, built with Nizek, and transitioned to its
-                  own dedicated engineering team. It completed its funding round and continues
-                  operating independently with Nizek&apos;s long-term technology leadership.
+                  Built inside the Nizek Venture Studio. After validation, the company transitioned
+                  to its own dedicated engineering team while continuing under Nizek&apos;s
+                  long-term technical leadership.
                 </p>
-                <div className="label-xs mt-8 text-foreground">Funding round completed</div>
+                <div className="label-xs mt-8 text-foreground">
+                  Series A funding round completed
+                </div>
               </div>
             </Reveal>
             {[
               {
                 name: "Ad Space",
-                desc: "Building the future of Digital Out-of-Home advertising across the GCC.",
+                desc: "A regional Digital Out-of-Home advertising platform currently being built inside the Nizek Venture Studio.",
                 time: "6 months",
                 val: "KD3M",
               },
               {
                 name: "Hazawy",
-                desc: "Building a modern digital marketplace.",
+                desc: "A modern commerce platform currently being built inside the Nizek Venture Studio.",
                 time: "2 months",
                 val: "KD1.5M",
               },
@@ -303,13 +305,27 @@ function PlatformPage() {
                     </div>
                   </div>
                   <p className="mt-6 text-[11px] leading-relaxed text-subtle">
-                    Illustrative current company value based on the latest available valuation
-                    basis. Not a guaranteed future value.
+                    Indicative current company value based on the latest available valuation basis.
+                    Not a guaranteed future value.
                   </p>
                 </div>
               </Reveal>
             ))}
           </div>
+
+          <Reveal>
+            <div className="mt-px border border-border bg-background p-8 md:p-10">
+              <p className="max-w-4xl text-xl leading-snug md:text-2xl">
+                Every company shown here is a real venture that has been built or is currently being
+                built through the Nizek Venture Studio.
+              </p>
+              <p className="mt-6 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+                Our portfolio spans multiple stages — from successful exits and funded companies to
+                ventures currently under construction. We believe investors should evaluate our
+                ability to repeatedly build companies, not just individual success stories.
+              </p>
+            </div>
+          </Reveal>
         </div>
 
 
