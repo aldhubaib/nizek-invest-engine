@@ -1,10 +1,16 @@
 import { useState } from "react";
 import { Reveal, Section, SectionHeading } from "@/components/ui/primitives";
 import { submitSeatRequest } from "@/lib/investor.functions";
-import { RESERVED_SEATS, TOTAL_SEATS } from "@/model/investment";
+import {
+  COMMITMENT_YEARS,
+  RESERVED_SEATS,
+  SEAT_ANNUAL_COMMITMENT,
+  SEAT_OWNERSHIP,
+  TOTAL_SEATS,
+} from "@/model/investment";
 
-const ANNUAL_PER_SEAT = 150_000;
-const OWNERSHIP_PER_SEAT = 5;
+const ANNUAL_PER_SEAT = SEAT_ANNUAL_COMMITMENT;
+const OWNERSHIP_PER_SEAT = SEAT_OWNERSHIP;
 
 function kd(value: number) {
   return `KD${value.toLocaleString("en-US")}`;
@@ -33,7 +39,7 @@ export function ReserveSection() {
     ["Ownership participation", `${seats * OWNERSHIP_PER_SEAT}%`],
     ["Annual commitment", kd(annual)],
     ["Quarterly commitment", kd(annual / 4)],
-    ["Maximum 5-year commitment", kd(annual * 5)],
+    [`Maximum ${COMMITMENT_YEARS}-year commitment`, kd(annual * COMMITMENT_YEARS)],
   ];
 
   function toggleSeat(n: number) {
@@ -66,9 +72,9 @@ export function ReserveSection() {
   return (
     <Section id="reserve" invert>
       <SectionHeading
-        index="21 — Reserve your seat"
+        index="12 — Request allocation"
         title="Choose Your Allocation."
-        lede="The Nizek Venture Fund is limited to six ownership seats. Select the number of seats you are interested in and submit your details. Our team will contact you to discuss the allocation, legal structure, and next steps."
+        lede="Select the seats you are interested in and submit your details. Our team will contact you to discuss allocation, legal structure and next steps."
       />
 
       <Reveal>
@@ -92,7 +98,7 @@ export function ReserveSection() {
                 }`}
               >
                 <span className="label-xs">{String(n).padStart(2, "0")}</span>
-                <span className="display-xl text-3xl md:text-4xl">5%</span>
+                <span className="display-xl text-3xl md:text-4xl">{OWNERSHIP_PER_SEAT}%</span>
                 <span className="label-xs">
                   {reserved ? "Committed" : active ? "Selected" : "Available"}
                 </span>
@@ -112,12 +118,6 @@ export function ReserveSection() {
           ))}
         </div>
       </Reveal>
-
-      <p className="mt-8 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-        Each seat represents 5% participation in Nizek's startup equity allocation, at
-        KD150,000 per year paid quarterly over a five-year commitment — a maximum of
-        KD750,000 per seat.
-      </p>
 
       <div className="mt-20 grid grid-cols-1 gap-16 lg:grid-cols-[1.2fr_0.8fr]">
         <Reveal>

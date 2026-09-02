@@ -39,28 +39,14 @@ export function TeamSection() {
   return (
     <Section id="team">
       <SectionHeading
-        index="08 — The people behind the studio"
+        index="11 — The team"
         title="A Venture Studio Is Only As Good As The Team Behind It."
+        lede="An operating studio run by entrepreneurs, product builders and technology leaders."
       />
-
-      <Reveal>
-        <div className="grid max-w-5xl grid-cols-1 gap-10 md:grid-cols-2">
-          <p className="text-base leading-relaxed text-muted-foreground">
-            Nizek is not an investment fund managed by financiers. It is an operating venture studio
-            built by entrepreneurs, product builders and technology leaders who have spent years
-            designing, developing and scaling technology companies across the GCC.
-          </p>
-          <p className="text-base leading-relaxed text-muted-foreground">
-            Our investors are not only investing in startups. They are investing in a proven team with
-            the experience, infrastructure and execution capability required to repeatedly build
-            companies from the ground up.
-          </p>
-        </div>
-      </Reveal>
 
       {/* Founding partner */}
       <Reveal delay={80}>
-        <div className="mt-24 grid grid-cols-1 gap-px border border-border bg-border lg:grid-cols-[minmax(0,420px)_1fr]">
+        <div className="grid grid-cols-1 gap-px border border-border bg-border lg:grid-cols-[minmax(0,420px)_1fr]">
           <div className="bg-background p-6">
             <Portrait member={founder} />
           </div>
@@ -95,12 +81,7 @@ export function TeamSection() {
       {/* Why this team */}
       <Reveal delay={160}>
         <div className="mt-24 border border-border p-10 md:p-20">
-          <div className="label-xs">Why this team</div>
-          <p className="display-xl mt-10 max-w-4xl text-3xl leading-[1.15] md:text-5xl">
-            Most investment firms provide capital. We provide the people required to transform ideas
-            into companies.
-          </p>
-          <p className="display-xl mt-10 text-2xl text-muted-foreground md:text-4xl">
+          <p className="display-xl max-w-4xl text-3xl leading-[1.15] md:text-5xl">
             Capital alone does not build startups. Execution does.
           </p>
         </div>
