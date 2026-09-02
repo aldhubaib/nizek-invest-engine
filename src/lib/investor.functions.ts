@@ -301,7 +301,11 @@ export const submitSeatRequest = createServerFn({ method: "POST" })
       if (request && cookie) {
         await supabaseAdmin
           .from("investors")
-          .update({ allocation_status: "requested", engagement_status: "interested" })
+          .update({
+            allocation_status: "requested",
+            engagement_status: "interested",
+            allocation_requested: true,
+          })
           .eq("id", cookie.investorId);
         await supabaseAdmin.from("investor_events").insert({
           investor_id: cookie.investorId,
