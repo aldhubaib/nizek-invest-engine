@@ -117,27 +117,29 @@ export async function buildHomePage() {
         {
           title: "Dabdoob",
           index: "Success story",
-          body: "One of the GCC's best-known e-commerce platforms. Built with Nizek from its early stages and successfully scaled into a leading regional consumer technology company.",
+          body: "Built with Nizek from its early stages and successfully scaled into one of the GCC's leading e-commerce companies.",
+          note: "Acquired — acquired for approximately USD 30 million.",
         },
         {
           title: "Provien",
-          index: "Series A",
-          body: "Built inside the Nizek Venture Studio. After validation, the company transitioned to its own dedicated engineering team while continuing under Nizek's long-term technical leadership.",
-          note: "Series A funding round completed.",
+          index: "Success story",
+          body: "Built inside the Nizek Venture Studio before transitioning to its own dedicated engineering team under Nizek's continued technical leadership.",
+          note: "Series A — successfully completed its Series A funding round.",
         },
         {
           title: "Ad Space",
           index: "Currently building",
-          body: "A regional Digital Out-of-Home advertising platform currently being built inside the Nizek Venture Studio. Time building: 6 months. Indicative value: KD3M.",
-          note: "Indicative current company value based on the latest available valuation basis. Not a guaranteed future value.",
+          body: "A regional Digital Out-of-Home advertising platform currently being built inside the Nizek Venture Studio.",
+          note: "Next milestone — preparing for Seed funding within approximately six months.",
         },
         {
           title: "Hazawy",
           index: "Currently building",
-          body: "A modern commerce platform currently being built inside the Nizek Venture Studio. Time building: 2 months. Indicative value: KD1.5M.",
-          note: "Indicative current company value based on the latest available valuation basis. Not a guaranteed future value.",
+          body: "A modern commerce platform currently being built inside the Nizek Venture Studio.",
+          note: "Next milestone — preparing for Seed funding within approximately four months.",
         },
       ],
+
 
       lists: [
         {

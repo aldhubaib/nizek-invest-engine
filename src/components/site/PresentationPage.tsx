@@ -242,62 +242,53 @@ function PlatformPageBody() {
                 <div className="label-xs opacity-60">Success story</div>
                 <div className="display-xl mt-10 text-4xl md:text-5xl">Dabdoob</div>
                 <p className="mt-6 text-sm leading-relaxed opacity-70">
-                  One of the GCC&apos;s best-known e-commerce platforms. Built with Nizek from its
-                  early stages and successfully scaled into a leading regional consumer technology
-                  company.
+                  Built with Nizek from its early stages and successfully scaled into one of the
+                  GCC&apos;s leading e-commerce companies.
                 </p>
-              </div>
-            </Reveal>
-            <Reveal delay={120}>
-              <div className="flex h-full flex-col justify-between bg-background p-8 md:p-10">
-                <div className="label-xs text-subtle">Series A</div>
-                <div className="display-xl mt-10 text-4xl md:text-5xl">Provien</div>
-                <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
-                  Built inside the Nizek Venture Studio. After validation, the company transitioned
-                  to its own dedicated engineering team while continuing under Nizek&apos;s
-                  long-term technical leadership.
-                </p>
-                <div className="label-xs mt-8 text-foreground">
-                  Series A funding round completed
+                <div className="mt-8">
+                  <div className="label-xs opacity-60">Acquired</div>
+                  <p className="mt-3 text-sm leading-relaxed">
+                    Acquired for approximately USD 30 million.
+                  </p>
                 </div>
               </div>
             </Reveal>
             {[
               {
+                name: "Provien",
+                eyebrow: "Success story",
+                desc: "Built inside the Nizek Venture Studio before transitioning to its own dedicated engineering team under Nizek's continued technical leadership.",
+                milestoneLabel: "Series A",
+                milestone: "Successfully completed its Series A funding round.",
+              },
+              {
                 name: "Ad Space",
+                eyebrow: "Currently building",
                 desc: "A regional Digital Out-of-Home advertising platform currently being built inside the Nizek Venture Studio.",
-                time: "6 months",
-                val: "KD3M",
+                milestoneLabel: "Next milestone",
+                milestone: "Preparing for Seed funding within approximately six months.",
               },
               {
                 name: "Hazawy",
+                eyebrow: "Currently building",
                 desc: "A modern commerce platform currently being built inside the Nizek Venture Studio.",
-                time: "2 months",
-                val: "KD1.5M",
+                milestoneLabel: "Next milestone",
+                milestone: "Preparing for Seed funding within approximately four months.",
               },
             ].map((c, i) => (
-              <Reveal key={c.name} delay={(i + 2) * 120}>
+              <Reveal key={c.name} delay={(i + 1) * 120}>
                 <div className="flex h-full flex-col justify-between bg-background p-8 md:p-10">
-                  <div className="label-xs text-subtle">Currently building</div>
+                  <div className="label-xs text-subtle">{c.eyebrow}</div>
                   <div className="display-xl mt-10 text-4xl md:text-5xl">{c.name}</div>
                   <p className="mt-6 text-sm leading-relaxed text-muted-foreground">{c.desc}</p>
-                  <div className="mt-8 flex gap-12">
-                    <div>
-                      <div className="label-xs">Time building</div>
-                      <div className="num mt-3 text-xl">{c.time}</div>
-                    </div>
-                    <div>
-                      <div className="label-xs">Indicative value</div>
-                      <div className="num mt-3 text-xl">{c.val}</div>
-                    </div>
+                  <div className="mt-8">
+                    <div className="label-xs">{c.milestoneLabel}</div>
+                    <p className="mt-3 text-sm leading-relaxed text-foreground">{c.milestone}</p>
                   </div>
-                  <p className="mt-6 text-[11px] leading-relaxed text-subtle">
-                    Indicative current company value based on the latest available valuation basis.
-                    Not a guaranteed future value.
-                  </p>
                 </div>
               </Reveal>
             ))}
+
           </div>
 
           <Reveal>
