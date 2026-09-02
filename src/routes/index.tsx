@@ -1215,7 +1215,7 @@ function PlatformPage() {
           </aside>
 
 
-          <div className="px-6 py-12 md:px-12">
+          <div className="pt-16 md:pt-24">
             <div className="flex flex-wrap items-center justify-between gap-4 border border-border px-8 py-6">
               <div className="flex items-center gap-3">
                 <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-foreground" aria-hidden />
