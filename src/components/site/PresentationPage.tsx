@@ -1230,7 +1230,7 @@ function PlatformPageBody() {
                 {
                   step: "02",
                   label: "MOIC",
-                  note: "What every dinar comes back as",
+                  note: "The total value returned for every dinar invested.",
                   value: result.moic,
                   format: (v: number) => multiple(v, 2),
                 },
@@ -1261,6 +1261,12 @@ function PlatformPageBody() {
                 </div>
               ))}
             </div>
+
+            <p className="mx-auto mt-6 max-w-3xl text-center text-[11px] leading-relaxed text-subtle">
+              The figures shown are scenario-based estimates derived from the assumptions selected
+              above. Actual investment performance will depend on the performance of the underlying
+              portfolio companies.
+            </p>
 
             {/* The portfolio, year by year — hidden for now, kept for later */}
             {SHOW_COHORT_BREAKDOWN && (

@@ -729,7 +729,7 @@ export async function buildHomePage() {
           value: kd(result.investorValue),
           note: "Your share of the Fund's equity in the successful companies",
         },
-        { label: "02 — MOIC", value: `${result.moic.toFixed(2)}x`, note: "What every dinar comes back as" },
+        { label: "02 — MOIC", value: `${result.moic.toFixed(2)}x`, note: "The total value returned for every dinar invested." },
         {
           label: "03 — Estimated profit",
           value: kd(result.investorProfit),
