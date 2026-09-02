@@ -248,7 +248,7 @@ function PlatformPageBody() {
                 <div className="mt-8">
                   <div className="label-xs opacity-60">Acquired</div>
                   <p className="mt-3 text-sm leading-relaxed">
-                    Acquired for approximately USD 30 million.
+                    Acquired for approximately KD 30 million.
                   </p>
                 </div>
               </div>
