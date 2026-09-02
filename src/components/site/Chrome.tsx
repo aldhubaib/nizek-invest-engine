@@ -7,7 +7,7 @@ const nav = [
   { id: "why", label: "Why Nizek" },
   { id: "founders", label: "Founders" },
   { id: "how-we-build", label: "Model" },
-  { id: "regional", label: "Founder pipeline" },
+  { id: "regional", label: "Regional sourcing" },
   { id: "equity", label: "Equity" },
   { id: "structure", label: "Fund" },
   { id: "advantages", label: "Advantages" },
