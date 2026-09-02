@@ -3,6 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 
 import { getInvestorDetail, rotateInvestorToken, updateInvestorNotes } from "@/lib/admin.functions";
+import { publicLink } from "@/lib/public-link";
 
 export const Route = createFileRoute("/_authenticated/admin/investors/$id")({
   head: () => ({
