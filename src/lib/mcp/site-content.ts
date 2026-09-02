@@ -610,6 +610,10 @@ export async function buildHomePage() {
           title: "Optional Follow-on",
           body: "Opportunity to participate in future funding rounds, subject to the investment terms.",
         },
+        {
+          title: "Quarterly Portfolio Reporting",
+          body: "Every portfolio company is required to submit a quarterly performance report. Fund A stakeholders receive access to these reports, creating ongoing visibility into how the portfolio companies are performing throughout the investment period. Reports cover financial performance, company progress, operating milestones, key metrics, challenges and risks, and major developments. Investors do not have to wait until the end of the five-year period to understand how the portfolio is performing. Quarterly reporting creates a continuous view of the companies held inside Nizek Venture Studio Fund A.",
+        },
       ],
       ui: ui({ layout: "card grid", columns: 2 }),
     },
