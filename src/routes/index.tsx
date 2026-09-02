@@ -214,13 +214,13 @@ function PlatformPage() {
         <SectionHeading
           index="02 — Why Nizek"
           title="Built to Build. Since 2009."
-          lede="Seventeen years of building technology companies in the GCC — the teams, the products and the operating infrastructure already exist."
+          lede="Nizek has spent more than seventeen years building technology products, teams and companies across the GCC. The venture studio is not a new capability we are trying to create — it is an operating system built from infrastructure, people and experience that already exist."
         />
 
         <div className="grid grid-cols-2 gap-px border border-border bg-border md:grid-cols-4">
           {[
             { value: 2009, label: "Founded", suffix: "" },
-            { value: 17, label: "Years building", suffix: "+" },
+            { value: 17, label: "Years operating", suffix: "+" },
             { value: 120, label: "Products shipped", suffix: "+" },
           ].map((m, i) => (
             <Reveal key={m.label} delay={i * 80}>
@@ -249,11 +249,10 @@ function PlatformPage() {
           <div className="mt-8 grid grid-cols-1 gap-px border border-border bg-border lg:grid-cols-3">
             <Reveal>
               <div className="flex h-full flex-col justify-between bg-foreground p-8 text-background md:p-10">
-                <div className="label-xs opacity-60">Success story</div>
+                <div className="label-xs opacity-60">Historical venture-building proof</div>
                 <div className="display-xl mt-10 text-4xl md:text-6xl">Dabdoob</div>
                 <p className="mt-6 text-sm leading-relaxed opacity-70">
-                  Built with Nizek and scaled into one of the region&apos;s most recognised consumer
-                  platforms.
+                  Built with Nizek and scaled into a recognized GCC consumer technology company.
                 </p>
               </div>
             </Reveal>
@@ -271,36 +270,40 @@ function PlatformPage() {
                       <div className="num mt-3 text-xl">{c.time}</div>
                     </div>
                     <div>
-                      <div className="label-xs">Indicative valuation</div>
+                      <div className="label-xs">Indicative company value</div>
                       <div className="num mt-3 text-xl">{c.val}</div>
                     </div>
                   </div>
+                  <p className="mt-6 text-[11px] leading-relaxed text-subtle">
+                    Illustrative current company value based on the latest available valuation
+                    basis. Not a guaranteed future value.
+                  </p>
                 </div>
               </Reveal>
             ))}
           </div>
         </div>
 
-        {/* What we provide */}
+        {/* The infrastructure already exists */}
         <div className="mt-24">
-          <div className="label-xs">What we provide</div>
-          <div className="mt-8 grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+          <div className="label-xs">The infrastructure already exists</div>
+          <p className="mt-8 max-w-3xl text-base leading-relaxed text-muted-foreground">
+            An investor is not funding Nizek to first assemble a venture studio. The teams,
+            disciplines and operating routines required to create companies are already in place and
+            already in use.
+          </p>
+          <div className="mt-10 grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
             {[
-              ["Founder Selection", "We identify, evaluate and qualify entrepreneurs before they build a company."],
-              ["Problem Discovery", "We help founders validate that they are solving a real market problem worth building."],
-              ["Product Strategy", "We define what should be built, in what order, and why."],
-              ["Market Validation", "We test assumptions early to reduce wasted time and capital."],
-              ["Business Model Design", "We help shape pricing, revenue models and long-term sustainability."],
-              ["Product Design", "We design intuitive user experiences that customers actually want to use."],
-              ["Technology Development", "We build the product with our internal engineering teams."],
-              ["Technical Leadership", "We make architecture and technology decisions that allow the company to scale."],
-              ["Go-To-Market Strategy", "We help define the launch strategy, customer acquisition approach and early growth priorities."],
-              ["Hiring & Team Building", "We help founders recruit and build their first internal product and technology team."],
-              ["Fundraising Readiness", "We prepare startups for future investment rounds with the right structure, metrics and documentation."],
-              ["Operational Guidance", "We work alongside founders during the first year, helping them make critical product and business decisions."],
-              ["Dedicated Team Transition", "We help the startup move from Nizek's shared venture-building resources to its own dedicated internal engineering team, with Nizek continuing as long-term CTO and technical leadership partner."],
+              ["Product Strategy", "What gets built, in what order, and why."],
+              ["Engineering", "Internal teams that build and ship the product."],
+              ["Product Design", "Interfaces customers can actually use."],
+              ["Technical Leadership", "Architecture decisions that hold up as the company scales."],
+              ["Market Validation", "Assumptions tested early to reduce wasted time and capital."],
+              ["Business Model Design", "Pricing, revenue model and long-term sustainability."],
+              ["Founder Selection", "Entrepreneurs evaluated and qualified before a company is built."],
+              ["Fundraising Readiness", "Structure, metrics and documentation for future rounds."],
             ].map(([t, d], i) => (
-              <Reveal key={t} delay={i * 40}>
+              <Reveal key={t} delay={i * 60}>
                 <div className="h-full bg-background px-6 py-8">
                   <div className="num text-xs text-subtle">{String(i + 1).padStart(2, "0")}</div>
                   <div className="mt-5 text-base text-foreground">{t}</div>
@@ -309,14 +312,18 @@ function PlatformPage() {
               </Reveal>
             ))}
           </div>
-          <Reveal>
-            <p className="mt-10 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-              Nizek contributes experience, execution and venture-building infrastructure—not
-              outsourced services. Our objective is to build companies that become independent and
-              continue growing long after they leave the studio.
-            </p>
-          </Reveal>
         </div>
+
+        {/* Key investor message */}
+        <Reveal>
+          <div className="mt-24 border-t border-border-strong pt-12">
+            <p className="display-xl max-w-4xl text-2xl leading-snug md:text-4xl">
+              The capital is not being used to discover whether Nizek can build companies. It is
+              being used to apply an existing capability across a larger portfolio.
+            </p>
+          </div>
+        </Reveal>
+
 
       </Section>
 
