@@ -18,6 +18,7 @@ import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } fr
 import { Route as ITokenRouteImport } from './routes/i.$token'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
 import { Route as AuthenticatedAdminInvestorsIndexRouteImport } from './routes/_authenticated/admin.investors.index'
+import { Route as AuthenticatedAdminInvestorsIdRouteImport } from './routes/_authenticated/admin.investors.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -65,6 +66,12 @@ const AuthenticatedAdminInvestorsIndexRoute =
     path: '/admin/investors/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedAdminInvestorsIdRoute =
+  AuthenticatedAdminInvestorsIdRouteImport.update({
+    id: '/admin/investors/$id',
+    path: '/admin/investors/$id',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -74,6 +81,7 @@ export interface FileRoutesByFullPath {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/i/$token': typeof ITokenRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
+  '/admin/investors/$id': typeof AuthenticatedAdminInvestorsIdRoute
   '/admin/investors/': typeof AuthenticatedAdminInvestorsIndexRoute
 }
 export interface FileRoutesByTo {
@@ -84,6 +92,7 @@ export interface FileRoutesByTo {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/i/$token': typeof ITokenRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
+  '/admin/investors/$id': typeof AuthenticatedAdminInvestorsIdRoute
   '/admin/investors': typeof AuthenticatedAdminInvestorsIndexRoute
 }
 export interface FileRoutesById {
@@ -96,6 +105,7 @@ export interface FileRoutesById {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/i/$token': typeof ITokenRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
+  '/_authenticated/admin/investors/$id': typeof AuthenticatedAdminInvestorsIdRoute
   '/_authenticated/admin/investors/': typeof AuthenticatedAdminInvestorsIndexRoute
 }
 export interface FileRouteTypes {
@@ -108,6 +118,7 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/i/$token'
     | '/.lovable/oauth/consent'
+    | '/admin/investors/$id'
     | '/admin/investors/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -118,6 +129,7 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/i/$token'
     | '/.lovable/oauth/consent'
+    | '/admin/investors/$id'
     | '/admin/investors'
   id:
     | '__root__'
@@ -129,6 +141,7 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/i/$token'
     | '/.lovable/oauth/consent'
+    | '/_authenticated/admin/investors/$id'
     | '/_authenticated/admin/investors/'
   fileRoutesById: FileRoutesById
 }
@@ -208,14 +221,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminInvestorsIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin/investors/$id': {
+      id: '/_authenticated/admin/investors/$id'
+      path: '/admin/investors/$id'
+      fullPath: '/admin/investors/$id'
+      preLoaderRoute: typeof AuthenticatedAdminInvestorsIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminInvestorsIdRoute: typeof AuthenticatedAdminInvestorsIdRoute
   AuthenticatedAdminInvestorsIndexRoute: typeof AuthenticatedAdminInvestorsIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminInvestorsIdRoute: AuthenticatedAdminInvestorsIdRoute,
   AuthenticatedAdminInvestorsIndexRoute: AuthenticatedAdminInvestorsIndexRoute,
 }
 
