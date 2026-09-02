@@ -4,3 +4,5 @@
 - [ ] Replace Structure section with Institutional Fund Structure (diagram, 5 steps, 4 benefit cards)
 - [ ] Seat 01 locked; investors select from 5 remaining seats
 - [ ] Change 'Annual commitment' display to quarterly commitment
+
+- [x] Founder Residency duration changed to 3 months

@@ -246,31 +246,59 @@ function PlatformPage() {
         {/* Selected proof */}
         <div className="mt-24">
           <div className="label-xs">Selected proof</div>
-          <div className="mt-8 grid grid-cols-1 gap-px border border-border bg-border lg:grid-cols-3">
+          <p className="mt-8 max-w-3xl text-base leading-relaxed text-muted-foreground">
+            Four companies at four stages of the same venture-building journey — a proven success, a
+            graduated venture, a growth company and a new build.
+          </p>
+          <div className="mt-10 grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
             <Reveal>
               <div className="flex h-full flex-col justify-between bg-foreground p-8 text-background md:p-10">
-                <div className="label-xs opacity-60">Historical venture-building proof</div>
-                <div className="display-xl mt-10 text-4xl md:text-6xl">Dabdoob</div>
+                <div className="label-xs opacity-60">Success story</div>
+                <div className="display-xl mt-10 text-4xl md:text-5xl">Dabdoob</div>
                 <p className="mt-6 text-sm leading-relaxed opacity-70">
-                  Built with Nizek and scaled into a recognized GCC consumer technology company.
+                  Built with Nizek and grew into one of the GCC&apos;s best-known consumer
+                  technology companies.
                 </p>
               </div>
             </Reveal>
+            <Reveal delay={120}>
+              <div className="flex h-full flex-col justify-between bg-background p-8 md:p-10">
+                <div className="label-xs text-subtle">Graduated venture</div>
+                <div className="display-xl mt-10 text-4xl md:text-5xl">Provien</div>
+                <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
+                  Started inside the Nizek Venture Studio, built with Nizek, and transitioned to its
+                  own dedicated engineering team. It completed its funding round and continues
+                  operating independently with Nizek&apos;s long-term technology leadership.
+                </p>
+                <div className="label-xs mt-8 text-foreground">Funding round completed</div>
+              </div>
+            </Reveal>
             {[
-              { name: "Ad Space", time: "6 months", val: "KD3M" },
-              { name: "Hazawy", time: "2 months", val: "KD1.5M" },
+              {
+                name: "Ad Space",
+                desc: "Building the future of Digital Out-of-Home advertising across the GCC.",
+                time: "6 months",
+                val: "KD3M",
+              },
+              {
+                name: "Hazawy",
+                desc: "Building a modern digital marketplace.",
+                time: "2 months",
+                val: "KD1.5M",
+              },
             ].map((c, i) => (
-              <Reveal key={c.name} delay={(i + 1) * 120}>
+              <Reveal key={c.name} delay={(i + 2) * 120}>
                 <div className="flex h-full flex-col justify-between bg-background p-8 md:p-10">
                   <div className="label-xs text-subtle">Currently building</div>
-                  <div className="display-xl mt-10 text-4xl md:text-6xl">{c.name}</div>
+                  <div className="display-xl mt-10 text-4xl md:text-5xl">{c.name}</div>
+                  <p className="mt-6 text-sm leading-relaxed text-muted-foreground">{c.desc}</p>
                   <div className="mt-8 flex gap-12">
                     <div>
-                      <div className="label-xs">Time to build</div>
+                      <div className="label-xs">Time building</div>
                       <div className="num mt-3 text-xl">{c.time}</div>
                     </div>
                     <div>
-                      <div className="label-xs">Indicative company value</div>
+                      <div className="label-xs">Indicative value</div>
                       <div className="num mt-3 text-xl">{c.val}</div>
                     </div>
                   </div>
@@ -283,6 +311,7 @@ function PlatformPage() {
             ))}
           </div>
         </div>
+
 
         {/* The infrastructure already exists */}
         <div className="mt-24">
@@ -346,7 +375,7 @@ function PlatformPage() {
           <div className="bg-background p-10">
             <div className="label-xs text-foreground">Our solution</div>
             <p className="mt-8 text-lg leading-relaxed text-foreground">
-              Every founder enters the Nizek Founder Residency first — roughly six months building
+              Every founder enters the Nizek Founder Residency first — roughly three months building
               inside a live startup. Only those who prove themselves are offered investment.
             </p>
           </div>
@@ -357,7 +386,7 @@ function PlatformPage() {
           <div className="mt-10 grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2 md:grid-cols-3">
             {[
               { t: "Applications", d: "Open, continuous inbound from the region's operators." },
-              { t: "6-Month Founder Residency", d: "Building inside a live Nizek startup." },
+              { t: "3-Month Founder Residency", d: "Building inside a live Nizek startup." },
               { t: "Performance Evaluation", d: "Judged on real output, not a pitch deck." },
               { t: "Founder Approved", d: "Both sides decide to build a company together." },
               { t: "Investment", d: "Capital, equity and platform are committed." },
