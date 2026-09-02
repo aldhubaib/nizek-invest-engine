@@ -1,7 +1,8 @@
 import { Reveal, Section, SectionHeading } from "@/components/ui/primitives";
 import {
   founder,
-  founderFocus,
+  founderRole,
+  founderSummary,
   team,
   ventureCapabilities,
   type TeamMember,
@@ -29,7 +30,7 @@ function Portrait({ member, className }: { member: TeamMember; className?: strin
         />
       ) : (
         <div className="flex h-full w-full items-center justify-center bg-muted/20">
-          <span className="display-xl text-5xl text-subtle md:text-7xl">{initials(member.name)}</span>
+          <span className="display-xl text-4xl text-subtle md:text-5xl">{initials(member.name)}</span>
         </div>
       )}
     </div>
@@ -41,29 +42,34 @@ export function TeamSection() {
     <Section id="team">
       <SectionHeading
         index="11 — The team"
-        title="The People Behind The Building."
-        lede="Nizek Venture Studio is operated by entrepreneurs, product builders and technology leaders with hands-on experience turning ideas into operating companies."
+        title="The Leadership Behind The Venture Studio."
+        lede="Nizek Venture Studio is led by operators who build companies, not by an organisational chart. Leadership sets the direction; a shared capability set is applied to every venture in the portfolio."
       />
 
-      {/* Founder — visual anchor */}
+      {/* Part 1 — Founder & Managing Partner */}
       <Reveal delay={80}>
-        <div className="grid grid-cols-1 gap-px border border-border bg-border lg:grid-cols-[minmax(0,420px)_1fr]">
-          <div className="bg-background p-6">
+        <div className="grid grid-cols-1 gap-px border border-border bg-border lg:grid-cols-[minmax(0,440px)_1fr]">
+          <div className="bg-background p-6 md:p-8">
             <Portrait member={founder} />
           </div>
           <div className="flex flex-col justify-center bg-background p-10 md:p-14">
-            <div className="label-xs">Founder</div>
+            <div className="label-xs">Founder &amp; Managing Partner</div>
             <h3 className="display-xl mt-6 text-4xl md:text-6xl">{founder.name}</h3>
             <div className="mt-4 text-sm text-muted-foreground">{founder.role}</div>
+            <p className="mt-8 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+              {founderSummary}
+            </p>
 
-            <div className="mt-10 grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2">
-              {founderFocus.map((f) => (
-                <div key={f.title} className="bg-background p-6">
-                  <div className="num text-[11px] text-subtle">{f.index}</div>
-                  <div className="label-xs mt-3">{f.title}</div>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{f.note}</p>
-                </div>
-              ))}
+            <div className="mt-10 border-t border-border pt-8">
+              <div className="label-xs text-subtle">Role inside the venture studio</div>
+              <ul className="mt-6 grid grid-cols-1 gap-x-10 gap-y-4 sm:grid-cols-2">
+                {founderRole.map((item) => (
+                  <li key={item} className="flex gap-4 text-sm leading-relaxed text-foreground">
+                    <span className="num text-[11px] text-subtle">—</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
 
             {founder.linkedin && (
@@ -80,44 +86,48 @@ export function TeamSection() {
         </div>
       </Reveal>
 
-      {/* Leadership team */}
+      {/* Part 2 — Venture studio leadership */}
       <Reveal delay={140}>
         <div className="mt-24">
-          <div className="label-xs mb-8">Leadership team</div>
-          <div className="grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+          <div className="label-xs mb-8">Venture Studio Leadership</div>
+          <div className="grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-3">
             {team.map((m, i) => (
-              <div key={`${m.name}-${i}`} className="bg-background p-6">
-                <Portrait member={m} />
-                <div className="mt-6 display-xl text-xl md:text-2xl">{m.name}</div>
-                <div className="mt-2 text-xs text-muted-foreground">{m.role}</div>
-                {m.responsibility && (
-                  <div className="mt-5 border-t border-border pt-5">
-                    <div className="label-xs text-subtle">Venture-studio responsibility</div>
-                    <div className="mt-2 text-sm text-foreground">{m.responsibility}</div>
-                  </div>
-                )}
-                <p className="mt-5 text-sm leading-relaxed text-muted-foreground">{m.bio}</p>
-                {m.linkedin && (
-                  <a
-                    href={m.linkedin}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    className="label-xs mt-6 inline-flex border border-border-strong px-4 py-2 transition-colors hover:bg-foreground hover:text-background"
-                  >
-                    LinkedIn
-                  </a>
-                )}
+              <div key={`${m.name}-${i}`} className="flex gap-6 bg-background p-6">
+                <div className="w-24 shrink-0">
+                  <Portrait member={m} />
+                </div>
+                <div className="min-w-0">
+                  <div className="display-xl text-lg">{m.name}</div>
+                  <div className="mt-1 text-xs text-muted-foreground">{m.role}</div>
+                  {m.responsibility && (
+                    <div className="label-xs mt-4 text-subtle">{m.responsibility}</div>
+                  )}
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{m.bio}</p>
+                  {m.linkedin && (
+                    <a
+                      href={m.linkedin}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      className="label-xs mt-4 inline-flex border border-border-strong px-4 py-2 transition-colors hover:bg-foreground hover:text-background"
+                    >
+                      LinkedIn
+                    </a>
+                  )}
+                </div>
               </div>
             ))}
           </div>
         </div>
       </Reveal>
 
-      {/* The operating system */}
+      {/* Part 3 — Shared venture studio capabilities */}
       <Reveal delay={180}>
         <div className="mt-24">
-          <div className="label-xs mb-8">The team behind every venture</div>
-          <div className="grid grid-cols-2 gap-px border border-border bg-border sm:grid-cols-3 lg:grid-cols-5">
+          <div className="label-xs mb-8">Shared Venture Studio Capabilities</div>
+          <h3 className="display-xl max-w-3xl text-3xl leading-[1.15] md:text-5xl">
+            Every Venture Receives
+          </h3>
+          <div className="mt-10 grid grid-cols-2 gap-px border border-border bg-border sm:grid-cols-3 lg:grid-cols-4">
             {ventureCapabilities.map((c, i) => (
               <div key={c} className="bg-background px-6 py-8">
                 <div className="num text-[11px] text-subtle">{String(i + 1).padStart(2, "0")}</div>
@@ -126,7 +136,7 @@ export function TeamSection() {
             ))}
             <div className="bg-background px-6 py-8">
               <p className="text-sm leading-relaxed text-muted-foreground">
-                An existing multidisciplinary venture-building capability — not one person.
+                Applied by the same studio team to every company in the portfolio.
               </p>
             </div>
           </div>
@@ -137,8 +147,8 @@ export function TeamSection() {
       <Reveal delay={200}>
         <div className="mt-24 border border-border p-10 md:p-20">
           <p className="display-xl max-w-4xl text-2xl leading-[1.2] md:text-4xl">
-            A venture studio does not succeed because it has capital. It succeeds because it has
-            people capable of repeatedly turning opportunities into companies.
+            A venture studio is defined by its ability to repeatedly build companies—not by the
+            number of people on its organisational chart.
           </p>
         </div>
       </Reveal>
@@ -146,11 +156,9 @@ export function TeamSection() {
       {/* Closing */}
       <Reveal delay={220}>
         <div className="mt-px border border-border border-t-0 p-10 md:p-20">
-          <p className="display-xl max-w-3xl text-3xl leading-[1.15] md:text-5xl">
-            Capital creates the opportunity. Execution creates the company.
-          </p>
-          <p className="mt-6 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-            The people responsible for that execution are already inside Nizek.
+          <p className="display-xl max-w-4xl text-2xl leading-[1.2] md:text-4xl">
+            The same leadership team, systems and operating experience are applied across every
+            company inside the portfolio.
           </p>
         </div>
       </Reveal>
