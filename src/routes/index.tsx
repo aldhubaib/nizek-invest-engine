@@ -1225,7 +1225,7 @@ function PlatformPage() {
                     title: "Estimated return",
                     value: result.moic,
                     format: (v: number) => multiple(v, 2),
-                    note: `On the ${kd(result.maxCommitment)} committed across five years.`,
+                    note: `On ${kd(result.annualCommitment / 4)} called every three months, paid quarterly in advance.`,
                   },
                 ].map((s) => (
                   <div key={s.step} className="bg-background p-8">
