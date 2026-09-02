@@ -180,8 +180,8 @@ export function EquitySection() {
                 },
                 {
                   l: "Look-through share of the startup",
-                  v: `${fmt(effectiveMin)}–${fmt(effectiveMax)}%`,
-                  n: "Fund ownership applied to the example company.",
+                  v: `${fmt(effectiveMin)}%–${fmt(effectiveMax)}%`,
+                  n: "Range derived from the 20–30% Nizek Venture Studio ownership.",
                 },
               ].map((c) => (
                 <div key={c.l} className="bg-background p-8">
