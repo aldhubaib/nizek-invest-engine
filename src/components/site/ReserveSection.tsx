@@ -207,15 +207,6 @@ export function ReserveSection() {
               />
               <input
                 className={field}
-                type="email"
-                placeholder="Email"
-                required={!investor}
-                maxLength={255}
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-              />
-              <input
-                className={field}
                 placeholder="Phone number"
                 required
                 maxLength={40}
@@ -269,7 +260,7 @@ export function ReserveSection() {
               availability.
             </p>
             <p className="mt-4">
-              Requests are sent directly to the Nizek investment team at investors@nizek.com.
+              Requests are delivered directly to the Nizek investment team.
             </p>
           </div>
         </Reveal>

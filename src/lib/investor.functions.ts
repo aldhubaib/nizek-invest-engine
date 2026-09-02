@@ -230,6 +230,17 @@ export const recordEngagement = createServerFn({ method: "POST" })
           payload: e.payload as never,
         })),
       );
+      const usedSimulator = data.events.some((e) =>
+        ["simulator_opened", "assumption_changed", "simulator_snapshot", "positions_selected"].includes(
+          e.type,
+        ),
+      );
+      if (usedSimulator) {
+        await supabaseAdmin
+          .from("investors")
+          .update({ simulator_used: true })
+          .eq("id", cookie.investorId);
+      }
     }
 
     const totalActive = data.sections.reduce((sum, s) => sum + s.activeSeconds, 0);
@@ -290,7 +301,11 @@ export const submitSeatRequest = createServerFn({ method: "POST" })
       if (request && cookie) {
         await supabaseAdmin
           .from("investors")
-          .update({ allocation_status: "requested", engagement_status: "interested" })
+          .update({
+            allocation_status: "requested",
+            engagement_status: "interested",
+            allocation_requested: true,
+          })
           .eq("id", cookie.investorId);
         await supabaseAdmin.from("investor_events").insert({
           investor_id: cookie.investorId,

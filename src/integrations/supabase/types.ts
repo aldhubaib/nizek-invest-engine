@@ -317,6 +317,7 @@ export type Database = {
       investors: {
         Row: {
           access_token_hash: string
+          allocation_requested: boolean
           allocation_status: Database["public"]["Enums"]["allocation_status"]
           company: string | null
           created_at: string
@@ -328,6 +329,7 @@ export type Database = {
           internal_notes: string
           last_viewed_at: string | null
           phone: string | null
+          simulator_used: boolean
           token_issued_at: string
           token_revoked_at: string | null
           total_active_seconds: number
@@ -336,6 +338,7 @@ export type Database = {
         }
         Insert: {
           access_token_hash: string
+          allocation_requested?: boolean
           allocation_status?: Database["public"]["Enums"]["allocation_status"]
           company?: string | null
           created_at?: string
@@ -347,6 +350,7 @@ export type Database = {
           internal_notes?: string
           last_viewed_at?: string | null
           phone?: string | null
+          simulator_used?: boolean
           token_issued_at?: string
           token_revoked_at?: string | null
           total_active_seconds?: number
@@ -355,6 +359,7 @@ export type Database = {
         }
         Update: {
           access_token_hash?: string
+          allocation_requested?: boolean
           allocation_status?: Database["public"]["Enums"]["allocation_status"]
           company?: string | null
           created_at?: string
@@ -366,6 +371,7 @@ export type Database = {
           internal_notes?: string
           last_viewed_at?: string | null
           phone?: string | null
+          simulator_used?: boolean
           token_issued_at?: string
           token_revoked_at?: string | null
           total_active_seconds?: number

@@ -57,8 +57,19 @@ export function useEngagement(enabled: boolean) {
       if (el) observer.observe(el);
     }
 
+    // Idle rule: nothing is counted after 60 seconds without interaction.
+    let lastActivity = Date.now();
+    const markActive = () => {
+      lastActivity = Date.now();
+    };
+    const activityEvents = ["mousemove", "mousedown", "keydown", "scroll", "touchstart", "wheel"];
+    for (const evt of activityEvents) {
+      window.addEventListener(evt, markActive, { passive: true });
+    }
+
     const tick = window.setInterval(() => {
       if (document.hidden) return;
+      if (Date.now() - lastActivity > 60_000) return;
       active.current += 1;
       for (const [key, ratio] of Object.entries(visibility)) {
         if (ratio < 40) continue;
@@ -99,6 +110,7 @@ export function useEngagement(enabled: boolean) {
       window.clearInterval(tick);
       window.clearInterval(flushTimer);
       document.removeEventListener("visibilitychange", onHide);
+      for (const evt of activityEvents) window.removeEventListener(evt, markActive);
       void flush();
     };
   }, [enabled]);
