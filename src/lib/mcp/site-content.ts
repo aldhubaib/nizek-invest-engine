@@ -322,7 +322,7 @@ export async function buildHomePage() {
         { label: "Entrepreneur (example startup)", value: "70–80%" },
         { label: "Nizek Venture Studio ownership (example startup)", value: "20–30%" },
         { label: "Investor share of the Fund (1 unit)", value: "5%" },
-        { label: "Look-through share of the startup (1 unit)", value: "1–1.5%" },
+        { label: "Look-through share of the startup (1 unit)", value: "1%–1.5%" },
         { label: "Minimum protection target", value: "KD3,000,000" },
       ],
       lists: [
