@@ -6,6 +6,7 @@ import { InvestorOnboarding } from "@/components/site/InvestorOnboarding";
 import { InvestorProvider } from "@/lib/investor-context";
 import { acknowledgeConfidentiality, getInvestorContext } from "@/lib/investor.functions";
 import { useEngagement } from "@/hooks/useEngagement";
+import { requireSiteAccess } from "@/lib/site-access";
 
 
 export const Route = createFileRoute("/presentation")({
@@ -28,6 +29,9 @@ export const Route = createFileRoute("/presentation")({
       { name: "robots", content: "noindex" },
     ],
   }),
+  beforeLoad: async ({ location }) => {
+    await requireSiteAccess(location.href);
+  },
   loader: async () => await getInvestorContext(),
   component: PersonalizedPresentation,
 });
