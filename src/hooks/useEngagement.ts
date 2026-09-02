@@ -110,6 +110,7 @@ export function useEngagement(enabled: boolean) {
       window.clearInterval(tick);
       window.clearInterval(flushTimer);
       document.removeEventListener("visibilitychange", onHide);
+      for (const evt of activityEvents) window.removeEventListener(evt, markActive);
       void flush();
     };
   }, [enabled]);
