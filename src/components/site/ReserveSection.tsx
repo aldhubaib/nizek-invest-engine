@@ -6,6 +6,7 @@ import {
   SEAT_QUARTERLY_COMMITMENT,
   SEAT_OWNERSHIP,
   TOTAL_SEATS,
+  investorPosition,
 } from "@/model/investment";
 
 const QUARTERLY_PER_SEAT = SEAT_QUARTERLY_COMMITMENT;
@@ -33,12 +34,12 @@ export function ReserveSection() {
 
   const seats = selected.length;
   const quarterly = seats * QUARTERLY_PER_SEAT;
-  const metrics: Array<[string, string]> = [
-    ["Seats selected", String(seats).padStart(2, "0")],
-    ["Participation", `${seats * OWNERSHIP_PER_SEAT}%`],
-    ["Quarterly capital call", `${kd(quarterly)} every 3 months`],
-    ["Capital call schedule", "Called quarterly in advance"],
+  const positionNames = selected.map((n) => investorPosition(n));
 
+  const summary: Array<[string, string]> = [
+    ["Selected", positionNames.join(" + ")],
+    ["Fund ownership", `${seats * OWNERSHIP_PER_SEAT}%`],
+    ["Quarterly capital call", `${kd(quarterly)} every 3 months`],
   ];
 
   function toggleSeat(n: number) {
@@ -57,7 +58,7 @@ export function ReserveSection() {
     setError(null);
     setStatus("sending");
     try {
-      await submitSeatRequest({ data: { ...form, seats } });
+      await submitSeatRequest({ data: { ...form, seats, positions: positionNames } });
       setStatus("done");
     } catch {
       setStatus("idle");
@@ -72,8 +73,8 @@ export function ReserveSection() {
     <Section id="reserve" invert>
       <SectionHeading
         index="12 — Request allocation"
-        title="Choose Your Allocation."
-        lede="Select the seats you are interested in and submit your details. Our team will contact you to discuss allocation, legal structure and next steps."
+        title="Request Your Ownership Position."
+        lede="Select the available Investor positions you would like to discuss with Nizek. Your request will be sent directly to the Nizek investment team."
       />
 
       <Reveal>
@@ -88,6 +89,11 @@ export function ReserveSection() {
                 disabled={reserved}
                 onClick={() => toggleSeat(n)}
                 aria-pressed={active}
+                aria-label={
+                  reserved
+                    ? `${investorPosition(n)} committed`
+                    : `Select ${investorPosition(n)}`
+                }
                 className={`group relative flex aspect-square flex-col justify-between p-5 text-left transition-colors duration-300 ${
                   reserved
                     ? "cursor-not-allowed bg-[repeating-linear-gradient(135deg,transparent,transparent_6px,currentColor_6px,currentColor_7px)] text-muted-foreground opacity-40"
@@ -96,7 +102,7 @@ export function ReserveSection() {
                       : "bg-background text-foreground hover:bg-foreground/5"
                 }`}
               >
-                <span className="label-xs">{String(n).padStart(2, "0")}</span>
+                <span className="label-xs">{investorPosition(n)}</span>
                 <span className="display-xl text-3xl md:text-4xl">{OWNERSHIP_PER_SEAT}%</span>
                 <span className="label-xs">
                   {reserved ? "Committed" : active ? "Selected" : "Available"}
@@ -108,8 +114,8 @@ export function ReserveSection() {
       </Reveal>
 
       <Reveal delay={80}>
-        <div className="mt-px grid grid-cols-1 gap-px border border-border-strong bg-border-strong sm:grid-cols-2 lg:grid-cols-5">
-          {metrics.map(([label, value]) => (
+        <div className="mt-px grid grid-cols-1 gap-px border border-border-strong bg-border-strong sm:grid-cols-3">
+          {summary.map(([label, value]) => (
             <div key={label} className="bg-background px-5 py-8">
               <div className="label-xs text-muted-foreground">{label}</div>
               <div className="display-xl mt-4 text-2xl md:text-3xl">{value}</div>
@@ -123,12 +129,10 @@ export function ReserveSection() {
           {status === "done" ? (
             <div className="border border-border-strong p-10 md:p-14">
               <div className="label-xs">Request received</div>
-              <h3 className="display-xl mt-6 text-3xl md:text-5xl">
-                Thank You For Your Interest In The Nizek Venture Fund.
-              </h3>
+              <h3 className="display-xl mt-6 text-3xl md:text-5xl">Request Received.</h3>
               <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground">
-                Your seat request has been received and our team will contact you shortly to
-                discuss allocation and next steps.
+                Our investment team will review your requested ownership positions and contact you
+                directly.
               </p>
             </div>
           ) : (
@@ -140,13 +144,6 @@ export function ReserveSection() {
                 maxLength={120}
                 value={form.fullName}
                 onChange={(e) => setForm({ ...form, fullName: e.target.value })}
-              />
-              <input
-                className={field}
-                placeholder="Company / family office"
-                maxLength={160}
-                value={form.company}
-                onChange={(e) => setForm({ ...form, company: e.target.value })}
               />
               <input
                 className={field}
@@ -165,9 +162,16 @@ export function ReserveSection() {
                 value={form.phone}
                 onChange={(e) => setForm({ ...form, phone: e.target.value })}
               />
+              <input
+                className={field}
+                placeholder="Company / family office (optional)"
+                maxLength={160}
+                value={form.company}
+                onChange={(e) => setForm({ ...form, company: e.target.value })}
+              />
               <div className="md:col-span-2">
-                <div className="label-xs text-muted-foreground">Number of seats</div>
-                <div className="display-xl mt-3 text-2xl">{String(seats).padStart(2, "0")}</div>
+                <div className="label-xs text-muted-foreground">Selected ownership positions</div>
+                <div className="display-xl mt-3 text-2xl">{positionNames.join(" + ")}</div>
               </div>
               <textarea
                 className={`${field} md:col-span-2`}
@@ -184,8 +188,11 @@ export function ReserveSection() {
                   disabled={status === "sending"}
                   className="label-xs border border-current px-10 py-5 transition-colors hover:bg-foreground hover:text-background disabled:opacity-50"
                 >
-                  {status === "sending" ? "Sending…" : "Request allocation"}
+                  {status === "sending" ? "Sending…" : "Submit investment request"}
                 </button>
+                <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
+                  Submitting a request does not create a binding investment commitment.
+                </p>
               </div>
             </form>
           )}
@@ -194,14 +201,13 @@ export function ReserveSection() {
         <Reveal delay={120}>
           <div className="border-t border-border pt-8 text-sm leading-relaxed text-muted-foreground">
             <div className="label-xs mb-6 text-foreground">Important</div>
-            <p>Submitting this form is an expression of interest only.</p>
+            <p>Requests are reviewed in the order they are received.</p>
             <p className="mt-4">
-              It does not constitute a binding investment commitment or guarantee seat
+              Final allocation is subject to confirmation, due diligence, legal documentation, and
               availability.
             </p>
             <p className="mt-4">
-              Final allocation is subject to confirmation, due diligence, legal documentation,
-              and availability.
+              Requests are sent directly to the Nizek investment team at investors@nizek.com.
             </p>
           </div>
         </Reveal>
