@@ -621,7 +621,7 @@ function PlatformPage() {
 
         <Reveal>
           <div className="border border-border p-6 md:p-10">
-            <div className="label-xs">Founder sourcing network — Gulf Cooperation Council</div>
+            <div className="label-xs">Regional sourcing network — Gulf Cooperation Council</div>
             <svg
               viewBox="0 0 760 470"
               className="mt-6 w-full text-foreground"
