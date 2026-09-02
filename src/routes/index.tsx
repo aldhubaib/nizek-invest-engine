@@ -281,32 +281,43 @@ function PlatformPage() {
           </div>
         </div>
 
-        {/* Infrastructure */}
+        {/* What we provide */}
         <div className="mt-24">
-          <div className="label-xs">Our infrastructure</div>
-          <div className="mt-8 grid grid-cols-2 gap-px border border-border bg-border sm:grid-cols-4">
+          <div className="label-xs">What we provide</div>
+          <div className="mt-8 grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
             {[
-              "Product",
-              "Engineering",
-              "Design",
-              "Growth",
-              "Legal",
-              "Finance",
-              "Hiring",
-              "Fundraising",
-            ].map((c, i) => (
-              <Reveal key={c} delay={i * 50}>
-                <div className="bg-background px-6 py-8 text-base text-foreground">{c}</div>
+              ["Founder Selection", "We identify, evaluate and qualify entrepreneurs before they build a company."],
+              ["Problem Discovery", "We help founders validate that they are solving a real market problem worth building."],
+              ["Product Strategy", "We define what should be built, in what order, and why."],
+              ["Market Validation", "We test assumptions early to reduce wasted time and capital."],
+              ["Business Model Design", "We help shape pricing, revenue models and long-term sustainability."],
+              ["Product Design", "We design intuitive user experiences that customers actually want to use."],
+              ["Technology Development", "We build the product with our internal engineering teams."],
+              ["Technical Leadership", "We make architecture and technology decisions that allow the company to scale."],
+              ["Go-To-Market Strategy", "We help define the launch strategy, customer acquisition approach and early growth priorities."],
+              ["Hiring & Team Building", "We help founders recruit and build their first internal product and technology team."],
+              ["Fundraising Readiness", "We prepare startups for future investment rounds with the right structure, metrics and documentation."],
+              ["Operational Guidance", "We work alongside founders during the first year, helping them make critical product and business decisions."],
+              ["Knowledge Transfer", "Once the startup is ready, we transfer the technology, documentation and operational knowledge to the company's own team."],
+            ].map(([t, d], i) => (
+              <Reveal key={t} delay={i * 40}>
+                <div className="h-full bg-background px-6 py-8">
+                  <div className="num text-xs text-subtle">{String(i + 1).padStart(2, "0")}</div>
+                  <div className="mt-5 text-base text-foreground">{t}</div>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{d}</p>
+                </div>
               </Reveal>
             ))}
           </div>
           <Reveal>
-            <p className="mt-10 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-              In-house venture-building capacity that is already operating — not a plan to assemble
-              one.
+            <p className="mt-10 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+              Nizek contributes experience, execution and venture-building infrastructure—not
+              outsourced services. Our objective is to build companies that become independent and
+              continue growing long after they leave the studio.
             </p>
           </Reveal>
         </div>
+
       </Section>
 
       {/* 03 — Founder pipeline */}
