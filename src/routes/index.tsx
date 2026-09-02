@@ -928,8 +928,53 @@ function PlatformPage() {
               </p>
             </div>
           </Reveal>
+          <Reveal delay={300}>
+            <div className="flex h-full flex-col bg-background p-10 lg:col-span-3">
+              <div className="num text-xs text-subtle">04</div>
+              <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
+                <div>
+                  <div className="display-xl mt-8 text-3xl md:text-4xl">
+                    Quarterly Portfolio Reporting
+                  </div>
+                  <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
+                    Every portfolio company is required to submit a quarterly performance report.
+                    Fund A stakeholders receive access to these reports, creating ongoing visibility
+                    into how the portfolio companies are performing throughout the investment
+                    period.
+                  </p>
+                </div>
+                <div className="flex flex-col justify-between gap-8 lg:mt-8">
+                  <div className="grid grid-cols-2 gap-px border border-border bg-border">
+                    {[
+                      "Financial performance",
+                      "Company progress",
+                      "Operating milestones",
+                      "Key metrics",
+                      "Challenges and risks",
+                      "Major developments",
+                    ].map((item) => (
+                      <div key={item} className="bg-background p-4 text-sm text-foreground">
+                        {item}
+                      </div>
+                    ))}
+                  </div>
+                  <div>
+                    <p className="text-sm leading-relaxed text-foreground">
+                      Investors do not have to wait until the end of the five-year period to
+                      understand how the portfolio is performing.
+                    </p>
+                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                      Quarterly reporting creates a continuous view of the companies held inside
+                      Nizek Venture Studio Fund A.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </Section>
+
 
       {/* 09 — The investment: terms + simulator */}
       <Section id="investment">
