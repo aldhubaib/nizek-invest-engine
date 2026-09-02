@@ -162,10 +162,24 @@ export function ReserveSection() {
           {status === "done" ? (
             <div className="border border-border-strong p-10 md:p-14">
               <div className="label-xs">Request received</div>
-              <h3 className="display-xl mt-6 text-3xl md:text-5xl">Request Received.</h3>
+              <h3 className="display-xl mt-6 text-3xl md:text-5xl">
+                Thank you, {form.fullName.split(" ")[0] || "investor"}.
+              </h3>
               <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground">
-                Our investment team will review your requested ownership positions and contact you
-                directly.
+                Your request has been delivered to the Nizek investment team. A partner will contact
+                you directly to confirm availability and walk through the next steps.
+              </p>
+              <div className="mt-10 grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-3">
+                {summary.map(([k, v]) => (
+                  <div key={k} className="bg-background p-6">
+                    <div className="label-xs text-muted-foreground">{k}</div>
+                    <div className="mt-3 text-base text-foreground">{v}</div>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-8 text-[11px] leading-relaxed text-subtle">
+                Submitting a request does not create a binding investment commitment. For anything
+                urgent, email investors@nizek.com.
               </p>
             </div>
           ) : (
