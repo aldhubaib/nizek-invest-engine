@@ -79,14 +79,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  beforeLoad: async ({ location }) => {
-    // Password gate temporarily disabled. To re-enable, remove this early return.
-    if (true) return;
-    if (location.pathname.startsWith("/unlock") || location.pathname.startsWith("/api/")) return;
-    if (!(await isUnlocked())) {
-      throw redirect({ to: "/unlock" });
-    }
-  },
+
   head: () => ({
     meta: [
       { charSet: "utf-8" },
