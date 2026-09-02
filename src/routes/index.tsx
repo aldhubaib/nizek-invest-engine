@@ -977,7 +977,7 @@ function PlatformPage() {
 
 
       {/* 09 — The investment: terms + simulator */}
-      <Section id="investment">
+      <Section id="investment" invert>
         <SectionHeading
           index="09 — The investment"
           title="Choose Your Position. Model The Outcome."
