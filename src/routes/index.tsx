@@ -1030,45 +1030,35 @@ function PlatformPage() {
         <Reveal>
           <div className="mt-16 md:mt-24">
             <div className="label-xs">Select your ownership</div>
-            <div className="mt-8 grid grid-cols-2 gap-px border border-border bg-border md:grid-cols-3 lg:grid-cols-6">
+            <div className="mt-8 flex flex-col border border-border">
               {Array.from({ length: TOTAL_SEATS }, (_, i) => {
                 const n = i + 1;
                 const reserved = RESERVED_SEATS.includes(n);
-                const rank = reserved ? 0 : n - RESERVED_SEATS.filter((r) => r < n).length;
-                const active = !reserved && rank <= result.seats;
+                if (reserved) return null;
+                const rank = n - RESERVED_SEATS.filter((r) => r < n).length;
+                const active = rank <= result.seats;
                 return (
                   <button
                     key={n}
                     type="button"
-                    disabled={reserved}
-                    onClick={() => !reserved && set("seats", rank)}
+                    onClick={() => set("seats", active && rank === result.seats ? rank - 1 : rank)}
                     aria-pressed={active}
-                    aria-label={
-                      reserved
-                        ? `${investorPosition(n)} committed`
-                        : `Select up to ${investorPosition(n)}`
-                    }
-                    className={`group flex aspect-square flex-col justify-between p-5 text-left transition-colors duration-300 md:p-6 ${
-                      reserved
-                        ? "cursor-not-allowed bg-background text-subtle"
-                        : active
-                          ? "bg-foreground text-background"
-                          : "bg-background hover:bg-muted"
-                    }`}
+                    aria-label={`${active ? "Deselect" : "Select"} ${investorPosition(n)}`}
+                    className="flex items-center gap-4 border-b border-border px-6 py-4 text-left transition-colors duration-200 last:border-b-0 hover:bg-muted"
                   >
-                    <span className="num text-[11px] opacity-60">{investorPosition(n)}</span>
-                    <span className="block">
-                      <span className="label-xs block">
-                        {reserved ? "Committed" : active ? "Selected" : "Available"}
-                      </span>
-                      <span className="num mt-2 block text-2xl tracking-tight md:text-3xl">
-                        {reserved ? "—" : `${SEAT_OWNERSHIP.toFixed(1)}%`}
-                      </span>
+                    <span
+                      className={`flex h-4 w-4 shrink-0 items-center justify-center border ${
+                        active ? "border-foreground bg-foreground" : "border-border"
+                      }`}
+                    >
+                      {active && <span className="block h-1.5 w-1.5 bg-background" />}
                     </span>
+                    <span className="text-sm text-foreground">{investorPosition(n)}</span>
                   </button>
                 );
               })}
             </div>
+
 
             <div className="mt-px grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-3">
               {[
