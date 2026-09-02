@@ -232,7 +232,7 @@ export function projectInvestment(input: InvestmentInputs): InvestmentResult {
 
 export const defaultInvestmentInputs: InvestmentInputs = {
   startupsPerYear: 10,
-  seats: 2,
+  seats: 1,
   successesByYear: [3, 3, 3, 3, 3],
   exitValuesByYear: [
     [5_000_000, 3_000_000, 2_000_000],
