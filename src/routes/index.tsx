@@ -245,7 +245,7 @@ function PlatformPage() {
               <div className="flex h-full flex-col justify-between bg-background p-8 md:p-10">
                 <div className="num text-xs text-subtle">{String(i + 1).padStart(2, "0")}</div>
                 <div className="display-xl mt-10 text-5xl tabular-nums md:text-7xl">
-                  <AnimatedNumber value={m.value} decimals={0} />
+                  <AnimatedNumber value={m.value} format={(v) => String(Math.round(v))} />
                   {m.suffix}
                 </div>
                 <div className="label-xs mt-6 text-muted-foreground">{m.label}</div>
