@@ -17,6 +17,451 @@
     },
     "tools": [
       {
+        "name": "get_page",
+        "title": "Get full page content",
+        "description": "Return the complete current content of the NIZEK investor website in exact display order, section by section: eyebrow, headline, subheadline, body copy, cards, metrics, tables, timelines, diagrams, CTAs, FAQ, team bios, fund structure, equity model, simulator labels and assumptions, benchmark labels, navigation and footer — plus UI metadata per section (layout, column count, chart/image/interactive flags, visibility, device scope). Read-only; intended for a full content audit (repetition, duplicated concepts, weak messaging, ordering, inconsistent investment terms).",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "page": {
+              "type": "string",
+              "enum": [
+                "home"
+              ],
+              "description": "Page identifier. The site is a single page: use \"home\"."
+            }
+          },
+          "required": [
+            "page"
+          ]
+        },
+        "outputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "page": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "meta_description": {
+              "type": "string"
+            },
+            "generated_at": {
+              "type": "string"
+            },
+            "navigation": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "investment_terms": {
+              "type": "object",
+              "properties": {
+                "currency": {
+                  "type": "string"
+                },
+                "totalSeats": {
+                  "type": "number"
+                },
+                "reservedSeats": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                "availableSeats": {
+                  "type": "number"
+                },
+                "ownershipPerSeatPercent": {
+                  "type": "number"
+                },
+                "quarterlyCommitmentPerSeat": {
+                  "type": "number"
+                },
+                "annualCommitmentPerSeat": {
+                  "type": "number"
+                },
+                "commitmentYears": {
+                  "type": "number"
+                },
+                "maxCommitmentPerSeat": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "currency",
+                "totalSeats",
+                "reservedSeats",
+                "availableSeats",
+                "ownershipPerSeatPercent",
+                "quarterlyCommitmentPerSeat",
+                "annualCommitmentPerSeat",
+                "commitmentYears",
+                "maxCommitmentPerSeat"
+              ]
+            },
+            "footer": {
+              "type": "object",
+              "properties": {
+                "disclaimer": {
+                  "type": "string"
+                },
+                "links": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "group": {
+                        "type": "string"
+                      },
+                      "label": {
+                        "type": "string"
+                      },
+                      "target": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "group",
+                      "label",
+                      "target"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "disclaimer",
+                "links"
+              ]
+            },
+            "section_count": {
+              "type": "number"
+            },
+            "sections": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "section_id": {
+                    "type": "string"
+                  },
+                  "section_order": {
+                    "type": "number"
+                  },
+                  "eyebrow": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "headline": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "subheadline": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "body": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "cards": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "index": {
+                          "type": "string"
+                        },
+                        "title": {
+                          "type": "string"
+                        },
+                        "body": {
+                          "type": "string"
+                        },
+                        "value": {
+                          "type": "string"
+                        },
+                        "note": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "title"
+                      ]
+                    }
+                  },
+                  "metrics": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "label": {
+                          "type": "string"
+                        },
+                        "value": {
+                          "type": "string"
+                        },
+                        "note": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "label",
+                        "value"
+                      ]
+                    }
+                  },
+                  "lists": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "label": {
+                          "type": "string"
+                        },
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "required": [
+                        "label",
+                        "items"
+                      ]
+                    }
+                  },
+                  "tables": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "label": {
+                          "type": "string"
+                        },
+                        "columns": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "rows": {
+                          "type": "array",
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "label",
+                        "columns",
+                        "rows"
+                      ]
+                    }
+                  },
+                  "timeline": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "step": {
+                          "type": "string"
+                        },
+                        "title": {
+                          "type": "string"
+                        },
+                        "note": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "step",
+                        "title"
+                      ]
+                    }
+                  },
+                  "diagram": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "label": {
+                            "type": "string"
+                          },
+                          "nodes": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "label": {
+                                  "type": "string"
+                                },
+                                "value": {
+                                  "type": "string"
+                                },
+                                "note": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "label"
+                              ]
+                            }
+                          }
+                        },
+                        "required": [
+                          "label",
+                          "nodes"
+                        ]
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "cta": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "label": {
+                          "type": "string"
+                        },
+                        "target": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "label"
+                      ]
+                    }
+                  },
+                  "faq": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "question": {
+                          "type": "string"
+                        },
+                        "answer": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "question",
+                        "answer"
+                      ]
+                    }
+                  },
+                  "ui": {
+                    "type": "object",
+                    "properties": {
+                      "layout": {
+                        "type": "string"
+                      },
+                      "columns": {
+                        "type": "number"
+                      },
+                      "hasChart": {
+                        "type": "boolean"
+                      },
+                      "hasImage": {
+                        "type": "boolean"
+                      },
+                      "hasInteractiveControl": {
+                        "type": "boolean"
+                      },
+                      "visible": {
+                        "type": "boolean"
+                      },
+                      "deviceScope": {
+                        "type": "string",
+                        "enum": [
+                          "all",
+                          "desktop",
+                          "mobile"
+                        ]
+                      },
+                      "theme": {
+                        "type": "string",
+                        "enum": [
+                          "light",
+                          "dark"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "layout",
+                      "columns",
+                      "hasChart",
+                      "hasImage",
+                      "hasInteractiveControl",
+                      "visible",
+                      "deviceScope",
+                      "theme"
+                    ]
+                  }
+                },
+                "required": [
+                  "section_id",
+                  "section_order",
+                  "eyebrow",
+                  "headline",
+                  "subheadline",
+                  "body",
+                  "cards",
+                  "metrics",
+                  "lists",
+                  "tables",
+                  "timeline",
+                  "diagram",
+                  "cta",
+                  "faq",
+                  "ui"
+                ]
+              }
+            }
+          },
+          "required": [
+            "page",
+            "url",
+            "title",
+            "meta_description",
+            "generated_at",
+            "navigation",
+            "investment_terms",
+            "footer",
+            "section_count",
+            "sections"
+          ]
+        }
+      },
+      {
         "name": "investment_terms",
         "title": "Investment terms",
         "description": "Return NIZEK's fixed investment terms: total seats, seats already committed, ownership per seat, and the quarterly / annual / five-year commitment per seat in KD.",
