@@ -4,7 +4,13 @@ import { z } from "zod";
 const schema = z.object({
   fullName: z.string().trim().min(2).max(120),
   company: z.string().trim().max(160).optional().default(""),
-  email: z.string().trim().email().max(255).optional().default(""),
+  email: z
+    .string()
+    .trim()
+    .max(255)
+    .optional()
+    .default("")
+    .refine((v) => v === "" || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v), "Invalid email address"),
   phone: z.string().trim().min(5).max(40),
   seats: z.number().int().min(1).max(6),
   positions: z.array(z.string().trim().max(40)).max(6).optional().default([]),

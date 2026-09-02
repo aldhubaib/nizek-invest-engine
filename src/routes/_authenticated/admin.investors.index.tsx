@@ -2,7 +2,12 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 
-import { createInvestor, listInvestors, rotateInvestorToken } from "@/lib/admin.functions";
+import {
+  createInvestor,
+  listAllocationRequests,
+  listInvestors,
+  rotateInvestorToken,
+} from "@/lib/admin.functions";
 import { publicLink } from "@/lib/public-link";
 
 const LINK_STORE = "nizek.investor.links";
@@ -55,6 +60,10 @@ function InvestorsDashboard() {
   const { data, isLoading, error } = useQuery({
     queryKey: ["admin", "investors"],
     queryFn: () => listInvestors(),
+  });
+  const requests = useQuery({
+    queryKey: ["admin", "allocation-requests"],
+    queryFn: () => listAllocationRequests(),
   });
 
   const [open, setOpen] = useState(false);
@@ -268,6 +277,66 @@ function InvestorsDashboard() {
                         </button>
                       )}
                     </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </section>
+
+      <section className="mt-16">
+        <h2 className="font-mono text-[11px] uppercase tracking-[0.24em] text-muted-foreground">
+          Investment requests
+        </h2>
+        {requests.isLoading ? (
+          <p className="mt-6 text-sm text-muted-foreground">Loading requests…</p>
+        ) : !requests.data?.length ? (
+          <p className="mt-6 text-sm text-muted-foreground">No requests submitted yet.</p>
+        ) : (
+          <div className="mt-6 overflow-x-auto">
+            <table className="w-full min-w-[900px] text-left text-sm">
+              <thead>
+                <tr className="border-b border-border font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                  <th className="py-3 pr-4">Submitted</th>
+                  <th className="py-3 pr-4">Name</th>
+                  <th className="py-3 pr-4">Contact</th>
+                  <th className="py-3 pr-4">Positions</th>
+                  <th className="py-3 pr-4">Ownership</th>
+                  <th className="py-3 pr-4">Quarterly</th>
+                  <th className="py-3">Message</th>
+                </tr>
+              </thead>
+              <tbody>
+                {requests.data.map((r) => (
+                  <tr key={r.id} className="border-b border-border align-top">
+                    <td className="py-4 pr-4 whitespace-nowrap">{when(r.submittedAt)}</td>
+                    <td className="py-4 pr-4">
+                      {r.investorId ? (
+                        <Link
+                          to="/admin/investors/$id"
+                          params={{ id: r.investorId }}
+                          className="underline underline-offset-4"
+                        >
+                          {r.fullName}
+                        </Link>
+                      ) : (
+                        r.fullName
+                      )}
+                      {r.company ? (
+                        <div className="text-xs text-muted-foreground">{r.company}</div>
+                      ) : null}
+                    </td>
+                    <td className="py-4 pr-4">
+                      <div>{r.phone}</div>
+                      {r.email ? (
+                        <div className="text-xs text-muted-foreground">{r.email}</div>
+                      ) : null}
+                    </td>
+                    <td className="py-4 pr-4">{r.positions || "—"}</td>
+                    <td className="py-4 pr-4">{r.ownership}%</td>
+                    <td className="py-4 pr-4">KD{r.quarterly.toLocaleString("en-US")}</td>
+                    <td className="py-4 max-w-[320px] text-muted-foreground">{r.message || "—"}</td>
                   </tr>
                 ))}
               </tbody>
