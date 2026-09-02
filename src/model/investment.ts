@@ -21,7 +21,7 @@ export const SEAT_ANNUAL_COMMITMENT = SEAT_QUARTERLY_COMMITMENT * 4; // KD per s
 export const COMMITMENT_YEARS = 5;
 export const SEAT_MAX_COMMITMENT = SEAT_ANNUAL_COMMITMENT * COMMITMENT_YEARS;
 /** Seats already reserved (1-indexed seat numbers). */
-export const RESERVED_SEATS = [1];
+export const RESERVED_SEATS = [1, 2];
 /** Seats still open to new investors. */
 export const AVAILABLE_SEATS = TOTAL_SEATS - RESERVED_SEATS.length;
 
