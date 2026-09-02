@@ -2,14 +2,13 @@ import { useState } from "react";
 import { Reveal, Section, SectionHeading } from "@/components/ui/primitives";
 import { submitSeatRequest } from "@/lib/investor.functions";
 import {
-  COMMITMENT_YEARS,
   RESERVED_SEATS,
-  SEAT_ANNUAL_COMMITMENT,
+  SEAT_QUARTERLY_COMMITMENT,
   SEAT_OWNERSHIP,
   TOTAL_SEATS,
 } from "@/model/investment";
 
-const ANNUAL_PER_SEAT = SEAT_ANNUAL_COMMITMENT;
+const QUARTERLY_PER_SEAT = SEAT_QUARTERLY_COMMITMENT;
 const OWNERSHIP_PER_SEAT = SEAT_OWNERSHIP;
 
 function kd(value: number) {
@@ -33,13 +32,12 @@ export function ReserveSection() {
   });
 
   const seats = selected.length;
-  const annual = seats * ANNUAL_PER_SEAT;
+  const quarterly = seats * QUARTERLY_PER_SEAT;
   const metrics: Array<[string, string]> = [
     ["Seats selected", String(seats).padStart(2, "0")],
-    ["Ownership participation", `${seats * OWNERSHIP_PER_SEAT}%`],
-    ["Annual commitment", kd(annual)],
-    ["Quarterly commitment", kd(annual / 4)],
-    [`Maximum ${COMMITMENT_YEARS}-year commitment`, kd(annual * COMMITMENT_YEARS)],
+    ["Participation", `${seats * OWNERSHIP_PER_SEAT}%`],
+    ["Quarterly commitment", `${kd(quarterly)} every 3 months`],
+    ["Payment schedule", "Paid quarterly in advance"],
   ];
 
   function toggleSeat(n: number) {
