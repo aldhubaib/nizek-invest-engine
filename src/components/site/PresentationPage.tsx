@@ -1230,7 +1230,7 @@ function PlatformPageBody() {
                 {
                   step: "02",
                   label: "MOIC",
-                  note: "The total value returned for every dinar invested.",
+                  note: "Derived from the assumptions selected above.",
                   value: result.moic,
                   format: (v: number) => multiple(v, 2),
                 },
