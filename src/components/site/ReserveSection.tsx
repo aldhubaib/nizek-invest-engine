@@ -207,15 +207,6 @@ export function ReserveSection() {
               />
               <input
                 className={field}
-                type="email"
-                placeholder="Email"
-                required={!investor}
-                maxLength={255}
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-              />
-              <input
-                className={field}
                 placeholder="Phone number"
                 required
                 maxLength={40}
