@@ -719,16 +719,15 @@ function PlatformPage() {
         <SectionHeading
           index="09 — The investment"
           title="Only Six Ownership Seats."
-          lede="Once all six seats are allocated, this investment vehicle closes."
+          lede="The investment vehicle is limited to six ownership seats. Each seat represents 5% participation in Nizek's equity position across the portfolio startups."
         />
 
-        <div className="grid grid-cols-2 gap-px border border-border bg-border lg:grid-cols-5">
+        <div className="grid grid-cols-2 gap-px border border-border bg-border lg:grid-cols-4">
           {[
-            [String(TOTAL_SEATS), "Total seats"],
+            [String(TOTAL_SEATS), "Ownership seats"],
             [`${SEAT_OWNERSHIP}%`, "Per seat"],
-            [kd(SEAT_QUARTERLY_COMMITMENT), "Per quarter, per seat"],
-            [kd(SEAT_ANNUAL_COMMITMENT), "Per year, per seat"],
-            [kd(SEAT_MAX_COMMITMENT), `Maximum ${COMMITMENT_YEARS}-year commitment`],
+            [kd(SEAT_QUARTERLY_COMMITMENT), "Every 3 months"],
+            ["Advance", "Quarterly payment"],
           ].map(([v, l], i) => (
             <Reveal key={l} delay={i * 70}>
               <div className="flex h-full flex-col justify-between bg-background p-8">
