@@ -122,10 +122,10 @@ function PlatformPageBody() {
     [result],
   );
 
-  const set = useCallback(
-    (k: NumericInvestmentKey, v: number) => setInputs((p) => ({ ...p, [k]: v })),
-    [],
-  );
+  const set = useCallback((k: NumericInvestmentKey, v: number) => {
+    setInputs((p) => ({ ...p, [k]: v }));
+    trackInvestorEvent("assumption_changed", { key: k, value: v });
+  }, []);
   const reset = useCallback(
     (k: NumericInvestmentKey) => setInputs((p) => ({ ...p, [k]: defaultInvestmentInputs[k] })),
     [],
