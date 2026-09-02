@@ -11,8 +11,7 @@ const nav = [
   { id: "equity", label: "Equity" },
   { id: "structure", label: "Fund" },
   { id: "advantages", label: "Advantages" },
-  { id: "investment", label: "Seats" },
-  { id: "model", label: "Simulator" },
+  { id: "investment", label: "The investment" },
   { id: "team", label: "Team" },
   { id: "reserve", label: "Request allocation" },
 ] as const;

@@ -931,72 +931,32 @@ function PlatformPage() {
         </div>
       </Section>
 
-      {/* 09 — Investment + limited ownership */}
+      {/* 09 — The investment: terms + simulator */}
       <Section id="investment">
         <SectionHeading
           index="09 — The investment"
-          title="Only Six Ownership Seats."
-          lede="The investment vehicle is limited to six ownership seats. Each seat represents 5% participation in Nizek's equity position across the portfolio startups."
+          title="Choose Your Position. Model The Outcome."
+          lede={`Nizek Venture Studio Fund A is limited to ${TOTAL_SEATS} ownership positions. Each position represents ${SEAT_OWNERSHIP}% ownership in the Fund and requires a ${kd(SEAT_QUARTERLY_COMMITMENT)} capital call every three months, paid quarterly in advance.`}
         />
 
-        <div className="grid grid-cols-2 gap-px border border-border bg-border lg:grid-cols-4">
-          {[
-            [kd(SEAT_QUARTERLY_COMMITMENT), "Quarterly capital call"],
-            ["Every 3 months", "Capital call frequency"],
-            ["In advance", "Called at the start of each quarter"],
-            [`${SEAT_OWNERSHIP}%`, "Participation per seat"],
-          ].map(([v, l], i) => (
-            <Reveal key={l} delay={i * 70}>
-              <div className="flex h-full flex-col justify-between bg-background p-8">
-                <div className="num text-3xl text-foreground md:text-4xl">{v}</div>
-                <div className="label-xs mt-8 text-muted-foreground">{l}</div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-
-        <Reveal>
-          <p className="mt-10 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-            Investors commit for a five-year investment period. Capital is not paid upfront. Instead,
-            capital is called every three months in advance as new venture cohorts are funded.
-          </p>
-        </Reveal>
-
-        <Reveal>
-          <div className="mt-10 grid grid-cols-2 gap-px border border-border bg-border md:grid-cols-4">
-            {[1, 2, 3, 4].map((q) => (
-              <div key={q} className="bg-background p-8">
-                <div className="label-xs">Quarter {q}</div>
-                <div className="num mt-6 text-2xl text-foreground md:text-3xl">
-                  {kd(SEAT_QUARTERLY_COMMITMENT)}
-                </div>
-                <div className="mt-4 text-[11px] text-subtle">Capital call — in advance</div>
-              </div>
-            ))}
-          </div>
-          <p className="mt-4 text-xs text-subtle">
-            Quarterly capital calls continue throughout the five-year commitment.
-          </p>
-        </Reveal>
-
-
-        <div className="mt-16 grid grid-cols-2 gap-px border border-border bg-border md:mt-24 md:grid-cols-3 lg:grid-cols-6">
+        {/* Part 1 — the six ownership positions */}
+        <div className="grid grid-cols-2 gap-px border border-border bg-border md:grid-cols-3 lg:grid-cols-6">
           {Array.from({ length: TOTAL_SEATS }, (_, i) => {
             const n = i + 1;
             const reserved = RESERVED_SEATS.includes(n);
+            const rank = reserved ? 0 : n - RESERVED_SEATS.filter((r) => r < n).length;
+            const active = !reserved && rank <= result.seats;
             return (
-              <Reveal key={n} delay={i * 60}>
+              <Reveal key={n} delay={i * 50}>
                 <div
                   className={`h-full p-8 transition-colors duration-300 ${
-                    reserved ? "bg-foreground text-background" : "bg-background"
+                    reserved ? "bg-foreground text-background" : active ? "bg-muted" : "bg-background"
                   }`}
                 >
                   <div className="num text-xs opacity-60">{investorPosition(n)}</div>
-                  <div className="display-xl mt-10 text-2xl md:text-3xl">
-                    {reserved ? "Taken" : "Available"}
-                  </div>
-                  <div className="mt-6 text-[11px] leading-relaxed opacity-60">
-                    {SEAT_OWNERSHIP}%
+                  <div className="num mt-10 text-2xl md:text-3xl">{SEAT_OWNERSHIP.toFixed(1)}%</div>
+                  <div className="label-xs mt-4 opacity-70">
+                    {reserved ? "Committed" : active ? "Selected" : "Available"}
                   </div>
                 </div>
               </Reveal>
@@ -1004,69 +964,116 @@ function PlatformPage() {
           })}
         </div>
 
-        <Reveal>
-          <div className="mt-px flex flex-wrap items-end justify-between gap-6 border border-border px-8 py-8">
-            <div>
-              <div className="label-xs">Total investor participation</div>
-              <p className="mt-3 text-xs text-subtle">
-                {TOTAL_SEATS} seats × {SEAT_OWNERSHIP}% of Nizek&apos;s equity position across the
-                portfolio startups
-              </p>
-            </div>
-            <div className="num text-4xl text-foreground md:text-6xl">
-              {TOTAL_SEATS * SEAT_OWNERSHIP}%
-            </div>
-          </div>
-        </Reveal>
-
+        {/* Part 2 — the commitment, stated once */}
         <Reveal>
           <div className="mt-px grid grid-cols-2 gap-px border border-border bg-border lg:grid-cols-4">
             {[
-              [`${TOTAL_SEATS}`, "Ownership seats"],
-              [`${SEAT_OWNERSHIP}%`, "Participation per seat"],
+              [`${SEAT_OWNERSHIP}%`, "Ownership per position"],
               [kd(SEAT_QUARTERLY_COMMITMENT), "Every 3 months"],
-              ["In advance", "Quarterly capital call"],
+              ["Quarterly", "Paid in advance"],
+              ["5 years", "Commitment period"],
             ].map(([v, l]) => (
               <div key={l} className="bg-background px-8 py-7">
-                <div className="num text-xl text-foreground md:text-2xl">{v}</div>
-                <div className="label-xs mt-5 text-muted-foreground">{l}</div>
+                <div className="num text-2xl text-foreground md:text-3xl">{v}</div>
+                <div className="label-xs mt-6 text-muted-foreground">{l}</div>
               </div>
             ))}
           </div>
         </Reveal>
 
+        {/* Part 3 — select your ownership */}
+        <Reveal>
+          <div className="mt-16 md:mt-24">
+            <div className="label-xs">Select your ownership</div>
+            <div className="mt-8 grid grid-cols-2 gap-px border border-border bg-border md:grid-cols-3 lg:grid-cols-6">
+              {Array.from({ length: TOTAL_SEATS }, (_, i) => {
+                const n = i + 1;
+                const reserved = RESERVED_SEATS.includes(n);
+                const rank = reserved ? 0 : n - RESERVED_SEATS.filter((r) => r < n).length;
+                const active = !reserved && rank <= result.seats;
+                return (
+                  <button
+                    key={n}
+                    type="button"
+                    disabled={reserved}
+                    onClick={() => !reserved && set("seats", rank)}
+                    aria-pressed={active}
+                    aria-label={
+                      reserved
+                        ? `${investorPosition(n)} committed`
+                        : `Select up to ${investorPosition(n)}`
+                    }
+                    className={`group flex aspect-square flex-col justify-between p-5 text-left transition-colors duration-300 md:p-6 ${
+                      reserved
+                        ? "cursor-not-allowed bg-background text-subtle"
+                        : active
+                          ? "bg-foreground text-background"
+                          : "bg-background hover:bg-muted"
+                    }`}
+                  >
+                    <span className="num text-[11px] opacity-60">{investorPosition(n)}</span>
+                    <span className="block">
+                      <span className="label-xs block">
+                        {reserved ? "Committed" : active ? "Selected" : "Available"}
+                      </span>
+                      <span className="num mt-2 block text-2xl tracking-tight md:text-3xl">
+                        {reserved ? "—" : `${SEAT_OWNERSHIP.toFixed(1)}%`}
+                      </span>
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
 
-        <div className="mt-24 grid grid-cols-1 gap-16 lg:grid-cols-[1fr_1fr]">
-          <div>
-            <div className="label-xs">Capital deployment</div>
-            <div className="mt-8 grid grid-cols-2 gap-px border border-border bg-border">
-              {["Developers", "Marketing", "Operations", "Ecosystem"].map((s, i) => (
-                <div key={s} className="bg-background p-8">
-                  <div className="num text-xs text-subtle">{String(i + 1).padStart(2, "0")}</div>
-                  <div className="display-xl mt-6 text-xl leading-tight md:text-2xl">{s}</div>
+            <div className="mt-px grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-3">
+              {[
+                {
+                  l: "Positions selected",
+                  v: result.seats,
+                  f: (v: number) => `${Math.round(v)}`,
+                  note: Array.from({ length: TOTAL_SEATS }, (_, i) => i + 1)
+                    .filter(
+                      (n) =>
+                        !RESERVED_SEATS.includes(n) &&
+                        n - RESERVED_SEATS.filter((r) => r < n).length <= result.seats,
+                    )
+                    .map((n) => investorPosition(n))
+                    .join(" + "),
+                },
+                {
+                  l: "Fund ownership",
+                  v: result.ownershipPercent,
+                  f: (v: number) => `${v.toFixed(1)}%`,
+                  note: "Ownership in Nizek Venture Studio Fund A",
+                },
+                {
+                  l: "Quarterly capital call",
+                  v: result.annualCommitment / 4,
+                  f: kd,
+                  note: "Paid quarterly in advance",
+                },
+              ].map((k) => (
+                <div key={k.l} className="bg-background p-8">
+                  <div className="label-xs">{k.l}</div>
+                  <div className="num mt-8 text-2xl tracking-tight text-foreground md:text-4xl">
+                    <AnimatedNumber value={k.v} format={k.f} />
+                  </div>
+                  <div className="mt-4 text-[11px] leading-relaxed text-subtle">{k.note}</div>
                 </div>
               ))}
             </div>
           </div>
-          <Reveal delay={100}>
-            <div className="border-l border-border-strong pl-8">
-              <p className="display-xl text-2xl md:text-4xl">
-                Participation is in Nizek&apos;s portfolio equity allocation.
-              </p>
-              <p className="mt-6 text-sm text-muted-foreground">It is not ownership in Nizek itself.</p>
-            </div>
-          </Reveal>
-        </div>
+        </Reveal>
       </Section>
 
-      {/* 10 — Simulator */}
+      {/* Part 4 — the simulator, assuming the selection above */}
       <section id="model" className="section-invert border-t border-border">
         <div className="px-6 py-24 md:px-12 md:py-32">
           <div className="mx-auto w-full max-w-[1400px]">
             <Reveal>
-              <div className="label-xs">10 — The investment simulator</div>
-              <h2 className="display-xl mt-6 text-5xl md:text-8xl">
-                If Nizek builds successful companies, what could your investment become?
+              <div className="label-xs">Model the outcome</div>
+              <h2 className="display-xl mt-6 text-4xl md:text-7xl">
+                What could that ownership become?
               </h2>
               <p className="mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground">
                 Five annual cohorts. Portfolio value is the sum of the Estimated Enterprise Values of
@@ -1092,6 +1099,7 @@ function PlatformPage() {
             }`}
             aria-hidden={!panelOpen}
           >
+
             <div className="flex items-center justify-between gap-4">
               <div className="label-xs">Your assumptions</div>
               <button
@@ -1218,155 +1226,52 @@ function PlatformPage() {
             ))}
           </aside>
 
+
           <div className="px-6 py-12 md:px-12">
-            {/* Seat selector — allocation interface */}
-            <div className="relative border border-border p-8 md:p-12">
+            <div className="flex flex-wrap items-center justify-between gap-4 border border-border px-8 py-6">
+              <div className="flex items-center gap-3">
+                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-foreground" aria-hidden />
+                <span className="label-xs">Live — venture assumptions</span>
+              </div>
               <button
                 type="button"
                 onClick={() => setPanelOpen(true)}
-                className="absolute right-8 top-8 border border-border-strong px-5 py-2.5 text-xs uppercase tracking-[0.18em] text-foreground transition-colors hover:bg-foreground hover:text-background md:right-12 md:top-12"
+                className="border border-border-strong px-5 py-2.5 text-xs uppercase tracking-[0.18em] text-foreground transition-colors hover:bg-foreground hover:text-background"
               >
                 Show assumptions
               </button>
-              <div className="flex flex-col gap-10 border-b border-border pb-10 md:flex-row md:items-end md:justify-between">
-                <div className="max-w-2xl">
-                  <div className="flex items-center gap-4">
-                    <span className="h-px w-8 bg-border-strong" aria-hidden />
-                    <div className="label-xs">Allocation interface</div>
-                  </div>
-
-                  <h3 className="display-xl mt-6 text-3xl leading-tight md:text-5xl">
-                    Secure your position in the Nizek ecosystem.{" "}
-                    <span className="text-subtle">
-                      {AVAILABLE_SEATS - result.seats === 0
-                        ? "All remaining seats are yours."
-                        : `Only ${AVAILABLE_SEATS - result.seats} of ${TOTAL_SEATS} seats would remain.`}
-                    </span>
-                  </h3>
-                  <p className="mt-6 max-w-md text-xs leading-relaxed text-subtle">
-                    Select the number of seats. Everything below updates instantly.
-                  </p>
-                </div>
-                <div className="text-right">
-                  <div className="num text-6xl leading-none text-foreground md:text-8xl">
-                    {String(AVAILABLE_SEATS - result.seats).padStart(2, "0")}
-                    <span className="text-subtle">/{String(TOTAL_SEATS).padStart(2, "0")}</span>
-                  </div>
-                  <div className="label-xs mt-3">Seats still available</div>
-                </div>
-              </div>
-
-              <div className="mt-10 grid grid-cols-2 gap-px border border-border bg-border md:grid-cols-3 lg:grid-cols-6">
-                {Array.from({ length: TOTAL_SEATS }, (_, i) => {
-                  const n = i + 1;
-                  const reserved = RESERVED_SEATS.includes(n);
-                  const rank = reserved ? 0 : n - RESERVED_SEATS.filter((r) => r < n).length;
-                  const active = !reserved && rank <= result.seats;
-                  return (
-                    <button
-                      key={n}
-                      type="button"
-                      disabled={reserved}
-                      onClick={() => !reserved && set("seats", rank)}
-                      aria-pressed={active}
-                      aria-label={
-                        reserved
-                          ? `${investorPosition(n)} committed`
-                          : `Select ${rank} ownership position${rank > 1 ? "s" : ""}`
-                      }
-                      className={`group relative flex aspect-square flex-col justify-between overflow-hidden p-5 text-left transition-colors duration-300 md:p-6 ${
-                        reserved
-                          ? "cursor-not-allowed bg-background text-subtle"
-                          : active
-                            ? "bg-foreground text-background"
-                            : "bg-background hover:bg-muted"
-                      }`}
-                    >
-                      {reserved && (
-                        <span
-                          aria-hidden
-                          className="pointer-events-none absolute inset-0 opacity-20"
-                          style={{
-                            backgroundImage:
-                              "repeating-linear-gradient(45deg, currentColor 0, currentColor 1px, transparent 1px, transparent 8px)",
-                          }}
-                        />
-                      )}
-                      <span className="num relative text-[11px] opacity-50 transition-opacity group-hover:opacity-100">
-                        {investorPosition(n)}
-                      </span>
-                      <span className="relative block">
-                        <span className={`label-xs block ${active ? "text-background" : ""}`}>
-                          {reserved ? "Committed" : active ? "Selected" : "Available"}
-                        </span>
-                        <span
-                          className={`num mt-2 block text-2xl tracking-tight md:text-3xl ${
-                            reserved ? "opacity-30" : active ? "" : "opacity-50 group-hover:opacity-100"
-                          }`}
-                        >
-                          {reserved ? "—" : `${SEAT_OWNERSHIP.toFixed(1)}%`}
-                        </span>
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
             </div>
 
-            {/* KPIs — live metrics matrix */}
-            <div className="mt-px grid grid-cols-2 gap-px border border-border bg-border md:grid-cols-3 lg:grid-cols-6">
-              {[
-                { l: "Seats selected", v: result.seats, f: (v: number) => `${Math.round(v)}` },
-                {
-                  l: "Participation",
-                  v: result.ownershipPercent,
-                  f: (v: number) => `${v.toFixed(1)}%`,
-                },
-                { l: "Quarterly commitment", v: result.annualCommitment / 4, f: kd },
-                { l: "Estimated portfolio value", v: result.portfolioValue, f: kd },
-                { l: "Estimated investor value", v: result.investorValue, f: kd },
-                { l: "Multiple", v: result.moic, f: (v: number) => multiple(v, 2) },
-              ].map((k) => (
-                <div key={k.l} className="bg-background p-8">
-                  <div className="label-xs">{k.l}</div>
-                  <div className="num mt-8 text-2xl tracking-tight text-foreground md:text-4xl">
-                    <AnimatedNumber value={k.v} format={k.f} />
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Status bar */}
-            <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
-                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-foreground" aria-hidden />
-                <span className="label-xs">Live — pool allocation active</span>
-              </div>
-              <span className="label-xs text-subtle">
-                {result.seats} of {AVAILABLE_SEATS} available seats selected
-              </span>
-            </div>
-
-            {/* The result — focal point */}
+            {/* Primary outputs */}
             <div className="mt-px border border-border">
               {[
                 {
-                  label: "Estimated value",
-                  note: "Your share of Nizek's equity in the successful companies",
+                  step: "01",
+                  label: "Investor estimated value",
+                  note: "Your share of the Fund's equity in the successful companies",
                   value: result.investorValue,
                   format: kd,
                 },
                 {
+                  step: "02",
+                  label: "MOIC",
+                  note: "What every dinar comes back as",
+                  value: result.moic,
+                  format: (v: number) => multiple(v, 2),
+                },
+                {
+                  step: "03",
                   label: "Estimated profit",
-                  note: "Value created above the capital you committed",
+                  note: "Value created above the capital committed",
                   value: result.investorProfit,
                   format: kd,
                 },
                 {
-                  label: "Return",
-                  note: "What every dinar comes back as",
-                  value: result.moic,
-                  format: (v: number) => multiple(v, 2),
+                  step: "04",
+                  label: "Portfolio estimated value",
+                  note: `${fmtNumber(result.totalSuccesses)} successful companies out of ${fmtNumber(result.totalStartups)}, each at its Estimated Enterprise Value`,
+                  value: result.portfolioValue,
+                  format: kd,
                 },
               ].map((row) => (
                 <div
@@ -1374,7 +1279,10 @@ function PlatformPage() {
                   className="flex flex-col gap-4 border-b border-border px-8 py-10 last:border-b-0 md:flex-row md:items-end md:justify-between md:px-12"
                 >
                   <div>
-                    <div className="label-xs">{row.label}</div>
+                    <div className="flex items-center gap-4">
+                      <span className="num text-[11px] text-subtle">{row.step}</span>
+                      <div className="label-xs">{row.label}</div>
+                    </div>
                     <div className="mt-3 max-w-sm text-xs leading-relaxed text-subtle">
                       {row.note}
                     </div>
@@ -1390,10 +1298,9 @@ function PlatformPage() {
             <div className="mt-20">
               <div className="label-xs">How the portfolio is built, one cohort at a time</div>
               <p className="mt-4 max-w-2xl text-xs leading-relaxed text-subtle">
-                Every year new capital is drawn and a new cohort of startups is created. Most do not
-                succeed. Each cohort is modeled using the Estimated Enterprise Value of its
-                successful companies — earlier cohorts carry higher values because they have had more
-                time to mature.
+                Every year a new cohort of startups is created. Most do not succeed. Each cohort is
+                modeled using the Estimated Enterprise Value of its successful companies — earlier
+                cohorts carry higher values because they have had more time to mature.
               </p>
 
               <div className="mt-8 border border-border">
@@ -1402,12 +1309,11 @@ function PlatformPage() {
                   return (
                     <Reveal key={c.year} delay={(c.year - 1) * 60}>
                       <div className="border-b border-border px-6 py-7 last:border-b-0 md:px-10">
-                        <div className="grid grid-cols-2 items-start gap-x-6 gap-y-6 sm:grid-cols-3 lg:grid-cols-6">
+                        <div className="grid grid-cols-2 items-start gap-x-6 gap-y-6 sm:grid-cols-3 lg:grid-cols-5">
                           <div className="display-xl col-span-2 min-w-0 text-2xl sm:col-span-3 lg:col-span-1">
                             Year {c.year}
                           </div>
                           {[
-                            ["Invested", `${kd(c.capitalInvested / 4)} / quarter`, null],
                             ["Successes", fmtNumber(c.successes), null],
                             [
                               "EEV",
@@ -1418,7 +1324,7 @@ function PlatformPage() {
                                     .join(" + ")} = ${kd(c.portfolioValue).replace("KD", "")}`
                                 : null,
                             ],
-                            ["Nizek equity", kd(c.nizekEquityValue), null],
+                            ["Fund equity", kd(c.nizekEquityValue), null],
                             ["Investor equity", kd(c.investorValue), null],
                           ].map(([l, v, breakdown]) => (
                             <div key={l as string} className="min-w-0">
@@ -1452,45 +1358,9 @@ function PlatformPage() {
                 })}
               </div>
 
-              {/* Funnel */}
-              <div className="mt-px grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-4">
-                {[
-                  {
-                    step: "01",
-                    title: "Portfolio value",
-                    value: result.portfolioValue,
-                    note: `${fmtNumber(result.totalSuccesses)} successful companies out of ${fmtNumber(result.totalStartups)}, each at its Estimated Enterprise Value.`,
-                  },
-                  {
-                    step: "02",
-                    title: "Nizek ownership",
-                    value: result.nizekEquityValue,
-                    note: `${inputs.avgNizekOwnership}% average equity across the successful companies.`,
-                  },
-                  {
-                    step: "03",
-                    title: "Investor share",
-                    value: result.investorValue,
-                    note: `${result.ownershipPercent}% participation in Nizek's equity position — ${result.seats} seat${result.seats > 1 ? "s" : ""} × ${SEAT_OWNERSHIP}%.`,
-                  },
-                  {
-                    step: "04",
-                    title: "Estimated return",
-                    value: result.moic,
-                    format: (v: number) => multiple(v, 2),
-                    note: `On ${kd(result.annualCommitment / 4)} called every three months, paid quarterly in advance.`,
-                  },
-                ].map((s) => (
-                  <div key={s.step} className="bg-background p-8">
-                    <div className="num text-xs text-subtle">{s.step}</div>
-                    <div className="mt-6 text-sm leading-relaxed text-foreground">{s.title}</div>
-                    <div className="num mt-6 text-2xl text-foreground">
-                      <AnimatedNumber value={s.value} format={s.format ?? kd} />
-                    </div>
-                    <div className="mt-4 text-[11px] leading-relaxed text-subtle">{s.note}</div>
-                  </div>
-                ))}
-              </div>
+              <p className="mt-10 max-w-3xl text-xl text-foreground md:text-2xl">
+                Change the assumptions. See how the portfolio responds.
+              </p>
 
               <p className="mt-8 max-w-3xl text-[11px] leading-relaxed text-subtle">
                 Illustrative model only. Estimated Enterprise Value is an assumption about what a
@@ -1500,6 +1370,7 @@ function PlatformPage() {
           </div>
         </div>
       </section>
+
 
       {/* 11 — Team */}
       <TeamSection />
