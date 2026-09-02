@@ -880,7 +880,7 @@ function PlatformPage() {
 
 
       {/* 08 — Investor advantages */}
-      <Section id="advantages">
+      <Section id="advantages" invert>
         <SectionHeading index="08 — Investor advantages" title="Why This Works For The Investor." />
         <div className="grid grid-cols-1 gap-px border border-border bg-border lg:grid-cols-3">
           <Reveal>
@@ -977,7 +977,7 @@ function PlatformPage() {
 
 
       {/* 09 — The investment: terms + simulator */}
-      <Section id="investment" invert>
+      <Section id="investment">
         <SectionHeading
           index="09 — The investment"
           title="Choose Your Position. Model The Outcome."
