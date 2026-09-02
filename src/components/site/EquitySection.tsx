@@ -4,7 +4,6 @@ import { Reveal, Section, SectionHeading } from "@/components/ui/primitives";
 import { SEAT_OWNERSHIP, TOTAL_SEATS } from "@/model/investment";
 
 /** Illustrative split used in the ownership example. */
-const NIZEK_SHARE = 30;
 
 const CONTRIBUTIONS = [
   "Founder Selection",
@@ -76,7 +75,9 @@ const BENEFITS = [
 export function EquitySection() {
   const [seats, setSeats] = useState(1);
   const participation = seats * SEAT_OWNERSHIP;
-  const effective = (NIZEK_SHARE * participation) / 100;
+  const fmt = (n: number) => n.toFixed(2).replace(/\.?0+$/, "");
+  const effectiveMin = (20 * participation) / 100;
+  const effectiveMax = (30 * participation) / 100;
 
   return (
     <Section id="equity" invert>
@@ -175,11 +176,11 @@ export function EquitySection() {
                 {
                   l: "Investor share of the Fund",
                   v: `${participation}%`,
-                  n: "Ownership held as units in Fund A.",
+                  n: "Fixed ownership held as units in Fund A.",
                 },
                 {
                   l: "Look-through share of the startup",
-                  v: `${effective.toFixed(2).replace(/\.?0+$/, "")}%`,
+                  v: `${fmt(effectiveMin)}–${fmt(effectiveMax)}%`,
                   n: "Fund ownership applied to the example company.",
                 },
               ].map((c) => (
