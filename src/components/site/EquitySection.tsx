@@ -104,8 +104,9 @@ export function EquitySection() {
               </h3>
             </div>
             <p className="text-base leading-relaxed text-muted-foreground">
-              The investor participates in Nizek&apos;s equity position across the portfolio startups — not in Nizek the company, and — never from the
-              founder&apos;s. Founder ownership is unchanged by the investor&apos;s participation.
+              The investor participates in Nizek&apos;s equity position across the portfolio
+              startups — never in the founder&apos;s ownership, and never in Nizek the company.
+              Founder ownership is unchanged by the investor&apos;s participation.
             </p>
           </div>
 
