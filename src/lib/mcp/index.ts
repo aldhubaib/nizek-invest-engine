@@ -1,4 +1,4 @@
-import { auth, defineMcp, type AnyToolDefinition } from "@lovable.dev/mcp-js";
+import { auth, defineMcp } from "@lovable.dev/mcp-js";
 
 import investmentTerms from "./tools/investment-terms";
 import simulateInvestment from "./tools/simulate-investment";
@@ -15,5 +15,5 @@ export default defineMcp({
     issuer: `https://${projectRef}.supabase.co/auth/v1`,
     acceptedAudiences: "authenticated",
   }),
-  tools: [investmentTerms, simulateInvestment] as unknown as AnyToolDefinition[],
+  tools: [investmentTerms, simulateInvestment] as unknown as Parameters<typeof defineMcp>[0]["tools"],
 });
