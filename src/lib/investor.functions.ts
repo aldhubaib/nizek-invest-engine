@@ -104,6 +104,7 @@ export interface InvestorContext {
   phone: string;
   company: string;
   allocationStatus: string;
+  confidentialityAcknowledged: boolean;
 }
 
 /** Resolve the investor behind the current signed session cookie, if any. */
@@ -115,7 +116,9 @@ export const getInvestorContext = createServerFn({ method: "GET" }).handler(asyn
   const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
   const { data } = await supabaseAdmin
     .from("investors")
-    .select("id, full_name, email, phone, company, allocation_status, token_revoked_at")
+    .select(
+      "id, full_name, email, phone, company, allocation_status, token_revoked_at, confidentiality_acknowledged",
+    )
     .eq("id", cookie.investorId)
     .maybeSingle();
   if (!data || data.token_revoked_at) return null;
@@ -128,9 +131,42 @@ export const getInvestorContext = createServerFn({ method: "GET" }).handler(asyn
     phone: data.phone ?? "",
     company: data.company ?? "",
     allocationStatus: data.allocation_status,
+    confidentialityAcknowledged: Boolean(data.confidentiality_acknowledged),
   };
   return context;
 });
+
+/** Record the investor's confidentiality acknowledgment for the current session. */
+export const acknowledgeConfidentiality = createServerFn({ method: "POST" }).handler(async () => {
+  const { readInvestorCookie } = await import("@/lib/investor-access.server");
+  const cookie = await readInvestorCookie();
+  if (!cookie) return { ok: false as const };
+
+  const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+  const now = new Date().toISOString();
+
+  const { data: existing } = await supabaseAdmin
+    .from("investors")
+    .select("confidentiality_acknowledged")
+    .eq("id", cookie.investorId)
+    .maybeSingle();
+
+  if (!existing?.confidentiality_acknowledged) {
+    await supabaseAdmin
+      .from("investors")
+      .update({ confidentiality_acknowledged: true, confidentiality_acknowledged_at: now })
+      .eq("id", cookie.investorId);
+  }
+
+  await supabaseAdmin.from("investor_events").insert({
+    investor_id: cookie.investorId,
+    session_id: cookie.sessionId,
+    event_type: "confidentiality_acknowledged" as never,
+  });
+
+  return { ok: true as const, acknowledgedAt: now };
+});
+
 
 const SECTION_KEYS = [
   "hero",

@@ -320,6 +320,8 @@ export type Database = {
           allocation_requested: boolean
           allocation_status: Database["public"]["Enums"]["allocation_status"]
           company: string | null
+          confidentiality_acknowledged: boolean
+          confidentiality_acknowledged_at: string | null
           created_at: string
           email: string | null
           engagement_status: Database["public"]["Enums"]["engagement_status"]
@@ -341,6 +343,8 @@ export type Database = {
           allocation_requested?: boolean
           allocation_status?: Database["public"]["Enums"]["allocation_status"]
           company?: string | null
+          confidentiality_acknowledged?: boolean
+          confidentiality_acknowledged_at?: string | null
           created_at?: string
           email?: string | null
           engagement_status?: Database["public"]["Enums"]["engagement_status"]
@@ -362,6 +366,8 @@ export type Database = {
           allocation_requested?: boolean
           allocation_status?: Database["public"]["Enums"]["allocation_status"]
           company?: string | null
+          confidentiality_acknowledged?: boolean
+          confidentiality_acknowledged_at?: string | null
           created_at?: string
           email?: string | null
           engagement_status?: Database["public"]["Enums"]["engagement_status"]
@@ -550,6 +556,7 @@ export type Database = {
         | "assumption_changed"
         | "simulator_snapshot"
         | "allocation_requested"
+        | "confidentiality_acknowledged"
       position_code: "A" | "B" | "C" | "D" | "E" | "F"
       position_status: "available" | "reserved" | "committed"
       report_status: "draft" | "submitted" | "published"
@@ -721,6 +728,7 @@ export const Constants = {
         "assumption_changed",
         "simulator_snapshot",
         "allocation_requested",
+        "confidentiality_acknowledged",
       ],
       position_code: ["A", "B", "C", "D", "E", "F"],
       position_status: ["available", "reserved", "committed"],

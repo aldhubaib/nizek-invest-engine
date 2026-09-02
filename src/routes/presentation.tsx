@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 
 import { PresentationPage } from "@/components/site/PresentationPage";
+import { InvestorOnboarding } from "@/components/site/InvestorOnboarding";
 import { InvestorProvider } from "@/lib/investor-context";
-import { getInvestorContext } from "@/lib/investor.functions";
+import { acknowledgeConfidentiality, getInvestorContext } from "@/lib/investor.functions";
 import { useEngagement } from "@/hooks/useEngagement";
+
 
 export const Route = createFileRoute("/presentation")({
   ssr: false,
@@ -31,24 +34,41 @@ export const Route = createFileRoute("/presentation")({
 
 function PersonalizedPresentation() {
   const investor = Route.useLoaderData();
-  useEngagement(Boolean(investor));
+  const storageKey = investor ? `nizek-onboarded-${investor.id}` : "";
+  const [entered, setEntered] = useState(() => {
+    if (typeof window === "undefined" || !storageKey) return false;
+    return window.sessionStorage.getItem(storageKey) === "1";
+  });
+  const showOnboarding = Boolean(investor) && !entered;
+  useEngagement(Boolean(investor) && entered);
+
+  function handleEnter() {
+    void acknowledgeConfidentiality().catch(() => {
+      /* acknowledgment must never block entry */
+    });
+    if (typeof window !== "undefined" && storageKey) {
+      window.sessionStorage.setItem(storageKey, "1");
+    }
+    setEntered(true);
+  }
 
   return (
     <InvestorProvider investor={investor}>
       {investor ? (
-        <div className="border-b border-border bg-foreground px-6 py-3 text-background">
+        <div className="border-b border-border px-6 py-2.5">
           <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2">
-            <p className="font-mono text-[11px] uppercase tracking-[0.28em] opacity-70">
-              Private invitation
-            </p>
-            <p className="text-sm">
-              Welcome, <span className="font-medium">{investor.firstName}</span>. This presentation
-              was prepared for you.
+            <p className="label-xs">Private Investor Presentation</p>
+            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-subtle">
+              Prepared for {investor.fullName}
             </p>
           </div>
         </div>
       ) : null}
       <PresentationPage />
+      {investor && showOnboarding ? (
+        <InvestorOnboarding fullName={investor.fullName} onEnter={handleEnter} />
+      ) : null}
     </InvestorProvider>
   );
+
 }
