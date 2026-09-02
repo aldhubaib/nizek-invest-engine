@@ -129,7 +129,7 @@ export const getInvestorDetail = createServerFn({ method: "POST" })
         .sort((a, b) => b.seconds - a.seconds),
       events: (eventsRes.data ?? []).map((e) => ({
         type: e.event_type,
-        payload: e.payload as Record<string, unknown>,
+        payload: JSON.stringify(e.payload ?? {}),
         at: e.occurred_at,
       })),
       requests: (requestsRes.data ?? []).map((r) => ({
