@@ -620,13 +620,14 @@ function PlatformPage() {
 
         <Reveal>
           <div className="border border-border p-6 md:p-10">
-            <div className="label-xs">Gulf Cooperation Council</div>
+            <div className="label-xs">Founder sourcing network — Gulf Cooperation Council</div>
             <svg
               viewBox="0 0 760 470"
               className="mt-6 w-full text-foreground"
               fill="none"
               role="img"
-              aria-label="Minimal map of the GCC with animated expansion routes between Kuwait, Saudi Arabia, Bahrain, Qatar, the UAE and Oman"
+              aria-label="Minimal map of the GCC showing Nizek's founder sourcing network across Kuwait, Saudi Arabia, Bahrain, Qatar, the UAE and Oman"
+
             >
               <path
                 d="M196 74 L262 96 L300 78 L352 108 L398 96 L436 128 L470 132 L520 158 L566 160 L612 196 L648 258 L636 316 L594 356 L546 386 L488 404 L430 396 L372 366 L318 328 L262 300 L214 252 L182 190 Z"
