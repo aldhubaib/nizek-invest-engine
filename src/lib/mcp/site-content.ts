@@ -659,12 +659,12 @@ export async function buildHomePage() {
       tables: [
         {
           label: "Seat grid",
-          columns: ["Seat", "Status", "Ownership", "Commitment"],
+          columns: ["Ownership position", "Status", "Ownership", "Commitment"],
           rows: Array.from({ length: m.TOTAL_SEATS }, (_, i) => {
             const n = i + 1;
             const reserved = m.RESERVED_SEATS.includes(n);
             return [
-              `Seat ${String(n).padStart(2, "0")}`,
+              m.investorPosition(n),
               reserved ? "Taken" : "Available",
               `${m.SEAT_OWNERSHIP}%`,
               `${kd(m.SEAT_QUARTERLY_COMMITMENT)} / quarter`,
@@ -707,7 +707,7 @@ export async function buildHomePage() {
           { label: "Nizek Venture Studio Fund A", note: "Abu Dhabi, UAE" },
           {
             label: "Portfolio companies",
-            note: "Startup 01, Startup 02, Startup 03 … future portfolio companies",
+            note: "Startup 01 through Startup 50 — every company created through the venture studio is held inside Fund A.",
           },
         ],
       },

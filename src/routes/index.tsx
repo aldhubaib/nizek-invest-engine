@@ -18,6 +18,8 @@ import {
   defaultInvestmentInputs,
   investmentControls,
   investmentGroups,
+  investorPosition,
+
   projectInvestment,
   type InvestmentControlMeta,
   type InvestmentInputs,
@@ -817,22 +819,19 @@ function PlatformPage() {
               </div>
             </Reveal>
 
-            <div className="grid grid-cols-2 gap-px border border-border bg-border sm:grid-cols-4">
-              {[
-                "Startup 01",
-                "Startup 02",
-                "Startup 03",
-                "Startup 04",
-                "Startup 05",
-                "Startup 06",
-                "…",
-                "Future portfolio companies",
-              ].map((s, i) => (
-                <Reveal key={s} delay={i * 50}>
-                  <div className="num bg-background px-4 py-5 text-xs text-muted-foreground">{s}</div>
-                </Reveal>
-              ))}
-            </div>
+            <Reveal delay={60}>
+              <div className="flex flex-wrap items-end justify-between gap-6 border border-border px-8 py-10">
+                <div>
+                  <div className="label-xs">Portfolio companies</div>
+                  <p className="mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">
+                    Startup 01 through Startup 50 — every company created through the venture studio
+                    is held inside Fund A.
+                  </p>
+                </div>
+                <div className="num text-5xl text-foreground md:text-7xl">50</div>
+              </div>
+            </Reveal>
+
 
             <p className="mt-10 max-w-3xl text-sm leading-relaxed text-muted-foreground">
               Nizek Venture Studio Fund A is being structured through Abu Dhabi, UAE.
@@ -992,7 +991,7 @@ function PlatformPage() {
                     reserved ? "bg-foreground text-background" : "bg-background"
                   }`}
                 >
-                  <div className="num text-xs opacity-60">Seat {String(n).padStart(2, "0")}</div>
+                  <div className="num text-xs opacity-60">{investorPosition(n)}</div>
                   <div className="display-xl mt-10 text-2xl md:text-3xl">
                     {reserved ? "Taken" : "Available"}
                   </div>
@@ -1271,7 +1270,9 @@ function PlatformPage() {
                       onClick={() => !reserved && set("seats", rank)}
                       aria-pressed={active}
                       aria-label={
-                        reserved ? `Seat ${n} committed` : `Select ${rank} seat${rank > 1 ? "s" : ""}`
+                        reserved
+                          ? `${investorPosition(n)} committed`
+                          : `Select ${rank} ownership position${rank > 1 ? "s" : ""}`
                       }
                       className={`group relative flex aspect-square flex-col justify-between overflow-hidden p-5 text-left transition-colors duration-300 md:p-6 ${
                         reserved
@@ -1292,7 +1293,7 @@ function PlatformPage() {
                         />
                       )}
                       <span className="num relative text-[11px] opacity-50 transition-opacity group-hover:opacity-100">
-                        {String(n).padStart(2, "0")}
+                        {investorPosition(n)}
                       </span>
                       <span className="relative block">
                         <span className={`label-xs block ${active ? "text-background" : ""}`}>

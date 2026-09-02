@@ -24,6 +24,25 @@ export const RESERVED_SEATS = [1, 2];
 /** Seats still open to new investors. */
 export const AVAILABLE_SEATS = TOTAL_SEATS - RESERVED_SEATS.length;
 
+/**
+ * Global naming rule: the six ownership positions in Nizek Venture Studio Fund A
+ * are always displayed as Investor A … Investor F — never "Seat 1" or "Investor #1".
+ */
+export const INVESTOR_POSITIONS = [
+  "Investor A",
+  "Investor B",
+  "Investor C",
+  "Investor D",
+  "Investor E",
+  "Investor F",
+] as const;
+
+/** Display name for a 1-indexed ownership position. */
+export function investorPosition(n: number): string {
+  return INVESTOR_POSITIONS[n - 1] ?? `Investor ${n}`;
+}
+
+
 export const ANNUAL_COMMITMENT = SEAT_ANNUAL_COMMITMENT;
 export const TOTAL_INVESTMENT = SEAT_MAX_COMMITMENT;
 
