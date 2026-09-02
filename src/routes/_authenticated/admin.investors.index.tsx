@@ -2,7 +2,12 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 
-import { createInvestor, listInvestors, rotateInvestorToken } from "@/lib/admin.functions";
+import {
+  createInvestor,
+  listAllocationRequests,
+  listInvestors,
+  rotateInvestorToken,
+} from "@/lib/admin.functions";
 import { publicLink } from "@/lib/public-link";
 
 const LINK_STORE = "nizek.investor.links";
