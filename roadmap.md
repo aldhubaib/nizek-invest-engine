@@ -1,8 +1,9 @@
 # Roadmap
 
-- [x] Seat-based ownership (6 seats, 5% each, KD150K/yr) + seat selector + KPI cards
-- [ ] Replace Structure section with Institutional Fund Structure (diagram, 5 steps, 4 benefit cards)
-- [ ] Seat 01 locked; investors select from 5 remaining seats
-- [ ] Change 'Annual commitment' display to quarterly commitment
+## Awaiting approval (architecture presented, not implemented)
+- [ ] Personalized investor-access system: invite tokens (`/i/:token`), investor database, engagement + section tracking, simulator tracking, admin dashboard at `/admin/investors`, investor detail page.
+- [ ] Request Allocation form v2: drop Email, keep Full Name / Phone / Company (optional), prefill from investor record, "Your details" review card + Edit details, carry positions from the Investment section, persist request + notify investors@nizek.com with admin profile link.
 
-- [x] Founder Residency duration changed to 3 months
+## Done
+- [x] Section 12 CTA rewrite (Request Your Ownership Position)
+- [x] Merged selection metrics with the live assumptions bar in Section 09
