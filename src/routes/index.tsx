@@ -1,8 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 import { PresentationPage } from "@/components/site/PresentationPage";
+import { requireSiteAccess } from "@/lib/site-access";
 
 export const Route = createFileRoute("/")({
+  ssr: false,
+  beforeLoad: async ({ location }) => {
+    await requireSiteAccess(location.href);
+  },
   head: () => ({
     meta: [
       { title: "We Don't Invest in Startups. We Build Them. — NIZEK" },
