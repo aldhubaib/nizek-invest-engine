@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useState } from "react";
 
+import { trackInvestorEvent } from "@/hooks/useEngagement";
 import { AnimatedNumber } from "@/components/model/AnimatedNumber";
 import { ValueField } from "@/components/model/ValueField";
 import { EquitySection } from "@/components/site/EquitySection";
