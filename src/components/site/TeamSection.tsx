@@ -3,7 +3,6 @@ import {
   founder,
   founderRole,
   founderSummary,
-  team,
   ventureCapabilities,
   type TeamMember,
 } from "@/data/team";
