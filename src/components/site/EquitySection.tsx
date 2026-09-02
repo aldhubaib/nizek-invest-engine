@@ -4,7 +4,6 @@ import { Reveal, Section, SectionHeading } from "@/components/ui/primitives";
 import { SEAT_OWNERSHIP, TOTAL_SEATS } from "@/model/investment";
 
 /** Illustrative split used in the ownership example. */
-const FOUNDER_SHARE = 70;
 const NIZEK_SHARE = 30;
 
 const CONTRIBUTIONS = [
