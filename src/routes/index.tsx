@@ -1218,7 +1218,7 @@ function PlatformPage() {
                     step: "03",
                     title: "Investor share",
                     value: result.investorValue,
-                    note: `${result.ownershipPercent}% of Nizek's ownership — ${result.seats} seat${result.seats > 1 ? "s" : ""} × ${SEAT_OWNERSHIP}%.`,
+                    note: `${result.ownershipPercent}% participation in Nizek's equity position — ${result.seats} seat${result.seats > 1 ? "s" : ""} × ${SEAT_OWNERSHIP}%.`,
                   },
                   {
                     step: "04",
