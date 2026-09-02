@@ -592,13 +592,31 @@ function PlatformPage() {
         </Reveal>
       </Section>
 
-      {/* 05 — Regional first */}
+      {/* 05 — Regional founder pipeline */}
       <Section id="regional" invert>
         <SectionHeading
-          index="05 — Regional first"
-          title="Built for the GCC. Designed to Scale Beyond Borders."
-          lede="Every venture is selected and built with multi-market GCC expansion in mind, increasing the addressable market and reducing dependence on a single economy."
+          index="05 — Regional founder pipeline"
+          title="The Best Companies Start With The Best Founders."
+          lede="Nizek is not limited to sourcing entrepreneurs from one city or one country. We actively identify founders and opportunities across the GCC, increasing the quality of ideas, the diversity of the portfolio and the probability of building exceptional companies."
         />
+
+        <Reveal>
+          <div className="mb-16 grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-5">
+            {[
+              ["The larger the founder pipeline", "01"],
+              ["The better the entrepreneurs", "02"],
+              ["The better the ideas", "03"],
+              ["The better the companies", "04"],
+              ["The stronger the portfolio", "05"],
+            ].map(([t, i]) => (
+              <div key={i} className="h-full bg-background p-8">
+                <div className="num text-xs text-subtle">{i}</div>
+                <p className="display-xl mt-8 text-xl md:text-2xl">{t}</p>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+
 
         <Reveal>
           <div className="border border-border p-6 md:p-10">
