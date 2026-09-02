@@ -5,7 +5,6 @@ import {
   createRootRouteWithContext,
   useRouter,
   useRouterState,
-  redirect,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -15,7 +14,6 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { ModelProvider } from "@/model/context";
 import { Footer, Header } from "@/components/site/Chrome";
-import { isUnlocked } from "@/lib/gate.functions";
 
 
 function NotFoundComponent() {
@@ -133,7 +131,7 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const bare = pathname.startsWith("/unlock");
+  const bare = false;
 
   return (
     <QueryClientProvider client={queryClient}>
