@@ -56,6 +56,10 @@ function InvestorsDashboard() {
     queryKey: ["admin", "investors"],
     queryFn: () => listInvestors(),
   });
+  const requests = useQuery({
+    queryKey: ["admin", "allocation-requests"],
+    queryFn: () => listAllocationRequests(),
+  });
 
   const [open, setOpen] = useState(false);
   const [form, setForm] = useState({ fullName: "", phone: "" });
