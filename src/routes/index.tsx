@@ -994,7 +994,7 @@ function PlatformPage() {
                     reserved ? "bg-foreground text-background" : "bg-background"
                   }`}
                 >
-                  <div className="num text-xs opacity-60">Seat {String(n).padStart(2, "0")}</div>
+                  <div className="num text-xs opacity-60">{investorPosition(n)}</div>
                   <div className="display-xl mt-10 text-2xl md:text-3xl">
                     {reserved ? "Taken" : "Available"}
                   </div>
@@ -1273,7 +1273,9 @@ function PlatformPage() {
                       onClick={() => !reserved && set("seats", rank)}
                       aria-pressed={active}
                       aria-label={
-                        reserved ? `Seat ${n} committed` : `Select ${rank} seat${rank > 1 ? "s" : ""}`
+                        reserved
+                          ? `${investorPosition(n)} committed`
+                          : `Select ${rank} ownership position${rank > 1 ? "s" : ""}`
                       }
                       className={`group relative flex aspect-square flex-col justify-between overflow-hidden p-5 text-left transition-colors duration-300 md:p-6 ${
                         reserved
@@ -1294,7 +1296,7 @@ function PlatformPage() {
                         />
                       )}
                       <span className="num relative text-[11px] opacity-50 transition-opacity group-hover:opacity-100">
-                        {String(n).padStart(2, "0")}
+                        {investorPosition(n)}
                       </span>
                       <span className="relative block">
                         <span className={`label-xs block ${active ? "text-background" : ""}`}>
