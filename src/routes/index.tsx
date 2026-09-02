@@ -762,6 +762,29 @@ function PlatformPage() {
           })}
         </div>
 
+        <Reveal>
+          <div className="mt-px flex flex-wrap items-end justify-between gap-6 border border-border px-8 py-8">
+            <div>
+              <div className="label-xs">Total investor participation</div>
+              <p className="mt-3 text-xs text-subtle">
+                {TOTAL_SEATS} seats × {SEAT_OWNERSHIP}% of Nizek&apos;s equity position across the
+                portfolio startups
+              </p>
+            </div>
+            <div className="num text-4xl text-foreground md:text-6xl">
+              {TOTAL_SEATS * SEAT_OWNERSHIP}%
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <p className="mt-10 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+            Capital is called quarterly rather than upfront. Each seat requires{" "}
+            {kd(SEAT_QUARTERLY_COMMITMENT)} at the beginning of every three-month period, paid
+            quarterly in advance.
+          </p>
+        </Reveal>
+
         <div className="mt-24 grid grid-cols-1 gap-16 lg:grid-cols-[1fr_1fr]">
           <div>
             <div className="label-xs">Capital deployment</div>
