@@ -11,13 +11,10 @@ import { multiple, number as fmtNumber } from "@/model/format";
 import {
   AVAILABLE_SEATS,
   RESERVED_SEATS,
-  SEAT_ANNUAL_COMMITMENT,
   SEAT_QUARTERLY_COMMITMENT,
-  SEAT_MAX_COMMITMENT,
   SEAT_OWNERSHIP,
   TOTAL_SEATS,
   cohortExitControls,
-  COMMITMENT_YEARS,
   defaultInvestmentInputs,
   investmentControls,
   investmentGroups,
