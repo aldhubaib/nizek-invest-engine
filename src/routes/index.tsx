@@ -210,7 +210,7 @@ function PlatformPage() {
       </section>
 
       {/* 02 — Why Nizek + proof */}
-      <Section id="why">
+      <Section id="why" invert>
         <SectionHeading
           index="02 — Why Nizek"
           title="Built to Build. Since 2009."
@@ -373,7 +373,7 @@ function PlatformPage() {
       </Section>
 
       {/* 03 — Founder pipeline */}
-      <Section id="founders" invert>
+      <Section id="founders">
         <SectionHeading
           index="03 — Founder pipeline"
           title="We Don't Find Founders. We Qualify Them."
@@ -452,7 +452,7 @@ function PlatformPage() {
       </Section>
 
       {/* 04 — Venture building model */}
-      <Section id="how-we-build">
+      <Section id="how-we-build" invert>
         <SectionHeading
           index="04 — Venture building model"
           title="From Idea To Scalable Company."
@@ -593,7 +593,7 @@ function PlatformPage() {
       </Section>
 
       {/* 05 — Regional founder pipeline */}
-      <Section id="regional" invert>
+      <Section id="regional">
         <SectionHeading
           index="05 — Regional founder pipeline"
           title="The Best Companies Start With The Best Founders."
@@ -1058,7 +1058,7 @@ function PlatformPage() {
       </Section>
 
       {/* 10 — Simulator */}
-      <section id="model" className="border-t border-border">
+      <section id="model" className="section-invert border-t border-border">
         <div className="px-6 py-24 md:px-12 md:py-32">
           <div className="mx-auto w-full max-w-[1400px]">
             <Reveal>
