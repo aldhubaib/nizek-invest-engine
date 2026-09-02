@@ -721,10 +721,10 @@ function PlatformPage() {
 
         <div className="grid grid-cols-2 gap-px border border-border bg-border lg:grid-cols-4">
           {[
-            [String(TOTAL_SEATS), "Ownership seats"],
-            [`${SEAT_OWNERSHIP}%`, "Per seat"],
-            [kd(SEAT_QUARTERLY_COMMITMENT), "Every 3 months"],
-            ["Advance", "Quarterly payment"],
+            [kd(SEAT_QUARTERLY_COMMITMENT), "Quarterly capital call"],
+            ["Every 3 months", "Capital call frequency"],
+            ["In advance", "Called at the start of each quarter"],
+            [`${SEAT_OWNERSHIP}%`, "Participation per seat"],
           ].map(([v, l], i) => (
             <Reveal key={l} delay={i * 70}>
               <div className="flex h-full flex-col justify-between bg-background p-8">
@@ -734,6 +734,31 @@ function PlatformPage() {
             </Reveal>
           ))}
         </div>
+
+        <Reveal>
+          <p className="mt-10 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+            Investors commit for a five-year investment period. Capital is not paid upfront. Instead,
+            capital is called every three months in advance as new venture cohorts are funded.
+          </p>
+        </Reveal>
+
+        <Reveal>
+          <div className="mt-10 grid grid-cols-2 gap-px border border-border bg-border md:grid-cols-4">
+            {[1, 2, 3, 4].map((q) => (
+              <div key={q} className="bg-background p-8">
+                <div className="label-xs">Quarter {q}</div>
+                <div className="num mt-6 text-2xl text-foreground md:text-3xl">
+                  {kd(SEAT_QUARTERLY_COMMITMENT)}
+                </div>
+                <div className="mt-4 text-[11px] text-subtle">Capital call — in advance</div>
+              </div>
+            ))}
+          </div>
+          <p className="mt-4 text-xs text-subtle">
+            Quarterly capital calls continue throughout the five-year commitment.
+          </p>
+        </Reveal>
+
 
         <div className="mt-16 grid grid-cols-2 gap-px border border-border bg-border md:mt-24 md:grid-cols-3 lg:grid-cols-6">
           {Array.from({ length: TOTAL_SEATS }, (_, i) => {
