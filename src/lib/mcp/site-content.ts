@@ -291,7 +291,7 @@ export async function buildHomePage() {
         { label: "Ownership protected until approximately", value: "KD3,000,000" },
         { label: "Founder (illustration)", value: "75%" },
         { label: "Nizek (illustration)", value: "25%" },
-        { label: "Investor share of Nizek (illustration)", value: "25%" },
+        { label: "Investor participation in Nizek's position (illustration)", value: "25%" },
         { label: "Effective ownership in startup (illustration)", value: "6.25%" },
       ],
       lists: [
@@ -321,7 +321,7 @@ export async function buildHomePage() {
           {
             label: "Investor",
             value: "% of Nizek",
-            note: "Receives a percentage of Nizek's ownership only — never of the founder's.",
+            note: "Participates in Nizek's equity position across the portfolio startups — never the founder's, and never Nizek itself.",
           },
         ],
       },
@@ -552,19 +552,19 @@ export async function buildHomePage() {
       headline: "One Investment. Fifty Companies.",
       subheadline: "Instead of investing in one startup, invest in the platform that creates them.",
       body: [
-        "Investor participates in a share of Nizek's ownership in every startup created during those five years.",
+        "Six investors participate in 30% of Nizek's portfolio equity allocation, with each ownership seat representing 5% participation in Nizek's equity position across the portfolio startups.",
         "Not ownership in Nizek.",
       ],
       metrics: [
         {
-          label: "Per seat, per quarter",
+          label: "Per seat, every 3 months",
           value: kd(m.SEAT_QUARTERLY_COMMITMENT),
-          note: `every quarter for ${m.COMMITMENT_YEARS} years — ${kd(m.SEAT_ANNUAL_COMMITMENT)} a year, ${kd(m.SEAT_MAX_COMMITMENT)} per seat`,
+          note: "paid quarterly in advance",
         },
         {
           label: "Your commitment (default 2 seats)",
-          value: `${kd(result.seats * m.SEAT_QUARTERLY_COMMITMENT)} / quarter`,
-          note: `${result.seats} seats — ${kd(result.annualCommitment)} a year, ${kd(result.maxCommitment)} over ${m.COMMITMENT_YEARS} years`,
+          value: `${kd(result.seats * m.SEAT_QUARTERLY_COMMITMENT)} every 3 months`,
+          note: `${result.seats} seats — ${result.ownershipPercent}% participation, paid quarterly in advance`,
         },
         {
           label: "Nizek commits to",
@@ -582,8 +582,8 @@ export async function buildHomePage() {
       headline: "Only Six Ownership Seats.",
       subheadline: "This investment vehicle is intentionally limited to only six ownership seats.",
       body: [
-        `Each seat represents ${m.SEAT_OWNERSHIP}% ownership of Nizek's equity across every startup created during this five-year venture creation program.`,
-        `Each seat requires a quarterly commitment of ${kd(m.SEAT_QUARTERLY_COMMITMENT)} — ${kd(m.SEAT_ANNUAL_COMMITMENT)} a year over five years. Maximum commitment per seat is ${kd(m.SEAT_MAX_COMMITMENT)}.`,
+        `Each seat represents ${m.SEAT_OWNERSHIP}% participation in Nizek's equity position across the portfolio startups — not ownership in Nizek itself. Six seats together represent ${m.TOTAL_SEATS * m.SEAT_OWNERSHIP}%.`,
+        `Each ownership seat requires a ${kd(m.SEAT_QUARTERLY_COMMITMENT)} commitment every three months, paid quarterly in advance.`,
         "Once all six seats have been allocated, this investment vehicle will be closed.",
       ],
       metrics: [
@@ -684,17 +684,17 @@ export async function buildHomePage() {
         "Ten new startups every year, five cohorts. Portfolio value is the sum of the expected exit valuations of the winners. Move the assumptions and it re-prices instantly.",
       body: [
         "Allocation interface — Secure your position in the Nizek ecosystem.",
-        `Each seat is ${m.SEAT_OWNERSHIP}% of Nizek's equity in every company created, for ${kd(m.SEAT_QUARTERLY_COMMITMENT)} a quarter over five years. Everything below updates instantly.`,
+        `Each seat is ${m.SEAT_OWNERSHIP}% participation in Nizek's equity position across the portfolio startups, for ${kd(m.SEAT_QUARTERLY_COMMITMENT)} every three months paid in advance. Everything below updates instantly.`,
         "Live — pool allocation active.",
         "How the portfolio is built, one cohort at a time: Every year new capital is drawn and a new cohort of startups is created. Most fail; a few reach an exit. Each cohort is valued at the expected exit valuation of its winners — earlier cohorts carry higher expected exits because they have had more time to mature.",
       ],
       cta: [{ label: "Show assumptions" }, { label: "Close" }, { label: "Reset" }],
       metrics: [
         { label: "Seats selected", value: String(result.seats) },
-        { label: "Ownership", value: `${result.ownershipPercent.toFixed(1)}%` },
-        { label: "Quarterly", value: kd(result.annualCommitment / 4) },
-        { label: "Maximum cap", value: kd(result.maxCommitment) },
-        { label: "Portfolio value", value: kd(result.portfolioValue) },
+        { label: "Participation", value: `${result.ownershipPercent.toFixed(1)}%` },
+        { label: "Quarterly commitment", value: kd(result.annualCommitment / 4) },
+        { label: "Estimated portfolio value", value: kd(result.portfolioValue) },
+        { label: "Estimated investor value", value: kd(result.investorValue) },
         { label: "Multiple", value: `${result.moic.toFixed(2)}x` },
         {
           label: "Estimated value",
@@ -719,12 +719,12 @@ export async function buildHomePage() {
         {
           label: "Investor share",
           value: kd(result.investorValue),
-          note: `${result.ownershipPercent}% of Nizek's ownership — ${result.seats} seats × ${m.SEAT_OWNERSHIP}%.`,
+          note: `${result.ownershipPercent}% participation in Nizek's equity position — ${result.seats} seats × ${m.SEAT_OWNERSHIP}%.`,
         },
         {
           label: "Estimated return",
           value: `${result.moic.toFixed(2)}x`,
-          note: `On the ${kd(result.maxCommitment)} committed across five years.`,
+          note: `On ${kd(result.annualCommitment / 4)} called every three months, paid quarterly in advance.`,
         },
       ],
       tables: [
@@ -788,8 +788,8 @@ export async function buildHomePage() {
       timeline: [
         { step: "01", title: "Portfolio value", note: `${result.totalSuccesses} winners out of ${result.totalStartups} startups, each valued at its expected exit valuation.` },
         { step: "02", title: "Nizek ownership", note: `${inputs.avgNizekOwnership}% average equity across the successful companies.` },
-        { step: "03", title: "Investor share", note: `${result.ownershipPercent}% of Nizek's ownership.` },
-        { step: "04", title: "Estimated return", note: `On the ${kd(result.maxCommitment)} committed across five years.` },
+        { step: "03", title: "Investor share", note: `${result.ownershipPercent}% participation in Nizek's equity position.` },
+        { step: "04", title: "Estimated return", note: `On ${kd(result.annualCommitment / 4)} called every three months, paid quarterly in advance.` },
       ],
       ui: ui({
         layout: "interactive simulator — seat selector, metrics matrix, cohort table, funnel",
@@ -824,7 +824,7 @@ export async function buildHomePage() {
       subheadline:
         "The Nizek Venture Fund is limited to six ownership seats. Select the number of seats you are interested in and submit your details. Our team will contact you to discuss the allocation, legal structure, and next steps.",
       body: [
-        "Each seat represents 5% participation in Nizek's startup equity allocation, at KD150,000 per year paid quarterly over a five-year commitment — a maximum of KD750,000 per seat.",
+        `Each seat represents ${m.SEAT_OWNERSHIP}% participation in Nizek's equity position across the portfolio startups, at ${kd(m.SEAT_QUARTERLY_COMMITMENT)} every three months, paid quarterly in advance.`,
         "Important: Submitting this form is an expression of interest only.",
         "It does not constitute a binding investment commitment or guarantee seat availability.",
         "Final allocation is subject to confirmation, due diligence, legal documentation, and availability.",
@@ -832,10 +832,9 @@ export async function buildHomePage() {
       ],
       metrics: [
         { label: "Seats selected", value: "01 (default)" },
-        { label: "Ownership participation", value: "5% per seat" },
-        { label: "Annual commitment", value: "KD150,000 per seat" },
-        { label: "Quarterly commitment", value: "KD37,500 per seat" },
-        { label: "Maximum 5-year commitment", value: "KD750,000 per seat" },
+        { label: "Participation", value: `${m.SEAT_OWNERSHIP}% per seat` },
+        { label: "Quarterly commitment", value: `${kd(m.SEAT_QUARTERLY_COMMITMENT)} per seat, every 3 months` },
+        { label: "Payment schedule", value: "Paid quarterly in advance" },
       ],
       lists: [
         {
