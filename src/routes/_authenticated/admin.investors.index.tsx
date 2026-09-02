@@ -2,8 +2,24 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 
-import { createInvestor, listInvestors } from "@/lib/admin.functions";
+import { createInvestor, listInvestors, rotateInvestorToken } from "@/lib/admin.functions";
 import { publicLink } from "@/lib/public-link";
+
+const LINK_STORE = "nizek.investor.links";
+
+function readLinks(): Record<string, string> {
+  if (typeof window === "undefined") return {};
+  try {
+    return JSON.parse(window.localStorage.getItem(LINK_STORE) ?? "{}") as Record<string, string>;
+  } catch {
+    return {};
+  }
+}
+
+function persistLinks(links: Record<string, string>) {
+  if (typeof window === "undefined") return;
+  window.localStorage.setItem(LINK_STORE, JSON.stringify(links));
+}
 
 export const Route = createFileRoute("/_authenticated/admin/investors/")({
   head: () => ({
@@ -47,10 +63,32 @@ function InvestorsDashboard() {
     { fullName: string; mobile: string; link: string } | null
   >(null);
   const [copied, setCopied] = useState(false);
+  const [links, setLinks] = useState<Record<string, string>>(() => readLinks());
+  const [copiedId, setCopiedId] = useState<string | null>(null);
+
+  const saveLink = (id: string, link: string) => {
+    setLinks((prev) => {
+      const next = { ...prev, [id]: link };
+      persistLinks(next);
+      return next;
+    });
+  };
+
+  const rotate = useMutation({
+    mutationFn: (id: string) => rotateInvestorToken({ data: { id } }),
+    onSuccess: (res, id) => saveLink(id, publicLink(res.invitePath)),
+  });
+
+  const copy = (id: string, link: string) => {
+    void navigator.clipboard.writeText(link);
+    setCopiedId(id);
+    window.setTimeout(() => setCopiedId((v) => (v === id ? null : v)), 1500);
+  };
 
   const create = useMutation({
     mutationFn: () => createInvestor({ data: form }),
     onSuccess: (res) => {
+      saveLink(res.id, publicLink(res.invitePath));
       setCreated({ fullName: res.fullName, mobile: res.mobile, link: publicLink(res.invitePath) });
       setForm({ fullName: "", phone: "" });
       setOpen(false);
@@ -170,7 +208,8 @@ function InvestorsDashboard() {
                   <th className="py-3 pr-4">Visits</th>
                   <th className="py-3 pr-4">Time spent</th>
                   <th className="py-3 pr-4">Simulator</th>
-                  <th className="py-3">Allocation request</th>
+                  <th className="py-3 pr-4">Allocation request</th>
+                  <th className="py-3">Private link</th>
                 </tr>
               </thead>
               <tbody>
@@ -201,8 +240,33 @@ function InvestorsDashboard() {
                     <td className="py-4 pr-4">{i.visits ? `${i.visits} visits` : "—"}</td>
                     <td className="py-4 pr-4">{duration(i.activeSeconds)}</td>
                     <td className="py-4 pr-4">{i.simulatorUsed ? "Yes" : "No"}</td>
-                    <td className="py-4">
+                    <td className="py-4 pr-4">
                       {i.allocationRequested ? i.allocationPositions || "Yes" : "—"}
+                    </td>
+                    <td className="py-4">
+                      {links[i.id] ? (
+                        <div className="flex items-center gap-3">
+                          <span className="max-w-[220px] truncate font-mono text-[11px] text-muted-foreground">
+                            {links[i.id]}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => copy(i.id, links[i.id] ?? "")}
+                            className="border border-foreground px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em]"
+                          >
+                            {copiedId === i.id ? "Copied" : "Copy"}
+                          </button>
+                        </div>
+                      ) : (
+                        <button
+                          type="button"
+                          disabled={rotate.isPending && rotate.variables === i.id}
+                          onClick={() => rotate.mutate(i.id)}
+                          className="border border-border px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] disabled:opacity-40"
+                        >
+                          {rotate.isPending && rotate.variables === i.id ? "Generating…" : "Generate link"}
+                        </button>
+                      )}
                     </td>
                   </tr>
                 ))}
