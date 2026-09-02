@@ -944,20 +944,6 @@ function PlatformPage() {
                   </p>
                 </div>
                 <div className="flex flex-col justify-between gap-8 lg:mt-8">
-                  <div className="grid grid-cols-2 gap-px border border-border bg-border">
-                    {[
-                      "Financial performance",
-                      "Company progress",
-                      "Operating milestones",
-                      "Key metrics",
-                      "Challenges and risks",
-                      "Major developments",
-                    ].map((item) => (
-                      <div key={item} className="bg-background p-4 text-sm text-foreground">
-                        {item}
-                      </div>
-                    ))}
-                  </div>
                   <div>
                     <p className="text-sm leading-relaxed text-foreground">
                       Investors do not have to wait until the end of the five-year period to
@@ -1088,22 +1074,7 @@ function PlatformPage() {
 
       {/* Part 4 — the simulator, assuming the selection above */}
       <section id="model">
-        <div className="px-6 py-24 md:px-12 md:py-32">
-          <div className="mx-auto w-full max-w-[1400px]">
-            <Reveal>
-              <div className="label-xs">Model the outcome</div>
-              <h2 className="display-xl mt-6 text-4xl md:text-7xl">
-                What could that ownership become?
-              </h2>
-              <p className="mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground">
-                Five annual cohorts. Portfolio value is the sum of the Estimated Enterprise Values of
-                the successful companies. Move the assumptions and it re-prices instantly.
-              </p>
-            </Reveal>
-          </div>
-        </div>
-
-        <div className="border-t border-border">
+        <div>
           {panelOpen && (
             <button
               type="button"
