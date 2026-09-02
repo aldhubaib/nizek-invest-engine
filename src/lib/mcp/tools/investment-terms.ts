@@ -15,6 +15,10 @@ export default defineTool({
       reservedSeats: m.RESERVED_SEATS,
       availableSeats: m.AVAILABLE_SEATS,
       ownershipPerSeatPercent: m.SEAT_OWNERSHIP,
+      totalInvestorParticipationPercent: m.TOTAL_SEATS * m.SEAT_OWNERSHIP,
+      participationBasis:
+        "Percent participation in NIZEK's equity position across the portfolio startups — not ownership in NIZEK the company.",
+      paymentSchedule: 'KD15,000 per seat every three months, paid quarterly in advance.',
       quarterlyCommitmentPerSeat: m.SEAT_QUARTERLY_COMMITMENT,
       annualCommitmentPerSeat: m.SEAT_ANNUAL_COMMITMENT,
       commitmentYears: m.COMMITMENT_YEARS,

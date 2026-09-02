@@ -11,13 +11,10 @@ import { multiple, number as fmtNumber } from "@/model/format";
 import {
   AVAILABLE_SEATS,
   RESERVED_SEATS,
-  SEAT_ANNUAL_COMMITMENT,
   SEAT_QUARTERLY_COMMITMENT,
-  SEAT_MAX_COMMITMENT,
   SEAT_OWNERSHIP,
   TOTAL_SEATS,
   cohortExitControls,
-  COMMITMENT_YEARS,
   defaultInvestmentInputs,
   investmentControls,
   investmentGroups,
@@ -719,16 +716,15 @@ function PlatformPage() {
         <SectionHeading
           index="09 — The investment"
           title="Only Six Ownership Seats."
-          lede="Once all six seats are allocated, this investment vehicle closes."
+          lede="The investment vehicle is limited to six ownership seats. Each seat represents 5% participation in Nizek's equity position across the portfolio startups."
         />
 
-        <div className="grid grid-cols-2 gap-px border border-border bg-border lg:grid-cols-5">
+        <div className="grid grid-cols-2 gap-px border border-border bg-border lg:grid-cols-4">
           {[
-            [String(TOTAL_SEATS), "Total seats"],
+            [String(TOTAL_SEATS), "Ownership seats"],
             [`${SEAT_OWNERSHIP}%`, "Per seat"],
-            [kd(SEAT_QUARTERLY_COMMITMENT), "Per quarter, per seat"],
-            [kd(SEAT_ANNUAL_COMMITMENT), "Per year, per seat"],
-            [kd(SEAT_MAX_COMMITMENT), `Maximum ${COMMITMENT_YEARS}-year commitment`],
+            [kd(SEAT_QUARTERLY_COMMITMENT), "Every 3 months"],
+            ["Advance", "Quarterly payment"],
           ].map(([v, l], i) => (
             <Reveal key={l} delay={i * 70}>
               <div className="flex h-full flex-col justify-between bg-background p-8">
@@ -762,6 +758,29 @@ function PlatformPage() {
             );
           })}
         </div>
+
+        <Reveal>
+          <div className="mt-px flex flex-wrap items-end justify-between gap-6 border border-border px-8 py-8">
+            <div>
+              <div className="label-xs">Total investor participation</div>
+              <p className="mt-3 text-xs text-subtle">
+                {TOTAL_SEATS} seats × {SEAT_OWNERSHIP}% of Nizek&apos;s equity position across the
+                portfolio startups
+              </p>
+            </div>
+            <div className="num text-4xl text-foreground md:text-6xl">
+              {TOTAL_SEATS * SEAT_OWNERSHIP}%
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <p className="mt-10 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+            Capital is called quarterly rather than upfront. Each seat requires{" "}
+            {kd(SEAT_QUARTERLY_COMMITMENT)} at the beginning of every three-month period, paid
+            quarterly in advance.
+          </p>
+        </Reveal>
 
         <div className="mt-24 grid grid-cols-1 gap-16 lg:grid-cols-[1fr_1fr]">
           <div>
@@ -1042,10 +1061,14 @@ function PlatformPage() {
             <div className="mt-px grid grid-cols-2 gap-px border border-border bg-border md:grid-cols-3 lg:grid-cols-6">
               {[
                 { l: "Seats selected", v: result.seats, f: (v: number) => `${Math.round(v)}` },
-                { l: "Ownership", v: result.ownershipPercent, f: (v: number) => `${v.toFixed(1)}%` },
-                { l: "Quarterly", v: result.annualCommitment / 4, f: kd },
-                { l: "Maximum cap", v: result.maxCommitment, f: kd },
-                { l: "Portfolio value", v: result.portfolioValue, f: kd },
+                {
+                  l: "Participation",
+                  v: result.ownershipPercent,
+                  f: (v: number) => `${v.toFixed(1)}%`,
+                },
+                { l: "Quarterly commitment", v: result.annualCommitment / 4, f: kd },
+                { l: "Estimated portfolio value", v: result.portfolioValue, f: kd },
+                { l: "Estimated investor value", v: result.investorValue, f: kd },
                 { l: "Multiple", v: result.moic, f: (v: number) => multiple(v, 2) },
               ].map((k) => (
                 <div key={k.l} className="bg-background p-8">
@@ -1192,14 +1215,14 @@ function PlatformPage() {
                     step: "03",
                     title: "Investor share",
                     value: result.investorValue,
-                    note: `${result.ownershipPercent}% of Nizek's ownership — ${result.seats} seat${result.seats > 1 ? "s" : ""} × ${SEAT_OWNERSHIP}%.`,
+                    note: `${result.ownershipPercent}% participation in Nizek's equity position — ${result.seats} seat${result.seats > 1 ? "s" : ""} × ${SEAT_OWNERSHIP}%.`,
                   },
                   {
                     step: "04",
                     title: "Estimated return",
                     value: result.moic,
                     format: (v: number) => multiple(v, 2),
-                    note: `On the ${kd(result.maxCommitment)} committed across five years.`,
+                    note: `On ${kd(result.annualCommitment / 4)} called every three months, paid quarterly in advance.`,
                   },
                 ].map((s) => (
                   <div key={s.step} className="bg-background p-8">
