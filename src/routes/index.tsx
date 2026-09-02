@@ -824,7 +824,7 @@ function PlatformPage() {
                 <div>
                   <div className="label-xs">Portfolio companies</div>
                   <p className="mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">
-                    Startup 01 through Startup 50 — every company created through the venture studio
+                    Startup 01 through Startup 50+ — every company created through the venture studio
                     is held inside Fund A.
                   </p>
                 </div>
