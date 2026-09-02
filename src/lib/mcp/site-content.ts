@@ -103,6 +103,9 @@ export async function buildHomePage() {
       body: [
         "An investor is not funding Nizek to first assemble a venture studio. The teams, disciplines and operating routines required to create companies are already in place and already in use.",
         "The capital is not being used to discover whether Nizek can build companies. It is being used to apply an existing capability across a larger portfolio.",
+        "Track record — real companies built through the Nizek Venture Studio.",
+        "Every company shown here is a real venture that has been built or is currently being built through the Nizek Venture Studio.",
+        "Our portfolio spans multiple stages — from successful exits and funded companies to ventures currently under construction. We believe investors should evaluate our ability to repeatedly build companies, not just individual success stories.",
       ],
       metrics: [
         { label: "Founded", value: "2009" },
@@ -114,25 +117,25 @@ export async function buildHomePage() {
         {
           title: "Dabdoob",
           index: "Success story",
-          body: "Built with Nizek and grew into one of the GCC's best-known consumer technology companies.",
+          body: "One of the GCC's best-known e-commerce platforms. Built with Nizek from its early stages and successfully scaled into a leading regional consumer technology company.",
         },
         {
           title: "Provien",
-          index: "Graduated venture",
-          body: "Started inside the Nizek Venture Studio, built with Nizek, and transitioned to its own dedicated engineering team. It completed its funding round and continues operating independently with Nizek's long-term technology leadership.",
-          note: "Funding round completed.",
+          index: "Series A",
+          body: "Built inside the Nizek Venture Studio. After validation, the company transitioned to its own dedicated engineering team while continuing under Nizek's long-term technical leadership.",
+          note: "Series A funding round completed.",
         },
         {
           title: "Ad Space",
           index: "Currently building",
-          body: "Building the future of Digital Out-of-Home advertising across the GCC. Time building: 6 months. Indicative company value: KD3M.",
-          note: "Illustrative current company value based on the latest available valuation basis. Not a guaranteed future value.",
+          body: "A regional Digital Out-of-Home advertising platform currently being built inside the Nizek Venture Studio. Time building: 6 months. Indicative value: KD3M.",
+          note: "Indicative current company value based on the latest available valuation basis. Not a guaranteed future value.",
         },
         {
           title: "Hazawy",
           index: "Currently building",
-          body: "Building a modern digital marketplace. Time building: 2 months. Indicative company value: KD1.5M.",
-          note: "Illustrative current company value based on the latest available valuation basis. Not a guaranteed future value.",
+          body: "A modern commerce platform currently being built inside the Nizek Venture Studio. Time building: 2 months. Indicative value: KD1.5M.",
+          note: "Indicative current company value based on the latest available valuation basis. Not a guaranteed future value.",
         },
       ],
 
