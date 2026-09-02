@@ -113,22 +113,29 @@ export async function buildHomePage() {
       cards: [
         {
           title: "Dabdoob",
-          index: "Historical venture-building proof",
-          body: "Built with Nizek and scaled into a recognized GCC consumer technology company.",
+          index: "Success story",
+          body: "Built with Nizek and grew into one of the GCC's best-known consumer technology companies.",
+        },
+        {
+          title: "Provien",
+          index: "Graduated venture",
+          body: "Started inside the Nizek Venture Studio, built with Nizek, and transitioned to its own dedicated engineering team. It completed its funding round and continues operating independently with Nizek's long-term technology leadership.",
+          note: "Funding round completed.",
         },
         {
           title: "Ad Space",
           index: "Currently building",
-          body: "Time to build: 6 months. Indicative company value: KD3M.",
+          body: "Building the future of Digital Out-of-Home advertising across the GCC. Time building: 6 months. Indicative company value: KD3M.",
           note: "Illustrative current company value based on the latest available valuation basis. Not a guaranteed future value.",
         },
         {
           title: "Hazawy",
           index: "Currently building",
-          body: "Time to build: 2 months. Indicative company value: KD1.5M.",
+          body: "Building a modern digital marketplace. Time building: 2 months. Indicative company value: KD1.5M.",
           note: "Illustrative current company value based on the latest available valuation basis. Not a guaranteed future value.",
         },
       ],
+
       lists: [
         {
           label: "The infrastructure already exists",
