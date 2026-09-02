@@ -627,7 +627,7 @@ function PlatformPage() {
               className="mt-6 w-full text-foreground"
               fill="none"
               role="img"
-              aria-label="Minimal map of the GCC showing Nizek's founder sourcing network across Kuwait, Saudi Arabia, Bahrain, Qatar, the UAE and Oman"
+              aria-label="Minimal map of the GCC showing Nizek's regional sourcing network across Kuwait, Saudi Arabia, Bahrain, Qatar, the UAE and Oman"
 
             >
               <path
