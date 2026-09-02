@@ -208,7 +208,8 @@ function InvestorsDashboard() {
                   <th className="py-3 pr-4">Visits</th>
                   <th className="py-3 pr-4">Time spent</th>
                   <th className="py-3 pr-4">Simulator</th>
-                  <th className="py-3">Allocation request</th>
+                  <th className="py-3 pr-4">Allocation request</th>
+                  <th className="py-3">Private link</th>
                 </tr>
               </thead>
               <tbody>
