@@ -1357,7 +1357,7 @@ function PlatformPage() {
             </div>
           </div>
         </div>
-      </section>
+      </Section>
 
 
       {/* 11 — Team */}
