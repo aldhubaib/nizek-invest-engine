@@ -1033,45 +1033,8 @@ function PlatformPage() {
                 );
               })}
             </div>
-
-            <div className="mt-px grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-3">
-              {[
-                {
-                  l: "Positions selected",
-                  v: result.seats,
-                  f: (v: number) => `${Math.round(v)}`,
-                  note: Array.from({ length: TOTAL_SEATS }, (_, i) => i + 1)
-                    .filter(
-                      (n) =>
-                        !RESERVED_SEATS.includes(n) &&
-                        n - RESERVED_SEATS.filter((r) => r < n).length <= result.seats,
-                    )
-                    .map((n) => investorPosition(n))
-                    .join(" + "),
-                },
-                {
-                  l: "Fund ownership",
-                  v: result.ownershipPercent,
-                  f: (v: number) => `${v.toFixed(1)}%`,
-                  note: "Ownership in Nizek Venture Studio Fund A",
-                },
-                {
-                  l: "Quarterly capital call",
-                  v: result.annualCommitment / 4,
-                  f: kd,
-                  note: "Paid quarterly in advance",
-                },
-              ].map((k) => (
-                <div key={k.l} className="bg-background p-8">
-                  <div className="label-xs">{k.l}</div>
-                  <div className="num mt-8 text-2xl tracking-tight text-foreground md:text-4xl">
-                    <AnimatedNumber value={k.v} format={k.f} />
-                  </div>
-                  <div className="mt-4 text-[11px] leading-relaxed text-subtle">{k.note}</div>
-                </div>
-              ))}
-            </div>
           </div>
+
         </Reveal>
       {/* Part 4 — the simulator, assuming the selection above */}
         <div id="model">
