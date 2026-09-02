@@ -27,6 +27,9 @@ import {
 } from "@/model/investment";
 import { kd } from "@/model/studio";
 
+// Cohort-by-cohort breakdown is temporarily hidden — flip to true to bring it back.
+const SHOW_COHORT_BREAKDOWN = false;
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
