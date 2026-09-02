@@ -7,6 +7,7 @@ const schema = z.object({
   email: z.string().trim().email().max(255),
   phone: z.string().trim().min(5).max(40),
   seats: z.number().int().min(1).max(6),
+  positions: z.array(z.string().trim().max(40)).max(6).optional().default([]),
   message: z.string().trim().max(1000).optional().default(""),
 });
 
@@ -33,16 +34,14 @@ export const submitSeatRequest = createServerFn({ method: "POST" })
       `Company / family office: ${data.company || "—"}`,
       `Email: ${data.email}`,
       `Phone: ${data.phone}`,
-      `Seats requested: ${data.seats}`,
-      `Ownership participation: ${data.seats * OWNERSHIP_PER_SEAT}%`,
-      `Annual commitment: ${formatKD(annual)}`,
-      `Quarterly commitment: ${formatKD(annual / 4)}`,
-      `Maximum 5-year commitment: ${formatKD(annual * 5)}`,
+      `Positions requested: ${data.positions.length ? data.positions.join(" + ") : data.seats}`,
+      `Total fund ownership requested: ${data.seats * OWNERSHIP_PER_SEAT}%`,
+      `Quarterly capital call: ${formatKD(annual / 4)} every 3 months`,
       `Message: ${data.message || "—"}`,
       `Submitted: ${new Date().toISOString()}`,
     ].join("\n");
 
-    const subject = `New Investor Seat Request — ${data.fullName}`;
+    const subject = `New Ownership Position Request — ${data.fullName}`;
     const apiKey = process.env["RESEND_API_KEY"];
     const from = process.env["INVESTOR_EMAIL_FROM"];
 
