@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "sdk_version": "1.0.0",
+  "path": "/mcp",
+  "auth": {
+    "type": "oauth",
+    "issuer": "https://oizmqkclnqbpfeokedvq.supabase.co/auth/v1",
+    "accepted_audiences": [
+      "authenticated"
+    ]
+  },
+  "mcp": {
+    "server": {
+      "name": "nizek-investor-hub",
+      "version": "0.1.0",
+      "title": "NIZEK Investor Hub"
+    },
+    "tools": [
+      {
+        "name": "investment_terms",
+        "title": "Investment terms",
+        "description": "Return NIZEK's fixed investment terms: total seats, seats already committed, ownership per seat, and the quarterly / annual / five-year commitment per seat in KD.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "simulate_investment",
+        "title": "Simulate an investment",
+        "description": "Run NIZEK's venture-studio financial model for a chosen number of ownership seats and assumptions. Returns portfolio value, NIZEK equity value, investor value, profit, MOIC, IRR, the five yearly cohorts, and real-estate / public-market benchmarks.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "seats": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 6,
+              "description": "Ownership seats, 1-6. Each seat is 5%."
+            },
+            "startupsPerYear": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 50
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Startups built each year. Default 10."
+            },
+            "successesPerYear": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 50
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Successful companies per yearly cohort. Default 3."
+            },
+            "exitValues": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Expected exit valuation in KD of each successful company in a cohort, e.g. [5000000,3000000,2000000]."
+            },
+            "avgNizekOwnership": {
+              "anyOf": [
+                {
+                  "type": "number",
+                  "minimum": 1,
+                  "maximum": 100
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Average NIZEK ownership per startup, %. Default 30."
+            },
+            "realEstateYield": {
+              "anyOf": [
+                {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 50
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Real-estate benchmark annual yield, %. Default 7."
+            },
+            "publicMarketReturn": {
+              "anyOf": [
+                {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 50
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Public-market benchmark annual return, %. Default 8."
+            }
+          },
+          "required": [
+            "seats",
+            "startupsPerYear",
+            "successesPerYear",
+            "exitValues",
+            "avgNizekOwnership",
+            "realEstateYield",
+            "publicMarketReturn"
+          ]
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
