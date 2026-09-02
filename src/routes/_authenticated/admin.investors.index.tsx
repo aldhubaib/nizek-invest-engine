@@ -251,7 +251,7 @@ function InvestorsDashboard() {
                           </span>
                           <button
                             type="button"
-                            onClick={() => copy(i.id, links[i.id])}
+                            onClick={() => copy(i.id, links[i.id] ?? "")}
                             className="border border-foreground px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em]"
                           >
                             {copiedId === i.id ? "Copied" : "Copy"}
