@@ -944,20 +944,6 @@ function PlatformPage() {
                   </p>
                 </div>
                 <div className="flex flex-col justify-between gap-8 lg:mt-8">
-                  <div className="grid grid-cols-2 gap-px border border-border bg-border">
-                    {[
-                      "Financial performance",
-                      "Company progress",
-                      "Operating milestones",
-                      "Key metrics",
-                      "Challenges and risks",
-                      "Major developments",
-                    ].map((item) => (
-                      <div key={item} className="bg-background p-4 text-sm text-foreground">
-                        {item}
-                      </div>
-                    ))}
-                  </div>
                   <div>
                     <p className="text-sm leading-relaxed text-foreground">
                       Investors do not have to wait until the end of the five-year period to
