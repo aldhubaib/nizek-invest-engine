@@ -135,11 +135,6 @@ export async function buildHomePage() {
           note: "Indicative current company value based on the latest available valuation basis. Not a guaranteed future value.",
         },
       ],
-      callouts: [
-        "Track record — real companies built through the Nizek Venture Studio.",
-        "Every company shown here is a real venture that has been built or is currently being built through the Nizek Venture Studio.",
-        "Our portfolio spans multiple stages — from successful exits and funded companies to ventures currently under construction. We believe investors should evaluate our ability to repeatedly build companies, not just individual success stories.",
-      ],
 
       lists: [
         {
