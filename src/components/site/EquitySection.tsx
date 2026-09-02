@@ -104,7 +104,7 @@ export function EquitySection() {
               </h3>
             </div>
             <p className="text-base leading-relaxed text-muted-foreground">
-              The investor receives participation from Nizek&apos;s ownership — never from the
+              The investor participates in Nizek&apos;s equity position across the portfolio startups — not in Nizek the company, and — never from the
               founder&apos;s. Founder ownership is unchanged by the investor&apos;s participation.
             </p>
           </div>
@@ -118,11 +118,11 @@ export function EquitySection() {
               note="Earned by creating, building and launching the company."
               emphasis
             />
-            <Arrow caption="A share of Nizek's ownership" />
+            <Arrow caption="Participation in Nizek's equity position" />
             <FlowNode
               label="Investor"
-              value={`${participation}% of Nizek`}
-              note={`${seats} seat${seats > 1 ? "s" : ""} × ${SEAT_OWNERSHIP}% of Nizek's allocation.`}
+              value={`${participation}% participation`}
+              note={`${seats} seat${seats > 1 ? "s" : ""} × ${SEAT_OWNERSHIP}% of Nizek's equity position across the portfolio startups. Not ownership in Nizek itself.`}
             />
           </div>
 
@@ -152,7 +152,7 @@ export function EquitySection() {
               {[
                 { l: "Founder", v: `${FOUNDER_SHARE}%` },
                 { l: "Nizek", v: `${NIZEK_SHARE}%` },
-                { l: "Investor share of Nizek", v: `${participation}%` },
+                { l: "Investor participation in Nizek's position", v: `${participation}%` },
                 {
                   l: "Effective ownership in startup",
                   v: `${effective.toFixed(2).replace(/\.?0+$/, "")}%`,
