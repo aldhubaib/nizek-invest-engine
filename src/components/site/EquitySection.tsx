@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { Reveal, Section, SectionHeading } from "@/components/ui/primitives";
-import { AVAILABLE_SEATS, SEAT_OWNERSHIP } from "@/model/investment";
+import { SEAT_OWNERSHIP, TOTAL_SEATS } from "@/model/investment";
 
 /** Illustrative split used in the ownership example. */
 const FOUNDER_SHARE = 75;
@@ -132,7 +132,7 @@ export function EquitySection() {
               <span className="label-xs">Illustration only</span>
               <div className="flex items-center gap-3">
                 <span className="label-xs text-subtle">Seats</span>
-                {Array.from({ length: AVAILABLE_SEATS }, (_, i) => i + 1).map((n) => (
+                {Array.from({ length: TOTAL_SEATS }, (_, i) => i + 1).map((n) => (
                   <button
                     key={n}
                     type="button"
