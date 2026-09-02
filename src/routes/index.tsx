@@ -1074,22 +1074,7 @@ function PlatformPage() {
 
       {/* Part 4 — the simulator, assuming the selection above */}
       <section id="model">
-        <div className="px-6 py-24 md:px-12 md:py-32">
-          <div className="mx-auto w-full max-w-[1400px]">
-            <Reveal>
-              <div className="label-xs">Model the outcome</div>
-              <h2 className="display-xl mt-6 text-4xl md:text-7xl">
-                What could that ownership become?
-              </h2>
-              <p className="mt-8 max-w-2xl text-base leading-relaxed text-muted-foreground">
-                Five annual cohorts. Portfolio value is the sum of the Estimated Enterprise Values of
-                the successful companies. Move the assumptions and it re-prices instantly.
-              </p>
-            </Reveal>
-          </div>
-        </div>
-
-        <div className="border-t border-border">
+        <div>
           {panelOpen && (
             <button
               type="button"
