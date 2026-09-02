@@ -177,11 +177,11 @@ export function EquitySection() {
                 {
                   l: "Investor share of the Fund",
                   v: `${participation}%`,
-                  n: "Ownership held as units in Fund A.",
+                  n: "Fixed ownership held as units in Fund A.",
                 },
                 {
                   l: "Look-through share of the startup",
-                  v: `${effective.toFixed(2).replace(/\.?0+$/, "")}%`,
+                  v: `${fmt(effectiveMin)}–${fmt(effectiveMax)}%`,
                   n: "Fund ownership applied to the example company.",
                 },
               ].map((c) => (
