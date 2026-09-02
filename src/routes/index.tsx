@@ -1064,10 +1064,14 @@ function PlatformPage() {
             <div className="mt-px grid grid-cols-2 gap-px border border-border bg-border md:grid-cols-3 lg:grid-cols-6">
               {[
                 { l: "Seats selected", v: result.seats, f: (v: number) => `${Math.round(v)}` },
-                { l: "Ownership", v: result.ownershipPercent, f: (v: number) => `${v.toFixed(1)}%` },
-                { l: "Quarterly", v: result.annualCommitment / 4, f: kd },
-                { l: "Maximum cap", v: result.maxCommitment, f: kd },
-                { l: "Portfolio value", v: result.portfolioValue, f: kd },
+                {
+                  l: "Participation",
+                  v: result.ownershipPercent,
+                  f: (v: number) => `${v.toFixed(1)}%`,
+                },
+                { l: "Quarterly commitment", v: result.annualCommitment / 4, f: kd },
+                { l: "Estimated portfolio value", v: result.portfolioValue, f: kd },
+                { l: "Estimated investor value", v: result.investorValue, f: kd },
                 { l: "Multiple", v: result.moic, f: (v: number) => multiple(v, 2) },
               ].map((k) => (
                 <div key={k.l} className="bg-background p-8">
