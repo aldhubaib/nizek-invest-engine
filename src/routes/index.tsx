@@ -800,12 +800,21 @@ function PlatformPage() {
         </Reveal>
 
         <Reveal>
-          <p className="mt-10 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-            Capital is called quarterly rather than upfront. Each seat requires{" "}
-            {kd(SEAT_QUARTERLY_COMMITMENT)} at the beginning of every three-month period, paid
-            quarterly in advance.
-          </p>
+          <div className="mt-px grid grid-cols-2 gap-px border border-border bg-border lg:grid-cols-4">
+            {[
+              [`${TOTAL_SEATS}`, "Ownership seats"],
+              [`${SEAT_OWNERSHIP}%`, "Participation per seat"],
+              [kd(SEAT_QUARTERLY_COMMITMENT), "Every 3 months"],
+              ["In advance", "Quarterly capital call"],
+            ].map(([v, l]) => (
+              <div key={l} className="bg-background px-8 py-7">
+                <div className="num text-xl text-foreground md:text-2xl">{v}</div>
+                <div className="label-xs mt-5 text-muted-foreground">{l}</div>
+              </div>
+            ))}
+          </div>
         </Reveal>
+
 
         <div className="mt-24 grid grid-cols-1 gap-16 lg:grid-cols-[1fr_1fr]">
           <div>
