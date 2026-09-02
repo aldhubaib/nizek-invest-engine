@@ -8,43 +8,70 @@ const FOUNDER_SHARE = 70;
 const NIZEK_SHARE = 30;
 
 const CONTRIBUTIONS = [
+  "Founder Selection",
+  "Problem Discovery",
   "Product Strategy",
+  "Market Validation",
+  "Product Design",
   "Technology Development",
   "Technical Leadership",
-  "Venture Building",
-  "Founder Support",
-  "Go-To-Market Guidance",
-  "Operational Experience",
+  "Go-To-Market Support",
+  "Hiring Support",
+  "Long-Term CTO Leadership",
 ];
 
 const OWNERSHIP_FLOW = [
-  { step: "01", title: "Founder", note: "Starts the company and remains the majority owner." },
-  { step: "02", title: "Startup", note: "The company is created and launched." },
+  { step: "01", title: "Entrepreneurs", note: "Founders join the studio to build their company." },
+  {
+    step: "02",
+    title: "Nizek Venture Studio",
+    note: "Builds the company and earns equity.",
+  },
   {
     step: "03",
-    title: "Nizek earns equity by building the company",
-    note: "Equity is earned through work, not purchased with cash.",
+    title: "Nizek Venture Studio Fund A",
+    note: "Holds the portfolio equity.",
   },
   {
     step: "04",
-    title: "Investor participates in Nizek's equity allocation",
-    note: "Participation is carved out of Nizek's position only.",
+    title: "Investors",
+    note: "Own units in the Fund.",
+  },
+];
+
+const STEPS = [
+  { step: "01", body: "Entrepreneurs join the Nizek Venture Studio." },
+  {
+    step: "02",
+    body: "Nizek works alongside the founders to validate, build and launch the company.",
   },
   {
-    step: "05",
-    title: "Investor owns a share of the portfolio",
-    note: "Exposure across every company Nizek builds.",
+    step: "03",
+    body: "In exchange for years of venture-building support, Nizek earns an agreed equity position.",
+  },
+  {
+    step: "04",
+    body: "That equity becomes part of Nizek Venture Studio Fund A, allowing investors to participate in the portfolio through Fund ownership.",
   },
 ];
 
 const BENEFITS = [
-  { t: "No Startup Dilution", b: "Investor ownership comes from Nizek's allocation." },
-  { t: "Founder Alignment", b: "Founders remain highly incentivized." },
   {
-    t: "Long-Term Protection",
-    b: "Portfolio ownership is protected through negotiated anti-dilution provisions.",
+    t: "Diversified Portfolio",
+    b: "One investment provides exposure to multiple venture-backed companies.",
   },
-  { t: "Transparent Structure", b: "Every investor understands exactly where ownership originates." },
+  {
+    t: "Aligned Founders",
+    b: "Founders remain highly motivated because they continue owning the majority of their businesses.",
+  },
+  {
+    t: "Professional Structure",
+    b: "Ownership is held through Nizek Venture Studio Fund A using a clear and transparent investment structure.",
+  },
+  {
+    t: "Long-Term Value Creation",
+    b: "The Fund participates in the value created as portfolio companies grow over time.",
+  },
 ];
 
 export function EquitySection() {
@@ -56,14 +83,14 @@ export function EquitySection() {
     <Section id="equity" invert>
       <SectionHeading
         index="06 — Equity model"
-        title="Own Part of the Portfolio. Not Individual Startups."
-        lede="Investors participate in Nizek's venture portfolio by acquiring a percentage of Nizek's equity allocation. Startup ownership is not diluted by incoming investors."
+        title="How Ownership Works"
+        lede="Investors acquire ownership in Nizek Venture Studio Fund A, which holds equity positions in the portfolio companies created through the Nizek Venture Studio. The ownership structure is intentionally designed to provide diversified exposure through a single investment."
       />
 
       {/* Ownership flow — primary visual */}
       <Reveal>
-        <div className="label-xs">The ownership flow</div>
-        <div className="mt-6 grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-5">
+        <div className="label-xs">The ownership chain</div>
+        <div className="mt-6 grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-4">
           {OWNERSHIP_FLOW.map((s) => (
             <div key={s.step} className="flex h-full flex-col bg-background p-8">
               <div className="num text-xs text-subtle">{s.step}</div>
@@ -74,17 +101,33 @@ export function EquitySection() {
         </div>
       </Reveal>
 
-      {/* How Nizek earns equity */}
+      {/* How the model works */}
+      <Reveal>
+        <div className="mt-24 border-t border-border-strong pt-16">
+          <div className="label-xs">How the model works</div>
+          <div className="mt-8 grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-2 lg:grid-cols-4">
+            {STEPS.map((s) => (
+              <div key={s.step} className="flex h-full flex-col bg-background p-8">
+                <div className="display-xl text-3xl md:text-4xl">{s.step}</div>
+                <p className="mt-8 text-sm leading-relaxed text-muted-foreground">{s.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Reveal>
+
+      {/* Equity earned through venture building */}
       <Reveal>
         <div className="mt-24 grid grid-cols-1 gap-16 border-t border-border-strong pt-16 lg:grid-cols-[1fr_1fr]">
           <div>
-            <div className="label-xs">How Nizek earns equity</div>
+            <div className="label-xs">Why founders allocate equity</div>
             <h3 className="display-xl mt-6 text-3xl md:text-5xl">
-              Nizek Does Not Purchase Startup Equity.
+              Equity Earned Through Venture Building
             </h3>
             <p className="mt-8 text-base leading-relaxed text-muted-foreground">
-              Nizek earns equity by contributing the capability required to create the company. That
-              contribution replaces the traditional cash investment made by many venture investors.
+              Founders partner with Nizek to accelerate the creation of their company. The equity
+              reflects the long-term value Nizek creates across the life of the business. This is
+              long-term company building, not traditional software development.
             </p>
           </div>
           <div className="grid grid-cols-1 gap-px self-start border border-border bg-border sm:grid-cols-2">
@@ -97,17 +140,17 @@ export function EquitySection() {
         </div>
       </Reveal>
 
-      {/* Equity structure example */}
+      {/* Ownership example */}
       <Reveal>
         <div className="mt-24 border-t border-border-strong pt-16">
           <div className="label-xs">Example startup</div>
-          <h3 className="display-xl mt-6 text-3xl md:text-5xl">Where The Ownership Comes From</h3>
+          <h3 className="display-xl mt-6 text-3xl md:text-5xl">What Fund Ownership Represents</h3>
 
           <div className="mt-12 border border-border">
             <div className="flex flex-wrap items-center justify-between gap-6 border-b border-border px-8 py-5">
               <span className="label-xs">Illustration only</span>
               <div className="flex items-center gap-3">
-                <span className="label-xs text-subtle">Seats</span>
+                <span className="label-xs text-subtle">Units</span>
                 {Array.from({ length: TOTAL_SEATS }, (_, i) => i + 1).map((n) => (
                   <button
                     key={n}
@@ -127,17 +170,17 @@ export function EquitySection() {
             </div>
             <div className="grid grid-cols-1 gap-px bg-border md:grid-cols-4">
               {[
-                { l: "Founder", v: `${FOUNDER_SHARE}%`, n: "Unchanged by investor participation." },
-                { l: "Nizek", v: `${NIZEK_SHARE}%`, n: "Earned by building the company." },
+                { l: "Founder", v: `${FOUNDER_SHARE}%`, n: "Founders keep the majority of their company." },
+                { l: "Fund A position", v: `${NIZEK_SHARE}%`, n: "Equity earned by building the company." },
                 {
-                  l: "Investor participation in Nizek's allocation",
+                  l: "Investor share of the Fund",
                   v: `${participation}%`,
-                  n: "Never from the founder's ownership.",
+                  n: "Ownership held as units in Fund A.",
                 },
                 {
-                  l: "Effective share of the startup",
+                  l: "Look-through share of the startup",
                   v: `${effective.toFixed(2).replace(/\.?0+$/, "")}%`,
-                  n: "Carved out of Nizek's 30%.",
+                  n: "Fund ownership applied to the example company.",
                 },
               ].map((c) => (
                 <div key={c.l} className="bg-background p-8">
@@ -148,30 +191,24 @@ export function EquitySection() {
               ))}
             </div>
           </div>
-
-          <p className="mt-8 max-w-3xl text-base leading-relaxed text-muted-foreground">
-            The investor&apos;s ownership is created from Nizek&apos;s equity allocation. The
-            founder&apos;s ownership structure remains unchanged.
-          </p>
         </div>
       </Reveal>
 
-      {/* Founder alignment / anti-dilution */}
+      {/* Anti-dilution */}
       <Reveal>
         <div className="mt-24 grid grid-cols-1 gap-16 border-t border-border-strong pt-16 lg:grid-cols-[1fr_1fr]">
           <div>
-            <div className="label-xs">Non-dilution protection</div>
-            <h3 className="display-xl mt-6 text-3xl md:text-5xl">Founder Alignment</h3>
+            <div className="label-xs">Anti-dilution</div>
+            <h3 className="display-xl mt-6 text-3xl md:text-5xl">Protecting Long-Term Ownership</h3>
           </div>
           <div className="flex flex-col gap-6">
             <p className="text-base leading-relaxed text-muted-foreground">
-              Nizek negotiates anti-dilution protection individually with every startup. Each
-              agreement is negotiated independently, so terms are not identical across the
-              portfolio. The purpose is to protect long-term portfolio ownership while keeping
-              founders aligned.
+              Every startup agreement is negotiated individually. Where appropriate, anti-dilution
+              protection is included to help preserve the Fund&apos;s ownership as companies raise
+              future investment rounds.
             </p>
             <div className="border border-border p-8">
-              <div className="label-xs">Minimum protection threshold</div>
+              <div className="label-xs">Minimum protection target</div>
               <div className="display-xl mt-4 text-4xl md:text-6xl">KD3,000,000</div>
               <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
                 company valuation — the baseline used when negotiating protection with each startup.
@@ -181,21 +218,8 @@ export function EquitySection() {
         </div>
       </Reveal>
 
-      {/* Why founders accept this model */}
-      <Reveal>
-        <div className="mt-24 border-t border-border-strong pt-16">
-          <div className="label-xs">Why founders give equity to Nizek</div>
-          <p className="mt-8 max-w-3xl text-base leading-relaxed text-muted-foreground">
-            Founders receive far more than software development. They receive an experienced
-            venture-building partner that helps validate the opportunity, build the product, launch
-            the company, recruit the team and provide long-term CTO leadership. The equity reflects
-            years of execution, infrastructure and operating support — not simply development work.
-          </p>
-        </div>
-      </Reveal>
-
-      {/* Investor benefits */}
-      <div className="mt-16 grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-2 lg:grid-cols-4">
+      {/* Key benefits */}
+      <div className="mt-24 grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-2 lg:grid-cols-4">
         {BENEFITS.map((c, i) => (
           <Reveal key={c.t} delay={i * 100}>
             <div className="flex h-full flex-col bg-background p-8 md:p-10">
@@ -209,8 +233,8 @@ export function EquitySection() {
 
       <Reveal>
         <p className="display-xl mt-16 max-w-4xl text-2xl md:text-3xl">
-          Our investors participate in the value Nizek creates. Not in additional dilution imposed on
-          founders.
+          Nizek builds companies. The Fund holds the portfolio. Investors participate in the value
+          created.
         </p>
       </Reveal>
     </Section>
