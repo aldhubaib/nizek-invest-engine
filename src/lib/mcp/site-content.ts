@@ -707,7 +707,7 @@ export async function buildHomePage() {
           { label: "Nizek Venture Studio Fund A", note: "Abu Dhabi, UAE" },
           {
             label: "Portfolio companies",
-            note: "Startup 01, Startup 02, Startup 03 … future portfolio companies",
+            note: "Startup 01 through Startup 50 — every company created through the venture studio is held inside Fund A.",
           },
         ],
       },
