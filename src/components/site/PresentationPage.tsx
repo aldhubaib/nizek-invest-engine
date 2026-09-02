@@ -1241,13 +1241,6 @@ function PlatformPageBody() {
                   value: result.investorProfit,
                   format: kd,
                 },
-                {
-                  step: "04",
-                  label: "Portfolio estimated value",
-                  note: `${fmtNumber(result.totalSuccesses)} successful companies out of ${fmtNumber(result.totalStartups)}, each at its Estimated Enterprise Value`,
-                  value: result.portfolioValue,
-                  format: kd,
-                },
               ].map((row) => (
                 <div
                   key={row.label}
