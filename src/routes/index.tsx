@@ -984,34 +984,9 @@ function PlatformPage() {
           lede={`Nizek Venture Studio Fund A is limited to ${TOTAL_SEATS} ownership positions. Each position represents ${SEAT_OWNERSHIP}% ownership in the Fund and requires a ${kd(SEAT_QUARTERLY_COMMITMENT)} capital call every three months, paid quarterly in advance.`}
         />
 
-        {/* Part 1 — the six ownership positions */}
-        <div className="grid grid-cols-2 gap-px border border-border bg-border md:grid-cols-3 lg:grid-cols-6">
-          {Array.from({ length: TOTAL_SEATS }, (_, i) => {
-            const n = i + 1;
-            const reserved = RESERVED_SEATS.includes(n);
-            const rank = reserved ? 0 : n - RESERVED_SEATS.filter((r) => r < n).length;
-            const active = !reserved && rank <= result.seats;
-            return (
-              <Reveal key={n} delay={i * 50}>
-                <div
-                  className={`h-full p-8 transition-colors duration-300 ${
-                    reserved ? "bg-foreground text-background" : active ? "bg-muted" : "bg-background"
-                  }`}
-                >
-                  <div className="num text-xs opacity-60">{investorPosition(n)}</div>
-                  <div className="num mt-10 text-2xl md:text-3xl">{SEAT_OWNERSHIP.toFixed(1)}%</div>
-                  <div className="label-xs mt-4 opacity-70">
-                    {reserved ? "Committed" : active ? "Selected" : "Available"}
-                  </div>
-                </div>
-              </Reveal>
-            );
-          })}
-        </div>
-
         {/* Part 2 — the commitment, stated once */}
         <Reveal>
-          <div className="mt-px grid grid-cols-2 gap-px border border-border bg-border lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-px border border-border bg-border lg:grid-cols-4">
             {[
               [`${SEAT_OWNERSHIP}%`, "Ownership per position"],
               [kd(SEAT_QUARTERLY_COMMITMENT), "Every 3 months"],
