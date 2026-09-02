@@ -86,39 +86,8 @@ export function TeamSection() {
         </div>
       </Reveal>
 
-      {/* Part 2 — Venture studio leadership */}
-      <Reveal delay={140}>
-        <div className="mt-24">
-          <div className="label-xs mb-8">Venture Studio Leadership</div>
-          <div className="grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-3">
-            {team.map((m, i) => (
-              <div key={`${m.name}-${i}`} className="flex gap-6 bg-background p-6">
-                <div className="w-24 shrink-0">
-                  <Portrait member={m} />
-                </div>
-                <div className="min-w-0">
-                  <div className="display-xl text-lg">{m.name}</div>
-                  <div className="mt-1 text-xs text-muted-foreground">{m.role}</div>
-                  {m.responsibility && (
-                    <div className="label-xs mt-4 text-subtle">{m.responsibility}</div>
-                  )}
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{m.bio}</p>
-                  {m.linkedin && (
-                    <a
-                      href={m.linkedin}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      className="label-xs mt-4 inline-flex border border-border-strong px-4 py-2 transition-colors hover:bg-foreground hover:text-background"
-                    >
-                      LinkedIn
-                    </a>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </Reveal>
+
+
 
       {/* Part 3 — Shared venture studio capabilities */}
       <Reveal delay={180}>
