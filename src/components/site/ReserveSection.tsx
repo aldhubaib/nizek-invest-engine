@@ -36,8 +36,9 @@ export function ReserveSection() {
   const metrics: Array<[string, string]> = [
     ["Seats selected", String(seats).padStart(2, "0")],
     ["Participation", `${seats * OWNERSHIP_PER_SEAT}%`],
-    ["Quarterly commitment", `${kd(quarterly)} every 3 months`],
-    ["Payment schedule", "Paid quarterly in advance"],
+    ["Quarterly capital call", `${kd(quarterly)} every 3 months`],
+    ["Capital call schedule", "Called quarterly in advance"],
+
   ];
 
   function toggleSeat(n: number) {
