@@ -4,7 +4,6 @@ import { Reveal, Section, SectionHeading } from "@/components/ui/primitives";
 import { SEAT_OWNERSHIP, TOTAL_SEATS } from "@/model/investment";
 
 /** Illustrative split used in the ownership example. */
-const FOUNDER_SHARE = 70;
 const NIZEK_SHARE = 30;
 
 const CONTRIBUTIONS = [
@@ -170,8 +169,9 @@ export function EquitySection() {
             </div>
             <div className="grid grid-cols-1 gap-px bg-border md:grid-cols-4">
               {[
-                { l: "Founder", v: `${FOUNDER_SHARE}%`, n: "Founders keep the majority of their company." },
-                { l: "Fund A position", v: `${NIZEK_SHARE}%`, n: "Equity earned by building the company." },
+                { l: "Entrepreneur", v: "70–80%", n: "Entrepreneurs keep the majority of their company." },
+                { l: "Fund A position", v: "20–30%", n: "Equity earned by building the company." },
+
                 {
                   l: "Investor share of the Fund",
                   v: `${participation}%`,

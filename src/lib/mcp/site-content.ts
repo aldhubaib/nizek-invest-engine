@@ -319,8 +319,8 @@ export async function buildHomePage() {
         "Nizek builds companies. The Fund holds the portfolio. Investors participate in the value created.",
       ],
       metrics: [
-        { label: "Founder (example startup)", value: "70%" },
-        { label: "Fund A position (example startup)", value: "30%" },
+        { label: "Entrepreneur (example startup)", value: "70–80%" },
+        { label: "Fund A position (example startup)", value: "20–30%" },
         { label: "Investor share of the Fund (1 unit)", value: "5%" },
         { label: "Look-through share of the startup (1 unit)", value: "1.5%" },
         { label: "Minimum protection target", value: "KD3,000,000" },
