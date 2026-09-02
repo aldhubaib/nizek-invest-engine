@@ -27,6 +27,9 @@ import {
 } from "@/model/investment";
 import { kd } from "@/model/studio";
 
+// Cohort-by-cohort breakdown is temporarily hidden — flip to true to bring it back.
+const SHOW_COHORT_BREAKDOWN = false;
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -1282,7 +1285,8 @@ function PlatformPage() {
               ))}
             </div>
 
-            {/* The portfolio, year by year */}
+            {/* The portfolio, year by year — hidden for now, kept for later */}
+            {SHOW_COHORT_BREAKDOWN && (
             <div className="mt-20">
               <div className="label-xs">How the portfolio is built, one cohort at a time</div>
               <p className="mt-4 max-w-2xl text-xs leading-relaxed text-subtle">
@@ -1345,7 +1349,10 @@ function PlatformPage() {
                   );
                 })}
               </div>
+            </div>
+            )}
 
+            <div className="mt-20">
               <p className="mt-10 max-w-3xl text-xl text-foreground md:text-2xl">
                 Change the assumptions. See how the portfolio responds.
               </p>
