@@ -617,66 +617,37 @@ export async function buildHomePage() {
       ...empty,
       section_id: "investment",
       section_order: 16,
-      eyebrow: "15 — The investment",
-      headline: "One Investment. Fifty Companies.",
-      subheadline: "Instead of investing in one startup, invest in the platform that creates them.",
+      eyebrow: "09 — The investment",
+      headline: "Choose Your Position. Model The Outcome.",
+      subheadline: `Nizek Venture Studio Fund A is limited to ${m.TOTAL_SEATS} ownership positions. Each position represents ${m.SEAT_OWNERSHIP}% ownership in the Fund and requires a ${kd(m.SEAT_QUARTERLY_COMMITMENT)} capital call every three months, paid quarterly in advance.`,
       body: [
-        "Six investors participate in 30% of Nizek's portfolio equity allocation, with each ownership seat representing 5% participation in Nizek's equity position across the portfolio startups.",
-        "Not ownership in Nizek.",
+        "Select your ownership: committed positions cannot be selected; available positions can.",
+        `Current selection: ${result.seats} position(s) — ${result.ownershipPercent.toFixed(1)}% Fund ownership — ${kd(result.annualCommitment / 4)} every 3 months, paid quarterly in advance.`,
       ],
       metrics: [
-        {
-          label: "Per seat, every 3 months",
-          value: kd(m.SEAT_QUARTERLY_COMMITMENT),
-          note: "paid quarterly in advance",
-        },
-        {
-          label: "Your commitment (default 2 seats)",
-          value: `${kd(result.seats * m.SEAT_QUARTERLY_COMMITMENT)} every 3 months`,
-          note: `${result.seats} seats — ${result.ownershipPercent}% participation, paid quarterly in advance`,
-        },
-        {
-          label: "Nizek commits to",
-          value: `${inputs.startupsPerYear} startups`,
-          note: `every year — minimum ${result.totalStartups}`,
-        },
-      ],
-      ui: ui({ layout: "metric grid", columns: 3, theme: "dark" }),
-    },
-    {
-      ...empty,
-      section_id: "ownership",
-      section_order: 17,
-      eyebrow: "16 — Limited ownership",
-      headline: "Only Six Ownership Seats.",
-      subheadline: "This investment vehicle is intentionally limited to only six ownership seats.",
-      body: [
-        `Each seat represents ${m.SEAT_OWNERSHIP}% participation in Nizek's equity position across the portfolio startups — not ownership in Nizek itself. Six seats together represent ${m.TOTAL_SEATS * m.SEAT_OWNERSHIP}%.`,
-        `Each ownership seat requires a ${kd(m.SEAT_QUARTERLY_COMMITMENT)} commitment every three months, paid quarterly in advance.`,
-        "Once all six seats have been allocated, this investment vehicle will be closed.",
-      ],
-      metrics: [
-        { label: "Total seats", value: String(m.TOTAL_SEATS) },
-        { label: "Reserved", value: String(m.RESERVED_SEATS.length) },
-        { label: "Remaining", value: String(m.AVAILABLE_SEATS) },
+        { label: "Ownership per position", value: `${m.SEAT_OWNERSHIP}%` },
+        { label: "Every 3 months", value: kd(m.SEAT_QUARTERLY_COMMITMENT) },
+        { label: "Paid in advance", value: "Quarterly" },
+        { label: "Commitment period", value: "5 years" },
       ],
       tables: [
         {
-          label: "Seat grid",
-          columns: ["Ownership position", "Status", "Ownership", "Commitment"],
+          label: "Ownership positions",
+          columns: ["Ownership position", "Ownership", "Status"],
           rows: Array.from({ length: m.TOTAL_SEATS }, (_, i) => {
             const n = i + 1;
             const reserved = m.RESERVED_SEATS.includes(n);
+            const rank = reserved ? 0 : n - m.RESERVED_SEATS.filter((r) => r < n).length;
+            const selected = !reserved && rank <= result.seats;
             return [
               m.investorPosition(n),
-              reserved ? "Taken" : "Available",
               `${m.SEAT_OWNERSHIP}%`,
-              `${kd(m.SEAT_QUARTERLY_COMMITMENT)} / quarter`,
+              reserved ? "COMMITTED" : selected ? "SELECTED" : "AVAILABLE",
             ];
           }),
         },
       ],
-      ui: ui({ layout: "text + seat grid", columns: 6 }),
+      ui: ui({ layout: "ownership positions + selector + simulator", columns: 6 }),
     },
     {
       ...empty,
@@ -739,53 +710,33 @@ export async function buildHomePage() {
       ...empty,
       section_id: "model",
       section_order: 20,
-      eyebrow: "19 — The investment simulator",
-      headline: "If Nizek builds successful companies, what could your investment become?",
+      eyebrow: "09 — The investment (simulator)",
+      headline: "What could that ownership become?",
       subheadline:
-        "Ten new startups every year, five cohorts. Portfolio value is the sum of the expected exit valuations of the winners. Move the assumptions and it re-prices instantly.",
+        "Five annual cohorts. Portfolio value is the sum of the Estimated Enterprise Values of the successful companies. Move the assumptions and it re-prices instantly.",
       body: [
-        "Allocation interface — Secure your position in the Nizek ecosystem.",
-        `Each seat is ${m.SEAT_OWNERSHIP}% participation in Nizek's equity position across the portfolio startups, for ${kd(m.SEAT_QUARTERLY_COMMITMENT)} every three months paid in advance. Everything below updates instantly.`,
-        "Live — pool allocation active.",
-        "How the portfolio is built, one cohort at a time: Every year new capital is drawn and a new cohort of startups is created. Most fail; a few reach an exit. Each cohort is valued at the expected exit valuation of its winners — earlier cohorts carry higher expected exits because they have had more time to mature.",
+        "The simulator assumes the ownership selection made in the section above; investment terms are not repeated here.",
+        "How the portfolio is built, one cohort at a time: every year a new cohort of startups is created. Most do not succeed. Each cohort is modeled using the Estimated Enterprise Value of its successful companies — earlier cohorts carry higher values because they have had more time to mature.",
+        "Change the assumptions. See how the portfolio responds.",
+        "Illustrative model only. Estimated Enterprise Value is an assumption about what a company could be worth — it does not imply a sale, IPO or any liquidity event.",
       ],
       cta: [{ label: "Show assumptions" }, { label: "Close" }, { label: "Reset" }],
       metrics: [
-        { label: "Seats selected", value: String(result.seats) },
-        { label: "Participation", value: `${result.ownershipPercent.toFixed(1)}%` },
-        { label: "Quarterly commitment", value: kd(result.annualCommitment / 4) },
-        { label: "Estimated portfolio value", value: kd(result.portfolioValue) },
-        { label: "Estimated investor value", value: kd(result.investorValue) },
-        { label: "Multiple", value: `${result.moic.toFixed(2)}x` },
         {
-          label: "Estimated value",
+          label: "01 — Investor estimated value",
           value: kd(result.investorValue),
-          note: "Your share of Nizek's equity in the successful companies",
+          note: "Your share of the Fund's equity in the successful companies",
         },
+        { label: "02 — MOIC", value: `${result.moic.toFixed(2)}x`, note: "What every dinar comes back as" },
         {
-          label: "Estimated profit",
+          label: "03 — Estimated profit",
           value: kd(result.investorProfit),
-          note: "Value created above the capital you committed",
+          note: "Value created above the capital committed",
         },
         {
-          label: "Return",
-          value: `${result.moic.toFixed(2)}x`,
-          note: "What every dinar comes back as",
-        },
-        {
-          label: "Nizek ownership",
-          value: kd(result.nizekEquityValue),
-          note: `${inputs.avgNizekOwnership}% average equity across the successful companies.`,
-        },
-        {
-          label: "Investor share",
-          value: kd(result.investorValue),
-          note: `${result.ownershipPercent}% participation in Nizek's equity position — ${result.seats} seats × ${m.SEAT_OWNERSHIP}%.`,
-        },
-        {
-          label: "Estimated return",
-          value: `${result.moic.toFixed(2)}x`,
-          note: `On ${kd(result.annualCommitment / 4)} called every three months, paid quarterly in advance.`,
+          label: "04 — Portfolio estimated value",
+          value: kd(result.portfolioValue),
+          note: `${result.totalSuccesses} successful companies out of ${result.totalStartups}, each at its Estimated Enterprise Value`,
         },
       ],
       tables: [
