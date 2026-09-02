@@ -1,3 +1,5 @@
+import founderPhoto from "@/assets/abdulaziz-aldhubaib.png.asset.json";
+
 export type TeamMember = {
   name: string;
   role: string;
@@ -11,7 +13,7 @@ export type TeamMember = {
 export const founder: TeamMember = {
   name: "Abdulaziz Al-Dhubaib",
   role: "Founder & CEO",
-  photo: "",
+  photo: founderPhoto.url,
   linkedin: "",
   bio: "Abdulaziz has been building technology companies since 2009.",
 };
