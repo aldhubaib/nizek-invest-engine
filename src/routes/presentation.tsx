@@ -34,7 +34,11 @@ export const Route = createFileRoute("/presentation")({
 
 function PersonalizedPresentation() {
   const investor = Route.useLoaderData();
-  const [entered, setEntered] = useState(false);
+  const storageKey = investor ? `nizek-onboarded-${investor.id}` : "";
+  const [entered, setEntered] = useState(() => {
+    if (typeof window === "undefined" || !storageKey) return false;
+    return window.sessionStorage.getItem(storageKey) === "1";
+  });
   const showOnboarding = Boolean(investor) && !entered;
   useEngagement(Boolean(investor) && entered);
 
@@ -42,6 +46,9 @@ function PersonalizedPresentation() {
     void acknowledgeConfidentiality().catch(() => {
       /* acknowledgment must never block entry */
     });
+    if (typeof window !== "undefined" && storageKey) {
+      window.sessionStorage.setItem(storageKey, "1");
+    }
     setEntered(true);
   }
 
