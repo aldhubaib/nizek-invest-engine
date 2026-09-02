@@ -913,8 +913,8 @@ function PlatformPageBody() {
               </p>
             </div>
           </Reveal>
-          <Reveal delay={300}>
-            <div className="flex h-full flex-col bg-background p-10 lg:col-span-3">
+          <Reveal delay={300} className="lg:col-span-3">
+            <div className="flex h-full flex-col bg-background p-10">
               <div className="num text-xs text-subtle">04</div>
               <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
                 <div>
