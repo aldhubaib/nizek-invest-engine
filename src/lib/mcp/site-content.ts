@@ -410,20 +410,18 @@ export async function buildHomePage() {
       section_id: "team",
       section_order: 9,
       eyebrow: "11 — The team",
-      headline: "The People Behind The Building.",
+      headline: "The Leadership Behind The Venture Studio.",
       subheadline:
-        "Nizek Venture Studio is operated by entrepreneurs, product builders and technology leaders with hands-on experience turning ideas into operating companies.",
+        "Nizek Venture Studio is led by operators who build companies, not by an organisational chart. Leadership sets the direction; a shared capability set is applied to every venture in the portfolio.",
       body: [
-        "Founder role inside the venture studio — Venture Creation: identifying problems, evaluating opportunities and working directly with entrepreneurs to shape new companies.",
-        "Product & Technology: leading product strategy, technology direction and the decisions required to turn an idea into a working business.",
-        "Company Building: experience building teams, products and operating businesses rather than acting only as a financial investor.",
-        "GCC Experience: long-term experience building technology businesses and working with entrepreneurs across the GCC.",
-        "The team behind every venture: Founder Selection, Problem Discovery, Product Strategy, Product Design, Technology, Market Validation, Business Model, Operations, Fundraising Readiness.",
-        "A venture studio does not succeed because it has capital. It succeeds because it has people capable of repeatedly turning opportunities into companies.",
-        "Capital creates the opportunity. Execution creates the company. The people responsible for that execution are already inside Nizek.",
+        "Founder & Managing Partner — Abdulaziz Al-Dhubaib leads the venture studio end to end: identifies high-potential founders, shapes venture strategy, oversees product direction, leads technology decisions, guides company building, works directly with founders throughout the venture lifecycle and is responsible for portfolio quality.",
+        "Venture Studio Leadership — Product Lead (product strategy & delivery), Public Relations (reputation & media), Marketing (brand & go-to-market).",
+        "Every venture receives: Product Strategy, Technology Leadership, Technical Architecture, Product Design, Brand Strategy, Public Relations, Go-To-Market Validation, AI & Automation, Founder Support, Hiring Support, Operational Guidance.",
+        "A venture studio is defined by its ability to repeatedly build companies—not by the number of people on its organisational chart.",
+        "The same leadership team, systems and operating experience are applied across every company inside the portfolio.",
       ],
       cards: [],
-      ui: ui({ layout: "founder profile + leadership grid", columns: 4, hasImage: true }),
+      ui: ui({ layout: "founder profile + leadership cards + capability grid", columns: 4, hasImage: true }),
     },
     {
       ...empty,
@@ -899,7 +897,7 @@ export async function buildHomePage() {
     {
       title: team.founder.name,
       note: team.founder.role,
-      body: team.founderFocus.map((f) => `${f.title}: ${f.note}`).join(" "),
+      body: `${team.founderSummary} Role inside the venture studio: ${team.founderRole.join("; ")}.`,
     },
     ...team.team.map((t) => ({
       title: t.name,
