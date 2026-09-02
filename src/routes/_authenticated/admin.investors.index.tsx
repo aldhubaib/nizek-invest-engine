@@ -64,7 +64,11 @@ function InvestorsDashboard() {
       <h1 className="mt-3 text-3xl font-medium tracking-tight">Investors</h1>
 
       <section className="mt-10 border border-border p-6">
-        <h2 className="text-sm font-medium uppercase tracking-[0.2em]">New private invitation</h2>
+        <h2 className="text-sm font-medium uppercase tracking-[0.2em]">Generate private link</h2>
+        <p className="mt-2 text-xs text-muted-foreground">
+          Enter the investor's name and phone number. A unique private link is generated for them —
+          nothing is emailed.
+        </p>
         <div className="mt-4 grid gap-4 sm:grid-cols-4">
           <input
             className={field}
@@ -74,15 +78,15 @@ function InvestorsDashboard() {
           />
           <input
             className={field}
-            placeholder="Email"
-            value={form.email}
-            onChange={(e) => setForm({ ...form, email: e.target.value })}
+            placeholder="Phone number"
+            value={form.phone}
+            onChange={(e) => setForm({ ...form, phone: e.target.value })}
           />
           <input
             className={field}
-            placeholder="Phone (optional)"
-            value={form.phone}
-            onChange={(e) => setForm({ ...form, phone: e.target.value })}
+            placeholder="Email (optional)"
+            value={form.email}
+            onChange={(e) => setForm({ ...form, email: e.target.value })}
           />
           <input
             className={field}
@@ -93,16 +97,24 @@ function InvestorsDashboard() {
         </div>
         <button
           type="button"
-          disabled={create.isPending || form.fullName.length < 2 || !form.email.includes("@")}
+          disabled={create.isPending || form.fullName.trim().length < 2 || form.phone.trim().length < 4}
           onClick={() => create.mutate()}
           className="mt-6 border border-foreground px-5 py-2 text-sm transition-colors hover:bg-foreground hover:text-background disabled:opacity-40"
         >
-          {create.isPending ? "Creating…" : "Create investor + link"}
+          {create.isPending ? "Generating…" : "Generate private link"}
         </button>
         {invite ? (
-          <p className="mt-4 break-all font-mono text-xs text-foreground">
-            Private link (shown once): {invite}
-          </p>
+          <div className="mt-4 border border-border p-4">
+            <p className="text-xs text-muted-foreground">Private link (shown once)</p>
+            <p className="mt-2 break-all font-mono text-xs text-foreground">{invite}</p>
+            <button
+              type="button"
+              onClick={() => void navigator.clipboard.writeText(invite)}
+              className="mt-3 border border-border px-3 py-1 text-xs transition-colors hover:bg-foreground hover:text-background"
+            >
+              Copy link
+            </button>
+          </div>
         ) : null}
         {create.isError ? (
           <p className="mt-4 text-xs text-muted-foreground">
