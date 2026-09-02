@@ -1282,7 +1282,8 @@ function PlatformPage() {
               ))}
             </div>
 
-            {/* The portfolio, year by year */}
+            {/* The portfolio, year by year — hidden for now, kept for later */}
+            {SHOW_COHORT_BREAKDOWN && (
             <div className="mt-20">
               <div className="label-xs">How the portfolio is built, one cohort at a time</div>
               <p className="mt-4 max-w-2xl text-xs leading-relaxed text-subtle">
