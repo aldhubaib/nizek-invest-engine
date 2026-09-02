@@ -691,53 +691,45 @@ export async function buildHomePage() {
       ...empty,
       section_id: "lifecycle",
       section_order: 19,
-      eyebrow: "18 — Institutional Fund Structure",
-      headline: "One Fund. Fifty Companies. One Ownership Structure.",
+      eyebrow: "07 — Fund structure",
+      headline: "One Fund. One Portfolio. One Ownership Structure.",
       subheadline:
-        "To provide investors with a simple, transparent and scalable ownership model, all investments are made through a dedicated investment fund established in Abu Dhabi, UAE.",
+        "Nizek Venture Studio Fund A is designed as a single investment vehicle that holds the equity positions created across the venture portfolio. As new companies are added, investor ownership remains consolidated through the same Fund structure.",
       body: [
-        "Instead of investors owning shares directly in dozens of different startups, each investor owns a percentage of the investment fund.",
-        "As new startups are created, every investment agreement is signed by the fund, making the fund the legal shareholder of every portfolio company.",
-        "One ownership vehicle that grows over time, while the legal structure stays simple for investors.",
+        "Investors hold one position in Fund A. Fund A holds the underlying portfolio. As the portfolio grows, that ownership position stays the same.",
+        "Nizek Venture Studio Fund A is being structured through Abu Dhabi, UAE.",
+        "One investment vehicle. A growing portfolio of companies. One clear ownership position.",
       ],
       diagram: {
-        label: "Ownership structure",
+        label: "Structure",
         nodes: [
           { label: "Investors", note: "Investor A, B, C, D, E, F" },
-          { label: "NIZEK Venture Fund", note: "Abu Dhabi, UAE" },
-          { label: "Startups", note: "Startup 01 … Startup 50+" },
+          { label: "Nizek Venture Studio Fund A", note: "Abu Dhabi, UAE" },
+          {
+            label: "Portfolio companies",
+            note: "Startup 01, Startup 02, Startup 03 … future portfolio companies",
+          },
         ],
       },
-      timeline: [
-        { step: "01", title: "Investors subscribe to ownership units in the NIZEK Venture Fund." },
-        { step: "02", title: "The fund commits capital over five years." },
-        { step: "03", title: "Every startup investment agreement is executed directly by the fund." },
-        { step: "04", title: "The fund becomes the shareholder of each startup." },
-        { step: "05", title: "As more startups are created, the value of the fund's portfolio grows." },
-      ],
       cards: [
         {
           index: "01",
-          title: "Simple Ownership",
-          body: "Investors own one fund instead of managing ownership in dozens of separate companies.",
+          title: "One Ownership Position",
+          body: "Investors hold one ownership position in Fund A rather than maintaining separate holdings across every portfolio company.",
         },
         {
           index: "02",
           title: "Centralized Portfolio",
-          body: "Every startup becomes part of one professionally managed investment vehicle.",
+          body: "The equity positions created through the venture studio are held within one investment vehicle.",
         },
         {
           index: "03",
           title: "Scalable Structure",
-          body: "New startups are automatically added to the fund without changing the ownership structure.",
-        },
-        {
-          index: "04",
-          title: "Aligned Interests",
-          body: "All investors participate in the performance of the same diversified portfolio.",
+          body: "New portfolio companies can be added to Fund A while investor ownership remains consolidated through the same structure.",
         },
       ],
-      ui: ui({ layout: "text + fund diagram + steps + benefit cards", columns: 4 }),
+      ui: ui({ layout: "fund diagram + benefit cards", columns: 3 }),
+
     },
     {
       ...empty,
