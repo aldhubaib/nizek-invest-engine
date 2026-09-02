@@ -17,6 +17,7 @@ const nav = [
   { id: "lifecycle", label: "Fund" },
   { id: "model", label: "Simulator" },
   { id: "timeline", label: "Timeline" },
+  { id: "reserve", label: "Reserve" },
   { id: "contact", label: "Contact" },
 ] as const;
 

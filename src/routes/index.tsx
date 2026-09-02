@@ -6,6 +6,7 @@ import { ValueField } from "@/components/model/ValueField";
 import { EquitySection } from "@/components/site/EquitySection";
 import { TeamSection } from "@/components/site/TeamSection";
 import { Reveal, Section, SectionHeading } from "@/components/ui/primitives";
+import { ReserveSection } from "@/components/site/ReserveSection";
 import { multiple, number as fmtNumber, percent } from "@/model/format";
 import {
   AVAILABLE_SEATS,
@@ -1709,6 +1710,8 @@ function PlatformPage() {
         </p>
 
       </Section>
+
+      <ReserveSection />
 
       <Section id="contact">
         <Reveal>
