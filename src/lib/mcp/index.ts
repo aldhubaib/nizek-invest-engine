@@ -1,5 +1,6 @@
 import { auth, defineMcp } from "@lovable.dev/mcp-js";
 
+import getPage from "./tools/get-page";
 import investmentTerms from "./tools/investment-terms";
 import simulateInvestment from "./tools/simulate-investment";
 
