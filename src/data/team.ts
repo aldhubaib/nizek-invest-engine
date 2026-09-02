@@ -14,91 +14,67 @@ export type TeamMember = {
 /** Founding partner — centerpiece of the section. */
 export const founder: TeamMember = {
   name: "Abdulaziz Al-Dhubaib",
-  role: "Founder & CEO",
+  role: "Founder & Managing Partner",
   photo: founderPhoto.url,
   linkedin: "",
   bio: "Abdulaziz has been building technology companies since 2009.",
 };
 
-export const founderBio: string[] = [
-  "Abdulaziz has been building technology companies since 2009.",
-  "Over the past decade he has led the development of products across multiple industries, helping founders transform ideas into scalable businesses.",
-  "His work has contributed to some of the GCC's most successful technology ventures, including Dabdoob, one of the region's largest startup exits.",
-  "Rather than investing only capital, Abdulaziz has built a venture creation system that combines product strategy, software engineering, operational execution and founder development into one repeatable model.",
-  "His vision is to build the leading venture studio in the GCC by creating dozens of technology companies over the coming years.",
+/** Founder's role inside the venture studio — responsibilities, not a biography. */
+export const founderRole: string[] = [
+  "Identifies high-potential founders",
+  "Shapes venture strategy",
+  "Oversees product direction",
+  "Leads technology decisions",
+  "Guides company building",
+  "Works directly with founders throughout the venture lifecycle",
+  "Responsible for portfolio quality",
 ];
 
-/** Founder's role inside the venture studio — four operating areas. */
-export const founderFocus: { index: string; title: string; note: string }[] = [
-  {
-    index: "01",
-    title: "Venture Creation",
-    note: "Identifying problems, evaluating opportunities and working directly with entrepreneurs to shape new companies.",
-  },
-  {
-    index: "02",
-    title: "Product & Technology",
-    note: "Leading product strategy, technology direction and the decisions required to turn an idea into a working business.",
-  },
-  {
-    index: "03",
-    title: "Company Building",
-    note: "Experience building teams, products and operating businesses rather than acting only as a financial investor.",
-  },
-  {
-    index: "04",
-    title: "GCC Experience",
-    note: "Long-term experience building technology businesses and working with entrepreneurs across the GCC.",
-  },
-];
+export const founderSummary =
+  "Abdulaziz leads the venture studio end to end — selecting the founders Nizek partners with, setting the strategy for each venture, and staying involved in product and technology decisions from first build through scale.";
 
-/** The multidisciplinary capability applied to every venture. */
-export const ventureCapabilities: string[] = [
-  "Founder Selection",
-  "Problem Discovery",
-  "Product Strategy",
-  "Product Design",
-  "Technology",
-  "Market Validation",
-  "Business Model",
-  "Operations",
-  "Fundraising Readiness",
-];
-
-/** Leadership team — add unlimited members; the grid scales automatically. */
+/** Venture studio leadership — real roles only. */
 export const team: TeamMember[] = [
   {
-    name: "Team Member",
-    role: "Chief Technology Officer",
-    responsibility: "Technology Leadership",
-    bio: "Leads engineering across the studio portfolio, from architecture to delivery.",
+    name: "Product Lead",
+    role: "Product Lead",
+    responsibility: "Product Strategy & Delivery",
+    bio: "Translates validated problems into product strategy, roadmaps and shipped software across the portfolio.",
     photo: "",
     linkedin: "",
   },
   {
-    name: "Team Member",
-    role: "Head of Product",
-    responsibility: "Product Strategy",
-    bio: "Turns validated problems into product strategy, roadmaps and shipped software.",
+    name: "Public Relations",
+    role: "Public Relations",
+    responsibility: "Reputation & Media",
+    bio: "Builds the public narrative for each venture and manages media relationships across the GCC.",
     photo: "",
     linkedin: "",
   },
   {
-    name: "Team Member",
-    role: "Head of Design",
-    responsibility: "Design",
-    bio: "Owns the UI/UX standard applied to every company the studio builds.",
+    name: "Marketing",
+    role: "Marketing",
+    responsibility: "Brand & Go-To-Market",
+    bio: "Owns brand positioning and the go-to-market motion applied to every company the studio launches.",
     photo: "",
     linkedin: "",
   },
-  {
-    name: "Team Member",
-    role: "Head of Growth",
-    responsibility: "Venture Development",
-    bio: "Builds acquisition, brand and revenue engines for each new venture.",
-    photo: "",
-    linkedin: "",
-  },
+];
+
+/** Capabilities every venture receives from the studio. */
+export const ventureCapabilities: string[] = [
+  "Product Strategy",
+  "Technology Leadership",
+  "Technical Architecture",
+  "Product Design",
+  "Brand Strategy",
+  "Public Relations",
+  "Go-To-Market Validation",
+  "AI & Automation",
+  "Founder Support",
+  "Hiring Support",
+  "Operational Guidance",
 ];
 
 /** Track record — editable values. */
