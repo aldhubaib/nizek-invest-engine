@@ -1087,7 +1087,7 @@ function PlatformPage() {
       </Section>
 
       {/* Part 4 — the simulator, assuming the selection above */}
-      <section id="model" className="section-invert border-t border-border">
+      <section id="model">
         <div className="px-6 py-24 md:px-12 md:py-32">
           <div className="mx-auto w-full max-w-[1400px]">
             <Reveal>
