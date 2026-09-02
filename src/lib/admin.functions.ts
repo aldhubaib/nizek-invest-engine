@@ -198,3 +198,32 @@ export const updateInvestorNotes = createServerFn({ method: "POST" })
     if (error) throw new Error(error.message);
     return { ok: true as const };
   });
+
+/** Every ownership-position request, including requests from public visits. */
+export const listAllocationRequests = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    await assertAdmin(context as never);
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data, error } = await supabaseAdmin
+      .from("allocation_requests")
+      .select(
+        "id, investor_id, full_name, email, phone, company, positions, ownership_percent, quarterly_capital_call, message, submitted_at",
+      )
+      .order("submitted_at", { ascending: false })
+      .limit(200);
+    if (error) throw new Error(error.message);
+    return (data ?? []).map((r) => ({
+      id: r.id,
+      investorId: r.investor_id,
+      fullName: r.full_name,
+      email: r.email ?? "",
+      phone: r.phone,
+      company: r.company ?? "",
+      positions: positionLabels(r.positions as string[]),
+      ownership: Number(r.ownership_percent),
+      quarterly: Number(r.quarterly_capital_call),
+      message: r.message ?? "",
+      submittedAt: r.submitted_at,
+    }));
+  });
