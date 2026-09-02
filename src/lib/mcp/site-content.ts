@@ -735,11 +735,6 @@ export async function buildHomePage() {
           value: kd(result.investorProfit),
           note: "Value created above the capital committed",
         },
-        {
-          label: "04 — Portfolio estimated value",
-          value: kd(result.portfolioValue),
-          note: `${result.totalSuccesses} successful companies out of ${result.totalStartups}, each at its Estimated Enterprise Value`,
-        },
       ],
       tables: [
         {
