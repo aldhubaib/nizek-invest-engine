@@ -409,14 +409,18 @@ export async function buildHomePage() {
       ...empty,
       section_id: "team",
       section_order: 9,
-      eyebrow: "08 — The people behind the studio",
-      headline: "A Venture Studio Is Only As Good As The Team Behind It.",
-      subheadline: null,
+      eyebrow: "11 — The team",
+      headline: "The People Behind The Building.",
+      subheadline:
+        "Nizek Venture Studio is operated by entrepreneurs, product builders and technology leaders with hands-on experience turning ideas into operating companies.",
       body: [
-        "Nizek is not an investment fund managed by financiers. It is an operating venture studio built by entrepreneurs, product builders and technology leaders who have spent years designing, developing and scaling technology companies across the GCC.",
-        "Our investors are not only investing in startups. They are investing in a proven team with the experience, infrastructure and execution capability required to repeatedly build companies from the ground up.",
-        "Why this team: Most investment firms provide capital. We provide the people required to transform ideas into companies.",
-        "Capital alone does not build startups. Execution does.",
+        "Founder role inside the venture studio — Venture Creation: identifying problems, evaluating opportunities and working directly with entrepreneurs to shape new companies.",
+        "Product & Technology: leading product strategy, technology direction and the decisions required to turn an idea into a working business.",
+        "Company Building: experience building teams, products and operating businesses rather than acting only as a financial investor.",
+        "GCC Experience: long-term experience building technology businesses and working with entrepreneurs across the GCC.",
+        "The team behind every venture: Founder Selection, Problem Discovery, Product Strategy, Product Design, Technology, Market Validation, Business Model, Operations, Fundraising Readiness.",
+        "A venture studio does not succeed because it has capital. It succeeds because it has people capable of repeatedly turning opportunities into companies.",
+        "Capital creates the opportunity. Execution creates the company. The people responsible for that execution are already inside Nizek.",
       ],
       cards: [],
       ui: ui({ layout: "founder profile + leadership grid", columns: 4, hasImage: true }),
@@ -707,7 +711,7 @@ export async function buildHomePage() {
           { label: "Nizek Venture Studio Fund A", note: "Abu Dhabi, UAE" },
           {
             label: "Portfolio companies",
-            note: "Startup 01 through Startup 50 — every company created through the venture studio is held inside Fund A.",
+            note: "Startup 01 through Startup 50+ — every company created through the venture studio is held inside Fund A.",
           },
         ],
       },
@@ -936,9 +940,13 @@ export async function buildHomePage() {
     {
       title: team.founder.name,
       note: team.founder.role,
-      body: team.founderBio.join(" "),
+      body: team.founderFocus.map((f) => `${f.title}: ${f.note}`).join(" "),
     },
-    ...team.team.map((t) => ({ title: t.name, note: t.role, body: t.bio })),
+    ...team.team.map((t) => ({
+      title: t.name,
+      note: t.responsibility ? `${t.role} — venture-studio responsibility: ${t.responsibility}` : t.role,
+      body: t.bio,
+    })),
   ];
 
   return {
