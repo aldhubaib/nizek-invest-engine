@@ -227,23 +227,97 @@ function PlatformPage() {
       </section>
 
       <Section id="why">
-        <SectionHeading index="01 — Why we exist" title="Great Ideas Don't Fail. Execution Does." />
-        <div className="grid grid-cols-1 gap-16 md:grid-cols-2">
+        <SectionHeading
+          index="01 — Why Nizek"
+          title="Built to Build. Since 2009."
+          lede="We are not allocating capital into an idea. We are applying seventeen years of building technology companies in the GCC to a repeatable venture engine."
+        />
+
+        {/* Institutional metric band */}
+        <div className="grid grid-cols-2 gap-px border border-border bg-border md:grid-cols-4">
+          {[
+            { value: 2009, label: "Building technology companies since", suffix: "" },
+            { value: 17, label: "Years operating in GCC markets", suffix: "+" },
+            { value: 120, label: "Digital products shipped", suffix: "+" },
+            { value: 1, label: "Regional breakout — Dabdoob", suffix: "" },
+          ].map((m, i) => (
+            <Reveal key={m.label} delay={i * 80}>
+              <div className="flex h-full flex-col justify-between bg-background p-8 md:p-10">
+                <div className="num text-xs text-subtle">{String(i + 1).padStart(2, "0")}</div>
+                <div className="display-xl mt-10 text-5xl tabular-nums md:text-7xl">
+                  <AnimatedNumber value={m.value} decimals={0} />
+                  {m.suffix}
+                </div>
+                <div className="label-xs mt-6 text-muted-foreground">{m.label}</div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+
+        {/* Dabdoob proof */}
+        <div className="mt-px grid grid-cols-1 gap-px border border-border bg-border lg:grid-cols-3">
           <Reveal>
-            <p className="text-lg leading-relaxed text-muted-foreground">
-              Thousands of founders have ideas. Very few have access to experienced product
-              managers, designers, engineers, CTOs, marketing support, legal guidance, fundraising
-              expertise, and operational infrastructure.
-            </p>
+            <div className="flex h-full flex-col justify-between bg-foreground p-8 text-background md:p-10 lg:col-span-1">
+              <div className="label-xs opacity-60">Proof point</div>
+              <div className="display-xl mt-10 text-4xl md:text-6xl">Dabdoob</div>
+              <p className="mt-6 text-sm leading-relaxed opacity-70">
+                Built with Nizek and scaled into one of the region&apos;s most recognised consumer
+                platforms — institutionally funded and operating across the GCC.
+              </p>
+            </div>
           </Reveal>
-          <Reveal delay={100}>
-            <p className="display-xl text-3xl md:text-5xl">
-              Nizek already has all of that. Instead of waiting for great startups to appear, we
-              build them ourselves.
-            </p>
+          <Reveal delay={120}>
+            <div className="flex h-full flex-col justify-between bg-background p-8 md:p-10">
+              <div className="label-xs text-subtle">Current portfolio</div>
+              <div className="mt-10 space-y-4">
+                {["Ad Space", "Hazawy"].map((n) => (
+                  <div
+                    key={n}
+                    className="flex items-baseline justify-between border-b border-border pb-3 text-2xl md:text-3xl"
+                  >
+                    <span className="display-xl">{n}</span>
+                    <span className="label-xs text-subtle">Active</span>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
+                Companies currently being built inside the studio.
+              </p>
+            </div>
+          </Reveal>
+          <Reveal delay={240}>
+            <div className="flex h-full flex-col justify-between bg-background p-8 md:p-10">
+              <div className="label-xs text-subtle">Infrastructure</div>
+              <div className="mt-10 grid grid-cols-2 gap-x-6 gap-y-3 text-sm text-foreground">
+                {[
+                  "Product",
+                  "Engineering",
+                  "Design",
+                  "Growth",
+                  "Legal",
+                  "Finance",
+                  "Hiring",
+                  "Fundraising",
+                ].map((c) => (
+                  <div key={c} className="border-b border-border pb-2">
+                    {c}
+                  </div>
+                ))}
+              </div>
+              <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
+                In-house venture-building capacity — already paid for, already running.
+              </p>
+            </div>
           </Reveal>
         </div>
+
+        <Reveal>
+          <p className="display-xl mt-20 text-3xl md:text-5xl">
+            Fifty companies is not an ambition. It is capacity we already operate.
+          </p>
+        </Reveal>
       </Section>
+
 
       <Section id="problem" invert>
         <SectionHeading
