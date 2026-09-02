@@ -63,10 +63,32 @@ function InvestorsDashboard() {
     { fullName: string; mobile: string; link: string } | null
   >(null);
   const [copied, setCopied] = useState(false);
+  const [links, setLinks] = useState<Record<string, string>>(() => readLinks());
+  const [copiedId, setCopiedId] = useState<string | null>(null);
+
+  const saveLink = (id: string, link: string) => {
+    setLinks((prev) => {
+      const next = { ...prev, [id]: link };
+      persistLinks(next);
+      return next;
+    });
+  };
+
+  const rotate = useMutation({
+    mutationFn: (id: string) => rotateInvestorToken({ data: { id } }),
+    onSuccess: (res, id) => saveLink(id, publicLink(res.invitePath)),
+  });
+
+  const copy = (id: string, link: string) => {
+    void navigator.clipboard.writeText(link);
+    setCopiedId(id);
+    window.setTimeout(() => setCopiedId((v) => (v === id ? null : v)), 1500);
+  };
 
   const create = useMutation({
     mutationFn: () => createInvestor({ data: form }),
     onSuccess: (res) => {
+      saveLink(res.id, publicLink(res.invitePath));
       setCreated({ fullName: res.fullName, mobile: res.mobile, link: publicLink(res.invitePath) });
       setForm({ fullName: "", phone: "" });
       setOpen(false);
