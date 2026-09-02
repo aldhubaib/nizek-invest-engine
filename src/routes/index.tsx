@@ -1352,16 +1352,6 @@ function PlatformPage() {
             </div>
             )}
 
-            <div className="mt-20">
-              <p className="mt-10 max-w-3xl text-xl text-foreground md:text-2xl">
-                Change the assumptions. See how the portfolio responds.
-              </p>
-
-              <p className="mt-8 max-w-3xl text-[11px] leading-relaxed text-subtle">
-                Illustrative model only. Estimated Enterprise Value is an assumption about what a
-                company could be worth — it does not imply a sale, IPO or any liquidity event.
-              </p>
-            </div>
           </div>
         </div>
       </Section>
