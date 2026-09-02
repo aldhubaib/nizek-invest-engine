@@ -375,7 +375,7 @@ function PlatformPage() {
           <div className="bg-background p-10">
             <div className="label-xs text-foreground">Our solution</div>
             <p className="mt-8 text-lg leading-relaxed text-foreground">
-              Every founder enters the Nizek Founder Residency first — roughly six months building
+              Every founder enters the Nizek Founder Residency first — roughly three months building
               inside a live startup. Only those who prove themselves are offered investment.
             </p>
           </div>
@@ -386,7 +386,7 @@ function PlatformPage() {
           <div className="mt-10 grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2 md:grid-cols-3">
             {[
               { t: "Applications", d: "Open, continuous inbound from the region's operators." },
-              { t: "6-Month Founder Residency", d: "Building inside a live Nizek startup." },
+              { t: "3-Month Founder Residency", d: "Building inside a live Nizek startup." },
               { t: "Performance Evaluation", d: "Judged on real output, not a pitch deck." },
               { t: "Founder Approved", d: "Both sides decide to build a company together." },
               { t: "Investment", d: "Capital, equity and platform are committed." },

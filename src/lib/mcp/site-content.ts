@@ -208,14 +208,14 @@ export async function buildHomePage() {
         "Venture capital's hardest problem is founder risk: a handful of meetings, then a decade of consequences. Nizek runs a repeatable system for discovering, testing and selecting founders before a single dinar is committed.",
       body: [
         "The problem: Most investors meet entrepreneurs through pitch events, introductions or applications, and must decide after a few conversations. Execution is discovered after the money is gone.",
-        "Our solution: Every founder enters the Nizek Founder Residency first — roughly six months building inside one of our existing startups. Only those who prove themselves are offered investment.",
+        "Our solution: Every founder enters the Nizek Founder Residency first — roughly three months building inside one of our existing startups. Only those who prove themselves are offered investment.",
         "The founder is evaluating us at the same time. By the end of the residency, both sides know the answer.",
         "Traditional venture capital invests first and evaluates execution later. Nizek evaluates execution first and invests later.",
         "The result is a continuous pipeline of founders who have already proven they can execute before receiving capital — making the studio repeatable, scalable and far less dependent on luck.",
       ],
       timeline: [
         { step: "01", title: "Applications", note: "Open, continuous inbound from the region's operators." },
-        { step: "02", title: "Founder Residency", note: "~6 months building inside a live Nizek startup." },
+        { step: "02", title: "Founder Residency", note: "~3 months building inside a live Nizek startup." },
         { step: "03", title: "Performance Evaluation", note: "Judged on real output, not a pitch deck." },
         { step: "04", title: "Founder Approved", note: "Both sides decide to build a company together." },
         { step: "05", title: "Investment", note: "Capital, equity and platform are committed." },
