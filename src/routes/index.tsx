@@ -455,96 +455,141 @@ function PlatformPage() {
       <Section id="how-we-build">
         <SectionHeading
           index="04 — Venture building model"
-          title="From Idea To Independent Company."
-          lede="Nizek contributes roughly one year of technology and venture-building support in exchange for equity. Then the company stands on its own."
+          title="From Idea To Scalable Company."
+          lede="Nizek works beside the entrepreneur from problem discovery through product, validation and launch. As the company grows, shared venture-studio resources transition into a dedicated engineering team while Nizek remains the long-term technology and CTO partner."
         />
 
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-[1fr_1fr] lg:gap-24">
           <FlowStack
             steps={[
-              "Idea",
+              "Problem",
               "Validation",
-              "Product",
-              "Technology",
+              "Product Strategy",
+              "Build",
               "Launch",
               "Market Validation",
-              "Startup Builds Internal Team",
-              "Dedicated Internal Team",
-              "Ongoing Nizek Technical Leadership",
-              "Independent Company",
+              "Dedicated Engineering Team",
+              "Ongoing Nizek CTO Leadership",
+              "Scale",
             ]}
           />
 
           <div className="flex flex-col gap-10">
             <Reveal>
               <div className="border border-border p-8 md:p-10">
-                <div className="label-xs">Year one</div>
+                <div className="label-xs">01 — Build together</div>
                 <p className="mt-6 text-base leading-relaxed text-muted-foreground">
-                  Every startup receives a full product and engineering organisation from day one,
-                  so the founder can focus on customers and the market instead of hiring a technical
-                  team.
+                  During the first year, the entrepreneur works directly with Nizek&apos;s
+                  venture-studio team to understand the problem, validate the opportunity, shape the
+                  product and launch the company.
                 </p>
-              </div>
-            </Reveal>
-            <Reveal delay={100}>
-              <div className="border border-border p-8 md:p-10">
-                <div className="label-xs">Building an internal team</div>
-                <p className="mt-6 text-base leading-relaxed text-muted-foreground">
-                  At the end of the first year, the startup begins building its own internal
-                  technology team. Rather than replacing Nizek, the company transitions from using
-                  Nizek's shared venture-building resources to a dedicated team that works
-                  exclusively for the startup.
-                </p>
-                <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-                  Nizek remains the long-term technology partner, providing CTO leadership,
-                  technical supervision, architecture oversight, engineering standards and strategic
-                  product guidance. The startup pays only the actual cost of the dedicated
-                  engineering team plus a fixed 15% management margin.
-                </p>
-                <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-                  This model allows every startup to become operationally independent while still
-                  benefiting from Nizek's experience, governance and technical leadership.
-                </p>
-                <div className="mt-8 grid grid-cols-1 gap-px border border-border bg-border">
+                <div className="mt-8 grid grid-cols-2 gap-px border border-border bg-border sm:grid-cols-4">
                   {[
-                    "Shared Venture Studio Team",
-                    "Dedicated Internal Team",
-                    "Ongoing Technical Leadership by Nizek",
-                  ].map((t, i) => (
-                    <div key={t} className="bg-background px-5 py-5">
-                      <span className="num text-xs text-subtle">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <div className="mt-2 text-sm text-foreground">{t}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </Reveal>
-            <Reveal delay={200}>
-              <div className="border border-border-strong p-8 md:p-10">
-                <div className="label-xs">Why this matters</div>
-                <div className="display-xl mt-6 text-3xl md:text-4xl">
-                  Independent Team. Continuous Leadership.
-                </div>
-                <p className="mt-6 text-base leading-relaxed text-muted-foreground">
-                  Every startup eventually builds its own dedicated engineering team, but founders
-                  continue benefiting from Nizek's experience and technical leadership. This ensures
-                  architectural consistency, better engineering decisions, faster hiring and lower
-                  long-term execution risk while allowing the company to scale independently.
-                </p>
-                <div className="mt-8 grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-3">
-                  {["Repeatable", "Scalable", "Capital efficient"].map((t) => (
-                    <div key={t} className="bg-background px-5 py-6 text-sm text-foreground">
+                    "Problem validation",
+                    "Product strategy",
+                    "Product design",
+                    "Technology",
+                    "Market validation",
+                    "Business model",
+                    "Launch",
+                    "Venture experience",
+                  ].map((t) => (
+                    <div key={t} className="bg-background px-4 py-5 text-sm text-foreground">
                       {t}
                     </div>
                   ))}
                 </div>
               </div>
             </Reveal>
-
+            <Reveal delay={100}>
+              <div className="border border-border p-8 md:p-10">
+                <div className="label-xs">02 — Dedicated capacity</div>
+                <p className="mt-6 text-base leading-relaxed text-muted-foreground">
+                  Once the company requires permanent engineering capacity, Nizek hires a dedicated
+                  team that works exclusively on that startup.
+                </p>
+                <div className="mt-8 grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-3">
+                  <div className="bg-background px-5 py-6">
+                    <div className="label-xs text-subtle">Cost basis</div>
+                    <div className="mt-3 text-base text-foreground">Engineering team cost</div>
+                  </div>
+                  <div className="flex items-center justify-center bg-background px-5 py-6">
+                    <span className="display-xl text-3xl">+</span>
+                  </div>
+                  <div className="bg-background px-5 py-6">
+                    <div className="label-xs text-subtle">Nizek</div>
+                    <div className="mt-3 text-base text-foreground">15% management margin</div>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+            <Reveal delay={200}>
+              <div className="border border-border p-8 md:p-10">
+                <div className="label-xs">03 — Continuous leadership</div>
+                <p className="mt-6 text-base leading-relaxed text-muted-foreground">
+                  Nizek continues as the long-term CTO and technology partner, supervising
+                  architecture, technical decisions, engineering quality and product technology
+                  strategy.
+                </p>
+                <div className="mt-8 grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2">
+                  {[
+                    "CTO leadership",
+                    "Technical strategy",
+                    "Architecture",
+                    "Engineering standards",
+                    "Technical supervision",
+                    "Product & technology direction",
+                  ].map((t) => (
+                    <div key={t} className="bg-background px-5 py-5 text-sm text-foreground">
+                      {t}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
           </div>
         </div>
+
+        <div className="mt-24">
+          <div className="label-xs">Why this matters</div>
+          <div className="mt-10 grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              [
+                "Venture experience",
+                "The entrepreneur does not build the company alone. Nizek brings years of product, technology and company-building knowledge into the earliest decisions.",
+              ],
+              [
+                "Dedicated execution",
+                "Successful companies graduate from shared studio capacity into engineering resources dedicated exclusively to them.",
+              ],
+              [
+                "Continuous CTO leadership",
+                "Founders continue benefiting from experienced technical leadership instead of having to manage engineering alone.",
+              ],
+              [
+                "Scalable studio model",
+                "Shared studio resources return to building new companies while mature ventures fund their own dedicated capacity.",
+              ],
+            ].map(([title, body], i) => (
+              <Reveal key={title} delay={i * 100}>
+                <div className="flex h-full flex-col bg-background p-8 md:p-10">
+                  <div className="num text-xs text-subtle">{String(i + 1).padStart(2, "0")}</div>
+                  <div className="label-xs mt-8 text-foreground">{title}</div>
+                  <p className="mt-5 text-sm leading-relaxed text-muted-foreground">{body}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+
+        <Reveal>
+          <div className="mt-px border border-border-strong p-8 md:p-12">
+            <p className="display-xl max-w-4xl text-2xl leading-snug md:text-4xl">
+              We don&apos;t build software and hand it over. We build companies alongside
+              entrepreneurs — and stay behind the technology as they scale.
+            </p>
+          </div>
+        </Reveal>
       </Section>
 
       {/* 05 — Regional first */}
