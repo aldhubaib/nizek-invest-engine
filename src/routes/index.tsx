@@ -1346,7 +1346,10 @@ function PlatformPage() {
                   );
                 })}
               </div>
+            </div>
+            )}
 
+            <div className="mt-20">
               <p className="mt-10 max-w-3xl text-xl text-foreground md:text-2xl">
                 Change the assumptions. See how the portfolio responds.
               </p>
