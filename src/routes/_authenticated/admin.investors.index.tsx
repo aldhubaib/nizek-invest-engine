@@ -140,7 +140,7 @@ function InvestorsDashboard() {
             >
               <div>
                 <p className="text-sm font-medium">{i.fullName}</p>
-                <p className="text-xs text-muted-foreground">{i.company || i.email}</p>
+                <p className="text-xs text-muted-foreground">{i.company || i.email || "—"}</p>
               </div>
               <p className="font-mono text-xs text-muted-foreground">{i.visits} visits</p>
               <p className="font-mono text-xs text-muted-foreground">{minutes(i.activeSeconds)} active</p>
