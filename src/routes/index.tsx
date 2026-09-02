@@ -788,13 +788,13 @@ function PlatformPage() {
       <Section id="structure">
         <SectionHeading
           index="07 — Fund structure"
-          title="One Fund. One Ownership Structure."
-          lede="Investors own units in a single Abu Dhabi investment vehicle. The fund signs the startup agreements and becomes the legal shareholder in every portfolio company — so investors participate through one centralised structure rather than holding shares in dozens of startups."
+          title="One Fund. One Portfolio. One Ownership Structure."
+          lede="Nizek Venture Studio Fund A is designed as a single investment vehicle that holds the equity positions created across the venture portfolio. As new companies are added, investor ownership remains consolidated through the same Fund structure."
         />
 
         <Reveal>
           <div className="border border-border p-8 md:p-12">
-            <div className="label-xs">Ownership structure</div>
+            <div className="label-xs">Structure</div>
 
             <div className="mt-10 grid grid-cols-2 gap-px border border-border bg-border sm:grid-cols-3">
               {["Investor A", "Investor B", "Investor C", "Investor D", "Investor E", "Investor F"].map(
@@ -810,7 +810,7 @@ function PlatformPage() {
               <div className="flex flex-col items-center">
                 <div className="my-6 h-10 w-px bg-border-strong" aria-hidden />
                 <div className="w-full border-y border-border-strong py-8 text-center">
-                  <div className="display-xl text-3xl md:text-5xl">NIZEK Venture Fund</div>
+                  <div className="display-xl text-3xl md:text-5xl">Nizek Venture Studio Fund A</div>
                   <div className="label-xs mt-4">Abu Dhabi, UAE</div>
                 </div>
                 <div className="my-6 h-10 w-px bg-border-strong" aria-hidden />
@@ -826,29 +826,40 @@ function PlatformPage() {
                 "Startup 05",
                 "Startup 06",
                 "…",
-                "Portfolio companies",
+                "Future portfolio companies",
               ].map((s, i) => (
                 <Reveal key={s} delay={i * 50}>
                   <div className="num bg-background px-4 py-5 text-xs text-muted-foreground">{s}</div>
                 </Reveal>
               ))}
             </div>
+
+            <p className="mt-10 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+              Nizek Venture Studio Fund A is being structured through Abu Dhabi, UAE.
+            </p>
           </div>
         </Reveal>
 
-        <div className="mt-px grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-3">
+        <Reveal>
+          <p className="display-xl mt-16 max-w-4xl text-2xl md:text-3xl">
+            Investors hold one position in Fund A. Fund A holds the underlying portfolio. As the
+            portfolio grows, that ownership position stays the same.
+          </p>
+        </Reveal>
+
+        <div className="mt-16 grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-3">
           {[
             [
-              "Simple Ownership",
-              "One fund unit instead of ownership in dozens of separate companies.",
+              "One Ownership Position",
+              "Investors hold one ownership position in Fund A rather than maintaining separate holdings across every portfolio company.",
             ],
             [
               "Centralized Portfolio",
-              "Every company sits inside one professionally managed vehicle.",
+              "The equity positions created through the venture studio are held within one investment vehicle.",
             ],
             [
               "Scalable Structure",
-              "New companies are added without changing the ownership structure.",
+              "New portfolio companies can be added to Fund A while investor ownership remains consolidated through the same structure.",
             ],
           ].map(([t, d], i) => (
             <Reveal key={t} delay={i * 70}>
@@ -860,7 +871,14 @@ function PlatformPage() {
             </Reveal>
           ))}
         </div>
+
+        <Reveal>
+          <p className="display-xl mt-16 max-w-4xl text-2xl md:text-3xl">
+            One investment vehicle. A growing portfolio of companies. One clear ownership position.
+          </p>
+        </Reveal>
       </Section>
+
 
       {/* 08 — Investor advantages */}
       <Section id="advantages" invert>
