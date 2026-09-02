@@ -10,14 +10,23 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as McpRouteImport } from './routes/mcp'
+import { Route as PresentationRouteImport } from './routes/presentation'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
+import { Route as ITokenRouteImport } from './routes/i.$token'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
+import { Route as AuthenticatedAdminInvestorsIndexRouteImport } from './routes/_authenticated/admin.investors.index'
+import { Route as AuthenticatedAdminInvestorsIdRouteImport } from './routes/_authenticated/admin.investors.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -30,39 +39,74 @@ const McpRoute = McpRouteImport.update({
   path: '/mcp',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PresentationRoute = PresentationRouteImport.update({
+  id: '/presentation',
+  path: '/presentation',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const Char91DotwellKnownChar93OauthProtectedResourceRoute =
   Char91DotwellKnownChar93OauthProtectedResourceRouteImport.update({
     id: '/.well-known/oauth-protected-resource',
     path: '/.well-known/oauth-protected-resource',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ITokenRoute = ITokenRouteImport.update({
+  id: '/i/$token',
+  path: '/i/$token',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DotlovableOauthConsentRoute = DotlovableOauthConsentRouteImport.update({
   id: '/.lovable/oauth/consent',
   path: '/.lovable/oauth/consent',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAdminInvestorsIndexRoute =
+  AuthenticatedAdminInvestorsIndexRouteImport.update({
+    id: '/admin/investors/',
+    path: '/admin/investors/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAdminInvestorsIdRoute =
+  AuthenticatedAdminInvestorsIdRouteImport.update({
+    id: '/admin/investors/$id',
+    path: '/admin/investors/$id',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/mcp': typeof McpRoute
+  '/presentation': typeof PresentationRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  '/i/$token': typeof ITokenRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
+  '/admin/investors/$id': typeof AuthenticatedAdminInvestorsIdRoute
+  '/admin/investors/': typeof AuthenticatedAdminInvestorsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/mcp': typeof McpRoute
+  '/presentation': typeof PresentationRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  '/i/$token': typeof ITokenRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
+  '/admin/investors/$id': typeof AuthenticatedAdminInvestorsIdRoute
+  '/admin/investors': typeof AuthenticatedAdminInvestorsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/login': typeof LoginRoute
   '/mcp': typeof McpRoute
+  '/presentation': typeof PresentationRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  '/i/$token': typeof ITokenRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
+  '/_authenticated/admin/investors/$id': typeof AuthenticatedAdminInvestorsIdRoute
+  '/_authenticated/admin/investors/': typeof AuthenticatedAdminInvestorsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -70,29 +114,45 @@ export interface FileRouteTypes {
     | '/'
     | '/login'
     | '/mcp'
+    | '/presentation'
     | '/.well-known/oauth-protected-resource'
+    | '/i/$token'
     | '/.lovable/oauth/consent'
+    | '/admin/investors/$id'
+    | '/admin/investors/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/login'
     | '/mcp'
+    | '/presentation'
     | '/.well-known/oauth-protected-resource'
+    | '/i/$token'
     | '/.lovable/oauth/consent'
+    | '/admin/investors/$id'
+    | '/admin/investors'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/login'
     | '/mcp'
+    | '/presentation'
     | '/.well-known/oauth-protected-resource'
+    | '/i/$token'
     | '/.lovable/oauth/consent'
+    | '/_authenticated/admin/investors/$id'
+    | '/_authenticated/admin/investors/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   LoginRoute: typeof LoginRoute
   McpRoute: typeof McpRoute
+  PresentationRoute: typeof PresentationRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
+  ITokenRoute: typeof ITokenRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
 }
 
@@ -103,6 +163,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -119,11 +186,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof McpRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/presentation': {
+      id: '/presentation'
+      path: '/presentation'
+      fullPath: '/presentation'
+      preLoaderRoute: typeof PresentationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/.well-known/oauth-protected-resource': {
       id: '/.well-known/oauth-protected-resource'
       path: '/.well-known/oauth-protected-resource'
       fullPath: '/.well-known/oauth-protected-resource'
       preLoaderRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/i/$token': {
+      id: '/i/$token'
+      path: '/i/$token'
+      fullPath: '/i/$token'
+      preLoaderRoute: typeof ITokenRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/.lovable/oauth/consent': {
@@ -133,15 +214,45 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DotlovableOauthConsentRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/admin/investors/': {
+      id: '/_authenticated/admin/investors/'
+      path: '/admin/investors'
+      fullPath: '/admin/investors/'
+      preLoaderRoute: typeof AuthenticatedAdminInvestorsIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/investors/$id': {
+      id: '/_authenticated/admin/investors/$id'
+      path: '/admin/investors/$id'
+      fullPath: '/admin/investors/$id'
+      preLoaderRoute: typeof AuthenticatedAdminInvestorsIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminInvestorsIdRoute: typeof AuthenticatedAdminInvestorsIdRoute
+  AuthenticatedAdminInvestorsIndexRoute: typeof AuthenticatedAdminInvestorsIndexRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminInvestorsIdRoute: AuthenticatedAdminInvestorsIdRoute,
+  AuthenticatedAdminInvestorsIndexRoute: AuthenticatedAdminInvestorsIndexRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   LoginRoute: LoginRoute,
   McpRoute: McpRoute,
+  PresentationRoute: PresentationRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
+  ITokenRoute: ITokenRoute,
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
 }
 export const routeTree = rootRouteImport

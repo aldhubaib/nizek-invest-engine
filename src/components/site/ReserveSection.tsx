@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { Reveal, Section, SectionHeading } from "@/components/ui/primitives";
-import { submitSeatRequest } from "@/lib/investor.functions";
+import { getFundPositions, submitSeatRequest } from "@/lib/investor.functions";
+import { useInvestor } from "@/lib/investor-context";
+import { trackInvestorEvent } from "@/hooks/useEngagement";
 import {
   RESERVED_SEATS,
   SEAT_QUARTERLY_COMMITMENT,
@@ -17,11 +20,26 @@ function kd(value: number) {
 }
 
 export function ReserveSection() {
-  const firstOpen = Array.from({ length: TOTAL_SEATS }, (_, i) => i + 1).find(
-    (n) => !RESERVED_SEATS.includes(n),
-  )!;
+  const investor = useInvestor();
+  const { data: livePositions } = useQuery({
+    queryKey: ["fund-positions"],
+    queryFn: () => getFundPositions(),
+    staleTime: 60_000,
+  });
+
+  // Availability comes from the fund_positions table; the static list is the fallback.
+  const takenSeats = useMemo(() => {
+    if (!livePositions?.length) return RESERVED_SEATS as readonly number[];
+    return livePositions
+      .filter((p) => p.status !== "available")
+      .map((p) => p.code.charCodeAt(0) - 64);
+  }, [livePositions]);
+
+  const firstOpen =
+    Array.from({ length: TOTAL_SEATS }, (_, i) => i + 1).find((n) => !takenSeats.includes(n)) ?? 1;
 
   const [selected, setSelected] = useState<number[]>([firstOpen]);
+  const [editing, setEditing] = useState(false);
   const [status, setStatus] = useState<"idle" | "sending" | "done">("idle");
   const [error, setError] = useState<string | null>(null);
   const [form, setForm] = useState({
@@ -31,6 +49,20 @@ export function ReserveSection() {
     phone: "",
     message: "",
   });
+
+  // Prefill from the investor record when the visit came through a private link.
+  useEffect(() => {
+    if (!investor) return;
+    setForm((prev) => ({
+      ...prev,
+      fullName: prev.fullName || investor.fullName,
+      email: prev.email || investor.email,
+      phone: prev.phone || investor.phone,
+      company: prev.company || investor.company,
+    }));
+  }, [investor]);
+
+  const knowsDetails = Boolean(investor && form.fullName && form.phone);
 
   const seats = selected.length;
   const quarterly = seats * QUARTERLY_PER_SEAT;
@@ -43,7 +75,7 @@ export function ReserveSection() {
   ];
 
   function toggleSeat(n: number) {
-    if (RESERVED_SEATS.includes(n)) return;
+    if (takenSeats.includes(n)) return;
     setSelected((prev) => {
       if (prev.includes(n)) {
         const next = prev.filter((s) => s !== n);
@@ -51,6 +83,7 @@ export function ReserveSection() {
       }
       return [...prev, n].sort((a, b) => a - b);
     });
+    trackInvestorEvent("positions_selected", { position: investorPosition(n) });
   }
 
   async function onSubmit(e: React.FormEvent) {
@@ -80,7 +113,7 @@ export function ReserveSection() {
       <Reveal>
         <div className="grid grid-cols-2 gap-px border border-border-strong bg-border-strong sm:grid-cols-3 lg:grid-cols-6">
           {Array.from({ length: TOTAL_SEATS }, (_, i) => i + 1).map((n) => {
-            const reserved = RESERVED_SEATS.includes(n);
+            const reserved = takenSeats.includes(n);
             const active = selected.includes(n);
             return (
               <button
@@ -137,6 +170,33 @@ export function ReserveSection() {
             </div>
           ) : (
             <form onSubmit={onSubmit} className="grid grid-cols-1 gap-8 md:grid-cols-2">
+              {knowsDetails && !editing ? (
+                <div className="md:col-span-2 border border-border-strong p-8">
+                  <div className="label-xs text-muted-foreground">Your details</div>
+                  <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-3">
+                    <div>
+                      <div className="label-xs text-muted-foreground">Name</div>
+                      <div className="mt-2 text-base">{form.fullName}</div>
+                    </div>
+                    <div>
+                      <div className="label-xs text-muted-foreground">Phone</div>
+                      <div className="mt-2 text-base">{form.phone}</div>
+                    </div>
+                    <div>
+                      <div className="label-xs text-muted-foreground">Company / family office</div>
+                      <div className="mt-2 text-base">{form.company || "—"}</div>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setEditing(true)}
+                    className="label-xs mt-8 border-b border-current pb-1"
+                  >
+                    Edit details
+                  </button>
+                </div>
+              ) : (
+              <>
               <input
                 className={field}
                 placeholder="Full name"
@@ -149,7 +209,7 @@ export function ReserveSection() {
                 className={field}
                 type="email"
                 placeholder="Email"
-                required
+                required={!investor}
                 maxLength={255}
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
@@ -169,6 +229,8 @@ export function ReserveSection() {
                 value={form.company}
                 onChange={(e) => setForm({ ...form, company: e.target.value })}
               />
+              </>
+              )}
               <div className="md:col-span-2">
                 <div className="label-xs text-muted-foreground">Selected ownership positions</div>
                 <div className="display-xl mt-3 text-2xl">{positionNames.join(" + ")}</div>

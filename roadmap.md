@@ -1,9 +1,10 @@
 # Roadmap
 
-## Awaiting approval (architecture presented, not implemented)
-- [ ] Personalized investor-access system: invite tokens (`/i/:token`), investor database, engagement + section tracking, simulator tracking, admin dashboard at `/admin/investors`, investor detail page.
-- [ ] Request Allocation form v2: drop Email, keep Full Name / Phone / Company (optional), prefill from investor record, "Your details" review card + Edit details, carry positions from the Investment section, persist request + notify investors@nizek.com with admin profile link.
+## Next
+- [ ] Quarterly reporting surfaces (admin entry + stakeholder view) on top of the existing portfolio_companies / quarterly_reports tables.
 
 ## Done
+- [x] Personalized investor-access system: hashed invite tokens (`/i/:token` → signed HttpOnly cookie → `/presentation`), investor database, aggregated section + simulator tracking, admin dashboard at `/admin/investors` with investor detail tabs.
+- [x] Request Allocation v2: prefill from the investor record, "Your details" + Edit details, live position availability from `fund_positions`, request persisted and emailed with admin profile link.
 - [x] Section 12 CTA rewrite (Request Your Ownership Position)
 - [x] Merged selection metrics with the live assumptions bar in Section 09
