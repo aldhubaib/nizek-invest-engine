@@ -4,6 +4,8 @@ export type TeamMember = {
   name: string;
   role: string;
   bio: string;
+  /** Why this person matters to the Fund — shown above the bio. */
+  responsibility?: string;
   /** Absolute or imported image URL. Leave empty to render the monogram frame. */
   photo?: string;
   linkedin?: string;
@@ -26,11 +28,49 @@ export const founderBio: string[] = [
   "His vision is to build the leading venture studio in the GCC by creating dozens of technology companies over the coming years.",
 ];
 
+/** Founder's role inside the venture studio — four operating areas. */
+export const founderFocus: { index: string; title: string; note: string }[] = [
+  {
+    index: "01",
+    title: "Venture Creation",
+    note: "Identifying problems, evaluating opportunities and working directly with entrepreneurs to shape new companies.",
+  },
+  {
+    index: "02",
+    title: "Product & Technology",
+    note: "Leading product strategy, technology direction and the decisions required to turn an idea into a working business.",
+  },
+  {
+    index: "03",
+    title: "Company Building",
+    note: "Experience building teams, products and operating businesses rather than acting only as a financial investor.",
+  },
+  {
+    index: "04",
+    title: "GCC Experience",
+    note: "Long-term experience building technology businesses and working with entrepreneurs across the GCC.",
+  },
+];
+
+/** The multidisciplinary capability applied to every venture. */
+export const ventureCapabilities: string[] = [
+  "Founder Selection",
+  "Problem Discovery",
+  "Product Strategy",
+  "Product Design",
+  "Technology",
+  "Market Validation",
+  "Business Model",
+  "Operations",
+  "Fundraising Readiness",
+];
+
 /** Leadership team — add unlimited members; the grid scales automatically. */
 export const team: TeamMember[] = [
   {
     name: "Team Member",
     role: "Chief Technology Officer",
+    responsibility: "Technology Leadership",
     bio: "Leads engineering across the studio portfolio, from architecture to delivery.",
     photo: "",
     linkedin: "",
@@ -38,6 +78,7 @@ export const team: TeamMember[] = [
   {
     name: "Team Member",
     role: "Head of Product",
+    responsibility: "Product Strategy",
     bio: "Turns validated problems into product strategy, roadmaps and shipped software.",
     photo: "",
     linkedin: "",
@@ -45,6 +86,7 @@ export const team: TeamMember[] = [
   {
     name: "Team Member",
     role: "Head of Design",
+    responsibility: "Design",
     bio: "Owns the UI/UX standard applied to every company the studio builds.",
     photo: "",
     linkedin: "",
@@ -52,6 +94,7 @@ export const team: TeamMember[] = [
   {
     name: "Team Member",
     role: "Head of Growth",
+    responsibility: "Venture Development",
     bio: "Builds acquisition, brand and revenue engines for each new venture.",
     photo: "",
     linkedin: "",
