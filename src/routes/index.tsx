@@ -592,23 +592,42 @@ function PlatformPage() {
         </Reveal>
       </Section>
 
-      {/* 05 — Regional first */}
+      {/* 05 — Regional founder pipeline */}
       <Section id="regional" invert>
         <SectionHeading
-          index="05 — Regional first"
-          title="Built for the GCC. Designed to Scale Beyond Borders."
-          lede="Every venture is selected and built with multi-market GCC expansion in mind, increasing the addressable market and reducing dependence on a single economy."
+          index="05 — Regional founder pipeline"
+          title="The Best Companies Start With The Best Founders."
+          lede="Nizek is not limited to sourcing entrepreneurs from one city or one country. We actively identify founders and opportunities across the GCC, increasing the quality of ideas, the diversity of the portfolio and the probability of building exceptional companies."
         />
 
         <Reveal>
+          <div className="mb-16 grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-5">
+            {[
+              ["The larger the founder pipeline", "01"],
+              ["The better the entrepreneurs", "02"],
+              ["The better the ideas", "03"],
+              ["The better the companies", "04"],
+              ["The stronger the portfolio", "05"],
+            ].map(([t, i]) => (
+              <div key={i} className="h-full bg-background p-8">
+                <div className="num text-xs text-subtle">{i}</div>
+                <p className="display-xl mt-8 text-xl md:text-2xl">{t}</p>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+
+
+        <Reveal>
           <div className="border border-border p-6 md:p-10">
-            <div className="label-xs">Gulf Cooperation Council</div>
+            <div className="label-xs">Founder sourcing network — Gulf Cooperation Council</div>
             <svg
               viewBox="0 0 760 470"
               className="mt-6 w-full text-foreground"
               fill="none"
               role="img"
-              aria-label="Minimal map of the GCC with animated expansion routes between Kuwait, Saudi Arabia, Bahrain, Qatar, the UAE and Oman"
+              aria-label="Minimal map of the GCC showing Nizek's founder sourcing network across Kuwait, Saudi Arabia, Bahrain, Qatar, the UAE and Oman"
+
             >
               <path
                 d="M196 74 L262 96 L300 78 L352 108 L398 96 L436 128 L470 132 L520 158 L566 160 L612 196 L648 258 L636 316 L594 356 L546 386 L488 404 L430 396 L372 366 L318 328 L262 300 L214 252 L182 190 Z"
@@ -696,24 +715,85 @@ function PlatformPage() {
           </div>
         </Reveal>
 
-        <div className="mt-16 grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-2">
-          <Reveal>
-            <div className="h-full bg-background p-10">
-              <div className="label-xs">Instead of asking</div>
-              <p className="display-xl mt-6 text-2xl text-subtle md:text-3xl">
-                “Can this succeed in Kuwait?”
-              </p>
-            </div>
-          </Reveal>
-          <Reveal delay={100}>
-            <div className="h-full bg-background p-10">
-              <div className="label-xs">We ask</div>
-              <p className="display-xl mt-6 text-2xl md:text-3xl">
-                “Can this become a regional company?”
-              </p>
-            </div>
-          </Reveal>
+        <div className="mt-16 grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-2 lg:grid-cols-4">
+          {[
+            {
+              t: "Better Founder Selection",
+              b: "A regional pipeline allows us to evaluate more entrepreneurs and select only the strongest founders.",
+            },
+            {
+              t: "Higher Quality Opportunities",
+              b: "Looking across multiple ecosystems increases the likelihood of identifying exceptional business ideas before they become obvious.",
+            },
+            {
+              t: "Portfolio Diversification",
+              b: "Building companies across different GCC markets and industries reduces concentration risk and creates a healthier portfolio.",
+            },
+            {
+              t: "Larger Opportunity Pool",
+              b: "Instead of relying on a single local ecosystem, Nizek continuously sources founders and ideas from across the region.",
+            },
+          ].map((c, i) => (
+            <Reveal key={c.t} delay={i * 100}>
+              <div className="flex h-full flex-col bg-background p-8 md:p-10">
+                <div className="num text-xs text-subtle">{String(i + 1).padStart(2, "0")}</div>
+                <div className="display-xl mt-10 text-2xl md:text-3xl">{c.t}</div>
+                <p className="mt-6 text-sm leading-relaxed text-muted-foreground">{c.b}</p>
+              </div>
+            </Reveal>
+          ))}
         </div>
+
+        <div className="mt-16">
+          <div className="label-xs">From founder to portfolio company</div>
+          <div className="mt-6 grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-5">
+            {[
+              "GCC Entrepreneurs",
+              "Founder Evaluation",
+              "Residency Program",
+              "Venture Studio",
+              "Portfolio Companies",
+            ].map((s, i) => (
+              <Reveal key={s} delay={i * 80}>
+                <div className="flex h-full flex-col justify-between bg-background p-6 md:p-8">
+                  <div className="num text-xs text-subtle">{String(i + 1).padStart(2, "0")}</div>
+                  <div className="display-xl mt-8 text-lg md:text-xl">{s}</div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+          <p className="mt-6 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+            The venture studio begins with sourcing exceptional founders — not with funding random
+            ideas. Regional sourcing improves portfolio quality before any capital is invested.
+          </p>
+        </div>
+
+        <Reveal>
+          <div className="mt-16 border border-border p-8 md:p-14">
+            <div className="label-xs">Investment philosophy</div>
+            <p className="display-xl mt-8 max-w-4xl text-2xl md:text-4xl">
+              “We believe the hardest asset to find is not capital. It is exceptional entrepreneurs.
+              Everything else can be built around them.”
+            </p>
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <div className="mt-16 max-w-3xl">
+            <div className="label-xs">Why this matters</div>
+            <p className="mt-6 text-base leading-relaxed text-muted-foreground">
+              Expanding the sourcing network across the GCC gives investors exposure to a far
+              broader and more diversified pipeline of founders than a venture studio limited to a
+              single local market. The emphasis is on increasing the quality of founder selection
+              and reducing portfolio concentration risk.
+            </p>
+            <p className="display-xl mt-10 text-2xl md:text-3xl">
+              Our competitive advantage is not access to more capital. It is access to more
+              founders.
+            </p>
+          </div>
+        </Reveal>
+
       </Section>
 
       {/* 06 — Equity model */}
