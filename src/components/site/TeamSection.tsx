@@ -92,50 +92,8 @@ export function TeamSection() {
         </div>
       </Reveal>
 
-      {/* Track record */}
-      <Reveal delay={120}>
-        <div className="mt-24">
-          <div className="label-xs mb-8">Our track record</div>
-          <div className="grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-5">
-            {trackRecord.map((k) => (
-              <div key={k.label} className="bg-background p-8">
-                <div className="label-xs">{k.label}</div>
-                <div className="num mt-6 text-3xl md:text-4xl">{k.value}</div>
-                {k.note && <div className="mt-4 text-[11px] text-subtle">{k.note}</div>}
-              </div>
-            ))}
-          </div>
-          <div className="mt-px grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2">
-            {currentPortfolio.map((c) => (
-              <div key={c} className="bg-background p-8">
-                <div className="label-xs">Current portfolio</div>
-                <div className="display-xl mt-6 text-2xl md:text-3xl">{c}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </Reveal>
 
-      {/* Our advantage */}
-      <Reveal delay={140}>
-        <div className="mt-24">
-          <div className="label-xs mb-8">Our advantage</div>
-          <div className="grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
-            {advantages.map((a) => (
-              <div key={a.index} className="bg-background p-10">
-                <div className="num text-xs text-subtle">{a.index}</div>
-                <div className="display-xl mt-6 text-2xl md:text-3xl">{a.title}</div>
-                <p className="mt-6 text-sm leading-relaxed text-muted-foreground">{a.note}</p>
-              </div>
-            ))}
-          </div>
-          <p className="mt-10 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-            Every one of these capabilities lives inside the studio. Nothing is outsourced to agencies
-            or consultants — the same teams that build one company build the next one, which is what
-            makes the model repeatable.
-          </p>
-        </div>
-      </Reveal>
+
 
       {/* Why this team */}
       <Reveal delay={160}>
