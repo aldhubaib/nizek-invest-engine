@@ -2,8 +2,24 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 
-import { createInvestor, listInvestors } from "@/lib/admin.functions";
+import { createInvestor, listInvestors, rotateInvestorToken } from "@/lib/admin.functions";
 import { publicLink } from "@/lib/public-link";
+
+const LINK_STORE = "nizek.investor.links";
+
+function readLinks(): Record<string, string> {
+  if (typeof window === "undefined") return {};
+  try {
+    return JSON.parse(window.localStorage.getItem(LINK_STORE) ?? "{}") as Record<string, string>;
+  } catch {
+    return {};
+  }
+}
+
+function persistLinks(links: Record<string, string>) {
+  if (typeof window === "undefined") return;
+  window.localStorage.setItem(LINK_STORE, JSON.stringify(links));
+}
 
 export const Route = createFileRoute("/_authenticated/admin/investors/")({
   head: () => ({
