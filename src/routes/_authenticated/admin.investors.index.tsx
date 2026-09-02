@@ -3,6 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 
 import { createInvestor, listInvestors } from "@/lib/admin.functions";
+import { publicLink } from "@/lib/public-link";
 
 export const Route = createFileRoute("/_authenticated/admin/investors/")({
   head: () => ({
@@ -35,7 +36,11 @@ function when(value: string | null) {
   return value ? new Date(value).toLocaleString() : "—";
 }
 
+
+
+
 function InvestorsDashboard() {
+
   const qc = useQueryClient();
   const { data, isLoading, error } = useQuery({
     queryKey: ["admin", "investors"],
@@ -47,7 +52,7 @@ function InvestorsDashboard() {
   const create = useMutation({
     mutationFn: () => createInvestor({ data: form }),
     onSuccess: (res) => {
-      setInvite(`${window.location.origin}${res.invitePath}`);
+      setInvite(publicLink(res.invitePath));
       setForm({ fullName: "", email: "", phone: "", company: "" });
       void qc.invalidateQueries({ queryKey: ["admin", "investors"] });
     },

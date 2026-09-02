@@ -3,6 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 
 import { getInvestorDetail, rotateInvestorToken, updateInvestorNotes } from "@/lib/admin.functions";
+import { publicLink } from "@/lib/public-link";
 
 export const Route = createFileRoute("/_authenticated/admin/investors/$id")({
   head: () => ({
@@ -60,7 +61,7 @@ function InvestorDetail() {
 
   const rotate = useMutation({
     mutationFn: () => rotateInvestorToken({ data: { id } }),
-    onSuccess: (res) => setInvite(`${window.location.origin}${res.invitePath}`),
+    onSuccess: (res) => setInvite(publicLink(res.invitePath)),
   });
 
   const saveNotes = useMutation({
