@@ -260,7 +260,7 @@ export function ReserveSection() {
               availability.
             </p>
             <p className="mt-4">
-              Requests are sent directly to the Nizek investment team at investors@nizek.com.
+              Requests are delivered directly to the Nizek investment team.
             </p>
           </div>
         </Reveal>
