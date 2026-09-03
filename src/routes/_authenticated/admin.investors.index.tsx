@@ -75,6 +75,19 @@ function InvestorsDashboard() {
   const [copied, setCopied] = useState(false);
   const [links, setLinks] = useState<Record<string, string>>(() => readLinks());
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [editId, setEditId] = useState<string | null>(null);
+  const [editForm, setEditForm] = useState({ fullName: "", phone: "" });
+
+  const save = useMutation({
+    mutationFn: () =>
+      updateInvestor({
+        data: { id: editId!, fullName: editForm.fullName.trim(), phone: editForm.phone.trim() },
+      }),
+    onSuccess: () => {
+      setEditId(null);
+      void qc.invalidateQueries({ queryKey: ["admin", "investors"] });
+    },
+  });
 
   const saveLink = (id: string, link: string) => {
     setLinks((prev) => {
