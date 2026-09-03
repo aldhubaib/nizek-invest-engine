@@ -7,6 +7,7 @@ import {
   listAllocationRequests,
   listInvestors,
   rotateInvestorToken,
+  updateInvestor,
 } from "@/lib/admin.functions";
 import { publicLink } from "@/lib/public-link";
 
@@ -74,6 +75,19 @@ function InvestorsDashboard() {
   const [copied, setCopied] = useState(false);
   const [links, setLinks] = useState<Record<string, string>>(() => readLinks());
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [editId, setEditId] = useState<string | null>(null);
+  const [editForm, setEditForm] = useState({ fullName: "", phone: "" });
+
+  const save = useMutation({
+    mutationFn: () =>
+      updateInvestor({
+        data: { id: editId!, fullName: editForm.fullName.trim(), phone: editForm.phone.trim() },
+      }),
+    onSuccess: () => {
+      setEditId(null);
+      void qc.invalidateQueries({ queryKey: ["admin", "investors"] });
+    },
+  });
 
   const saveLink = (id: string, link: string) => {
     setLinks((prev) => {
@@ -225,15 +239,68 @@ function InvestorsDashboard() {
                 {data.map((i) => (
                   <tr key={i.id} className="border-b border-border/60">
                     <td className="py-4 pr-4">
-                      <Link
-                        to="/admin/investors/$id"
-                        params={{ id: i.id }}
-                        className="underline underline-offset-4"
-                      >
-                        {i.fullName}
-                      </Link>
+                      {editId === i.id ? (
+                        <input
+                          className={field}
+                          value={editForm.fullName}
+                          onChange={(e) => setEditForm({ ...editForm, fullName: e.target.value })}
+                        />
+                      ) : (
+                        <div className="flex items-center gap-3">
+                          <Link
+                            to="/admin/investors/$id"
+                            params={{ id: i.id }}
+                            className="underline underline-offset-4"
+                          >
+                            {i.fullName}
+                          </Link>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setEditId(i.id);
+                              setEditForm({ fullName: i.fullName, phone: i.mobile ?? "" });
+                            }}
+                            className="border border-border px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground"
+                          >
+                            Edit
+                          </button>
+                        </div>
+                      )}
                     </td>
-                    <td className="py-4 pr-4 font-mono text-xs">{i.mobile || "—"}</td>
+                    <td className="py-4 pr-4 font-mono text-xs">
+                      {editId === i.id ? (
+                        <div className="flex flex-col gap-2">
+                          <input
+                            className={field}
+                            value={editForm.phone}
+                            onChange={(e) => setEditForm({ ...editForm, phone: e.target.value })}
+                          />
+                          <div className="flex gap-2">
+                            <button
+                              type="button"
+                              disabled={
+                                save.isPending ||
+                                editForm.fullName.trim().length < 2 ||
+                                editForm.phone.trim().length < 4
+                              }
+                              onClick={() => save.mutate()}
+                              className="bg-foreground px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-background disabled:opacity-40"
+                            >
+                              {save.isPending ? "Saving…" : "Save"}
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => setEditId(null)}
+                              className="border border-border px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em]"
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                        </div>
+                      ) : (
+                        i.mobile || "—"
+                      )}
+                    </td>
                     <td className="py-4 pr-4">
                       <span
                         className={`inline-block px-2 py-1 font-mono text-[10px] uppercase tracking-[0.18em] ${
