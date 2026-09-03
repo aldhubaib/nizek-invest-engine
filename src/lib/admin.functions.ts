@@ -182,6 +182,29 @@ export const rotateInvestorToken = createServerFn({ method: "POST" })
     return { invitePath: `/i/${token}` };
   });
 
+/** Edit investor name and mobile. The private link is left untouched. */
+export const updateInvestor = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((data: unknown) =>
+    z
+      .object({
+        id: z.string().uuid(),
+        fullName: z.string().trim().min(2).max(120),
+        phone: z.string().trim().min(4).max(40),
+      })
+      .parse(data),
+  )
+  .handler(async ({ data, context }) => {
+    await assertAdmin(context as never);
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { error } = await supabaseAdmin
+      .from("investors")
+      .update({ full_name: data.fullName, phone: data.phone })
+      .eq("id", data.id);
+    if (error) throw new Error(error.message);
+    return { ok: true as const };
+  });
+
 /** Update internal notes on an investor record. */
 export const updateInvestorNotes = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
