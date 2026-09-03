@@ -7,6 +7,7 @@ import {
   listAllocationRequests,
   listInvestors,
   rotateInvestorToken,
+  updateInvestor,
 } from "@/lib/admin.functions";
 import { publicLink } from "@/lib/public-link";
 
