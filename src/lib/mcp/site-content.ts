@@ -626,7 +626,7 @@ export async function buildHomePage() {
       subheadline: `Nizek Venture Studio Fund A is limited to ${m.TOTAL_SEATS} ownership positions. Each position represents ${m.SEAT_OWNERSHIP}% ownership in the Fund and requires a ${kd(m.SEAT_QUARTERLY_COMMITMENT)} capital call every three months, paid quarterly in advance.`,
       body: [
         "Select your ownership: committed positions cannot be selected; available positions can.",
-        `Current selection: ${result.seats} position(s) — ${result.ownershipPercent.toFixed(1)}% Fund ownership — ${kd(result.annualCommitment / 4)} every 3 months, paid quarterly in advance.`,
+        `Current selection: ${result.seats} position(s) — ${result.ownershipPercent.toFixed(1)}% Fund ownership — ${kd(result.annualCommitment / 4)} payable quarterly in advance.`,
       ],
       metrics: [
         { label: "Ownership per position", value: `${m.SEAT_OWNERSHIP}%` },
@@ -847,7 +847,7 @@ export async function buildHomePage() {
         { label: "Fund ownership", value: `${m.SEAT_OWNERSHIP}% per position` },
         {
           label: "Quarterly capital call",
-          value: `${kd(m.SEAT_QUARTERLY_COMMITMENT)} per position, every 3 months`,
+          value: `${kd(m.SEAT_QUARTERLY_COMMITMENT)} per position, payable quarterly in advance`,
         },
       ],
       lists: [
