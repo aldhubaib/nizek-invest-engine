@@ -70,7 +70,7 @@ export function ReserveSection() {
   const summary: Array<[string, string]> = [
     ["Selected", positionNames.join(" + ")],
     ["Fund ownership", `${seats * OWNERSHIP_PER_SEAT}%`],
-    ["Quarterly capital call", `${kd(quarterly)} every 3 months`],
+    ["Quarterly capital call", `${kd(quarterly)} payable quarterly in advance`],
   ];
 
   function toggleSeat(n: number) {

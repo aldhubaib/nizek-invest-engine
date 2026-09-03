@@ -951,7 +951,7 @@ function PlatformPageBody() {
           <div className="grid grid-cols-2 gap-px border border-border bg-border lg:grid-cols-4">
             {[
               [`${SEAT_OWNERSHIP}%`, "Ownership per position"],
-              [kd(SEAT_QUARTERLY_COMMITMENT), "Every 3 months"],
+              [kd(SEAT_QUARTERLY_COMMITMENT), "Payable quarterly in advance"],
               ["Quarterly", "Paid in advance"],
               ["5 years", "Commitment period"],
             ].map(([v, l]) => (
@@ -961,6 +961,14 @@ function PlatformPageBody() {
               </div>
             ))}
           </div>
+        </Reveal>
+
+        <Reveal>
+          <p className="mt-6 w-full text-[11px] leading-relaxed text-subtle">
+            The first quarterly payment is made in advance before the investment period begins.
+            Thereafter, one payment is due at the beginning of each quarter throughout the five-year
+            commitment.
+          </p>
         </Reveal>
 
         {/* Part 3 — select your ownership */}
