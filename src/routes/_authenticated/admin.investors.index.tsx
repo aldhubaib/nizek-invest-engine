@@ -123,8 +123,87 @@ function InvestorsDashboard() {
   const field =
     "w-full border-b border-border bg-transparent py-2 text-sm outline-none focus:border-foreground";
 
+  type SortKey =
+    | "fullName"
+    | "mobile"
+    | "opened"
+    | "lastViewedAt"
+    | "visits"
+    | "activeSeconds"
+    | "simulatorUsed"
+    | "allocationRequested"
+    | "link";
+
+  const [sort, setSort] = useState<{ key: SortKey; dir: "asc" | "desc" }>({
+    key: "fullName",
+    dir: "asc",
+  });
+
+  const toggleSort = (key: SortKey) =>
+    setSort((prev) =>
+      prev.key === key ? { key, dir: prev.dir === "asc" ? "desc" : "asc" } : { key, dir: "asc" },
+    );
+
+  const sortValue = (row: NonNullable<typeof data>[number], key: SortKey): string | number => {
+    switch (key) {
+      case "fullName":
+        return row.fullName?.toLowerCase() ?? "";
+      case "mobile":
+        return row.mobile ?? "";
+      case "opened":
+        return row.opened ? 1 : 0;
+      case "lastViewedAt":
+        return row.lastViewedAt ? new Date(row.lastViewedAt).getTime() : 0;
+      case "visits":
+        return row.visits ?? 0;
+      case "activeSeconds":
+        return row.activeSeconds ?? 0;
+      case "simulatorUsed":
+        return row.simulatorUsed ? 1 : 0;
+      case "allocationRequested":
+        return row.allocationRequested ? 1 : 0;
+      case "link":
+        return links[row.id] ? 1 : 0;
+    }
+  };
+
+  const rows = data
+    ? [...data].sort((a, b) => {
+        const av = sortValue(a, sort.key);
+        const bv = sortValue(b, sort.key);
+        const cmp =
+          typeof av === "number" && typeof bv === "number"
+            ? av - bv
+            : String(av).localeCompare(String(bv));
+        return sort.dir === "asc" ? cmp : -cmp;
+      })
+    : [];
+
+  const SortTh = ({
+    label,
+    sortKey,
+    className = "py-3 pr-4",
+  }: {
+    label: string;
+    sortKey: SortKey;
+    className?: string;
+  }) => (
+    <th className={className}>
+      <button
+        type="button"
+        onClick={() => toggleSort(sortKey)}
+        className="inline-flex items-center gap-1 uppercase tracking-[0.2em] hover:text-foreground"
+      >
+        {label}
+        <span className="opacity-60">
+          {sort.key === sortKey ? (sort.dir === "asc" ? "▲" : "▼") : "↕"}
+        </span>
+      </button>
+    </th>
+  );
+
   return (
-    <div className="mx-auto max-w-6xl px-6 py-16">
+    <div className="mx-auto w-full max-w-[1800px] px-6 py-16">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-muted-foreground">
@@ -221,22 +300,22 @@ function InvestorsDashboard() {
         )}
         {data && data.length > 0 && (
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[900px] text-left text-sm">
+            <table className="w-full min-w-[1400px] text-left text-sm">
               <thead>
                 <tr className="border-b border-border font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
-                  <th className="py-3 pr-4">Investor</th>
-                  <th className="py-3 pr-4">Mobile</th>
-                  <th className="py-3 pr-4">Status</th>
-                  <th className="py-3 pr-4">Last viewed</th>
-                  <th className="py-3 pr-4">Visits</th>
-                  <th className="py-3 pr-4">Time spent</th>
-                  <th className="py-3 pr-4">Simulator</th>
-                  <th className="py-3 pr-4">Allocation request</th>
-                  <th className="py-3">Private link</th>
+                  <SortTh label="Investor" sortKey="fullName" />
+                  <SortTh label="Mobile" sortKey="mobile" />
+                  <SortTh label="Status" sortKey="opened" />
+                  <SortTh label="Last viewed" sortKey="lastViewedAt" />
+                  <SortTh label="Visits" sortKey="visits" />
+                  <SortTh label="Time spent" sortKey="activeSeconds" />
+                  <SortTh label="Simulator" sortKey="simulatorUsed" />
+                  <SortTh label="Allocation request" sortKey="allocationRequested" />
+                  <SortTh label="Private link" sortKey="link" className="py-3" />
                 </tr>
               </thead>
               <tbody>
-                {data.map((i) => (
+                {rows.map((i) => (
                   <tr key={i.id} className="border-b border-border/60">
                     <td className="py-4 pr-4">
                       {editId === i.id ? (
