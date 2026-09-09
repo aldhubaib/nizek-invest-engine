@@ -328,6 +328,7 @@ export type Database = {
           first_viewed_at: string | null
           full_name: string
           id: string
+          interest: Database["public"]["Enums"]["interest_level"]
           internal_notes: string
           last_viewed_at: string | null
           phone: string | null
@@ -351,6 +352,7 @@ export type Database = {
           first_viewed_at?: string | null
           full_name: string
           id?: string
+          interest?: Database["public"]["Enums"]["interest_level"]
           internal_notes?: string
           last_viewed_at?: string | null
           phone?: string | null
@@ -374,6 +376,7 @@ export type Database = {
           first_viewed_at?: string | null
           full_name?: string
           id?: string
+          interest?: Database["public"]["Enums"]["interest_level"]
           internal_notes?: string
           last_viewed_at?: string | null
           phone?: string | null
@@ -547,6 +550,7 @@ export type Database = {
         | "interested"
         | "inactive"
       fund_status: "structuring" | "open" | "closed"
+      interest_level: "unset" | "yes" | "no" | "maybe"
       investor_event_type:
         | "session_start"
         | "session_end"
@@ -719,6 +723,7 @@ export const Constants = {
         "inactive",
       ],
       fund_status: ["structuring", "open", "closed"],
+      interest_level: ["unset", "yes", "no", "maybe"],
       investor_event_type: [
         "session_start",
         "session_end",
