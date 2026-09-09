@@ -121,7 +121,7 @@ export async function buildHomePage() {
           note: "Acquired — acquired for approximately KD 30 million.",
         },
         {
-          title: "Provien",
+          title: "Provin",
           index: "Success story",
           body: "Built inside the Nizek Venture Studio before transitioning to its own dedicated engineering team under Nizek's continued technical leadership.",
           note: "Series A — successfully completed its Series A funding round.",

@@ -255,7 +255,7 @@ function PlatformPageBody() {
             </Reveal>
             {[
               {
-                name: "Provien",
+                name: "Provin",
                 eyebrow: "Success story",
                 desc: "Built inside the Nizek Venture Studio before transitioning to its own dedicated engineering team under Nizek's continued technical leadership.",
                 milestoneLabel: "Series A",
