@@ -64,8 +64,15 @@ function Stat({ label, value }: { label: string; value: string }) {
   );
 }
 
+const INTEREST_OPTIONS = [
+  { value: "yes", label: "Yes" },
+  { value: "no", label: "No" },
+  { value: "maybe", label: "Maybe" },
+] as const;
+
 function InvestorDetail() {
   const { id } = Route.useParams();
+  const qc = useQueryClient();
   const [invite, setInvite] = useState<string | null>(null);
 
   const { data, isLoading, error } = useQuery({
