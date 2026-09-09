@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 
-import { getInvestorDetail, rotateInvestorToken } from "@/lib/admin.functions";
+import { getInvestorDetail, rotateInvestorToken, setInvestorInterest } from "@/lib/admin.functions";
 import { publicLink } from "@/lib/public-link";
 
 export const Route = createFileRoute("/_authenticated/admin/investors/$id")({
