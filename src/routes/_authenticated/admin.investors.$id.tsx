@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 
-import { getInvestorDetail, rotateInvestorToken } from "@/lib/admin.functions";
+import { getInvestorDetail, rotateInvestorToken, setInvestorInterest } from "@/lib/admin.functions";
 import { publicLink } from "@/lib/public-link";
 
 export const Route = createFileRoute("/_authenticated/admin/investors/$id")({
@@ -64,8 +64,15 @@ function Stat({ label, value }: { label: string; value: string }) {
   );
 }
 
+const INTEREST_OPTIONS = [
+  { value: "yes", label: "Yes" },
+  { value: "no", label: "No" },
+  { value: "maybe", label: "Maybe" },
+] as const;
+
 function InvestorDetail() {
   const { id } = Route.useParams();
+  const qc = useQueryClient();
   const [invite, setInvite] = useState<string | null>(null);
 
   const { data, isLoading, error } = useQuery({
@@ -76,6 +83,12 @@ function InvestorDetail() {
   const rotate = useMutation({
     mutationFn: () => rotateInvestorToken({ data: { id } }),
     onSuccess: (res) => setInvite(publicLink(res.invitePath)),
+  });
+
+  const interest = useMutation({
+    mutationFn: (value: "unset" | "yes" | "no" | "maybe") =>
+      setInvestorInterest({ data: { id, interest: value } }),
+    onSuccess: () => void qc.invalidateQueries({ queryKey: ["admin", "investor", id] }),
   });
 
   if (isLoading) return <p className="mx-auto max-w-5xl px-6 py-16 text-sm">Loading…</p>;
@@ -114,6 +127,39 @@ function InvestorDetail() {
           value={latestRequest ? latestRequest.positions || "Requested" : "—"}
         />
       </div>
+
+      <section className="mt-10 border border-border p-6">
+        <h2 className="font-mono text-[11px] uppercase tracking-[0.28em] text-muted-foreground">
+          Interested?
+        </h2>
+        <div className="mt-4 flex flex-wrap items-center gap-3">
+          {INTEREST_OPTIONS.map((o) => {
+            const active = investor.interest === o.value;
+            return (
+              <button
+                key={o.value}
+                type="button"
+                disabled={interest.isPending}
+                onClick={() => interest.mutate(active ? "unset" : o.value)}
+                className={`px-5 py-2 text-xs font-medium uppercase tracking-[0.18em] disabled:opacity-40 ${
+                  active
+                    ? "bg-foreground text-background"
+                    : "border border-border hover:border-foreground"
+                }`}
+              >
+                {o.label}
+              </button>
+            );
+          })}
+          <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+            {interest.isPending
+              ? "Saving…"
+              : investor.interest === "unset"
+                ? "Not set"
+                : "Saved"}
+          </span>
+        </div>
+      </section>
 
       <section className="mt-14">
         <h2 className="font-mono text-[11px] uppercase tracking-[0.28em] text-muted-foreground">

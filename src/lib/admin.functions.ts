@@ -114,6 +114,7 @@ export const getInvestorDetail = createServerFn({ method: "POST" })
         simulatorUsed: i.simulator_used,
         allocationRequested: i.allocation_requested,
         tokenRevoked: Boolean(i.token_revoked_at),
+        interest: (i as { interest?: string }).interest ?? "unset",
       },
       sections: Object.fromEntries(sectionTotals),
       simulatorState: simulatorEvent
@@ -203,6 +204,28 @@ export const updateInvestor = createServerFn({ method: "POST" })
       .eq("id", data.id);
     if (error) throw new Error(error.message);
     return { ok: true as const };
+  });
+
+/** Mark whether an investor is interested: yes / no / maybe. */
+export const setInvestorInterest = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((data: unknown) =>
+    z
+      .object({
+        id: z.string().uuid(),
+        interest: z.enum(["unset", "yes", "no", "maybe"]),
+      })
+      .parse(data),
+  )
+  .handler(async ({ data, context }) => {
+    await assertAdmin(context as never);
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { error } = await supabaseAdmin
+      .from("investors")
+      .update({ interest: data.interest } as never)
+      .eq("id", data.id);
+    if (error) throw new Error(error.message);
+    return { ok: true as const, interest: data.interest };
   });
 
 /** Update internal notes on an investor record. */
