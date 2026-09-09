@@ -85,6 +85,12 @@ function InvestorDetail() {
     onSuccess: (res) => setInvite(publicLink(res.invitePath)),
   });
 
+  const interest = useMutation({
+    mutationFn: (value: "unset" | "yes" | "no" | "maybe") =>
+      setInvestorInterest({ data: { id, interest: value } }),
+    onSuccess: () => void qc.invalidateQueries({ queryKey: ["admin", "investor", id] }),
+  });
+
   if (isLoading) return <p className="mx-auto max-w-5xl px-6 py-16 text-sm">Loading…</p>;
   if (error || !data)
     return (
