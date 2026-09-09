@@ -114,6 +114,7 @@ export const getInvestorDetail = createServerFn({ method: "POST" })
         simulatorUsed: i.simulator_used,
         allocationRequested: i.allocation_requested,
         tokenRevoked: Boolean(i.token_revoked_at),
+        interest: (i as { interest?: string }).interest ?? "unset",
       },
       sections: Object.fromEntries(sectionTotals),
       simulatorState: simulatorEvent
