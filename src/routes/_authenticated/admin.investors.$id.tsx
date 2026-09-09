@@ -128,6 +128,39 @@ function InvestorDetail() {
         />
       </div>
 
+      <section className="mt-10 border border-border p-6">
+        <h2 className="font-mono text-[11px] uppercase tracking-[0.28em] text-muted-foreground">
+          Interested?
+        </h2>
+        <div className="mt-4 flex flex-wrap items-center gap-3">
+          {INTEREST_OPTIONS.map((o) => {
+            const active = investor.interest === o.value;
+            return (
+              <button
+                key={o.value}
+                type="button"
+                disabled={interest.isPending}
+                onClick={() => interest.mutate(active ? "unset" : o.value)}
+                className={`px-5 py-2 text-xs font-medium uppercase tracking-[0.18em] disabled:opacity-40 ${
+                  active
+                    ? "bg-foreground text-background"
+                    : "border border-border hover:border-foreground"
+                }`}
+              >
+                {o.label}
+              </button>
+            );
+          })}
+          <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+            {interest.isPending
+              ? "Saving…"
+              : investor.interest === "unset"
+                ? "Not set"
+                : "Saved"}
+          </span>
+        </div>
+      </section>
+
       <section className="mt-14">
         <h2 className="font-mono text-[11px] uppercase tracking-[0.28em] text-muted-foreground">
           Section engagement
