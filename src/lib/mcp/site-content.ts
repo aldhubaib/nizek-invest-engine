@@ -365,11 +365,6 @@ export async function buildHomePage() {
         nodes: [
           { label: "Entrepreneurs", value: "", note: "Founders join the studio to build their company." },
           {
-            label: "Nizek Venture Studio",
-            value: "30% example position",
-            note: "Builds the company and earns equity.",
-          },
-          {
             label: "Nizek Venture Studio Fund A",
             value: "",
             note: "Holds the portfolio equity.",
