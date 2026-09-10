@@ -1035,9 +1035,9 @@ function PlatformPageBody() {
 
 
       {/* 09 — The investment: terms + simulator */}
-      <Section id="investment">
+      <Section id="investment" invert>
         <SectionHeading
-          index="09 — The investment"
+          index="10 — The investment"
           title="Choose Your Position. Model The Outcome."
           lede={`Nizek Venture Studio Fund A is limited to ${TOTAL_SEATS} ownership positions. Each position represents ${SEAT_OWNERSHIP}% ownership in the Fund and requires a ${kd(SEAT_QUARTERLY_COMMITMENT)} capital call every three months, paid quarterly in advance.`}
         />
