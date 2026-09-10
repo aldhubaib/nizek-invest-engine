@@ -10,6 +10,7 @@ const nav = [
   { id: "regional", label: "Regional sourcing" },
   { id: "equity", label: "Equity" },
   { id: "structure", label: "Fund" },
+  { id: "venture-building-agreement", label: "Venture building" },
   { id: "advantages", label: "Advantages" },
   { id: "investment", label: "The investment" },
   { id: "team", label: "Team" },
