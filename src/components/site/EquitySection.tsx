@@ -22,16 +22,11 @@ const OWNERSHIP_FLOW = [
   { step: "01", title: "Entrepreneurs", note: "Founders join the studio to build their company." },
   {
     step: "02",
-    title: "Nizek Venture Studio",
-    note: "Builds the company and earns equity.",
-  },
-  {
-    step: "03",
     title: "Nizek Venture Studio Fund A",
     note: "Holds the portfolio equity.",
   },
   {
-    step: "04",
+    step: "03",
     title: "Investors",
     note: "Own units in the Fund.",
   },
