@@ -707,6 +707,56 @@ export async function buildHomePage() {
     },
     {
       ...empty,
+      section_id: "venture-building-agreement",
+      section_order: 19.5,
+      eyebrow: "08 — Venture building agreement",
+      headline: "Fund A Builds Through Nizek.",
+      subheadline:
+        "Rather than employing its own product and technology organisation, Nizek Venture Studio Fund A contracts Nizek as its long-term venture-building partner.",
+      body: [
+        "Nizek Venture Studio Fund A focuses on identifying opportunities, investing in new ventures and building a diversified portfolio of companies. To execute this strategy, the Fund enters into a Venture Building Agreement with Nizek.",
+        "Under this agreement, Nizek provides the operational capabilities required to repeatedly build and support portfolio companies, including product strategy, technical leadership, software engineering, design, founder support and venture operations. This structure enables the Fund to leverage an established venture-building organisation from day one rather than creating an internal operating team.",
+        "The Fund owns the investment strategy. Nizek delivers the venture-building capability.",
+        "By partnering with Nizek through a long-term Venture Building Agreement, Fund A gains immediate access to an experienced venture-building organisation without the cost and complexity of establishing its own operational infrastructure.",
+      ],
+      timeline: [
+        { step: "01", title: "Fund A", note: "Owns the investment strategy and the portfolio." },
+        {
+          step: "02",
+          title: "Venture Building Agreement",
+          note: "Long-term agreement between the Fund and Nizek.",
+        },
+        {
+          step: "03",
+          title: "Nizek",
+          note: "Operating partner delivering the venture-building capability.",
+        },
+        {
+          step: "04",
+          title: "Portfolio Companies",
+          note: "Built and supported on behalf of the Fund.",
+        },
+      ],
+      lists: [
+        {
+          label: "Capabilities provided under the agreement",
+          items: [
+            "Product Strategy",
+            "Technology Leadership",
+            "Software Engineering",
+            "Product Design",
+            "AI & Automation",
+            "Founder Support",
+            "Go-To-Market Validation",
+            "Hiring Support",
+            "Operational Guidance",
+          ],
+        },
+      ],
+      ui: ui({ layout: "flow steps + capability grid", columns: 4, theme: "dark" }),
+    },
+    {
+      ...empty,
       section_id: "model",
       section_order: 20,
       eyebrow: "09 — The investment (simulator)",
