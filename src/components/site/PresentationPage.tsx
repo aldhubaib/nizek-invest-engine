@@ -943,12 +943,29 @@ function PlatformPageBody() {
         </Reveal>
 
         <Reveal>
-          <p className="mt-10 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-            By partnering with Nizek through a long-term Venture Building Agreement, Fund A gains
-            immediate access to an experienced venture-building organisation without the cost and
-            complexity of establishing its own operational infrastructure.
+          <div className="mt-16 border border-border bg-background p-8 md:p-10">
+            <div className="label-xs">An operating partner from day one</div>
+            <p className="mt-6 max-w-3xl text-lg leading-relaxed text-foreground md:text-xl">
+              Rather than spending years building an internal operating organisation, Nizek Venture
+              Studio Fund A immediately gains access to Nizek's established venture-building
+              capabilities through a long-term Venture Building Agreement.
+            </p>
+            <p className="mt-6 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+              This structure allows the Fund to focus on identifying exceptional founders, investing
+              in new ventures and building a diversified portfolio, while Nizek provides the
+              experienced team, operating systems and venture-building expertise required to execute
+              consistently across every portfolio company.
+            </p>
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <p className="display-xl mt-16 max-w-4xl text-2xl md:text-3xl">
+            The Fund provides the investment strategy. Nizek provides the venture-building
+            capability. Together they create companies.
           </p>
         </Reveal>
+
       </Section>
 
       {/* 09 — Investor advantages */}
