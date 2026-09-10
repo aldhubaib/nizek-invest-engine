@@ -85,7 +85,7 @@ export function EquitySection() {
       {/* Ownership flow — primary visual */}
       <Reveal>
         <div className="label-xs">The ownership chain</div>
-        <div className="mt-6 grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-4">
+        <div className="mt-6 grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-3">
           {OWNERSHIP_FLOW.map((s) => (
             <div key={s.step} className="flex h-full flex-col bg-background p-8">
               <div className="num text-xs text-subtle">{s.step}</div>
