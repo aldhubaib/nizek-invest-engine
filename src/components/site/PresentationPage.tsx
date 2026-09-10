@@ -855,9 +855,105 @@ function PlatformPageBody() {
       </Section>
 
 
-      {/* 08 — Investor advantages */}
-      <Section id="advantages" invert>
-        <SectionHeading index="08 — Investor advantages" title="Why This Works For The Investor." />
+      {/* 08 — Venture building agreement */}
+      <Section id="venture-building-agreement" invert>
+        <SectionHeading
+          index="08 — Venture building agreement"
+          title="Fund A Builds Through Nizek."
+          lede="Rather than employing its own product and technology organisation, Nizek Venture Studio Fund A contracts Nizek as its long-term venture-building partner."
+        />
+
+        <Reveal>
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
+            <p className="text-base leading-relaxed text-muted-foreground">
+              Nizek Venture Studio Fund A focuses on identifying opportunities, investing in new
+              ventures and building a diversified portfolio of companies. To execute this strategy,
+              the Fund enters into a Venture Building Agreement with Nizek.
+            </p>
+            <p className="text-base leading-relaxed text-muted-foreground">
+              Under this agreement, Nizek provides the operational capabilities required to
+              repeatedly build and support portfolio companies, including product strategy,
+              technical leadership, software engineering, design, founder support and venture
+              operations. This structure enables the Fund to leverage an established
+              venture-building organisation from day one rather than creating an internal operating
+              team.
+            </p>
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <div className="mt-16">
+            <div className="label-xs">How it works</div>
+            <div className="mt-6 grid grid-cols-1 gap-px border border-border bg-border md:grid-cols-4">
+              {[
+                { step: "01", title: "Fund A", note: "Owns the investment strategy and the portfolio." },
+                {
+                  step: "02",
+                  title: "Venture Building Agreement",
+                  note: "Long-term agreement between the Fund and Nizek.",
+                },
+                {
+                  step: "03",
+                  title: "Nizek",
+                  note: "Operating partner delivering the venture-building capability.",
+                },
+                {
+                  step: "04",
+                  title: "Portfolio Companies",
+                  note: "Built and supported on behalf of the Fund.",
+                },
+              ].map((s) => (
+                <div key={s.step} className="flex h-full flex-col bg-background p-8">
+                  <div className="num text-xs text-subtle">{s.step}</div>
+                  <div className="display-xl mt-8 text-lg md:text-xl">{s.title}</div>
+                  <p className="mt-5 text-sm leading-relaxed text-muted-foreground">{s.note}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <div className="mt-16">
+            <div className="label-xs">Capabilities provided under the agreement</div>
+            <div className="mt-6 grid grid-cols-1 gap-px border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+              {[
+                "Product Strategy",
+                "Technology Leadership",
+                "Software Engineering",
+                "Product Design",
+                "AI & Automation",
+                "Founder Support",
+                "Go-To-Market Validation",
+                "Hiring Support",
+                "Operational Guidance",
+              ].map((c) => (
+                <div key={c} className="bg-background px-6 py-6 text-sm text-foreground">
+                  {c}
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <p className="display-xl mt-16 max-w-4xl text-2xl md:text-3xl">
+            The Fund owns the investment strategy. Nizek delivers the venture-building capability.
+          </p>
+        </Reveal>
+
+        <Reveal>
+          <p className="mt-10 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+            By partnering with Nizek through a long-term Venture Building Agreement, Fund A gains
+            immediate access to an experienced venture-building organisation without the cost and
+            complexity of establishing its own operational infrastructure.
+          </p>
+        </Reveal>
+      </Section>
+
+      {/* 09 — Investor advantages */}
+      <Section id="advantages">
+        <SectionHeading index="09 — Investor advantages" title="Why This Works For The Investor." />
         <div className="grid grid-cols-1 gap-px border border-border bg-border lg:grid-cols-3">
           <Reveal>
             <div className="flex h-full flex-col bg-background p-10">
