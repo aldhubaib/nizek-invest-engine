@@ -717,7 +717,9 @@ export async function buildHomePage() {
         "Nizek Venture Studio Fund A focuses on identifying opportunities, investing in new ventures and building a diversified portfolio of companies. To execute this strategy, the Fund enters into a Venture Building Agreement with Nizek.",
         "Under this agreement, Nizek provides the operational capabilities required to repeatedly build and support portfolio companies, including product strategy, technical leadership, software engineering, design, founder support and venture operations. This structure enables the Fund to leverage an established venture-building organisation from day one rather than creating an internal operating team.",
         "The Fund owns the investment strategy. Nizek delivers the venture-building capability.",
-        "By partnering with Nizek through a long-term Venture Building Agreement, Fund A gains immediate access to an experienced venture-building organisation without the cost and complexity of establishing its own operational infrastructure.",
+        "An operating partner from day one. Rather than spending years building an internal operating organisation, Nizek Venture Studio Fund A immediately gains access to Nizek's established venture-building capabilities through a long-term Venture Building Agreement.",
+        "This structure allows the Fund to focus on identifying exceptional founders, investing in new ventures and building a diversified portfolio, while Nizek provides the experienced team, operating systems and venture-building expertise required to execute consistently across every portfolio company.",
+        "The Fund provides the investment strategy. Nizek provides the venture-building capability. Together they create companies.",
       ],
       timeline: [
         { step: "01", title: "Fund A", note: "Owns the investment strategy and the portfolio." },
