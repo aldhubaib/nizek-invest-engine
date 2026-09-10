@@ -401,9 +401,6 @@ function InvestorsDashboard() {
                     <td className="py-4">
                       {links[i.id] ? (
                         <div className="flex items-center gap-3">
-                          <span className="max-w-[220px] truncate font-mono text-[11px] text-muted-foreground">
-                            {links[i.id]}
-                          </span>
                           <button
                             type="button"
                             onClick={() => copy(i.id, links[i.id] ?? "")}
